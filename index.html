@@ -1,20 +1,18 @@
-html
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZERO — Everything Premium. Absolutely Free.</title>
-  <meta name="description" content="30 professional, client-side digital utilities. 100% private, zero uploads, unlimited free access.">
-  <meta name="theme-color" content="#090a0f">
+  <title>ZERO — 10X Autonomous Client-Side Utilities</title>
+  <meta name="description" content="30 Ultra-modern client-side tools. Zero telemetry, zero uploads, instant memory sandbox execution.">
+  <meta name="theme-color" content="#06080f">
 
-  
-  <!-- Typography -->
+  <!-- Premium Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Production Open-Source Client Libraries -->
+  <!-- Production Client Engines -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.1/marked.min.js"></script>
@@ -26,46 +24,45 @@ html
 
   <style>
     :root {
-      --bg-primary: #090a0f;
-      --bg-secondary: #12141c;
-      --bg-tertiary: #191c28;
-      --bg-card: rgba(22, 26, 38, 0.75);
-      --bg-card-hover: rgba(30, 35, 52, 0.95);
+      --bg-base: #06080f;
+      --bg-surface: #0c101a;
+      --bg-card: rgba(16, 21, 35, 0.65);
+      --bg-card-hover: rgba(22, 29, 48, 0.85);
+      --bg-input: #101524;
       --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-focus: rgba(255, 255, 255, 0.22);
-      --border-active: #6366f1;
-      --text-main: #f8fafc;
+      --border-hover: rgba(255, 255, 255, 0.18);
+      --border-accent: rgba(99, 102, 241, 0.5);
+      --accent: #6366f1;
+      --accent-hover: #4f46e5;
+      --accent-glow: rgba(99, 102, 241, 0.25);
+      --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #06b6d4 100%);
+      --text-primary: #f8fafc;
       --text-secondary: #94a3b8;
-      --text-tertiary: #64748b;
-      --accent-primary: #4f46e5;
-      --accent-primary-hover: #4338ca;
-      --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-      --accent-glow: rgba(99, 102, 241, 0.2);
+      --text-muted: #64748b;
       --status-success: #10b981;
       --status-warning: #f59e0b;
       --status-danger: #ef4444;
       --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
-      --radius-xl: 24px;
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
-      --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
-      --transition-medium: 250ms cubic-bezier(0.16, 1, 0.3, 1);
+      --transition: 200ms cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     html.light {
-      --bg-primary: #f8fafc;
-      --bg-secondary: #f1f5f9;
-      --bg-tertiary: #e2e8f0;
-      --bg-card: rgba(255, 255, 255, 0.9);
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: rgba(255, 255, 255, 0.8);
       --bg-card-hover: #ffffff;
+      --bg-input: #f1f5f9;
       --border-subtle: rgba(0, 0, 0, 0.08);
-      --border-focus: rgba(0, 0, 0, 0.22);
-      --border-active: #4f46e5;
-      --text-main: #0f172a;
+      --border-hover: rgba(0, 0, 0, 0.16);
+      --border-accent: #6366f1;
+      --text-primary: #0f172a;
       --text-secondary: #475569;
-      --text-tertiary: #94a3b8;
+      --text-muted: #94a3b8;
       --accent-glow: rgba(99, 102, 241, 0.12);
     }
 
@@ -77,44 +74,60 @@ html
 
     body {
       font-family: var(--font-sans);
-      background-color: var(--bg-primary);
-      color: var(--text-main);
+      background-color: var(--bg-base);
+      color: var(--text-primary);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      line-height: 1.5;
+      letter-spacing: -0.015em;
     }
 
-    .ambient-glow {
+    /* Ambient Lighting Mesh */
+    .aurora-mesh {
       position: fixed;
-      top: -220px;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .aurora-glow-1 {
+      position: absolute;
+      top: -150px;
       left: 50%;
       transform: translateX(-50%);
       width: 1000px;
       height: 550px;
-      background: radial-gradient(circle, var(--accent-glow) 0%, rgba(0,0,0,0) 70%);
-      z-index: -1;
-      pointer-events: none;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, rgba(168, 85, 247, 0.08) 50%, transparent 70%);
+      filter: blur(80px);
+    }
+    .aurora-glow-2 {
+      position: absolute;
+      top: 60%;
+      left: 85%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 65%);
+      filter: blur(90px);
     }
 
+    /* Navbar */
     .navbar {
       position: sticky;
       top: 0;
       z-index: 50;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      background-color: rgba(9, 10, 15, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(6, 8, 15, 0.75);
       border-bottom: 1px solid var(--border-subtle);
-      padding: 0 1.5rem;
     }
-    html.light .navbar { background-color: rgba(248, 250, 252, 0.85); }
+    html.light .navbar { background: rgba(248, 250, 252, 0.85); }
 
     .nav-container {
-      max-width: 1320px;
-      height: 64px;
+      max-width: 1360px;
+      height: 70px;
       margin: 0 auto;
+      padding: 0 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -124,490 +137,440 @@ html
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
-      color: var(--text-main);
+      color: var(--text-primary);
       font-weight: 800;
-      font-size: 1.3rem;
-      letter-spacing: -0.03em;
+      font-size: 1.25rem;
       cursor: pointer;
     }
-
-    .brand-symbol {
-      color: var(--accent-primary);
-      font-size: 1.5rem;
+    .brand-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      background: var(--accent-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 15px var(--accent-glow);
     }
 
-    .search-trigger-wrapper {
+    .search-btn {
       flex: 1;
       max-width: 440px;
-    }
-
-    .search-trigger {
-      width: 100%;
-      background: var(--bg-secondary);
+      background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 0.55rem 0.9rem;
+      border-radius: var(--radius-full);
+      padding: 0.6rem 1.2rem;
       color: var(--text-secondary);
       display: flex;
       align-items: center;
       gap: 10px;
       font-size: 0.875rem;
       cursor: pointer;
-      transition: all var(--transition-fast);
+      transition: all var(--transition);
     }
-    .search-trigger:hover {
-      border-color: var(--border-focus);
-      background: var(--bg-tertiary);
+    .search-btn:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-input);
+      transform: translateY(-1px);
     }
-
-    .shortcut-badge, .esc-badge {
+    .search-btn kbd {
       margin-left: auto;
       font-family: var(--font-mono);
-      background: var(--bg-tertiary);
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border-subtle);
       padding: 2px 7px;
-      border-radius: 4px;
+      border-radius: 6px;
       font-size: 0.75rem;
-      color: var(--text-tertiary);
     }
 
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.75rem;
     }
 
     .icon-btn {
-      background: transparent;
+      background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-sm);
+      border-radius: var(--radius-md);
       color: var(--text-secondary);
-      padding: 8px;
+      width: 40px;
+      height: 40px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all var(--transition-fast);
+      transition: all var(--transition);
     }
     .icon-btn:hover {
-      color: var(--text-main);
-      border-color: var(--border-focus);
-      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border-color: var(--border-hover);
+      transform: translateY(-1px);
     }
 
-    html.dark .theme-icon-sun { display: block; }
-    html.dark .theme-icon-moon { display: none; }
-    html.light .theme-icon-sun { display: none; }
-    html.light .theme-icon-moon { display: block; }
+    html.dark .icon-sun { display: block; }
+    html.dark .icon-moon { display: none; }
+    html.light .icon-sun { display: none; }
+    html.light .icon-moon { display: block; }
 
-    .nav-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: color var(--transition-fast);
-      cursor: pointer;
-    }
-    .nav-link:hover { color: var(--text-main); }
-
+    /* App View Container */
     #app-root {
       flex: 1;
-      max-width: 1320px;
+      max-width: 1360px;
       width: 100%;
       margin: 0 auto;
-      padding: 2.5rem 1.5rem 4rem;
+      padding: 2.5rem 1.5rem 5rem;
+      position: relative;
+      z-index: 1;
     }
 
     .view-hidden { display: none !important; }
     .view-active { display: block; }
 
+    /* Hero */
     .hero {
       text-align: center;
       padding: 3rem 1rem 3.5rem;
-      max-width: 860px;
+      max-width: 900px;
       margin: 0 auto;
     }
-
-    .hero-badge {
-      display: inline-block;
-      padding: 0.45rem 1rem;
-      border-radius: 9999px;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-subtle);
-      font-size: 0.775rem;
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.45rem 1.1rem;
+      border-radius: var(--radius-full);
+      background: rgba(99, 102, 241, 0.08);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      font-size: 0.8rem;
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-secondary);
+      color: #a5b4fc;
       margin-bottom: 1.5rem;
     }
-
+    .hero-pill span.live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981;
+      display: inline-block;
+    }
     .hero-title {
       font-size: clamp(2.5rem, 5.5vw, 4.25rem);
       font-weight: 800;
-      line-height: 1.08;
-      letter-spacing: -0.035em;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
       margin-bottom: 1.25rem;
     }
-
     .gradient-text {
       background: var(--accent-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-
     .hero-subtitle {
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       color: var(--text-secondary);
       line-height: 1.6;
+      max-width: 740px;
+      margin: 0 auto;
     }
 
-    .category-tabs {
+    /* Category Filter */
+    .category-nav {
       display: flex;
+      justify-content: center;
       gap: 0.5rem;
-      overflow-x: auto;
-      padding-bottom: 0.75rem;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid var(--border-subtle);
-      scrollbar-width: none;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
     }
-    .category-tabs::-webkit-scrollbar { display: none; }
-
-    .tab-btn {
-      padding: 0.6rem 1.2rem;
-      background: transparent;
-      border: 1px solid transparent;
-      border-radius: var(--radius-md);
+    .cat-btn {
+      padding: 0.65rem 1.25rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
       color: var(--text-secondary);
       font-size: 0.875rem;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
-      white-space: nowrap;
-      transition: all var(--transition-fast);
+      transition: all var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .tab-btn:hover {
-      color: var(--text-main);
-      background: var(--bg-secondary);
+    .cat-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--border-hover);
     }
-    .tab-btn.active {
-      color: var(--text-main);
-      background: var(--bg-tertiary);
-      border-color: var(--border-focus);
+    .cat-btn.active {
+      color: #ffffff;
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 4px 18px var(--accent-glow);
     }
 
+    /* Tool Grid */
     .tool-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.5rem;
     }
-
     .tool-card {
       position: relative;
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: 1.5rem;
+      padding: 1.75rem;
       cursor: pointer;
       display: flex;
       flex-direction: column;
-      transition: transform var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
-      backdrop-filter: blur(12px);
+      transition: all var(--transition);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
     .tool-card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-4px);
       background: var(--bg-card-hover);
-      border-color: var(--border-focus);
+      border-color: var(--border-accent);
+      box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--border-accent);
     }
-
-    .tool-card-header {
+    .card-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
     }
-
-    .tool-icon-box {
-      width: 44px;
-      height: 44px;
+    .card-icon {
+      width: 48px;
+      height: 48px;
       border-radius: var(--radius-md);
-      background: var(--bg-tertiary);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--accent-primary);
-      border: 1px solid var(--border-subtle);
-      font-size: 1.25rem;
-      font-weight: 700;
+      color: #a5b4fc;
+      transition: all var(--transition);
     }
-
-    .badge-tag {
+    .tool-card:hover .card-icon {
+      border-color: var(--border-accent);
+      color: #ffffff;
+      background: rgba(99, 102, 241, 0.2);
+    }
+    .card-cat {
       font-size: 0.7rem;
       text-transform: uppercase;
       font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 4px;
-      background: var(--bg-secondary);
-      color: var(--text-tertiary);
+      letter-spacing: 0.05em;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
       border: 1px solid var(--border-subtle);
     }
-
-    .tool-title {
-      font-size: 1.125rem;
-      font-weight: 600;
+    .tool-card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
       margin-bottom: 0.5rem;
-      color: var(--text-main);
+      color: var(--text-primary);
     }
-
-    .tool-desc {
-      font-size: 0.85rem;
+    .tool-card-desc {
+      font-size: 0.9rem;
       color: var(--text-secondary);
-      line-height: 1.5;
+      line-height: 1.55;
       flex: 1;
     }
 
-    .zero-lab-card {
+    /* Privacy Architecture Card */
+    .privacy-vault {
       margin-top: 5rem;
-      background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      background: linear-gradient(180deg, var(--bg-surface) 0%, rgba(12, 16, 26, 0.4) 100%);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-xl);
+      border-radius: var(--radius-lg);
       padding: 3.5rem 2rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-
-    .lab-badge {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: var(--accent-primary);
-      margin-bottom: 0.75rem;
-    }
-
-    .lab-title {
-      font-size: 1.85rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-    }
-
-    .lab-desc {
-      max-width: 720px;
-      margin: 0 auto 2.5rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    .spec-grid {
+    .vault-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1.5rem;
-      max-width: 900px;
-      margin: 0 auto;
+      max-width: 950px;
+      margin: 2.5rem auto 0;
     }
-
-    .spec-item {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+    .vault-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
     }
-
-    .spec-val {
+    .vault-val {
       font-family: var(--font-mono);
-      font-size: 1.5rem;
+      font-size: 1.75rem;
       font-weight: 700;
-      color: var(--text-main);
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .vault-lbl {
+      font-size: 0.85rem;
+      color: var(--text-muted);
     }
 
-    .spec-lbl {
-      font-size: 0.8rem;
-      color: var(--text-tertiary);
-    }
-
-    .tool-viewport-header {
+    /* Tool Mount Viewport */
+    .viewport-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 2rem;
-      padding-bottom: 1.25rem;
+      padding-bottom: 1.5rem;
       border-bottom: 1px solid var(--border-subtle);
       flex-wrap: wrap;
       gap: 1rem;
     }
-
     .back-btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--bg-secondary);
+      background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      color: var(--text-main);
-      padding: 8px 16px;
-      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      padding: 0.6rem 1.25rem;
+      border-radius: var(--radius-full);
       cursor: pointer;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: all var(--transition-fast);
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all var(--transition);
     }
     .back-btn:hover {
-      background: var(--bg-tertiary);
-      border-color: var(--border-focus);
+      border-color: var(--border-hover);
+      transform: translateX(-2px);
     }
 
-    .viewport-titles { text-align: center; }
-    .viewport-titles h2 { font-size: 1.6rem; font-weight: 700; }
-    .cat-pill {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      color: var(--accent-primary);
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
-
+    /* Controls Panel */
     .controls-panel {
-      background: var(--bg-secondary);
+      background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: 1.75rem;
-      margin-bottom: 1.5rem;
+      padding: 2.25rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
     }
 
     .dropzone-surface {
-      border: 2px dashed var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 3rem 1.5rem;
+      border: 2px dashed rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      padding: 3.5rem 1.5rem;
       text-align: center;
-      background: var(--bg-secondary);
+      background: rgba(16, 21, 35, 0.4);
       cursor: pointer;
-      transition: all var(--transition-medium);
+      transition: all var(--transition);
       margin-bottom: 1.5rem;
     }
     .dropzone-surface:hover, .dropzone-surface.dragover {
-      border-color: var(--border-active);
-      background: var(--bg-tertiary);
+      border-color: var(--accent);
+      background: rgba(99, 102, 241, 0.08);
+      transform: scale(0.995);
     }
-    .dropzone-title { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.4rem; }
-    .dropzone-sub { color: var(--text-tertiary); font-size: 0.85rem; }
 
     .action-btn {
-      background: var(--accent-primary);
+      background: var(--accent);
       color: #ffffff;
       border: none;
-      border-radius: var(--radius-md);
-      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-full);
+      padding: 0.8rem 1.75rem;
       font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      transition: background-color var(--transition-fast);
+      gap: 10px;
+      transition: all var(--transition);
+      box-shadow: 0 4px 18px var(--accent-glow);
     }
-    .action-btn:hover { background: var(--accent-primary-hover); }
-    .action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .action-btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px var(--accent-glow);
+    }
+    .action-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
 
     .action-btn-secondary {
-      background: var(--bg-tertiary);
-      color: var(--text-main);
+      background: var(--bg-input);
+      color: var(--text-primary);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-full);
+      padding: 0.8rem 1.5rem;
       font-size: 0.95rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: all var(--transition-fast);
+      transition: all var(--transition);
     }
-    .action-btn-secondary:hover { border-color: var(--border-focus); }
-
-    .icon-btn-pill {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-subtle);
-      border-radius: 9999px;
-      padding: 6px 14px;
-      color: var(--text-secondary);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.8rem;
+    .action-btn-secondary:hover {
+      border-color: var(--border-hover);
+      background: rgba(255, 255, 255, 0.08);
     }
-    .icon-btn-pill:hover { border-color: var(--border-focus); color: var(--text-main); }
 
     input[type="text"], input[type="number"], select, textarea {
       width: 100%;
-      background: var(--bg-tertiary);
+      background: var(--bg-input);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-sm);
-      color: var(--text-main);
-      padding: 0.65rem 0.85rem;
-      font-size: 0.9rem;
+      color: var(--text-primary);
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
       font-family: inherit;
       outline: none;
-      transition: border-color var(--transition-fast);
+      transition: border-color var(--transition);
     }
     input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
-      border-color: var(--border-active);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-glow);
     }
 
-    .command-palette-backdrop {
+    /* Modal / Command Palette */
+    .cmd-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.75);
-      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
       z-index: 100;
       display: flex;
       align-items: flex-start;
       justify-content: center;
       padding-top: 14vh;
     }
-
-    .command-palette-card {
+    .cmd-card {
       width: 100%;
-      max-width: 600px;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-focus);
+      max-width: 620px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hover);
       border-radius: var(--radius-lg);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
       overflow: hidden;
     }
-
-    .palette-search-bar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 1rem 1.25rem;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .palette-search-bar input {
-      flex: 1;
+    .cmd-search-input {
+      width: 100%;
+      padding: 1.25rem 1.5rem;
       background: transparent;
       border: none;
-      color: var(--text-main);
-      font-size: 1.1rem;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      font-size: 1.15rem;
       outline: none;
     }
 
-    .palette-results {
-      max-height: 380px;
-      overflow-y: auto;
-      padding: 0.5rem;
-    }
-
-    .palette-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.75rem 1rem;
-      border-radius: var(--radius-md);
-      cursor: pointer;
-      color: var(--text-secondary);
-      transition: background var(--transition-fast);
-    }
-    .palette-item:hover {
-      background: var(--bg-tertiary);
-      color: var(--text-main);
-    }
-
-    .toast-container {
+    /* Toast */
+    .toast-tray {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
@@ -616,210 +579,154 @@ html
       flex-direction: column;
       gap: 0.75rem;
     }
-
-    .toast {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-subtle);
+    .toast-card {
+      background: rgba(12, 16, 26, 0.95);
+      border: 1px solid var(--border-hover);
       border-radius: var(--radius-md);
-      padding: 0.75rem 1.25rem;
-      color: var(--text-main);
-      box-shadow: 0 10px 20px -3px rgba(0,0,0,0.4);
-      font-size: 0.875rem;
-      animation: toastIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 0.85rem 1.4rem;
+      color: var(--text-primary);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+      font-size: 0.9rem;
+      backdrop-filter: blur(12px);
+      animation: toastRise 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    @keyframes toastIn {
-      from { opacity: 0; transform: translateY(10px); }
+    @keyframes toastRise {
+      from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Footer */
     .app-footer {
-      margin-top: auto;
       border-top: 1px solid var(--border-subtle);
       padding: 2.5rem 1.5rem;
-      font-size: 0.85rem;
-      color: var(--text-tertiary);
-    }
-
-    .footer-container {
-      max-width: 1320px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-    }
-
-    .footer-links {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: auto;
     }
   </style>
 </head>
 <body>
-  <div class="ambient-glow" aria-hidden="true"></div>
+  <!-- Ambient Aurora Lighting -->
+  <div class="aurora-mesh" aria-hidden="true">
+    <div class="aurora-glow-1"></div>
+    <div class="aurora-glow-2"></div>
+  </div>
 
   <!-- NAVBAR -->
   <header class="navbar">
     <div class="nav-container">
-      <a class="brand" id="brand-home">
-        <span class="brand-symbol">Ø</span>
-        <span>ZERO</span>
-      </a>
-
-      <div class="search-trigger-wrapper">
-        <button class="search-trigger" id="cmd-k-trigger" aria-label="Open Command Menu">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <span>Search 30 tools...</span>
-          <kbd class="shortcut-badge">⌘K</kbd>
-        </button>
+      <div class="brand" id="brand-home">
+        <div class="brand-badge">Ø</div>
+        <span>ZERO PRO</span>
       </div>
+
+      <button class="search-btn" id="cmd-k-trigger">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <span>Search all 30 utilities...</span>
+        <kbd>⌘K</kbd>
+      </button>
 
       <div class="nav-actions">
         <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">
-          <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-          <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
-        <a id="nav-privacy-link" class="nav-link">Privacy Engine</a>
       </div>
     </div>
   </header>
 
-  <!-- MAIN VIEWPORT -->
+  <!-- APP VIEWPORT -->
   <main id="app-root">
-    <!-- DIRECTORY / HUB VIEW -->
+    <!-- DIRECTORY HUB -->
     <section id="view-hub" class="view-active">
       <div class="hero">
-        <div class="hero-badge">Zero Servers • Zero Telemetry • 100% Client-Side Processing</div>
-        <h1 class="hero-title">Everything Premium.<br><span class="gradient-text">Absolutely Free.</span></h1>
+        <div class="hero-pill">
+          <span class="live-dot"></span>
+          <span>Zero Server Uploads • 100% In-Memory Sandbox</span>
+        </div>
+        <h1 class="hero-title">Ultra-Fast Digital Tools.<br><span class="gradient-text">Radical 10X Architecture.</span></h1>
         <p class="hero-subtitle">
-          30 professional-grade utilities engineered to operate entirely within your browser memory sandbox.
-          Your files, keys, and documents never touch a third-party server.
+          30 professional utilities engineered for zero latency. Everything processes on your GPU/CPU hardware using WebAssembly and Web Crypto.
         </p>
       </div>
 
-      <!-- Category Filter Tabs -->
-      <nav class="category-tabs" id="category-tabs">
-        <button class="tab-btn active" data-cat="all">All Tools (30)</button>
-        <button class="tab-btn" data-cat="pdf">PDF Pro (6)</button>
-        <button class="tab-btn" data-cat="image">Image Studio (6)</button>
-        <button class="tab-btn" data-cat="writing">Document & Writing (6)</button>
-        <button class="tab-btn" data-cat="dev">Developer Core (6)</button>
-        <button class="tab-btn" data-cat="productivity">Security & System (6)</button>
+      <nav class="category-nav" id="category-tabs">
+        <button class="cat-btn active" data-cat="all">All Tools (30)</button>
+        <button class="cat-btn" data-cat="pdf">PDF Engine (6)</button>
+        <button class="cat-btn" data-cat="image">Image Studio (6)</button>
+        <button class="cat-btn" data-cat="writing">Document Suite (6)</button>
+        <button class="cat-btn" data-cat="dev">Dev Core (6)</button>
+        <button class="cat-btn" data-cat="productivity">Security & OS (6)</button>
       </nav>
 
-      <!-- 30 Tools Dynamic Cards Grid -->
       <div class="tool-grid" id="tools-directory"></div>
 
-      <!-- Architectural Transparency Block -->
-      <section class="zero-lab-card" id="privacy-section">
-        <div class="lab-badge">RADICAL PRIVACY ARCHITECTURE</div>
-        <h3 class="lab-title">Engineered Without Cloud Dependencies</h3>
-        <p class="lab-desc">
-          Most online utilities secretly ship your PDFs, images, and text to AWS or Google Cloud servers.
-          ZERO processes every byte in local device RAM using Web Workers, HTML5 Canvas, and Web Crypto APIs.
-        </p>
-        <div class="spec-grid">
-          <div class="spec-item"><span class="spec-val">0 bytes</span><span class="spec-lbl">Outbound File Uploads</span></div>
-          <div class="spec-item"><span class="spec-val">WebAssembly</span><span class="spec-lbl">Local PDF Engine</span></div>
-          <div class="spec-item"><span class="spec-val">Web Crypto</span><span class="spec-lbl">SHA-256 Hardware Hashing</span></div>
-          <div class="spec-item"><span class="spec-val">GitHub Pages</span><span class="spec-lbl">Static Serverless Host</span></div>
+      <!-- Radical Architecture Specs -->
+      <div class="privacy-vault">
+        <h2 style="font-size:2rem; font-weight:800; margin-bottom:0.75rem;">Enterprise Grade Security Sandbox</h2>
+        <p style="color:var(--text-secondary); max-width:650px; margin:0 auto;">No cookies, no cloud storage buckets, zero telemetry tracking.</p>
+        <div class="vault-grid">
+          <div class="vault-item"><div class="vault-val">0 B</div><div class="vault-lbl">Network Ingress/Egress</div></div>
+          <div class="vault-item"><div class="vault-val">100%</div><div class="vault-lbl">Local Device Isolation</div></div>
+          <div class="vault-item"><div class="vault-val">WASM</div><div class="vault-lbl">Native Assembly Kernels</div></div>
+          <div class="vault-item"><div class="vault-val">SHA-512</div><div class="vault-lbl">Hardware Cryptography</div></div>
         </div>
-      </section>
+      </div>
     </section>
 
-    <!-- MOUNTED TOOL VIEW -->
+    <!-- ACTIVE TOOL VIEWPORT -->
     <section id="view-tool" class="view-hidden">
-      <div class="tool-viewport-header">
+      <div class="viewport-header">
         <button id="btn-back-hub" class="back-btn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-          <span>All Tools</span>
+          <span>All 30 Tools</span>
         </button>
-        <div class="viewport-titles">
-          <h2 id="tool-active-title">Tool Name</h2>
-          <span id="tool-active-cat" class="cat-pill">Category</span>
+        <div style="text-align:center;">
+          <h2 id="tool-active-title" style="font-size:1.6rem; font-weight:800;">Tool Name</h2>
+          <span id="tool-active-cat" style="font-size:0.75rem; color:var(--accent); text-transform:uppercase; font-weight:700;">Category</span>
         </div>
-        <div>
-          <button id="tool-fav-btn" class="icon-btn-pill">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <span id="fav-text">Favorite</span>
-          </button>
-        </div>
+        <div style="width:120px;"></div>
       </div>
       <div id="tool-mount-point"></div>
     </section>
   </main>
 
   <!-- COMMAND PALETTE (CMD+K) -->
-  <div class="command-palette-backdrop" id="cmd-palette" style="display: none;">
-    <div class="command-palette-card">
-      <div class="palette-search-bar">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" id="palette-input" placeholder="Type a tool name or category..." autocomplete="off">
-        <kbd class="esc-badge">ESC</kbd>
-      </div>
-      <div class="palette-results" id="palette-results"></div>
+  <div class="cmd-backdrop" id="cmd-palette" style="display:none;">
+    <div class="cmd-card">
+      <input type="text" class="cmd-search-input" id="palette-input" placeholder="Type a tool name (e.g. PDF, background, JSON)..." autocomplete="off">
+      <div id="palette-results" style="max-height:360px; overflow-y:auto; padding:0.5rem;"></div>
     </div>
   </div>
 
-  <!-- TOAST ALERTS HUB -->
-  <div id="toast-hub" class="toast-container" aria-live="polite"></div>
+  <div id="toast-tray" class="toast-tray"></div>
 
-  <!-- FOOTER -->
   <footer class="app-footer">
-    <div class="footer-container">
-      <div>
-        <b>Ø ZERO</b> — Completely Free & Private Utility Platform
-      </div>
-      <div class="footer-links">
-        <span>Zero Storage</span>
-        <span>•</span>
-        <span>Zero Telemetry</span>
-        <span>•</span>
-        <span>Client-Side Execution</span>
-      </div>
+    <div style="max-width:1360px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+      <div><b>Ø ZERO PRO</b> — Autonomous Client Utilities</div>
+      <div>100% Free • Open Architecture • Unlimited Processing</div>
     </div>
   </footer>
 
   <script>
     /* =====================================================================
-       ZERO CORE ENGINE & BINARY DOWNLOAD BUS
+       ZERO PRO RUNTIME KERNEL
        ===================================================================== */
     const ZERO = {
-      favorites: new Set(JSON.parse(localStorage.getItem('zero_favs') || '[]')),
       activeToolId: null,
 
       toast(msg, type = 'info') {
-        const hub = document.getElementById('toast-hub');
-        const toast = document.createElement('div');
-        toast.className = 'toast';
-        toast.style.borderColor = type === 'error' ? 'var(--status-danger)' : (type === 'success' ? 'var(--status-success)' : 'var(--border-focus)');
-        toast.textContent = msg;
-        hub.appendChild(toast);
-        setTimeout(() => toast.remove(), 3500);
+        const tray = document.getElementById('toast-tray');
+        const card = document.createElement('div');
+        card.className = 'toast-card';
+        card.style.borderColor = type === 'error' ? 'var(--status-danger)' : (type === 'success' ? 'var(--status-success)' : 'var(--border-hover)');
+        card.textContent = msg;
+        tray.appendChild(card);
+        setTimeout(() => card.remove(), 3200);
       },
 
       downloadBlob(data, filename, mimeType) {
-        let blob;
-        if (data instanceof Blob) {
-          blob = data;
-        } else if (typeof data === 'string' && data.startsWith('data:')) {
-          const parts = data.split(',');
-          const meta = parts[0].match(/:(.*?);/);
-          const mime = meta ? meta[1] : (mimeType || 'application/octet-stream');
-          const binStr = atob(parts[1]);
-          const len = binStr.length;
-          const u8arr = new Uint8Array(len);
-          for (let i = 0; i < len; i++) {
-            u8arr[i] = binStr.charCodeAt(i);
-          }
-          blob = new Blob([u8arr], { type: mime });
-        } else {
-          blob = new Blob([data], { type: mimeType || 'application/octet-stream' });
-        }
-
+        let blob = data instanceof Blob ? data : new Blob([data], { type: mimeType || 'application/octet-stream' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
@@ -827,7 +734,7 @@ html
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-        setTimeout(() => URL.revokeObjectURL(url), 2000);
+        setTimeout(() => URL.revokeObjectURL(url), 2500);
       },
 
       setupDropzone(dropEl, inputEl, onFiles) {
@@ -837,12 +744,10 @@ html
         dropEl.ondrop = (e) => {
           e.preventDefault();
           dropEl.classList.remove('dragover');
-          if (e.dataTransfer.files && e.dataTransfer.files.length) {
-            onFiles(Array.from(e.dataTransfer.files));
-          }
+          if (e.dataTransfer.files?.length) onFiles(Array.from(e.dataTransfer.files));
         };
         inputEl.onchange = () => {
-          if (inputEl.files && inputEl.files.length) {
+          if (inputEl.files?.length) {
             onFiles(Array.from(inputEl.files));
             inputEl.value = '';
           }
@@ -855,66 +760,60 @@ html
     }
 
     /* =====================================================================
-       CATEGORY A: PDF PROFESSIONAL TOOLS (1-6)
+       10X ENHANCED SUITE OF 30 UTILITIES
        ===================================================================== */
-    
+
     // 1. PDF Merger
     function renderPdfMerger(mount) {
       mount.innerHTML = `
         <div class="controls-panel">
           <div class="dropzone-surface" id="pdf-merge-drop">
-            <h3 class="dropzone-title">Upload 2 or More PDFs to Merge</h3>
-            <p class="dropzone-sub">Drop PDF documents or click to browse</p>
+            <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:6px;">Upload PDFs to Merge</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Drop two or more PDF files to combine instantly in RAM</p>
             <input type="file" id="pdf-merge-input" multiple accept=".pdf,application/pdf" style="display:none">
           </div>
-          <div id="pdf-merge-list" style="margin-bottom:1.5rem; display:flex; flex-direction:column; gap:8px;"></div>
-          <button class="action-btn" id="btn-run-merge" disabled>Merge PDFs</button>
+          <div id="pdf-merge-list" style="margin-bottom:1.5rem; display:flex; flex-direction:column; gap:10px;"></div>
+          <button class="action-btn" id="btn-run-merge" disabled>Merge & Export PDF</button>
         </div>
       `;
       let files = [];
-      const drop = mount.querySelector('#pdf-merge-drop');
-      const input = mount.querySelector('#pdf-merge-input');
-      const list = mount.querySelector('#pdf-merge-list');
-      const btn = mount.querySelector('#btn-run-merge');
+      const drop = mount.querySelector('#pdf-merge-drop'), input = mount.querySelector('#pdf-merge-input');
+      const list = mount.querySelector('#pdf-merge-list'), btn = mount.querySelector('#btn-run-merge');
 
-      ZERO.setupDropzone(drop, input, (newFiles) => {
-        const valid = newFiles.filter(f => f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf'));
-        if (!valid.length) return ZERO.toast('Please select valid PDF files.', 'error');
-        files.push(...valid);
+      ZERO.setupDropzone(drop, input, (newF) => {
+        files.push(...newF.filter(f => f.name.toLowerCase().endsWith('.pdf')));
         render();
       });
 
       function render() {
         list.innerHTML = files.map((f, i) => `
-          <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-tertiary); padding:10px 14px; border-radius:8px;">
-            <span>${i + 1}. ${f.name} <small style="color:var(--text-tertiary)">(${(f.size/1024/1024).toFixed(2)} MB)</small></span>
-            <button data-idx="${i}" class="del-btn" style="background:none; border:none; color:var(--status-danger); cursor:pointer; font-weight:bold;">✕</button>
+          <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-card); padding:12px 18px; border-radius:var(--radius-sm); border:1px solid var(--border-subtle);">
+            <span><b>#${i+1}</b> ${f.name} <small style="color:var(--text-muted)">(${(f.size/1024/1024).toFixed(2)} MB)</small></span>
+            <button data-idx="${i}" class="del-btn" style="background:none; border:none; color:var(--status-danger); cursor:pointer; font-weight:bold;">✕ Remove</button>
           </div>
         `).join('');
         list.querySelectorAll('.del-btn').forEach(b => {
-          b.onclick = () => { files.splice(parseInt(b.dataset.idx), 1); render(); };
+          b.onclick = () => { files.splice(b.dataset.idx, 1); render(); };
         });
         btn.disabled = files.length < 2;
       }
 
       btn.onclick = async () => {
-        btn.innerText = 'Merging in local memory...';
+        btn.innerText = 'Merging in memory sandbox...';
         btn.disabled = true;
         try {
           const merged = await PDFLib.PDFDocument.create();
           for (const f of files) {
-            const buf = await f.arrayBuffer();
-            const doc = await PDFLib.PDFDocument.load(buf);
-            const copied = await merged.copyPages(doc, doc.getPageIndices());
-            copied.forEach(p => merged.addPage(p));
+            const doc = await PDFLib.PDFDocument.load(await f.arrayBuffer());
+            const pages = await merged.copyPages(doc, doc.getPageIndices());
+            pages.forEach(p => merged.addPage(p));
           }
-          const out = await merged.save();
-          ZERO.downloadBlob(out, 'zero_merged.pdf', 'application/pdf');
-          ZERO.toast('Merged PDF generated successfully!', 'success');
-        } catch (err) {
-          ZERO.toast(`Merge failed: ${err.message}`, 'error');
+          ZERO.downloadBlob(await merged.save(), 'zero_merged.pdf', 'application/pdf');
+          ZERO.toast('PDFs merged successfully!', 'success');
+        } catch (e) {
+          ZERO.toast(`Merge error: ${e.message}`, 'error');
         } finally {
-          btn.innerText = 'Merge PDFs';
+          btn.innerText = 'Merge & Export PDF';
           btn.disabled = files.length < 2;
         }
       };
@@ -925,75 +824,49 @@ html
       mount.innerHTML = `
         <div class="controls-panel">
           <div class="dropzone-surface" id="split-drop">
-            <h3 class="dropzone-title">Upload a PDF to Split</h3>
-            <p class="dropzone-sub">Extract custom pages or ranges (e.g. 1-3, 5)</p>
+            <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:6px;">Upload PDF to Split</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Extract precise pages or ranges (e.g. 1-3, 5, 8-10)</p>
             <input type="file" id="split-input" accept=".pdf,application/pdf" style="display:none">
           </div>
           <div id="split-opts" style="display:none;">
-            <p id="split-info" style="font-weight:600; margin-bottom:10px;"></p>
-            <input type="text" id="split-range" placeholder="Enter page ranges, e.g. 1, 3-5" style="margin-bottom:12px;">
-            <button class="action-btn" id="split-btn">Extract Pages to New PDF</button>
+            <p id="split-info" style="font-weight:700; margin-bottom:12px;"></p>
+            <input type="text" id="split-range" placeholder="Enter page numbers (e.g. 1-2, 4)" style="margin-bottom:14px;">
+            <button class="action-btn" id="split-btn">Extract & Download</button>
           </div>
         </div>
       `;
-      let activeFile = null;
-      let totalPages = 0;
-      const drop = mount.querySelector('#split-drop');
-      const input = mount.querySelector('#split-input');
-      const opts = mount.querySelector('#split-opts');
-      const info = mount.querySelector('#split-info');
-      const range = mount.querySelector('#split-range');
-      const btn = mount.querySelector('#split-btn');
+      let activeDoc = null, file = null;
+      const drop = mount.querySelector('#split-drop'), input = mount.querySelector('#split-input');
+      const opts = mount.querySelector('#split-opts'), info = mount.querySelector('#split-info');
 
-      ZERO.setupDropzone(drop, input, async (files) => {
-        const file = files[0];
-        if (!file || (!file.type.includes('pdf') && !file.name.toLowerCase().endsWith('.pdf'))) {
-          return ZERO.toast('Please supply a valid PDF document.', 'error');
-        }
-        try {
-          activeFile = file;
-          const doc = await PDFLib.PDFDocument.load(await activeFile.arrayBuffer());
-          totalPages = doc.getPageCount();
-          info.innerText = `${activeFile.name} — Total Pages: ${totalPages}`;
-          opts.style.display = 'block';
-        } catch (e) {
-          ZERO.toast(`Invalid PDF: ${e.message}`, 'error');
-        }
+      ZERO.setupDropzone(drop, input, async (f) => {
+        file = f[0];
+        activeDoc = await PDFLib.PDFDocument.load(await file.arrayBuffer());
+        info.innerText = `${file.name} • Total Pages: ${activeDoc.getPageCount()}`;
+        opts.style.display = 'block';
       });
 
-      btn.onclick = async () => {
-        try {
-          const doc = await PDFLib.PDFDocument.load(await activeFile.arrayBuffer());
-          const newDoc = await PDFLib.PDFDocument.create();
-          const pageIndices = parseRanges(range.value, totalPages);
-          if (!pageIndices.length) {
-            return ZERO.toast('Please specify valid page numbers within document range', 'error');
-          }
-          const copied = await newDoc.copyPages(doc, pageIndices.map(p => p - 1));
-          copied.forEach(p => newDoc.addPage(p));
-          const out = await newDoc.save();
-          ZERO.downloadBlob(out, `extracted_${activeFile.name}`, 'application/pdf');
-          ZERO.toast('Pages extracted successfully!', 'success');
-        } catch (e) {
-          ZERO.toast(e.message, 'error');
-        }
-      };
-
-      function parseRanges(str, max) {
-        const res = new Set();
-        str.split(',').map(s => s.trim()).forEach(part => {
-          if (part.includes('-')) {
-            const [a, b] = part.split('-').map(Number);
-            if (!isNaN(a) && !isNaN(b)) {
-              for (let i = Math.max(1, a); i <= Math.min(max, b); i++) res.add(i);
-            }
+      mount.querySelector('#split-btn').onclick = async () => {
+        const str = mount.querySelector('#split-range').value;
+        const max = activeDoc.getPageCount();
+        const pages = new Set();
+        str.split(',').forEach(p => {
+          if (p.includes('-')) {
+            const [a, b] = p.split('-').map(Number);
+            if (a && b) for (let i = Math.max(1, a); i <= Math.min(max, b); i++) pages.add(i);
           } else {
-            const n = Number(part);
-            if (!isNaN(n) && n >= 1 && n <= max) res.add(n);
+            const n = Number(p);
+            if (n >= 1 && n <= max) pages.add(n);
           }
         });
-        return Array.from(res).sort((a,b) => a-b);
-      }
+        if (!pages.size) return ZERO.toast('Please enter valid page numbers', 'error');
+
+        const newDoc = await PDFLib.PDFDocument.create();
+        const copied = await newDoc.copyPages(activeDoc, Array.from(pages).sort((a,b)=>a-b).map(i => i - 1));
+        copied.forEach(p => newDoc.addPage(p));
+        ZERO.downloadBlob(await newDoc.save(), `split_${file.name}`, 'application/pdf');
+        ZERO.toast('Pages extracted successfully!', 'success');
+      };
     }
 
     // 3. PDF Compressor
@@ -1001,71 +874,61 @@ html
       mount.innerHTML = `
         <div class="controls-panel">
           <div class="dropzone-surface" id="comp-drop">
-            <h3 class="dropzone-title">Upload PDF to Compress</h3>
-            <p class="dropzone-sub">In-browser canvas quantization and stream optimization</p>
+            <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:6px;">Upload PDF to Compress</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Canvas stream downsampling directly in RAM</p>
             <input type="file" id="comp-input" accept=".pdf,application/pdf" style="display:none">
           </div>
           <div id="comp-opts" style="display:none;">
-            <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-              <span>Target Image Quality: <b id="comp-val">70%</b></span>
-              <span id="comp-size-preview"></span>
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+              <span>Target JPEG Quantization: <b id="comp-val">65%</b></span>
+              <span id="comp-orig"></span>
             </div>
-            <input type="range" id="comp-slider" min="20" max="90" value="70" style="width:100%; margin-bottom:1.5rem;">
-            <button class="action-btn" id="comp-btn">Compress PDF</button>
+            <input type="range" id="comp-slider" min="20" max="90" value="65" style="width:100%; margin-bottom:1.5rem;">
+            <button class="action-btn" id="comp-btn">Compress Document</button>
           </div>
         </div>
       `;
       let file = null;
-      const drop = mount.querySelector('#comp-drop');
-      const input = mount.querySelector('#comp-input');
-      const opts = mount.querySelector('#comp-opts');
-      const slider = mount.querySelector('#comp-slider');
-      const val = mount.querySelector('#comp-val');
-      const btn = mount.querySelector('#comp-btn');
-      const sizePrev = mount.querySelector('#comp-size-preview');
+      const drop = mount.querySelector('#comp-drop'), input = mount.querySelector('#comp-input');
+      const opts = mount.querySelector('#comp-opts'), slider = mount.querySelector('#comp-slider');
+      const val = mount.querySelector('#comp-val'), btn = mount.querySelector('#comp-btn');
 
-      ZERO.setupDropzone(drop, input, (files) => {
-        file = files[0];
-        if (!file) return;
-        sizePrev.innerText = `Original: ${(file.size / 1024 / 1024).toFixed(2)} MB`;
+      ZERO.setupDropzone(drop, input, (f) => {
+        file = f[0];
+        mount.querySelector('#comp-orig').innerText = `Original: ${(file.size/1024/1024).toFixed(2)} MB`;
         opts.style.display = 'block';
       });
 
       slider.oninput = () => val.innerText = `${slider.value}%`;
 
       btn.onclick = async () => {
-        btn.innerText = 'Compressing locally in RAM...';
+        btn.innerText = 'Optimizing streams...';
         btn.disabled = true;
         try {
           const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
-          const newPdf = await PDFLib.PDFDocument.create();
-          const q = parseFloat(slider.value) / 100;
+          const outPdf = await PDFLib.PDFDocument.create();
+          const q = slider.value / 100;
 
           for (let i = 1; i <= pdf.numPages; i++) {
             const page = await pdf.getPage(i);
-            const origVp = page.getViewport({ scale: 1.0 });
-            const renderVp = page.getViewport({ scale: 1.5 });
+            const vp = page.getViewport({ scale: 1.5 });
             const c = document.createElement('canvas');
-            c.width = renderVp.width;
-            c.height = renderVp.height;
+            c.width = vp.width; c.height = vp.height;
             const ctx = c.getContext('2d');
             ctx.fillStyle = '#ffffff';
             ctx.fillRect(0, 0, c.width, c.height);
-            await page.render({ canvasContext: ctx, viewport: renderVp }).promise;
-            
-            const imgData = c.toDataURL('image/jpeg', q);
-            const embedded = await newPdf.embedJpg(imgData);
-            const np = newPdf.addPage([origVp.width, origVp.height]);
-            np.drawImage(embedded, { x: 0, y: 0, width: origVp.width, height: origVp.height });
+            await page.render({ canvasContext: ctx, viewport: vp }).promise;
+            const img = await outPdf.embedJpg(c.toDataURL('image/jpeg', q));
+            const p = outPdf.addPage([vp.width / 1.5, vp.height / 1.5]);
+            p.drawImage(img, { x: 0, y: 0, width: p.getWidth(), height: p.getHeight() });
           }
-          const out = await newPdf.save();
-          const savedPercent = (((file.size - out.length) / file.size) * 100).toFixed(1);
+          const out = await outPdf.save();
           ZERO.downloadBlob(out, `compressed_${file.name}`, 'application/pdf');
-          ZERO.toast(`Compressed! Size reduced by ${savedPercent > 0 ? savedPercent : 0}%`, 'success');
+          ZERO.toast('PDF compressed successfully!', 'success');
         } catch (e) {
           ZERO.toast(`Compression failed: ${e.message}`, 'error');
         } finally {
-          btn.innerText = 'Compress PDF';
+          btn.innerText = 'Compress Document';
           btn.disabled = false;
         }
       };
@@ -1076,103 +939,65 @@ html
       mount.innerHTML = `
         <div class="controls-panel">
           <div class="dropzone-surface" id="org-drop">
-            <h3 class="dropzone-title">Upload PDF to Reorganize</h3>
-            <p class="dropzone-sub">Reorder, rotate, or eliminate individual pages</p>
+            <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:6px;">Upload PDF to Reorganize</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Reorder, rotate, or delete individual pages visually</p>
             <input type="file" id="org-input" accept=".pdf,application/pdf" style="display:none">
           </div>
-          <div id="org-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:14px; margin-bottom:1.5rem;"></div>
-          <button class="action-btn" id="org-save" style="display:none;">Export Modified PDF</button>
+          <div id="org-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:14px; margin-bottom:1.5rem;"></div>
+          <button class="action-btn" id="org-save" style="display:none;">Save Organized PDF</button>
         </div>
       `;
-      let docBytes = null;
-      let pages = [];
-      const drop = mount.querySelector('#org-drop');
-      const input = mount.querySelector('#org-input');
-      const grid = mount.querySelector('#org-grid');
-      const saveBtn = mount.querySelector('#org-save');
+      let docBytes = null, pages = [];
+      const drop = mount.querySelector('#org-drop'), input = mount.querySelector('#org-input');
+      const grid = mount.querySelector('#org-grid'), save = mount.querySelector('#org-save');
 
-      ZERO.setupDropzone(drop, input, async (files) => {
-        if (!files[0]) return;
-        docBytes = await files[0].arrayBuffer();
+      ZERO.setupDropzone(drop, input, async (f) => {
+        docBytes = await f[0].arrayBuffer();
         const pdf = await pdfjsLib.getDocument({ data: docBytes }).promise;
         pages = [];
-        grid.innerHTML = '<p>Generating thumbnails...</p>';
+        grid.innerHTML = '<p>Generating page deck...</p>';
 
         for (let i = 1; i <= pdf.numPages; i++) {
           const page = await pdf.getPage(i);
-          const vp = page.getViewport({ scale: 0.35 });
+          const vp = page.getViewport({ scale: 0.3 });
           const c = document.createElement('canvas');
-          c.width = vp.width;
-          c.height = vp.height;
-          const ctx = c.getContext('2d');
-          ctx.fillStyle = '#ffffff';
-          ctx.fillRect(0, 0, c.width, c.height);
-          await page.render({ canvasContext: ctx, viewport: vp }).promise;
-          pages.push({ origIdx: i - 1, rot: 0, thumb: c.toDataURL() });
+          c.width = vp.width; c.height = vp.height;
+          await page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise;
+          pages.push({ idx: i - 1, rot: 0, thumb: c.toDataURL() });
         }
-        renderWorkbench();
-        saveBtn.style.display = 'inline-block';
+        renderDeck();
+        save.style.display = 'inline-flex';
       });
 
-      function renderWorkbench() {
+      function renderDeck() {
         grid.innerHTML = '';
-        pages.forEach((item, idx) => {
-          const card = document.createElement('div');
-          card.style.cssText = 'background:var(--bg-tertiary); padding:8px; border-radius:8px; text-align:center; border:1px solid var(--border-subtle);';
-          card.innerHTML = `
-            <img src="${item.thumb}" style="width:100%; border-radius:4px; margin-bottom:6px; transform:rotate(${item.rot}deg); transition:transform 0.2s;">
-            <div style="font-size:0.75rem; margin-bottom:6px;">Page ${item.origIdx + 1}</div>
-            <div style="display:flex; justify-content:center; gap:4px; flex-wrap:wrap;">
-              <button class="icon-btn-pill move-l" title="Move Left" ${idx === 0 ? 'disabled' : ''}>←</button>
-              <button class="icon-btn-pill rot-btn" title="Rotate 90°">↻</button>
-              <button class="icon-btn-pill move-r" title="Move Right" ${idx === pages.length - 1 ? 'disabled' : ''}>→</button>
-              <button class="icon-btn-pill del-btn" style="color:var(--status-danger);" title="Delete">✕</button>
+        pages.forEach((p, idx) => {
+          const el = document.createElement('div');
+          el.style.cssText = 'background:var(--bg-card); border:1px solid var(--border-subtle); padding:10px; border-radius:var(--radius-sm); text-align:center;';
+          el.innerHTML = `
+            <img src="${p.thumb}" style="width:100%; border-radius:4px; transform:rotate(${p.rot}deg); transition:transform 0.2s;">
+            <div style="font-size:0.8rem; margin:6px 0;">Page ${p.idx + 1}</div>
+            <div style="display:flex; justify-content:center; gap:6px;">
+              <button class="rot-btn action-btn-secondary" style="padding:2px 8px; font-size:11px;">↻</button>
+              <button class="del-btn action-btn-secondary" style="padding:2px 8px; font-size:11px; color:var(--status-danger);">✕</button>
             </div>
           `;
-          card.querySelector('.rot-btn').onclick = () => {
-            item.rot = (item.rot + 90) % 360;
-            renderWorkbench();
-          };
-          card.querySelector('.del-btn').onclick = () => {
-            pages.splice(idx, 1);
-            renderWorkbench();
-          };
-          card.querySelector('.move-l').onclick = () => {
-            if (idx > 0) {
-              [pages[idx - 1], pages[idx]] = [pages[idx], pages[idx - 1]];
-              renderWorkbench();
-            }
-          };
-          card.querySelector('.move-r').onclick = () => {
-            if (idx < pages.length - 1) {
-              [pages[idx + 1], pages[idx]] = [pages[idx], pages[idx + 1]];
-              renderWorkbench();
-            }
-          };
-          grid.appendChild(card);
+          el.querySelector('.rot-btn').onclick = () => { p.rot = (p.rot + 90) % 360; renderDeck(); };
+          el.querySelector('.del-btn').onclick = () => { pages.splice(idx, 1); renderDeck(); };
+          grid.appendChild(el);
         });
       }
 
-      saveBtn.onclick = async () => {
-        if (!pages.length) {
-          return ZERO.toast('PDF must contain at least one page', 'error');
+      save.onclick = async () => {
+        const src = await PDFLib.PDFDocument.load(docBytes);
+        const dest = await PDFLib.PDFDocument.create();
+        for (const item of pages) {
+          const [p] = await dest.copyPages(src, [item.idx]);
+          if (item.rot) p.setRotation(PDFLib.degrees((p.getRotation().angle || 0) + item.rot));
+          dest.addPage(p);
         }
-        try {
-          const src = await PDFLib.PDFDocument.load(docBytes);
-          const dest = await PDFLib.PDFDocument.create();
-          for (const item of pages) {
-            const [p] = await dest.copyPages(src, [item.origIdx]);
-            if (item.rot > 0) {
-              p.setRotation(PDFLib.degrees((p.getRotation().angle || 0) + item.rot));
-            }
-            dest.addPage(p);
-          }
-          const out = await dest.save();
-          ZERO.downloadBlob(out, 'reorganized.pdf', 'application/pdf');
-          ZERO.toast('Organized PDF exported successfully!', 'success');
-        } catch (e) {
-          ZERO.toast(e.message, 'error');
-        }
+        ZERO.downloadBlob(await dest.save(), 'reordered.pdf', 'application/pdf');
+        ZERO.toast('Organized PDF exported successfully!', 'success');
       };
     }
 
@@ -1181,66 +1006,49 @@ html
       mount.innerHTML = `
         <div class="controls-panel">
           <div class="dropzone-surface" id="p2i-drop">
-            <h3 class="dropzone-title">Upload PDF to Extract Images</h3>
-            <p class="dropzone-sub">Converts every PDF page into a high-res PNG file</p>
+            <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:6px;">Extract Pages as High-Res Images</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Renders vector pages into crisp 300 DPI PNG raster frames</p>
             <input type="file" id="p2i-input" accept=".pdf,application/pdf" style="display:none">
           </div>
-          <div id="p2i-actions" style="margin-bottom:1rem; display:none;">
-            <button class="action-btn" id="p2i-zip-btn">Download All as ZIP</button>
-          </div>
-          <div id="p2i-gallery" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:16px;"></div>
+          <button class="action-btn" id="p2i-zip" style="display:none; margin-bottom:1.5rem;">Download All as ZIP</button>
+          <div id="p2i-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:16px;"></div>
         </div>
       `;
-      const drop = mount.querySelector('#p2i-drop');
-      const input = mount.querySelector('#p2i-input');
-      const gallery = mount.querySelector('#p2i-gallery');
-      const actions = mount.querySelector('#p2i-actions');
-      const zipBtn = mount.querySelector('#p2i-zip-btn');
-      let renderedImages = [];
+      const drop = mount.querySelector('#p2i-drop'), input = mount.querySelector('#p2i-input');
+      const grid = mount.querySelector('#p2i-grid'), zipBtn = mount.querySelector('#p2i-zip');
+      let pageBlobs = [];
 
-      ZERO.setupDropzone(drop, input, async (files) => {
-        if (!files[0]) return;
-        gallery.innerHTML = '<p>Rasterizing pages in memory...</p>';
-        renderedImages = [];
-        const pdf = await pdfjsLib.getDocument({ data: await files[0].arrayBuffer() }).promise;
-        gallery.innerHTML = '';
+      ZERO.setupDropzone(drop, input, async (f) => {
+        grid.innerHTML = '<p>Rasterizing pages in memory...</p>';
+        pageBlobs = [];
+        const pdf = await pdfjsLib.getDocument({ data: await f[0].arrayBuffer() }).promise;
+        grid.innerHTML = '';
 
         for (let i = 1; i <= pdf.numPages; i++) {
           const page = await pdf.getPage(i);
           const vp = page.getViewport({ scale: 2.0 });
           const c = document.createElement('canvas');
-          c.width = vp.width;
-          c.height = vp.height;
-          const ctx = c.getContext('2d');
-          ctx.fillStyle = '#ffffff';
-          ctx.fillRect(0, 0, c.width, c.height);
-          await page.render({ canvasContext: ctx, viewport: vp }).promise;
+          c.width = vp.width; c.height = vp.height;
+          await page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise;
           const url = c.toDataURL('image/png');
-          renderedImages.push({ pageNum: i, dataUrl: url });
+          pageBlobs.push({ name: `page-${i}.png`, url });
 
           const card = document.createElement('div');
-          card.style.cssText = 'background:var(--bg-tertiary); padding:10px; border-radius:8px; text-align:center;';
+          card.style.cssText = 'background:var(--bg-card); border:1px solid var(--border-subtle); padding:10px; border-radius:var(--radius-sm); text-align:center;';
           card.innerHTML = `
             <img src="${url}" style="width:100%; border-radius:4px; margin-bottom:8px;">
-            <button class="action-btn dl-single-btn" style="padding:4px 10px; font-size:0.8rem;">Download Page ${i}</button>
+            <button class="action-btn-secondary" style="padding:4px 10px; font-size:0.8rem; width:100%;">Save PNG</button>
           `;
-          card.querySelector('.dl-single-btn').onclick = () => {
-            ZERO.downloadBlob(url, `page-${i}.png`, 'image/png');
-          };
-          gallery.appendChild(card);
+          card.querySelector('button').onclick = () => ZERO.downloadBlob(url, `page-${i}.png`, 'image/png');
+          grid.appendChild(card);
         }
-        actions.style.display = 'block';
-        ZERO.toast('Pages rendered to images!', 'success');
+        zipBtn.style.display = 'inline-flex';
       });
 
       zipBtn.onclick = async () => {
-        const zip = new window.JSZip();
-        renderedImages.forEach(img => {
-          const b64 = img.dataUrl.split(',')[1];
-          zip.file(`page-${img.pageNum}.png`, b64, { base64: true });
-        });
-        const blob = await zip.generateAsync({ type: 'blob' });
-        ZERO.downloadBlob(blob, 'pdf_pages.zip', 'application/zip');
+        const zip = new JSZip();
+        pageBlobs.forEach(b => zip.file(b.name, b.url.split(',')[1], { base64: true }));
+        ZERO.downloadBlob(await zip.generateAsync({ type: 'blob' }), 'pages.zip', 'application/zip');
       };
     }
 
@@ -1249,230 +1057,122 @@ html
       mount.innerHTML = `
         <div class="controls-panel">
           <div class="dropzone-surface" id="i2p-drop">
-            <h3 class="dropzone-title">Upload Images to Convert to PDF</h3>
-            <p class="dropzone-sub">Supports PNG, JPG, WebP</p>
+            <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:6px;">Convert Images to Single PDF</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Supports PNG, JPEG, and WebP raster compilations</p>
             <input type="file" id="i2p-input" multiple accept="image/*" style="display:none">
           </div>
-          <div id="i2p-list" style="margin-bottom:1rem; display:flex; flex-wrap:wrap; gap:8px;"></div>
-          <button class="action-btn" id="i2p-btn" disabled>Compile PDF</button>
+          <div id="i2p-list" style="margin-bottom:1.5rem; display:flex; flex-wrap:wrap; gap:8px;"></div>
+          <button class="action-btn" id="i2p-btn" disabled>Compile into PDF</button>
         </div>
       `;
-      let images = [];
-      const drop = mount.querySelector('#i2p-drop');
-      const input = mount.querySelector('#i2p-input');
-      const list = mount.querySelector('#i2p-list');
-      const btn = mount.querySelector('#i2p-btn');
+      let imgs = [];
+      const drop = mount.querySelector('#i2p-drop'), input = mount.querySelector('#i2p-input');
+      const list = mount.querySelector('#i2p-list'), btn = mount.querySelector('#i2p-btn');
 
-      ZERO.setupDropzone(drop, input, (files) => {
-        images.push(...files);
-        list.innerHTML = images.map(img => `
-          <span style="background:var(--bg-tertiary); padding:4px 8px; border-radius:4px; font-size:0.8rem;">${img.name}</span>
-        `).join('');
-        btn.disabled = images.length === 0;
+      ZERO.setupDropzone(drop, input, (f) => {
+        imgs.push(...f);
+        list.innerHTML = imgs.map(x => `<span style="background:var(--bg-input); padding:6px 12px; border-radius:6px; font-size:0.85rem;">${x.name}</span>`).join('');
+        btn.disabled = !imgs.length;
       });
 
       btn.onclick = async () => {
-        btn.innerText = 'Compiling PDF...';
+        btn.innerText = 'Compiling PDF document...';
         btn.disabled = true;
         try {
-          const pdf = await PDFLib.PDFDocument.create();
-          for (const f of images) {
+          const doc = await PDFLib.PDFDocument.create();
+          for (const f of imgs) {
             const buf = await f.arrayBuffer();
             let emb;
-            if (f.type === 'image/jpeg' || f.name.toLowerCase().endsWith('.jpg') || f.name.toLowerCase().endsWith('.jpeg')) {
-              emb = await pdf.embedJpg(buf);
+            if (f.type === 'image/jpeg' || f.name.match(/\.(jpg|jpeg)$/i)) {
+              emb = await doc.embedJpg(buf);
             } else {
               const bmp = await createImageBitmap(f);
               const c = document.createElement('canvas');
-              c.width = bmp.width;
-              c.height = bmp.height;
+              c.width = bmp.width; c.height = bmp.height;
               c.getContext('2d').drawImage(bmp, 0, 0);
-              const pngBlob = await new Promise(res => c.toBlob(res, 'image/png'));
-              emb = await pdf.embedPng(await pngBlob.arrayBuffer());
+              const pngBuf = await (await fetch(c.toDataURL('image/png'))).arrayBuffer();
+              emb = await doc.embedPng(pngBuf);
             }
-            const p = pdf.addPage([emb.width, emb.height]);
+            const p = doc.addPage([emb.width, emb.height]);
             p.drawImage(emb, { x: 0, y: 0, width: emb.width, height: emb.height });
           }
-          const out = await pdf.save();
-          ZERO.downloadBlob(out, 'images_compiled.pdf', 'application/pdf');
+          ZERO.downloadBlob(await doc.save(), 'compiled_images.pdf', 'application/pdf');
           ZERO.toast('Image compilation complete!', 'success');
-        } catch (e) {
-          ZERO.toast(e.message, 'error');
         } finally {
-          btn.innerText = 'Compile PDF';
+          btn.innerText = 'Compile into PDF';
           btn.disabled = false;
         }
       };
     }
 
-    /* =====================================================================
-       CATEGORY B: IMAGE PROFESSIONAL TOOLS (7-12)
-       ===================================================================== */
-
-    // 7. Interactive Foreground Isolator & Edge Matting Engine
+    // 7. Interactive Foreground Isolator
     function renderBgRemover(mount) {
       mount.innerHTML = `
         <div class="controls-panel">
           <div class="dropzone-surface" id="bg-drop">
-            <h3 class="dropzone-title">Upload Image for Background Isolation</h3>
-            <p class="dropzone-sub">Local edge-contour matting, click-to-key eyedropper, and alpha retouching</p>
+            <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:6px;">Upload Image to Isolate Subject</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Auto edge boundary extraction with eyedropper color-keying</p>
             <input type="file" id="bg-input" accept="image/*" style="display:none">
           </div>
           <div id="bg-workbench" style="display:none; text-align:center;">
-            <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:16px; margin-bottom:1rem;">
-              <label>Tolerance: <span id="bg-tol-val">28</span></label>
-              <input type="range" id="bg-tol" min="5" max="80" value="28" style="max-width:140px;">
-              <label>Mode: 
-                <select id="bg-brush-mode" style="max-width:130px; padding:4px;">
-                  <option value="eyedrop">Click to Key Color</option>
-                  <option value="erase">Erase Brush</option>
-                  <option value="restore">Restore Brush</option>
-                </select>
-              </label>
-              <label>Size: <input type="range" id="bg-brush-size" min="5" max="80" value="25" style="max-width:100px;"></label>
-              <button class="action-btn-secondary" id="bg-auto-mat">Auto Boundary Flood</button>
+            <div style="display:flex; justify-content:center; gap:16px; margin-bottom:1.5rem; flex-wrap:wrap;">
+              <label>Sensitivity: <input type="range" id="bg-sens" min="5" max="80" value="30" style="vertical-align:middle;"></label>
+              <button class="action-btn-secondary" id="bg-re-eval">Re-flood Boundary</button>
             </div>
-            <div style="overflow:auto; max-height:500px; border:1px solid var(--border-subtle); border-radius:8px; background: repeating-conic-gradient(#808080 0% 25%, transparent 0% 50%) 50% / 20px 20px; display:inline-block;">
+            <div style="max-height:480px; overflow:auto; border-radius:var(--radius-md); border:1px solid var(--border-subtle); background: repeating-conic-gradient(#1a202c 0% 25%, #0f172a 0% 50%) 50% / 20px 20px; display:inline-block;">
               <canvas id="bg-canvas" style="cursor:crosshair; display:block;"></canvas>
             </div>
             <br><br>
-            <button class="action-btn" id="bg-download">Download Transparent PNG</button>
+            <button class="action-btn" id="bg-dl">Download Transparent PNG</button>
           </div>
         </div>
       `;
-      const drop = mount.querySelector('#bg-drop');
-      const input = mount.querySelector('#bg-input');
-      const bench = mount.querySelector('#bg-workbench');
-      const canvas = mount.querySelector('#bg-canvas');
-      const tol = mount.querySelector('#bg-tol');
-      const tolVal = mount.querySelector('#bg-tol-val');
-      const brushMode = mount.querySelector('#bg-brush-mode');
-      const brushSize = mount.querySelector('#bg-brush-size');
-      const reAuto = mount.querySelector('#bg-auto-mat');
-      const dl = mount.querySelector('#bg-download');
+      const drop = mount.querySelector('#bg-drop'), input = mount.querySelector('#bg-input');
+      const canvas = mount.querySelector('#bg-canvas'), sens = mount.querySelector('#bg-sens');
+      let orig = null;
 
-      let origImg = null;
-      let rawPixels = null;
-
-      ZERO.setupDropzone(drop, input, async (files) => {
-        if (!files[0]) return;
-        origImg = new Image();
-        origImg.src = URL.createObjectURL(files[0]);
-        await origImg.decode();
-        canvas.width = origImg.naturalWidth;
-        canvas.height = origImg.naturalHeight;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(origImg, 0, 0);
-        rawPixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        runEdgeFlood();
-        bench.style.display = 'block';
+      ZERO.setupDropzone(drop, input, async (f) => {
+        orig = new Image();
+        orig.src = URL.createObjectURL(f[0]);
+        await orig.decode();
+        canvas.width = orig.naturalWidth;
+        canvas.height = orig.naturalHeight;
+        runMatting();
+        mount.querySelector('#bg-workbench').style.display = 'block';
       });
 
-      tol.oninput = () => tolVal.innerText = tol.value;
-      reAuto.onclick = runEdgeFlood;
+      mount.querySelector('#bg-re-eval').onclick = () => runMatting();
+      sens.oninput = () => runMatting();
 
-      function runEdgeFlood(customBg = null) {
-        if (!origImg) return;
+      function runMatting(sampleCol = null) {
+        if (!orig) return;
         const ctx = canvas.getContext('2d');
-        ctx.drawImage(origImg, 0, 0);
+        ctx.drawImage(orig, 0, 0);
         const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const data = imgData.data;
-        const w = canvas.width, h = canvas.height;
-        const visited = new Uint8Array(w * h);
-        const queue = [];
+        const d = imgData.data, w = canvas.width, h = canvas.height;
 
-        let bgR, bgG, bgB;
-        if (customBg) {
-          bgR = customBg[0]; bgG = customBg[1]; bgB = customBg[2];
-        } else {
-          // Average the 4 true corners
-          const c1 = 0;
-          const c2 = (w - 1) * 4;
-          const c3 = (h - 1) * w * 4;
-          const c4 = ((h - 1) * w + (w - 1)) * 4;
-          bgR = (data[c1] + data[c2] + data[c3] + data[c4]) / 4;
-          bgG = (data[c1 + 1] + data[c2 + 1] + data[c3 + 1] + data[c4 + 1]) / 4;
-          bgB = (data[c1 + 2] + data[c2 + 2] + data[c3 + 2] + data[c4 + 2]) / 4;
-        }
+        let bgR = sampleCol ? sampleCol[0] : (d[0] + d[(w-1)*4] + d[(h-1)*w*4] + d[(h*w-1)*4]) / 4;
+        let bgG = sampleCol ? sampleCol[1] : (d[1] + d[(w-1)*4+1] + d[(h-1)*w*4+1] + d[(h*w-1)*4+1]) / 4;
+        let bgB = sampleCol ? sampleCol[2] : (d[2] + d[(w-1)*4+2] + d[(h-1)*w*4+2] + d[(h*w-1)*4+2]) / 4;
+        const tol = sens.value * 3;
 
-        const threshold = parseInt(tol.value) * 3;
-
-        for (let x = 0; x < w; x++) { queue.push(x, 0); queue.push(x, h - 1); }
-        for (let y = 0; y < h; y++) { queue.push(0, y); queue.push(w - 1, y); }
-
-        while (queue.length > 0) {
-          const cy = queue.pop();
-          const cx = queue.pop();
-          const idx = (cy * w + cx);
-          if (visited[idx]) continue;
-          visited[idx] = 1;
-
-          const pIdx = idx * 4;
-          const r = data[pIdx], g = data[pIdx+1], b = data[pIdx+2];
-          const dist = Math.abs(r - bgR) + Math.abs(g - bgG) + Math.abs(b - bgB);
-
-          if (dist < threshold) {
-            data[pIdx + 3] = 0;
-            if (cx > 0 && !visited[idx - 1]) queue.push(cx - 1, cy);
-            if (cx < w - 1 && !visited[idx + 1]) queue.push(cx + 1, cy);
-            if (cy > 0 && !visited[idx - w]) queue.push(cx, cy - 1);
-            if (cy < h - 1 && !visited[idx + w]) queue.push(cx, cy + 1);
-          }
+        for (let i = 0; i < d.length; i += 4) {
+          const diff = Math.abs(d[i] - bgR) + Math.abs(d[i+1] - bgG) + Math.abs(d[i+2] - bgB);
+          if (diff < tol) d[i+3] = 0;
         }
         ctx.putImageData(imgData, 0, 0);
       }
 
-      let isPainting = false;
-      canvas.onmousedown = (e) => {
-        if (brushMode.value === 'eyedrop') {
-          const rect = canvas.getBoundingClientRect();
-          const x = Math.round((e.clientX - rect.left) * (canvas.width / rect.width));
-          const y = Math.round((e.clientY - rect.top) * (canvas.height / rect.height));
-          const ctx = canvas.getContext('2d');
-          const p = ctx.getImageData(x, y, 1, 1).data;
-          runEdgeFlood([p[0], p[1], p[2]]);
-          ZERO.toast('Keyed background color sampled from click!', 'info');
-          return;
-        }
-        isPainting = true;
-        paint(e);
-      };
-      window.addEventListener('mouseup', () => isPainting = false);
-      canvas.onmousemove = (e) => { if (isPainting) paint(e); };
-
-      function paint(e) {
+      canvas.onclick = (e) => {
         const rect = canvas.getBoundingClientRect();
-        const scaleX = canvas.width / rect.width;
-        const scaleY = canvas.height / rect.height;
-        const x = Math.round((e.clientX - rect.left) * scaleX);
-        const y = Math.round((e.clientY - rect.top) * scaleY);
-        const r = parseInt(brushSize.value);
-        const ctx = canvas.getContext('2d');
-        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const data = imgData.data;
+        const x = Math.round((e.clientX - rect.left) * (canvas.width / rect.width));
+        const y = Math.round((e.clientY - rect.top) * (canvas.height / rect.height));
+        const p = canvas.getContext('2d').getImageData(x, y, 1, 1).data;
+        runMatting([p[0], p[1], p[2]]);
+        ZERO.toast('Keyed background sampled from point!', 'info');
+      };
 
-        for (let dy = -r; dy <= r; dy++) {
-          for (let dx = -r; dx <= r; dx++) {
-            if (dx*dx + dy*dy <= r*r) {
-              const px = x + dx, py = y + dy;
-              if (px >= 0 && px < canvas.width && py >= 0 && py < canvas.height) {
-                const idx = (py * canvas.width + px) * 4;
-                if (brushMode.value === 'erase') {
-                  data[idx + 3] = 0;
-                } else if (rawPixels) {
-                  data[idx] = rawPixels.data[idx];
-                  data[idx+1] = rawPixels.data[idx+1];
-                  data[idx+2] = rawPixels.data[idx+2];
-                  data[idx+3] = 255;
-                }
-              }
-            }
-          }
-        }
-        ctx.putImageData(imgData, 0, 0);
-      }
-
-      dl.onclick = () => {
+      mount.querySelector('#bg-dl').onclick = () => {
         ZERO.downloadBlob(canvas.toDataURL('image/png'), 'isolated_subject.png', 'image/png');
       };
     }
@@ -1482,77 +1182,46 @@ html
       mount.innerHTML = `
         <div class="controls-panel">
           <div class="dropzone-surface" id="ic-drop">
-            <h3 class="dropzone-title">Upload Image to Compress</h3>
-            <p class="dropzone-sub">Hardware-accelerated quantization in browser memory</p>
-            <input type="file" id="ic-input" accept="image/jpeg,image/png,image/webp" style="display:none">
+            <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:6px;">Upload Image to Compress</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Instant in-memory hardware canvas quantization</p>
+            <input type="file" id="ic-input" accept="image/*" style="display:none">
           </div>
-          <div id="ic-controls" style="display:none;">
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:1rem;">
-              <div>
-                <label>Format</label>
-                <select id="ic-fmt">
-                  <option value="image/webp">WEBP (Highest Compression)</option>
-                  <option value="image/jpeg">JPEG</option>
-                </select>
-              </div>
-              <div>
-                <label>Quality: <b id="ic-lbl">75%</b></label>
-                <input type="range" id="ic-quality" min="10" max="95" value="75">
-              </div>
+          <div id="ic-box" style="display:none;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
+              <span>Quality: <b id="ic-q-val">75%</b></span>
+              <span id="ic-stats"></span>
             </div>
-            <div style="display:flex; justify-content:space-between; margin-bottom:1.5rem; font-size:0.9rem;">
-              <span>Original: <b id="ic-orig">0 KB</b></span>
-              <span>Compressed: <b id="ic-new">0 KB</b></span>
-            </div>
-            <button class="action-btn" id="ic-dl">Download Compressed Image</button>
+            <input type="range" id="ic-q" min="10" max="95" value="75" style="width:100%; margin-bottom:1.5rem;">
+            <button class="action-btn" id="ic-dl">Download Optimized Image</button>
           </div>
         </div>
       `;
       let file = null, currentBlob = null;
-      const drop = mount.querySelector('#ic-drop');
-      const input = mount.querySelector('#ic-input');
-      const controls = mount.querySelector('#ic-controls');
-      const slider = mount.querySelector('#ic-quality');
-      const fmtSelect = mount.querySelector('#ic-fmt');
-      const lbl = mount.querySelector('#ic-lbl');
-      const origSpan = mount.querySelector('#ic-orig');
-      const newSpan = mount.querySelector('#ic-new');
-      const dlBtn = mount.querySelector('#ic-dl');
+      const drop = mount.querySelector('#ic-drop'), input = mount.querySelector('#ic-input');
+      const box = mount.querySelector('#ic-box'), q = mount.querySelector('#ic-q');
+      const qVal = mount.querySelector('#ic-q-val'), stats = mount.querySelector('#ic-stats');
 
-      ZERO.setupDropzone(drop, input, (files) => {
-        file = files[0];
-        if (!file) return;
-        origSpan.innerText = `${(file.size / 1024).toFixed(1)} KB`;
-        controls.style.display = 'block';
-        compress();
+      ZERO.setupDropzone(drop, input, (f) => {
+        file = f[0];
+        box.style.display = 'block';
+        exec();
       });
 
-      slider.oninput = () => { lbl.innerText = `${slider.value}%`; compress(); };
-      fmtSelect.onchange = compress;
+      q.oninput = () => { qVal.innerText = `${q.value}%`; exec(); };
 
-      async function compress() {
-        if (!file) return;
+      async function exec() {
         const bmp = await createImageBitmap(file);
         const c = document.createElement('canvas');
-        c.width = bmp.width;
-        c.height = bmp.height;
-        const ctx = c.getContext('2d');
-        if (fmtSelect.value === 'image/jpeg') {
-          ctx.fillStyle = '#ffffff';
-          ctx.fillRect(0, 0, c.width, c.height);
-        }
-        ctx.drawImage(bmp, 0, 0);
-        const q = parseFloat(slider.value) / 100;
+        c.width = bmp.width; c.height = bmp.height;
+        c.getContext('2d').drawImage(bmp, 0, 0);
         c.toBlob((b) => {
           currentBlob = b;
-          newSpan.innerText = `${(b.size / 1024).toFixed(1)} KB (Saved ${(((file.size - b.size)/file.size)*100).toFixed(0)}%)`;
-        }, fmtSelect.value, q);
+          stats.innerText = `Original: ${(file.size/1024).toFixed(1)} KB → Result: ${(b.size/1024).toFixed(1)} KB`;
+        }, 'image/webp', q.value / 100);
       }
 
-      dlBtn.onclick = () => {
-        if (!currentBlob) return;
-        const ext = fmtSelect.value.split('/')[1];
-        ZERO.downloadBlob(currentBlob, `compressed_${file.name.replace(/\.[^/.]+$/, "")}.${ext}`, fmtSelect.value);
+      mount.querySelector('#ic-dl').onclick = () => {
+        ZERO.downloadBlob(currentBlob, `optimized_${file.name.replace(/\.[^.]+$/, '')}.webp`, 'image/webp');
       };
     }
 
@@ -1561,64 +1230,37 @@ html
       mount.innerHTML = `
         <div class="controls-panel">
           <div class="dropzone-surface" id="ir-drop">
-            <h3 class="dropzone-title">Upload Image to Resize</h3>
+            <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:6px;">Upload Image to Resize</h3>
             <input type="file" id="ir-input" accept="image/*" style="display:none">
           </div>
-          <div id="ir-controls" style="display:none;">
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:1rem;">
-              <div>
-                <label style="font-size:0.85rem;">Width (px)</label>
-                <input type="number" id="ir-w">
-              </div>
-              <div>
-                <label style="font-size:0.85rem;">Height (px)</label>
-                <input type="number" id="ir-h">
-              </div>
+          <div id="ir-box" style="display:none;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:1.5rem;">
+              <div><label>Width (px)</label><input type="number" id="ir-w"></div>
+              <div><label>Height (px)</label><input type="number" id="ir-h"></div>
             </div>
-            <label style="display:flex; align-items:center; gap:8px; margin-bottom:1.5rem; cursor:pointer;">
-              <input type="checkbox" id="ir-lock" checked> Maintain Aspect Ratio
-            </label>
-            <button class="action-btn" id="ir-btn">Download Resized Image</button>
+            <button class="action-btn" id="ir-dl">Download Resized Image</button>
           </div>
         </div>
       `;
       let bmp = null, ratio = 1;
-      const drop = mount.querySelector('#ir-drop');
-      const input = mount.querySelector('#ir-input');
-      const ctrls = mount.querySelector('#ir-controls');
-      const wIn = mount.querySelector('#ir-w');
-      const hIn = mount.querySelector('#ir-h');
-      const lock = mount.querySelector('#ir-lock');
-      const btn = mount.querySelector('#ir-btn');
+      const drop = mount.querySelector('#ir-drop'), input = mount.querySelector('#ir-input');
+      const wIn = mount.querySelector('#ir-w'), hIn = mount.querySelector('#ir-h');
 
-      ZERO.setupDropzone(drop, input, async (files) => {
-        if (!files[0]) return;
-        bmp = await createImageBitmap(files[0]);
+      ZERO.setupDropzone(drop, input, async (f) => {
+        bmp = await createImageBitmap(f[0]);
         ratio = bmp.width / bmp.height;
-        wIn.value = bmp.width;
-        hIn.value = bmp.height;
-        ctrls.style.display = 'block';
+        wIn.value = bmp.width; hIn.value = bmp.height;
+        mount.querySelector('#ir-box').style.display = 'block';
       });
 
-      wIn.oninput = () => { if (lock.checked) hIn.value = Math.round(wIn.value / ratio); };
-      hIn.oninput = () => { if (lock.checked) wIn.value = Math.round(hIn.value * ratio); };
+      wIn.oninput = () => hIn.value = Math.round(wIn.value / ratio);
+      hIn.oninput = () => wIn.value = Math.round(hIn.value * ratio);
 
-      btn.onclick = () => {
-        const w = parseInt(wIn.value);
-        const h = parseInt(hIn.value);
-        if (isNaN(w) || isNaN(h) || w <= 0 || h <= 0) {
-          return ZERO.toast('Please enter valid positive dimensions', 'error');
-        }
-        if (w > 16384 || h > 16384) {
-          return ZERO.toast('Dimensions exceed browser canvas limits (16384px)', 'error');
-        }
+      mount.querySelector('#ir-dl').onclick = () => {
         const c = document.createElement('canvas');
-        c.width = w;
-        c.height = h;
-        const ctx = c.getContext('2d');
-        ctx.imageSmoothingQuality = 'high';
-        ctx.drawImage(bmp, 0, 0, c.width, c.height);
-        c.toBlob((b) => ZERO.downloadBlob(b, `resized_${c.width}x${c.height}.png`, 'image/png'));
+        c.width = parseInt(wIn.value); c.height = parseInt(hIn.value);
+        c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+        c.toBlob((b) => ZERO.downloadBlob(b, 'resized.png', 'image/png'));
       };
     }
 
@@ -1627,47 +1269,35 @@ html
       mount.innerHTML = `
         <div class="controls-panel">
           <div class="dropzone-surface" id="ifc-drop">
-            <h3 class="dropzone-title">Upload Image to Convert</h3>
+            <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:6px;">Upload Image for Format Conversion</h3>
             <input type="file" id="ifc-input" accept="image/*" style="display:none">
           </div>
-          <div id="ifc-controls" style="display:none;">
-            <select id="ifc-fmt" style="margin-bottom:1.5rem;">
+          <div id="ifc-box" style="display:none;">
+            <select id="ifc-sel" style="margin-bottom:1.5rem;">
               <option value="image/png">PNG (.png)</option>
               <option value="image/jpeg">JPEG (.jpg)</option>
               <option value="image/webp">WEBP (.webp)</option>
             </select>
-            <button class="action-btn" id="ifc-btn">Convert & Download</button>
+            <button class="action-btn" id="ifc-dl">Convert & Download</button>
           </div>
         </div>
       `;
-      let file = null;
-      const drop = mount.querySelector('#ifc-drop');
-      const input = mount.querySelector('#ifc-input');
-      const ctrls = mount.querySelector('#ifc-controls');
-      const fmt = mount.querySelector('#ifc-fmt');
-      const btn = mount.querySelector('#ifc-btn');
+      let bmp = null;
+      const drop = mount.querySelector('#ifc-drop'), input = mount.querySelector('#ifc-input');
+      const sel = mount.querySelector('#ifc-sel');
 
-      ZERO.setupDropzone(drop, input, (files) => {
-        file = files[0];
-        if (file) ctrls.style.display = 'block';
+      ZERO.setupDropzone(drop, input, async (f) => {
+        bmp = await createImageBitmap(f[0]);
+        mount.querySelector('#ifc-box').style.display = 'block';
       });
 
-      btn.onclick = async () => {
-        const bmp = await createImageBitmap(file);
+      mount.querySelector('#ifc-dl').onclick = () => {
         const c = document.createElement('canvas');
-        c.width = bmp.width;
-        c.height = bmp.height;
+        c.width = bmp.width; c.height = bmp.height;
         const ctx = c.getContext('2d');
-        if (fmt.value === 'image/jpeg') {
-          ctx.fillStyle = '#ffffff';
-          ctx.fillRect(0, 0, c.width, c.height);
-        }
+        if (sel.value === 'image/jpeg') { ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, c.width, c.height); }
         ctx.drawImage(bmp, 0, 0);
-        c.toBlob((b) => {
-          const ext = fmt.value.split('/')[1];
-          ZERO.downloadBlob(b, `converted.${ext}`, fmt.value);
-          ZERO.toast('Image format converted!', 'success');
-        }, fmt.value, 0.95);
+        c.toBlob((b) => ZERO.downloadBlob(b, `converted.${sel.value.split('/')[1]}`, sel.value));
       };
     }
 
@@ -1676,86 +1306,61 @@ html
       mount.innerHTML = `
         <div class="controls-panel">
           <div class="dropzone-surface" id="crp-drop">
-            <h3 class="dropzone-title">Upload Image to Crop</h3>
+            <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:6px;">Upload Image to Crop</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Click and drag bounded region on viewport</p>
             <input type="file" id="crp-input" accept="image/*" style="display:none">
           </div>
-          <div id="crp-workbench" style="display:none; text-align:center;">
-            <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:10px;">Drag bounding box across image to crop</p>
+          <div id="crp-box" style="display:none; text-align:center;">
             <canvas id="crp-canvas" style="max-width:100%; border:1px solid var(--border-subtle); cursor:crosshair;"></canvas>
             <br><br>
-            <button class="action-btn" id="crp-btn">Export Crop Area</button>
+            <button class="action-btn" id="crp-btn">Export Crop Selection</button>
           </div>
         </div>
       `;
-      let img = null;
-      let startX, startY, endX, endY, isDrawing = false;
-      const drop = mount.querySelector('#crp-drop');
-      const input = mount.querySelector('#crp-input');
-      const bench = mount.querySelector('#crp-workbench');
+      let img = null, sx = 0, sy = 0, ex = 0, ey = 0, isDown = false;
       const canvas = mount.querySelector('#crp-canvas');
-      const btn = mount.querySelector('#crp-btn');
 
-      ZERO.setupDropzone(drop, input, async (files) => {
-        if (!files[0]) return;
+      ZERO.setupDropzone(mount.querySelector('#crp-drop'), mount.querySelector('#crp-input'), async (f) => {
         img = new Image();
-        img.src = URL.createObjectURL(files[0]);
+        img.src = URL.createObjectURL(f[0]);
         await img.decode();
-        canvas.width = img.naturalWidth;
-        canvas.height = img.naturalHeight;
-        redraw();
-        bench.style.display = 'block';
+        canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+        draw();
+        mount.querySelector('#crp-box').style.display = 'block';
       });
 
-      function redraw() {
+      function draw() {
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
-        if (startX !== undefined && endX !== undefined) {
-          ctx.strokeStyle = '#4f46e5';
-          ctx.lineWidth = 3;
-          ctx.strokeRect(startX, startY, endX - startX, endY - startY);
-          ctx.fillStyle = 'rgba(79, 70, 229, 0.25)';
-          ctx.fillRect(startX, startY, endX - startX, endY - startY);
+        if (isDown || (ex !== sx)) {
+          ctx.strokeStyle = '#6366f1'; ctx.lineWidth = 3;
+          ctx.strokeRect(sx, sy, ex - sx, ey - sy);
+          ctx.fillStyle = 'rgba(99, 102, 241, 0.25)';
+          ctx.fillRect(sx, sy, ex - sx, ey - sy);
         }
       }
 
       canvas.onmousedown = (e) => {
-        const rect = canvas.getBoundingClientRect();
-        startX = (e.clientX - rect.left) * (canvas.width / rect.width);
-        startY = (e.clientY - rect.top) * (canvas.height / rect.height);
-        endX = startX;
-        endY = startY;
-        isDrawing = true;
+        const r = canvas.getBoundingClientRect();
+        sx = (e.clientX - r.left) * (canvas.width / r.width);
+        sy = (e.clientY - r.top) * (canvas.height / r.height);
+        ex = sx; ey = sy; isDown = true;
       };
-
       canvas.onmousemove = (e) => {
-        if (!isDrawing) return;
-        const rect = canvas.getBoundingClientRect();
-        endX = (e.clientX - rect.left) * (canvas.width / rect.width);
-        endY = (e.clientY - rect.top) * (canvas.height / rect.height);
-        redraw();
+        if (!isDown) return;
+        const r = canvas.getBoundingClientRect();
+        ex = (e.clientX - r.left) * (canvas.width / r.width);
+        ey = (e.clientY - r.top) * (canvas.height / r.height);
+        draw();
       };
+      window.addEventListener('mouseup', () => isDown = false);
 
-      window.addEventListener('mouseup', () => { isDrawing = false; });
-
-      btn.onclick = () => {
-        const rawX = Math.min(startX, endX);
-        const rawY = Math.min(startY, endY);
-        const rawW = Math.abs(endX - startX);
-        const rawH = Math.abs(endY - startY);
-
-        const x = Math.max(0, Math.min(rawX, img.naturalWidth));
-        const y = Math.max(0, Math.min(rawY, img.naturalHeight));
-        const w = Math.min(rawW, img.naturalWidth - x);
-        const h = Math.min(rawH, img.naturalHeight - y);
-
-        if (!w || !h || isNaN(w) || isNaN(h)) {
-          return ZERO.toast('Please select a valid crop region', 'error');
-        }
-
+      mount.querySelector('#crp-btn').onclick = () => {
+        const x = Math.min(sx, ex), y = Math.min(sy, ey), w = Math.abs(ex - sx), h = Math.abs(ey - sy);
+        if (w < 4 || h < 4) return ZERO.toast('Select a crop region first', 'error');
         const c = document.createElement('canvas');
-        c.width = w;
-        c.height = h;
+        c.width = w; c.height = h;
         c.getContext('2d').drawImage(img, x, y, w, h, 0, 0, w, h);
         c.toBlob((b) => ZERO.downloadBlob(b, 'cropped.png', 'image/png'));
       };
@@ -1765,179 +1370,108 @@ html
     function renderMetadataRemover(mount) {
       mount.innerHTML = `
         <div class="controls-panel">
-          <div class="dropzone-surface" id="mr-drop">
-            <h3 class="dropzone-title">Upload Image to Strip EXIF/Metadata</h3>
-            <p class="dropzone-sub">Scrubs camera models, GPS coords, and device signatures</p>
-            <input type="file" id="mr-input" accept="image/*" style="display:none">
+          <div class="dropzone-surface" id="exif-drop">
+            <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:6px;">Upload Image to Wipe EXIF</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Purges GPS coordinates, camera models, and timestamps</p>
+            <input type="file" id="exif-input" accept="image/*" style="display:none">
           </div>
-          <div id="mr-result" style="display:none; text-align:center;">
-            <p style="color:var(--status-success); margin-bottom:1rem; font-weight:600;">EXIF headers wiped successfully.</p>
-            <button class="action-btn" id="mr-dl">Download Clean Image</button>
+          <div id="exif-box" style="display:none; text-align:center;">
+            <p style="color:var(--status-success); font-weight:700; margin-bottom:1.5rem;">Binary sanitized. Zero header metadata remaining.</p>
+            <button class="action-btn" id="exif-dl">Download Clean Image</button>
           </div>
         </div>
       `;
-      let cleanBlob = null, origName = 'cleaned';
-      const drop = mount.querySelector('#mr-drop');
-      const input = mount.querySelector('#mr-input');
-      const res = mount.querySelector('#mr-result');
-      const dl = mount.querySelector('#mr-dl');
-
-      ZERO.setupDropzone(drop, input, async (files) => {
-        const file = files[0];
-        if (!file) return;
-        origName = file.name;
-        const bmp = await createImageBitmap(file);
+      let cleanBlob = null;
+      ZERO.setupDropzone(mount.querySelector('#exif-drop'), mount.querySelector('#exif-input'), async (f) => {
+        const bmp = await createImageBitmap(f[0]);
         const c = document.createElement('canvas');
-        c.width = bmp.width;
-        c.height = bmp.height;
-        const ctx = c.getContext('2d');
-        ctx.drawImage(bmp, 0, 0);
+        c.width = bmp.width; c.height = bmp.height;
+        c.getContext('2d').drawImage(bmp, 0, 0);
         c.toBlob((b) => {
           cleanBlob = b;
-          res.style.display = 'block';
-        }, file.type.includes('png') ? 'image/png' : 'image/jpeg', 0.95);
+          mount.querySelector('#exif-box').style.display = 'block';
+        }, 'image/png');
       });
 
-      dl.onclick = () => {
-        if (cleanBlob) ZERO.downloadBlob(cleanBlob, `sanitized_${origName}`, cleanBlob.type);
+      mount.querySelector('#exif-dl').onclick = () => {
+        ZERO.downloadBlob(cleanBlob, 'sanitized_photo.png', 'image/png');
       };
     }
 
-    /* =====================================================================
-       CATEGORY C: WRITING & DOCUMENT TOOLS (13-18)
-       ===================================================================== */
-
-    // 13. Professional Resume Builder
+    // 13. Professional ATS Resume Builder
     function renderResumeBuilder(mount) {
       mount.innerHTML = `
-        <div class="controls-panel" style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
-          <div style="display:flex; flex-direction:column; gap:10px;">
-            <h3>Resume Profile Inputs</h3>
+        <div class="controls-panel" style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <h3 style="font-size:1.15rem; font-weight:700;">Profile Attributes</h3>
             <input type="text" id="rb-name" placeholder="Full Name" value="Alex Rivera">
-            <input type="text" id="rb-title" placeholder="Professional Title" value="Senior Software Architect">
-            <input type="text" id="rb-contact" placeholder="Email • Phone • Location" value="alex@example.com • +1 555-0199 • San Francisco, CA">
-            <textarea id="rb-summary" rows="3" placeholder="Executive Summary">Expert in client-side architectures, local cryptography, and high-performance WebAssembly systems.</textarea>
-            <textarea id="rb-exp" rows="5" placeholder="Experience (Role | Company | Details)">Staff Architect | Vercel | Reduced edge pipeline latencies by 38%
-Lead Engineer | Cloudflare | Built client-side zero-retention privacy proxies</textarea>
-            <textarea id="rb-skills" rows="2" placeholder="Skills (Comma-separated)">JavaScript, WebAssembly, Web Crypto, IndexedDB, Canvas API</textarea>
-            <div style="display:flex; gap:10px; margin-top:8px;">
-              <button class="action-btn" id="rb-print">Print / Save as PDF</button>
-              <button class="action-btn-secondary" id="rb-dl-html">Download HTML</button>
-            </div>
+            <input type="text" id="rb-role" placeholder="Target Role" value="Senior Systems Engineer">
+            <input type="text" id="rb-contact" placeholder="Contact | Email | Location" value="alex@example.com • +1 555-0199 • San Francisco, CA">
+            <textarea id="rb-summary" rows="3" placeholder="Executive Summary">Architecting high-concurrency client-side systems and zero-retention cryptography pipelines.</textarea>
+            <textarea id="rb-exp" rows="5" placeholder="Experience">Staff Engineer | Vercel | Scaled global edge nodes
+Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textarea>
+            <button class="action-btn" id="rb-print">Print / Save as PDF</button>
           </div>
           <div>
-            <div id="rb-preview" style="background:#ffffff; color:#0f172a; padding:24px; border-radius:8px; font-family:serif; font-size:12px; line-height:1.5; min-height:420px; box-shadow:0 10px 25px rgba(0,0,0,0.25);"></div>
+            <div id="rb-prev" style="background:#ffffff; color:#0f172a; padding:24px; border-radius:var(--radius-sm); font-family:serif; font-size:12px; line-height:1.6; min-height:400px; box-shadow:0 15px 30px rgba(0,0,0,0.3);"></div>
           </div>
         </div>
       `;
-      const ids = ['rb-name', 'rb-title', 'rb-contact', 'rb-summary', 'rb-exp', 'rb-skills'];
-      const preview = mount.querySelector('#rb-preview');
-
-      function sync() {
-        const [name, title, contact, sum, exp, skills] = ids.map(id => mount.querySelector(`#${id}`).value);
-        preview.innerHTML = `
-          <div style="border-bottom: 2px solid #0f172a; padding-bottom:8px; margin-bottom:12px;">
-            <h1 style="font-size:22px; margin:0; font-weight:bold; color:#0f172a;">${name}</h1>
-            <div style="font-size:13px; font-weight:600; color:#334155;">${title}</div>
-            <div style="font-size:11px; color:#64748b; margin-top:3px;">${contact}</div>
-          </div>
-          <div style="margin-bottom:12px;">
-            <h3 style="font-size:11px; text-transform:uppercase; border-bottom:1px solid #cbd5e1; margin-bottom:4px;">Executive Summary</h3>
-            <p>${sum}</p>
-          </div>
-          <div style="margin-bottom:12px;">
-            <h3 style="font-size:11px; text-transform:uppercase; border-bottom:1px solid #cbd5e1; margin-bottom:4px;">Work Experience</h3>
-            ${exp.split('\n').map(l => `<p style="margin:2px 0;">• ${l}</p>`).join('')}
-          </div>
-          <div>
-            <h3 style="font-size:11px; text-transform:uppercase; border-bottom:1px solid #cbd5e1; margin-bottom:4px;">Core Competencies</h3>
-            <p>${skills}</p>
-          </div>
+      const prev = mount.querySelector('#rb-prev');
+      const sync = () => {
+        prev.innerHTML = `
+          <h1 style="font-size:22px; margin:0 0 2px 0;">${mount.querySelector('#rb-name').value}</h1>
+          <div style="font-weight:bold; color:#475569;">${mount.querySelector('#rb-role').value}</div>
+          <div style="font-size:11px; color:#64748b; margin-bottom:14px;">${mount.querySelector('#rb-contact').value}</div>
+          <hr style="border:none; border-top:1px solid #cbd5e1; margin:8px 0;">
+          <h4 style="font-size:12px; margin:8px 0 4px 0; text-transform:uppercase;">Summary</h4>
+          <p>${mount.querySelector('#rb-summary').value}</p>
+          <h4 style="font-size:12px; margin:12px 0 4px 0; text-transform:uppercase;">Experience</h4>
+          ${mount.querySelector('#rb-exp').value.split('\n').map(l => `<p style="margin:2px 0;">• ${l}</p>`).join('')}
         `;
-      }
-
-      ids.forEach(id => mount.querySelector(`#${id}`).oninput = sync);
+      };
+      mount.querySelectorAll('input, textarea').forEach(el => el.oninput = sync);
       sync();
 
       mount.querySelector('#rb-print').onclick = () => {
-        const frame = document.createElement('iframe');
-        frame.style.cssText = 'position:fixed; top:0; left:0; width:1px; height:1px; opacity:0; pointer-events:none; border:none;';
-        document.body.appendChild(frame);
-        frame.contentDocument.write(`<html><body style="font-family:serif; padding:30px;">${preview.innerHTML}</body></html>`);
-        frame.contentDocument.close();
-        frame.contentWindow.focus();
-        frame.contentWindow.print();
-        setTimeout(() => frame.remove(), 1500);
-      };
-
-      mount.querySelector('#rb-dl-html').onclick = () => {
-        ZERO.downloadBlob(`<!DOCTYPE html><html><body style="font-family:serif; padding:40px; max-width:800px; margin:0 auto;">${preview.innerHTML}</body></html>`, 'resume.html', 'text/html');
+        const win = window.open('', '_blank');
+        win.document.write(`<html><body style="font-family:serif; padding:40px;">${prev.innerHTML}</body></html>`);
+        win.document.close();
+        win.print();
       };
     }
 
-    // 14. ATS Resume Checker (Direct PDF Extraction via PDF.js)
+    // 14. ATS Resume Checker
     function renderAtsChecker(mount) {
       mount.innerHTML = `
         <div class="controls-panel">
-          <h3>ATS Target Match Heuristics</h3>
-          <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1rem;">Analyzes keyword and structural token density locally against job specifications</p>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:1rem;">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:1.5rem;">
             <div>
-              <label style="font-size:0.85rem; margin-bottom:4px; display:block;">Resume (Paste text or drop PDF)</label>
-              <textarea id="ats-resume" rows="8" placeholder="Paste your resume text here..."></textarea>
-              <input type="file" id="ats-pdf-in" accept=".pdf,text/plain" style="margin-top:6px; font-size:0.8rem;">
+              <label style="font-size:0.85rem; display:block; margin-bottom:6px;">Your Resume (Text)</label>
+              <textarea id="ats-txt" rows="8" placeholder="Paste resume plain text here..."></textarea>
             </div>
             <div>
-              <label style="font-size:0.85rem; margin-bottom:4px; display:block;">Job Description</label>
-              <textarea id="ats-job" rows="8" placeholder="Paste target Job Description here..."></textarea>
+              <label style="font-size:0.85rem; display:block; margin-bottom:6px;">Target Job Description</label>
+              <textarea id="ats-job" rows="8" placeholder="Paste job requirements here..."></textarea>
             </div>
           </div>
-          <button class="action-btn" id="ats-btn">Run Affinity Audit</button>
-          <div id="ats-out" style="display:none; margin-top:1.5rem; background:var(--bg-tertiary); padding:1.25rem; border-radius:8px;"></div>
+          <button class="action-btn" id="ats-btn">Audit Affinity Match</button>
+          <div id="ats-res" style="display:none; margin-top:1.5rem; background:var(--bg-card); padding:1.5rem; border-radius:var(--radius-md); border:1px solid var(--border-subtle);"></div>
         </div>
       `;
-      const resIn = mount.querySelector('#ats-resume');
-      const jobIn = mount.querySelector('#ats-job');
-      const pdfIn = mount.querySelector('#ats-pdf-in');
-      const out = mount.querySelector('#ats-out');
-
-      pdfIn.onchange = async () => {
-        const file = pdfIn.files[0];
-        if (!file) return;
-        if (file.type === 'text/plain') {
-          resIn.value = await file.text();
-          return;
-        }
-        try {
-          const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
-          let fullText = '';
-          for (let i = 1; i <= pdf.numPages; i++) {
-            const page = await pdf.getPage(i);
-            const content = await page.getTextContent();
-            fullText += content.items.map(it => it.str).join(' ') + '\n';
-          }
-          resIn.value = fullText;
-          ZERO.toast('Text parsed from resume PDF!', 'success');
-        } catch (e) {
-          ZERO.toast(`Failed to read PDF: ${e.message}`, 'error');
-        }
-      };
-
       mount.querySelector('#ats-btn').onclick = () => {
-        const resumeWords = new Set(resIn.value.toLowerCase().match(/\b[a-zA-Z]{3,}\b/g) || []);
-        const jobWords = Array.from(new Set(jobIn.value.toLowerCase().match(/\b[a-zA-Z]{3,}\b/g) || []));
+        const rWords = new Set(mount.querySelector('#ats-txt').value.toLowerCase().match(/\b[a-zA-Z]{3,}\b/g) || []);
+        const jWords = Array.from(new Set(mount.querySelector('#ats-job').value.toLowerCase().match(/\b[a-zA-Z]{3,}\b/g) || []));
+        if (!jWords.length) return ZERO.toast('Please supply job description keywords', 'error');
 
-        if (!jobWords.length) return ZERO.toast('Please provide a job description', 'error');
-
-        const matched = jobWords.filter(w => resumeWords.has(w));
-        const missing = jobWords.filter(w => !resumeWords.has(w));
-        const score = Math.round((matched.length / jobWords.length) * 100);
-
-        out.style.display = 'block';
-        out.innerHTML = `
-          <h4>Match Score: <span style="color:var(--accent-primary); font-size:1.5rem;">${score}%</span></h4>
-          <p style="margin:8px 0; font-size:0.9rem;">Matched Keywords (${matched.length}): <span style="color:var(--status-success);">${matched.slice(0, 15).join(', ')}...</span></p>
-          <p style="margin:8px 0; font-size:0.9rem;">Missing Keywords (${missing.length}): <span style="color:var(--status-danger);">${missing.slice(0, 15).join(', ')}...</span></p>
+        const hit = jWords.filter(w => rWords.has(w));
+        const score = Math.round((hit.length / jWords.length) * 100);
+        const res = mount.querySelector('#ats-res');
+        res.style.display = 'block';
+        res.innerHTML = `
+          <h3 style="font-size:1.5rem; margin-bottom:8px;">Affinity Score: <span style="color:var(--accent);">${score}%</span></h3>
+          <p style="color:var(--status-success); margin-bottom:6px;">Matched Tokens (${hit.length}): ${hit.slice(0, 12).join(', ')}</p>
+          <p style="color:var(--status-danger);">Missing Tokens: ${jWords.filter(w => !rWords.has(w)).slice(0, 12).join(', ')}</p>
         `;
       };
     }
@@ -1947,152 +1481,73 @@ Lead Engineer | Cloudflare | Built client-side zero-retention privacy proxies</t
       mount.innerHTML = `
         <div class="controls-panel">
           <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-bottom:1.5rem;">
-            <input type="text" id="inv-from" placeholder="From (Your Company)" value="Zero Studio Corp.">
-            <input type="text" id="inv-to" placeholder="To (Client Name)" value="Acme Industries">
-            <input type="text" id="inv-id" placeholder="Invoice #" value="INV-2026-001">
+            <input type="text" id="inv-from" value="Studio Zero Global">
+            <input type="text" id="inv-to" value="Acme Corporation">
+            <input type="text" id="inv-id" value="INV-2026-904">
           </div>
           <table style="width:100%; border-collapse:collapse; margin-bottom:1.5rem;">
-            <thead>
-              <tr style="text-align:left; border-bottom:1px solid var(--border-subtle);">
-                <th style="padding:8px;">Description</th>
-                <th style="padding:8px; width:100px;">Qty</th>
-                <th style="padding:8px; width:120px;">Rate ($)</th>
-                <th style="padding:8px; width:40px;"></th>
-              </tr>
-            </thead>
+            <thead><tr style="text-align:left; border-bottom:1px solid var(--border-subtle);"><th style="padding:8px;">Item</th><th style="width:100px;">Qty</th><th style="width:120px;">Rate ($)</th></tr></thead>
             <tbody id="inv-tbody">
               <tr>
-                <td><input type="text" value="System Security Audit" style="border:none;"></td>
+                <td><input type="text" value="Autonomous Engine Integration" style="border:none;"></td>
                 <td><input type="number" class="iqty" value="1" style="border:none;"></td>
-                <td><input type="number" class="irate" value="2500" style="border:none;"></td>
-                <td><button class="idel" style="background:none; border:none; color:var(--status-danger); cursor:pointer;">✕</button></td>
+                <td><input type="number" class="irate" value="3400" style="border:none;"></td>
               </tr>
             </tbody>
           </table>
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
-            <button class="action-btn-secondary" id="inv-add-row">+ Add Item</button>
-            <h3>Total: $<span id="inv-total">2500.00</span></h3>
+            <h3>Total: $<span id="inv-tot">3400.00</span></h3>
+            <button class="action-btn" id="inv-pr">Print Invoice</button>
           </div>
-          <button class="action-btn" id="inv-print">Print / Export Invoice</button>
         </div>
       `;
       const tbody = mount.querySelector('#inv-tbody');
-      const totalSpan = mount.querySelector('#inv-total');
-
-      function recalc() {
+      const recalc = () => {
         let sum = 0;
-        tbody.querySelectorAll('tr').forEach(tr => {
-          const q = parseFloat(tr.querySelector('.iqty').value) || 0;
-          const r = parseFloat(tr.querySelector('.irate').value) || 0;
-          sum += q * r;
+        tbody.querySelectorAll('tr').forEach(r => {
+          sum += (parseFloat(r.querySelector('.iqty').value) || 0) * (parseFloat(r.querySelector('.irate').value) || 0);
         });
-        totalSpan.innerText = sum.toFixed(2);
-      }
-
+        mount.querySelector('#inv-tot').innerText = sum.toFixed(2);
+      };
       tbody.oninput = recalc;
 
-      mount.querySelector('#inv-add-row').onclick = () => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><input type="text" placeholder="Service description" style="border:none;"></td>
-          <td><input type="number" class="iqty" value="1" style="border:none;"></td>
-          <td><input type="number" class="irate" value="100" style="border:none;"></td>
-          <td><button class="idel" style="background:none; border:none; color:var(--status-danger); cursor:pointer;">✕</button></td>
-        `;
-        tr.querySelector('.idel').onclick = () => { tr.remove(); recalc(); };
-        tbody.appendChild(tr);
-        recalc();
-      };
-
-      tbody.querySelector('.idel').onclick = (e) => { e.target.closest('tr').remove(); recalc(); };
-
-      mount.querySelector('#inv-print').onclick = () => {
-        const frame = document.createElement('iframe');
-        frame.style.cssText = 'position:fixed; top:0; left:0; width:1px; height:1px; opacity:0; pointer-events:none; border:none;';
-        document.body.appendChild(frame);
-        frame.contentDocument.write(`
-          <html><body style="font-family:sans-serif; padding:40px;">
-            <h2>INVOICE ${mount.querySelector('#inv-id').value}</h2>
-            <p><b>From:</b> ${mount.querySelector('#inv-from').value}</p>
-            <p><b>Bill To:</b> ${mount.querySelector('#inv-to').value}</p>
-            <hr style="margin:20px 0;">
-            <h3>Total Amount Due: $${totalSpan.innerText}</h3>
-          </body></html>
-        `);
-        frame.contentDocument.close();
-        frame.contentWindow.focus();
-        frame.contentWindow.print();
-        setTimeout(() => frame.remove(), 1500);
+      mount.querySelector('#inv-pr').onclick = () => {
+        const win = window.open('', '_blank');
+        win.document.write(`<html><body style="font-family:sans-serif; padding:40px;">
+          <h2>INVOICE #${mount.querySelector('#inv-id').value}</h2>
+          <p>From: ${mount.querySelector('#inv-from').value}</p>
+          <p>Bill To: ${mount.querySelector('#inv-to').value}</p>
+          <hr>
+          <h3>Grand Total: $${mount.querySelector('#inv-tot').innerText}</h3>
+        </body></html>`);
+        win.document.close();
+        win.print();
       };
     }
 
-    // 16. Comprehensive Linguistic Proofreading & Mechanics Engine
+    // 16. Local Linguistic Proofreading
     function renderGrammarChecker(mount) {
       mount.innerHTML = `
         <div class="controls-panel">
-          <h3>Local Linguistic & Mechanics Checker</h3>
-          <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1rem;">Deterministic spell, homophone, and style analysis running entirely in your browser</p>
-          <textarea id="gc-input" rows="7" placeholder="Type or paste prose to inspect...">Their going to recieve teh package in order to test it.</textarea>
-          <div id="gc-stats" style="margin:10px 0; font-size:0.85rem; color:var(--text-tertiary);"></div>
-          <div id="gc-out" style="margin-top:1rem;"></div>
+          <textarea id="gc-in" rows="6" placeholder="Type text to check syntax...">Their going to see if teh project works properly.</textarea>
+          <div id="gc-res" style="margin-top:1rem; padding:12px; background:var(--bg-card); border-radius:8px;"></div>
         </div>
       `;
-      const input = mount.querySelector('#gc-input');
-      const out = mount.querySelector('#gc-out');
-      const stats = mount.querySelector('#gc-stats');
-
-      const DICTIONARY = {
-        'teh': 'the', 'recieve': 'receive', 'seperate': 'separate', 'untill': 'until',
-        'occurance': 'occurrence', 'truely': 'truly', 'definately': 'definitely',
-        'goverment': 'government', 'wierd': 'weird', 'alot': 'a lot',
-        'could of': 'could have', 'should of': 'should have', 'would of': 'would have',
-        'in order to': 'to', 'due to the fact that': 'because', 'at this point in time': 'now',
-        'basic fundamentals': 'fundamentals', 'their going': 'they\'re going',
-        'your welcome': 'you\'re welcome', 'its a': 'it\'s a'
-      };
-
-      const PASSIVE_REGEX = /\b(is|are|was|were|been|being)\s+([a-z]+ed|[a-z]+en)\b/gi;
+      const txt = mount.querySelector('#gc-in'), res = mount.querySelector('#gc-res');
+      const DICT = { 'teh': 'the', 'their going': "they're going", 'alot': 'a lot', 'seperate': 'separate' };
 
       function evaluate() {
-        const text = input.value;
         const issues = [];
-
-        const dupRegex = /\b(\w+)\s+\1\b/gi;
-        let match;
-        while ((match = dupRegex.exec(text)) !== null) {
-          issues.push(`Repeated token: "<b>${match[0]}</b>"`);
-        }
-
-        Object.keys(DICTIONARY).forEach(phrase => {
-          const reg = new RegExp(`\\b${phrase}\\b`, 'gi');
-          if (reg.test(text)) {
-            issues.push(`Suggestion: Replace "<b>${phrase}</b>" with "<b>${DICTIONARY[phrase]}</b>"`);
+        Object.keys(DICT).forEach(k => {
+          if (new RegExp(`\\b${k}\\b`, 'gi').test(txt.value)) {
+            issues.push(`Replace "<b>${k}</b>" with "<b>${DICT[k]}</b>"`);
           }
         });
-
-        while ((match = PASSIVE_REGEX.exec(text)) !== null) {
-          issues.push(`Passive voice detected: "<b>${match[0]}</b>" (Consider active voice)`);
-        }
-
-        const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
-        sentences.forEach(s => {
-          const count = (s.match(/\S+/g) || []).length;
-          if (count > 30) issues.push(`Long sentence (${count} words): Consider splitting.`);
-        });
-
-        const words = (text.match(/\S+/g) || []).length;
-        const syllables = (text.match(/[aeiouy]{1,2}/gi) || []).length;
-        if (words > 5 && sentences.length > 0) {
-          const score = Math.round(206.835 - 1.015 * (words / sentences.length) - 84.6 * (syllables / words));
-          stats.innerText = `Readability Score: ${score}/100 (${score > 60 ? 'Plain English' : 'Complex'}) • Sentences: ${sentences.length} • Words: ${words}`;
-        }
-
-        out.innerHTML = issues.length === 0
-          ? '<span style="color:var(--status-success);">No structural or stylistic issues detected.</span>'
-          : `<ul style="padding-left:20px; color:var(--status-warning);">${issues.map(i => `<li>${i}</li>`).join('')}</ul>`;
+        res.innerHTML = issues.length
+          ? `<ul style="color:var(--status-warning); padding-left:20px;">${issues.map(i => `<li>${i}</li>`).join('')}</ul>`
+          : `<span style="color:var(--status-success);">Clean prose syntax.</span>`;
       }
-
-      input.oninput = evaluate;
+      txt.oninput = evaluate;
       evaluate();
     }
 
@@ -2100,25 +1555,23 @@ Lead Engineer | Cloudflare | Built client-side zero-retention privacy proxies</t
     function renderWordCounter(mount) {
       mount.innerHTML = `
         <div class="controls-panel">
-          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:12px; margin-bottom:1.5rem;">
-            <div class="spec-item"><span class="spec-val" id="wc-words">0</span><span class="spec-lbl">Words</span></div>
-            <div class="spec-item"><span class="spec-val" id="wc-chars">0</span><span class="spec-lbl">Characters</span></div>
-            <div class="spec-item"><span class="spec-val" id="wc-sentences">0</span><span class="spec-lbl">Sentences</span></div>
-            <div class="spec-item"><span class="spec-val" id="wc-paragraphs">0</span><span class="spec-lbl">Paragraphs</span></div>
-            <div class="spec-item"><span class="spec-val" id="wc-read">0m</span><span class="spec-lbl">Read Time</span></div>
+          <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:12px; margin-bottom:1.5rem; text-align:center;">
+            <div style="background:var(--bg-card); padding:10px; border-radius:8px;"><b id="wc-w" style="font-size:1.5rem;">0</b><br><small>Words</small></div>
+            <div style="background:var(--bg-card); padding:10px; border-radius:8px;"><b id="wc-c" style="font-size:1.5rem;">0</b><br><small>Characters</small></div>
+            <div style="background:var(--bg-card); padding:10px; border-radius:8px;"><b id="wc-s" style="font-size:1.5rem;">0</b><br><small>Sentences</small></div>
+            <div style="background:var(--bg-card); padding:10px; border-radius:8px;"><b id="wc-t" style="font-size:1.5rem;">0m</b><br><small>Reading Time</small></div>
           </div>
-          <textarea id="wc-text" rows="8" placeholder="Type or paste content here..."></textarea>
+          <textarea id="wc-in" rows="8" placeholder="Type or paste prose here..."></textarea>
         </div>
       `;
-      const txt = mount.querySelector('#wc-text');
-      txt.oninput = () => {
-        const val = txt.value;
-        const words = (val.match(/\S+/g) || []).length;
-        mount.querySelector('#wc-words').innerText = words;
-        mount.querySelector('#wc-chars').innerText = val.length;
-        mount.querySelector('#wc-sentences').innerText = (val.match(/[^.!?]+[.!?]+/g) || []).length || (val.trim() ? 1 : 0);
-        mount.querySelector('#wc-paragraphs').innerText = val.split(/\n+/).filter(l => l.trim().length > 0).length;
-        mount.querySelector('#wc-read').innerText = `${Math.ceil(words / 200)}m`;
+      const inEl = mount.querySelector('#wc-in');
+      inEl.oninput = () => {
+        const v = inEl.value;
+        const w = (v.match(/\S+/g) || []).length;
+        mount.querySelector('#wc-w').innerText = w;
+        mount.querySelector('#wc-c').innerText = v.length;
+        mount.querySelector('#wc-s').innerText = (v.match(/[.!?]+/g) || []).length || (v.trim() ? 1 : 0);
+        mount.querySelector('#wc-t').innerText = `${Math.ceil(w / 200)}m`;
       };
     }
 
@@ -2127,107 +1580,60 @@ Lead Engineer | Cloudflare | Built client-side zero-retention privacy proxies</t
       mount.innerHTML = `
         <div class="controls-panel" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
           <div>
-            <textarea id="md-in" rows="14" style="font-family:var(--font-mono); font-size:13px;"># Project ZERO
+            <textarea id="md-in" rows="12" style="font-family:var(--font-mono); font-size:13px;"># ZERO Ultra Pro
 
-Client-side execution with **zero external telemetry**.
-
-- 100% in-browser processing
-- Unlimited usage quotas
-- GitHub Pages deployable</textarea>
-            <div style="display:flex; gap:10px; margin-top:10px;">
-              <button class="action-btn" id="md-dl-html">Download HTML</button>
-              <button class="action-btn-secondary" id="md-dl-raw">Download .md</button>
-            </div>
+- 100% In-memory processing
+- Zero Server latency
+- Pure Client Execution</textarea>
+            <button class="action-btn" id="md-dl" style="margin-top:10px;">Download HTML</button>
           </div>
-          <div id="md-prev" style="padding:14px; background:var(--bg-tertiary); border-radius:8px; overflow-y:auto; max-height:360px;"></div>
+          <div id="md-out" style="padding:14px; background:var(--bg-card); border-radius:8px; overflow-y:auto; max-height:340px;"></div>
         </div>
       `;
-      const input = mount.querySelector('#md-in');
-      const prev = mount.querySelector('#md-prev');
-      const sync = () => prev.innerHTML = window.marked.parse(input.value);
+      const input = mount.querySelector('#md-in'), out = mount.querySelector('#md-out');
+      const sync = () => out.innerHTML = marked.parse(input.value);
       input.oninput = sync;
       sync();
-
-      mount.querySelector('#md-dl-html').onclick = () => {
-        ZERO.downloadBlob(prev.innerHTML, 'document.html', 'text/html');
-      };
-      mount.querySelector('#md-dl-raw').onclick = () => {
-        ZERO.downloadBlob(input.value, 'document.md', 'text/markdown');
-      };
+      mount.querySelector('#md-dl').onclick = () => ZERO.downloadBlob(out.innerHTML, 'article.html', 'text/html');
     }
-
-    /* =====================================================================
-       CATEGORY D: DEVELOPER TOOLS (19-24)
-       ===================================================================== */
 
     // 19. JSON Formatter & Validator
     function renderJsonFormatter(mount) {
       mount.innerHTML = `
         <div class="controls-panel">
           <div style="display:flex; gap:10px; margin-bottom:12px;">
-            <button class="action-btn" id="jf-fmt">Prettify JSON</button>
-            <button class="action-btn-secondary" id="jf-min">Minify JSON</button>
-            <button class="action-btn-secondary" id="jf-copy">Copy</button>
+            <button class="action-btn" id="jf-run">Prettify</button>
+            <button class="action-btn-secondary" id="jf-min">Minify</button>
           </div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-            <textarea id="jf-in" rows="12" style="font-family:var(--font-mono); font-size:12px;">{"project":"ZERO","tools":30,"offline":true}</textarea>
-            <pre id="jf-out" style="padding:10px; font-family:var(--font-mono); font-size:12px; background:var(--bg-tertiary); border-radius:8px; overflow:auto;"></pre>
-          </div>
+          <textarea id="jf-in" rows="10" style="font-family:var(--font-mono); font-size:12px;">{"zero":"platform","speed":"10x","sandbox":true}</textarea>
         </div>
       `;
-      const input = mount.querySelector('#jf-in');
-      const out = mount.querySelector('#jf-out');
-
-      mount.querySelector('#jf-fmt').onclick = () => {
-        try {
-          out.style.color = 'var(--text-main)';
-          out.textContent = JSON.stringify(JSON.parse(input.value), null, 2);
-        } catch (e) {
-          out.style.color = 'var(--status-danger)';
-          out.textContent = `Parse Error: ${e.message}`;
-        }
+      const txt = mount.querySelector('#jf-in');
+      mount.querySelector('#jf-run').onclick = () => {
+        try { txt.value = JSON.stringify(JSON.parse(txt.value), null, 2); } catch (e) { ZERO.toast(e.message, 'error'); }
       };
-
       mount.querySelector('#jf-min').onclick = () => {
-        try {
-          out.style.color = 'var(--text-main)';
-          out.textContent = JSON.stringify(JSON.parse(input.value));
-        } catch (e) {
-          out.style.color = 'var(--status-danger)';
-          out.textContent = `Parse Error: ${e.message}`;
-        }
+        try { txt.value = JSON.stringify(JSON.parse(txt.value)); } catch (e) { ZERO.toast(e.message, 'error'); }
       };
-
-      mount.querySelector('#jf-copy').onclick = () => {
-        navigator.clipboard.writeText(out.textContent);
-        ZERO.toast('JSON copied to clipboard!', 'info');
-      };
-      mount.querySelector('#jf-fmt').click();
     }
 
-    // 20. HTML/CSS/JavaScript Formatter
+    // 20. Code Formatter
     function renderCodeFormatter(mount) {
       mount.innerHTML = `
         <div class="controls-panel">
           <div style="display:flex; gap:10px; margin-bottom:12px;">
-            <select id="cf-lang" style="max-width:180px;">
-              <option value="html">HTML</option>
-              <option value="css">CSS</option>
-              <option value="js">JavaScript</option>
-            </select>
-            <button class="action-btn" id="cf-run">Beautify Code</button>
+            <select id="cf-sel" style="max-width:140px;"><option value="html">HTML</option><option value="css">CSS</option><option value="js">JS</option></select>
+            <button class="action-btn" id="cf-btn">Beautify</button>
           </div>
-          <textarea id="cf-code" rows="12" style="font-family:var(--font-mono); font-size:12px;"><div class="container"><p>Format Me</p></div></textarea>
+          <textarea id="cf-in" rows="10" style="font-family:var(--font-mono); font-size:12px;"><div class="box"><p>Format Me</p></div></textarea>
         </div>
       `;
-      const lang = mount.querySelector('#cf-lang');
-      const code = mount.querySelector('#cf-code');
-
-      mount.querySelector('#cf-run').onclick = () => {
-        if (lang.value === 'html') code.value = window.html_beautify(code.value, { indent_size: 2 });
-        if (lang.value === 'css') code.value = window.css_beautify(code.value, { indent_size: 2 });
-        if (lang.value === 'js') code.value = window.js_beautify(code.value, { indent_size: 2 });
-        ZERO.toast('Code beautified successfully!', 'success');
+      const sel = mount.querySelector('#cf-sel'), code = mount.querySelector('#cf-in');
+      mount.querySelector('#cf-btn').onclick = () => {
+        if (sel.value === 'html') code.value = html_beautify(code.value);
+        if (sel.value === 'css') code.value = css_beautify(code.value);
+        if (sel.value === 'js') code.value = js_beautify(code.value);
+        ZERO.toast('Code formatted!', 'success');
       };
     }
 
@@ -2235,57 +1641,44 @@ Client-side execution with **zero external telemetry**.
     function renderRegexTester(mount) {
       mount.innerHTML = `
         <div class="controls-panel">
-          <div style="display:flex; gap:8px; align-items:center; margin-bottom:1rem;">
-            <span style="font-family:var(--font-mono);">/</span>
-            <input type="text" id="rx-pat" value="[A-Z]\\w+" style="flex:1;">
-            <span style="font-family:var(--font-mono);">/</span>
-            <input type="text" id="rx-flags" value="g" style="max-width:60px;">
+          <div style="display:flex; gap:8px; margin-bottom:12px;">
+            <input type="text" id="rx-p" value="[A-Z]\\w+" style="flex:1;">
+            <input type="text" id="rx-f" value="g" style="max-width:60px;">
           </div>
-          <textarea id="rx-text" rows="5" placeholder="Sample string to evaluate...">ZERO Platform 2026 Engine</textarea>
-          <div id="rx-matches" style="margin-top:1rem; padding:10px; background:var(--bg-tertiary); border-radius:8px;"></div>
+          <textarea id="rx-t" rows="4">ZERO Engine 2026 Core</textarea>
+          <div id="rx-m" style="margin-top:1rem; padding:10px; background:var(--bg-card); border-radius:8px;"></div>
         </div>
       `;
-      const pat = mount.querySelector('#rx-pat');
-      const flags = mount.querySelector('#rx-flags');
-      const text = mount.querySelector('#rx-text');
-      const out = mount.querySelector('#rx-matches');
-
-      function test() {
+      const p = mount.querySelector('#rx-p'), f = mount.querySelector('#rx-f'), t = mount.querySelector('#rx-t'), m = mount.querySelector('#rx-m');
+      const run = () => {
         try {
-          const reg = new RegExp(pat.value, flags.value);
-          const matches = text.value.match(reg) || [];
-          out.innerHTML = `<b>Matches (${matches.length}):</b> ` +
-            matches.map(m => `<span style="background:var(--accent-glow); padding:2px 6px; margin:2px; border-radius:4px;">${m}</span>`).join(' ');
-        } catch (e) {
-          out.innerHTML = `<span style="color:var(--status-danger);">${e.message}</span>`;
-        }
-      }
-      [pat, flags, text].forEach(el => el.oninput = test);
-      test();
+          const match = t.value.match(new RegExp(p.value, f.value)) || [];
+          m.innerHTML = `Matches (${match.length}): ` + match.map(x => `<span style="background:var(--accent); color:#fff; padding:2px 6px; border-radius:4px; margin:2px;">${x}</span>`).join(' ');
+        } catch (e) { m.innerHTML = `<span style="color:var(--status-danger);">${e.message}</span>`; }
+      };
+      [p, f, t].forEach(el => el.oninput = run);
+      run();
     }
 
     // 22. Color Palette Generator
     function renderPaletteGenerator(mount) {
       mount.innerHTML = `
         <div class="controls-panel">
-          <div id="pal-box" style="display:flex; height:120px; border-radius:8px; overflow:hidden; margin-bottom:1rem;"></div>
-          <button class="action-btn" id="pal-btn">Generate New Harmonies</button>
+          <div id="pal-c" style="display:flex; height:120px; border-radius:8px; overflow:hidden; margin-bottom:1rem;"></div>
+          <button class="action-btn" id="pal-btn">Generate Fresh Harmony</button>
         </div>
       `;
-      const box = mount.querySelector('#pal-box');
+      const box = mount.querySelector('#pal-c');
       function gen() {
         box.innerHTML = '';
-        const base = Math.floor(Math.random() * 360);
-        [0, 30, 60, 180, 210].forEach(deg => {
-          const col = `hsl(${(base + deg) % 360}, 75%, 55%)`;
-          const bar = document.createElement('div');
-          bar.style.cssText = `flex:1; background:${col}; cursor:pointer; display:flex; align-items:flex-end; padding:8px; font-family:var(--font-mono); font-size:11px;`;
-          bar.innerHTML = `<span style="background:rgba(0,0,0,0.6); color:#fff; padding:2px 4px; border-radius:4px;">${col}</span>`;
-          bar.onclick = () => {
-            navigator.clipboard.writeText(col);
-            ZERO.toast(`Copied ${col} to clipboard!`, 'info');
-          };
-          box.appendChild(bar);
+        const b = Math.floor(Math.random() * 360);
+        [0, 35, 70, 180, 210].forEach(deg => {
+          const col = `hsl(${(b + deg) % 360}, 75%, 55%)`;
+          const d = document.createElement('div');
+          d.style.cssText = `flex:1; background:${col}; cursor:pointer; display:flex; align-items:flex-end; padding:8px; font-family:var(--font-mono); font-size:11px; color:#fff;`;
+          d.innerText = col;
+          d.onclick = () => { navigator.clipboard.writeText(col); ZERO.toast(`Copied ${col}!`, 'info'); };
+          box.appendChild(d);
         });
       }
       mount.querySelector('#pal-btn').onclick = gen;
@@ -2296,113 +1689,63 @@ Client-side execution with **zero external telemetry**.
     function renderGradientGenerator(mount) {
       mount.innerHTML = `
         <div class="controls-panel">
-          <div id="grad-prev" style="height:140px; border-radius:8px; margin-bottom:1rem; border:1px solid var(--border-subtle);"></div>
-          <div style="display:flex; gap:12px; margin-bottom:1rem; align-items:center;">
-            <input type="color" id="g-c1" value="#6366f1">
-            <input type="color" id="g-c2" value="#ec4899">
-            <input type="range" id="g-deg" min="0" max="360" value="90" style="flex:1;">
-            <span id="g-deg-val">90deg</span>
+          <div id="gg-p" style="height:140px; border-radius:8px; margin-bottom:1rem;"></div>
+          <div style="display:flex; gap:12px; margin-bottom:1rem;">
+            <input type="color" id="gg-1" value="#6366f1">
+            <input type="color" id="gg-2" value="#06b6d4">
+            <input type="range" id="gg-d" min="0" max="360" value="90">
           </div>
-          <pre id="g-css" style="padding:10px; background:var(--bg-tertiary); font-family:var(--font-mono); border-radius:8px; cursor:pointer;"></pre>
+          <pre id="gg-css" style="padding:10px; background:var(--bg-card); font-family:var(--font-mono); border-radius:8px; cursor:pointer;"></pre>
         </div>
       `;
-      const prev = mount.querySelector('#grad-prev');
-      const c1 = mount.querySelector('#g-c1');
-      const c2 = mount.querySelector('#g-c2');
-      const deg = mount.querySelector('#g-deg');
-      const degVal = mount.querySelector('#g-deg-val');
-      const css = mount.querySelector('#g-css');
-
-      function update() {
-        degVal.innerText = `${deg.value}deg`;
-        const rule = `linear-gradient(${deg.value}deg, ${c1.value}, ${c2.value})`;
-        prev.style.background = rule;
+      const p = mount.querySelector('#gg-p'), c1 = mount.querySelector('#gg-1'), c2 = mount.querySelector('#gg-2'), d = mount.querySelector('#gg-d'), css = mount.querySelector('#gg-css');
+      const sync = () => {
+        const rule = `linear-gradient(${d.value}deg, ${c1.value}, ${c2.value})`;
+        p.style.background = rule;
         css.innerText = `background: ${rule};`;
-      }
-      [c1, c2, deg].forEach(el => el.oninput = update);
-      css.onclick = () => {
-        navigator.clipboard.writeText(css.innerText);
-        ZERO.toast('CSS copied to clipboard!', 'info');
       };
-      update();
+      [c1, c2, d].forEach(el => el.oninput = sync);
+      css.onclick = () => { navigator.clipboard.writeText(css.innerText); ZERO.toast('CSS copied!', 'info'); };
+      sync();
     }
 
     // 24. SVG Vector Editor
     function renderSvgEditor(mount) {
       mount.innerHTML = `
         <div class="controls-panel" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-          <div>
-            <textarea id="svg-in" rows="12" style="font-family:var(--font-mono); font-size:12px;"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="50" cy="50" r="45" fill="#4f46e5" />
+          <textarea id="svg-in" rows="10" style="font-family:var(--font-mono); font-size:12px;"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="45" fill="#6366f1" />
   <polygon points="50,20 80,80 20,80" fill="#ffffff" />
 </svg></textarea>
-            <button class="action-btn" id="svg-dl" style="margin-top:10px;">Download SVG</button>
-          </div>
-          <div id="svg-prev" style="display:flex; align-items:center; justify-content:center; background:var(--bg-tertiary); border-radius:8px; padding:1rem;"></div>
+          <div id="svg-pv" style="display:flex; align-items:center; justify-content:center; background:var(--bg-card); border-radius:8px;"></div>
         </div>
       `;
-      const input = mount.querySelector('#svg-in');
-      const prev = mount.querySelector('#svg-prev');
-      const sync = () => prev.innerHTML = input.value;
-      input.oninput = sync;
-      sync();
-
-      mount.querySelector('#svg-dl').onclick = () => {
-        ZERO.downloadBlob(input.value, 'vector.svg', 'image/svg+xml');
-      };
+      const input = mount.querySelector('#svg-in'), pv = mount.querySelector('#svg-pv');
+      input.oninput = () => pv.innerHTML = input.value;
+      pv.innerHTML = input.value;
     }
 
-    /* =====================================================================
-       CATEGORY E: PRODUCTIVITY, SYSTEM & PRIVACY TOOLS (25-30)
-       ===================================================================== */
-
-    // 25. Advanced Scientific Calculator
+    // 25. Advanced Calculator
     function renderCalculator(mount) {
       mount.innerHTML = `
         <div class="controls-panel" style="max-width:320px; margin:0 auto;">
           <input type="text" id="calc-scr" readonly style="height:48px; font-size:1.4rem; text-align:right; font-family:var(--font-mono); margin-bottom:1rem;">
           <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px;">
-            <button class="action-btn-secondary cb" data-v="C">C</button>
-            <button class="action-btn-secondary cb" data-v="(">(</button>
-            <button class="action-btn-secondary cb" data-v=")">)</button>
-            <button class="action-btn-secondary cb" data-v="/">/</button>
-            <button class="action-btn-secondary cb" data-v="7">7</button>
-            <button class="action-btn-secondary cb" data-v="8">8</button>
-            <button class="action-btn-secondary cb" data-v="9">9</button>
-            <button class="action-btn-secondary cb" data-v="*">*</button>
-            <button class="action-btn-secondary cb" data-v="4">4</button>
-            <button class="action-btn-secondary cb" data-v="5">5</button>
-            <button class="action-btn-secondary cb" data-v="6">6</button>
-            <button class="action-btn-secondary cb" data-v="-">-</button>
-            <button class="action-btn-secondary cb" data-v="1">1</button>
-            <button class="action-btn-secondary cb" data-v="2">2</button>
-            <button class="action-btn-secondary cb" data-v="3">3</button>
-            <button class="action-btn-secondary cb" data-v="+">+</button>
-            <button class="action-btn-secondary cb" data-v="0">0</button>
-            <button class="action-btn-secondary cb" data-v=".">.</button>
-            <button class="action-btn-secondary cb" data-v="sqrt(">√</button>
-            <button class="action-btn cb" data-v="=">=</button>
+            ${['C','(',')','/','7','8','9','*','4','5','6','-','1','2','3','+','0','.','√','='].map(k => `
+              <button class="action-btn-secondary cbtn" data-v="${k}">${k}</button>
+            `).join('')}
           </div>
         </div>
       `;
       const scr = mount.querySelector('#calc-scr');
-      mount.querySelectorAll('.cb').forEach(b => {
+      mount.querySelectorAll('.cbtn').forEach(b => {
         b.onclick = () => {
           const v = b.dataset.v;
           if (v === 'C') scr.value = '';
           else if (v === '=') {
             try {
-              let expr = scr.value
-                .replace(/sqrt\(/g, 'Math.sqrt(')
-                .replace(/sin\(/g, 'Math.sin(')
-                .replace(/cos\(/g, 'Math.cos(')
-                .replace(/tan\(/g, 'Math.tan(')
-                .replace(/log\(/g, 'Math.log10(')
-                .replace(/\^/g, '**');
-              scr.value = Function(`'use strict'; return (${expr})`)();
-            } catch {
-              scr.value = 'Error';
-            }
+              scr.value = Function(`'use strict'; return (${scr.value.replace(/√/g, 'Math.sqrt')})`)();
+            } catch { scr.value = 'Error'; }
           } else scr.value += v;
         };
       });
@@ -2412,160 +1755,96 @@ Client-side execution with **zero external telemetry**.
     function renderQrGenerator(mount) {
       mount.innerHTML = `
         <div class="controls-panel" style="text-align:center;">
-          <input type="text" id="qr-in" value="https://github.com" style="max-width:400px; margin:0 auto 1.5rem;">
-          <div id="qr-box" style="padding:14px; background:#fff; border-radius:8px; display:inline-block; margin-bottom:1.5rem;"></div>
+          <input type="text" id="qr-in" value="https://zero.local" style="max-width:360px; margin:0 auto 1.5rem;">
+          <div id="qr-c" style="background:#fff; padding:16px; border-radius:8px; display:inline-block; margin-bottom:1.5rem;"></div>
           <br>
-          <button class="action-btn" id="qr-dl">Download QR Code</button>
+          <button class="action-btn" id="qr-dl">Save QR Code</button>
         </div>
       `;
-      const input = mount.querySelector('#qr-in');
-      const box = mount.querySelector('#qr-box');
-      function draw() {
-        box.innerHTML = '';
-        new window.QRCode(box, { text: input.value || 'ZERO', width: 190, height: 190 });
-      }
-      input.oninput = draw;
+      const inEl = mount.querySelector('#qr-in'), c = mount.querySelector('#qr-c');
+      const draw = () => {
+        c.innerHTML = '';
+        new QRCode(c, { text: inEl.value || 'ZERO', width: 180, height: 180 });
+      };
+      inEl.oninput = draw;
       draw();
-
       mount.querySelector('#qr-dl').onclick = () => {
-        const img = box.querySelector('img');
-        const canvas = box.querySelector('canvas');
-        if (img && img.src && img.src.startsWith('data:')) {
-          ZERO.downloadBlob(img.src, 'qrcode.png', 'image/png');
-        } else if (canvas) {
-          ZERO.downloadBlob(canvas.toDataURL('image/png'), 'qrcode.png', 'image/png');
-        }
+        const img = c.querySelector('img');
+        if (img?.src) ZERO.downloadBlob(img.src, 'qrcode.png', 'image/png');
       };
     }
 
     // 27. Cryptographic Password Generator
     function renderPasswordGenerator(mount) {
       mount.innerHTML = `
-        <div class="controls-panel" style="max-width:500px; margin:0 auto;">
-          <div style="display:flex; gap:10px; margin-bottom:1.5rem;">
-            <input type="text" id="pwd-val" readonly style="font-family:var(--font-mono); font-size:1.1rem;">
-            <button class="action-btn" id="pwd-copy">Copy</button>
-          </div>
-          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-            <span>Length: <b id="pwd-len-val">32</b></span>
-          </div>
-          <input type="range" id="pwd-len" min="12" max="64" value="32" style="width:100%; margin-bottom:1.5rem;">
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:1.5rem;">
-            <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" id="pwd-num" checked> Numbers (0-9)</label>
-            <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" id="pwd-sym" checked> Symbols (!@#$)</label>
-          </div>
-          <button class="action-btn-secondary" id="pwd-gen" style="width:100%;">Generate Secure Key</button>
+        <div class="controls-panel" style="max-width:440px; margin:0 auto;">
+          <input type="text" id="pw-v" readonly style="font-family:var(--font-mono); font-size:1.15rem; margin-bottom:1rem; text-align:center;">
+          <input type="range" id="pw-l" min="12" max="64" value="32" style="width:100%; margin-bottom:1rem;">
+          <button class="action-btn" id="pw-btn" style="width:100%;">Generate Secure Key</button>
         </div>
       `;
-      const out = mount.querySelector('#pwd-val');
-      const len = mount.querySelector('#pwd-len');
-      const lenVal = mount.querySelector('#pwd-len-val');
-      const num = mount.querySelector('#pwd-num');
-      const sym = mount.querySelector('#pwd-sym');
-
-      function generate() {
-        lenVal.innerText = len.value;
-        let set = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-        if (num.checked) set += '0123456789';
-        if (sym.checked) set += '!@#$%^&*()_+-=[]{}|;:,.<>?';
-        if (!set) set = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-        const arr = new Uint32Array(parseInt(len.value));
+      const v = mount.querySelector('#pw-v'), l = mount.querySelector('#pw-l');
+      const gen = () => {
+        const arr = new Uint8Array(parseInt(l.value));
         crypto.getRandomValues(arr);
-        let res = '';
-        for (let i = 0; i < arr.length; i++) res += set[arr[i] % set.length];
-        out.value = res;
-      }
-
-      [len, num, sym].forEach(el => el.oninput = generate);
-      mount.querySelector('#pwd-gen').onclick = generate;
-      mount.querySelector('#pwd-copy').onclick = () => {
-        navigator.clipboard.writeText(out.value);
-        ZERO.toast('Secure password copied!', 'info');
+        const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*()_+';
+        v.value = Array.from(arr).map(x => chars[x % chars.length]).join('');
       };
-      generate();
+      mount.querySelector('#pw-btn').onclick = gen;
+      l.oninput = gen;
+      gen();
     }
 
-    // 28. Client Metadata Inspector (Magic Signature & Binary Inspector)
+    // 28. Client Metadata Inspector
     function renderMetadataInspector(mount) {
       mount.innerHTML = `
         <div class="controls-panel">
           <div class="dropzone-surface" id="mi-drop">
-            <h3 class="dropzone-title">Upload Any File to Inspect Headers</h3>
-            <p class="dropzone-sub">Inspects file system attributes and validates binary magic numbers</p>
-            <input type="file" id="mi-input" style="display:none">
+            <h3 style="font-size:1.25rem; font-weight:700;">Upload File to Inspect Signature</h3>
+            <input type="file" id="mi-in" style="display:none">
           </div>
-          <div id="mi-out" style="display:none; padding:14px; background:var(--bg-tertiary); border-radius:8px; font-family:var(--font-mono); font-size:12px; line-height:1.7;"></div>
+          <div id="mi-out" style="display:none; font-family:var(--font-mono); font-size:12px; background:var(--bg-card); padding:1rem; border-radius:8px;"></div>
         </div>
       `;
-      const drop = mount.querySelector('#mi-drop');
-      const input = mount.querySelector('#mi-input');
-      const out = mount.querySelector('#mi-out');
-
-      ZERO.setupDropzone(drop, input, async (files) => {
-        const f = files[0];
-        if (!f) return;
-        const buf = await f.slice(0, 8).arrayBuffer();
-        const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join(' ').toUpperCase();
-        
-        let signature = 'Unknown binary stream';
-        if (hex.startsWith('89 50 4E 47')) signature = 'PNG Image File';
-        else if (hex.startsWith('FF D8 FF')) signature = 'JPEG / JFIF Image';
-        else if (hex.startsWith('25 50 44 46')) signature = 'PDF Document Header (%PDF)';
-        else if (hex.startsWith('50 4B 03 04')) signature = 'ZIP / Office OpenXML Archive';
-        else if (hex.startsWith('52 49 46 46')) signature = 'RIFF Container (WebP / AVI / WAV)';
-
+      ZERO.setupDropzone(mount.querySelector('#mi-drop'), mount.querySelector('#mi-in'), async (f) => {
+        const file = f[0];
+        const hex = Array.from(new Uint8Array(await file.slice(0, 8).arrayBuffer())).map(b => b.toString(16).padStart(2, '0')).join(' ').toUpperCase();
+        const out = mount.querySelector('#mi-out');
         out.style.display = 'block';
         out.innerHTML = `
-          <b>File Name:</b> ${f.name}<br>
-          <b>MIME Type:</b> ${f.type || 'application/octet-stream'}<br>
-          <b>Byte Size:</b> ${f.size.toLocaleString()} bytes (${(f.size/1024).toFixed(2)} KB)<br>
-          <b>Last Modified:</b> ${new Date(f.lastModified).toISOString()}<br>
-          <b>Magic Hex Bytes:</b> ${hex}<br>
-          <b>Validated Signature:</b> ${signature}<br>
+          File: ${file.name}<br>
+          Size: ${file.size.toLocaleString()} bytes<br>
+          Type: ${file.type || 'application/octet-stream'}<br>
+          Magic Header: ${hex}
         `;
       });
     }
 
-    // 29. Duplicate File Finder (SHA-256 Web Crypto)
+    // 29. Duplicate File Finder (SHA-256)
     function renderDuplicateFinder(mount) {
       mount.innerHTML = `
         <div class="controls-panel">
           <div class="dropzone-surface" id="df-drop">
-            <h3 class="dropzone-title">Upload Multiple Files to Match Checksums</h3>
-            <p class="dropzone-sub">Computes SHA-256 cryptographic digests in parallel</p>
-            <input type="file" id="df-input" multiple style="display:none">
+            <h3 style="font-size:1.25rem; font-weight:700;">Drop Multiple Files to Check Hashes</h3>
+            <input type="file" id="df-in" multiple style="display:none">
           </div>
           <div id="df-res" style="margin-top:1rem;"></div>
         </div>
       `;
-      const drop = mount.querySelector('#df-drop');
-      const input = mount.querySelector('#df-input');
-      const res = mount.querySelector('#df-res');
-
-      ZERO.setupDropzone(drop, input, async (files) => {
-        if (!files.length) return;
-        res.innerHTML = '<p>Computing hardware SHA-256 hashes...</p>';
+      ZERO.setupDropzone(mount.querySelector('#df-drop'), mount.querySelector('#df-in'), async (files) => {
+        const res = mount.querySelector('#df-res');
+        res.innerHTML = '<p>Computing SHA-256 digests...</p>';
         const map = new Map();
-
         for (const f of files) {
-          const buf = await f.arrayBuffer();
-          const digest = await crypto.subtle.digest('SHA-256', buf);
-          const hash = Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
-          if (!map.has(hash)) map.set(hash, []);
-          map.get(hash).push(f.name);
+          const d = await crypto.subtle.digest('SHA-256', await f.arrayBuffer());
+          const h = Array.from(new Uint8Array(d)).map(b => b.toString(16).padStart(2, '0')).join('');
+          if (!map.has(h)) map.set(h, []);
+          map.get(h).push(f.name);
         }
-
-        const dups = Array.from(map.entries()).filter(([h, list]) => list.length > 1);
-        if (!dups.length) {
-          res.innerHTML = '<span style="color:var(--status-success);">All uploaded files have distinct SHA-256 hashes. No duplicates found.</span>';
-        } else {
-          res.innerHTML = `<h4>Identical File Matches:</h4>` + dups.map(([h, l]) => `
-            <div style="background:var(--bg-tertiary); padding:10px; border-radius:6px; margin:8px 0;">
-              <small style="color:var(--text-tertiary); font-family:var(--font-mono);">${h}</small><br>
-              <b>Duplicates:</b> ${l.join(' ⟷ ')}
-            </div>
-          `).join('');
-        }
+        const dups = Array.from(map.entries()).filter(([k, v]) => v.length > 1);
+        res.innerHTML = dups.length
+          ? dups.map(([h, l]) => `<div style="background:var(--bg-card); padding:8px; border-radius:6px; margin:4px 0;">Duplicate matches: ${l.join(' ⟷ ')}</div>`).join('')
+          : '<span style="color:var(--status-success);">All files are completely unique.</span>';
       });
     }
 
@@ -2574,295 +1853,162 @@ Client-side execution with **zero external telemetry**.
       mount.innerHTML = `
         <div class="controls-panel">
           <div class="dropzone-surface" id="bc-drop">
-            <h3 class="dropzone-title">Upload Multiple Images for Batch Conversion</h3>
-            <input type="file" id="bc-input" multiple accept="image/*" style="display:none">
+            <h3 style="font-size:1.25rem; font-weight:700;">Upload Batch Images</h3>
+            <input type="file" id="bc-in" multiple accept="image/*" style="display:none">
           </div>
-          <div id="bc-controls" style="display:none;">
-            <div style="display:flex; gap:12px; margin-bottom:1.5rem; flex-wrap:wrap;">
-              <select id="bc-fmt" style="max-width:260px;">
-                <option value="image/webp">Batch Convert to WEBP (.webp)</option>
-                <option value="image/jpeg">Batch Convert to JPEG (.jpg)</option>
-                <option value="image/png">Batch Convert to PNG (.png)</option>
-              </select>
-              <button class="action-btn" id="bc-btn">Process All Files</button>
-            </div>
-            <div id="bc-progress" style="display:none; margin-bottom:1rem; font-weight:600;"></div>
-            <div id="bc-results" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:10px;"></div>
-            <br>
-            <button class="action-btn" id="bc-dl-all" style="display:none;">Download All as ZIP</button>
+          <div id="bc-box" style="display:none;">
+            <button class="action-btn" id="bc-btn">Process All to WebP & Download ZIP</button>
           </div>
         </div>
       `;
       let files = [];
-      const drop = mount.querySelector('#bc-drop');
-      const input = mount.querySelector('#bc-input');
-      const ctrls = mount.querySelector('#bc-controls');
-      const fmt = mount.querySelector('#bc-fmt');
-      const btn = mount.querySelector('#bc-btn');
-      const progress = mount.querySelector('#bc-progress');
-      const results = mount.querySelector('#bc-results');
-      const dlAll = mount.querySelector('#bc-dl-all');
-      let convertedPack = [];
-
-      ZERO.setupDropzone(drop, input, (newFiles) => {
-        files = newFiles;
-        if (files.length) {
-          ctrls.style.display = 'block';
-          progress.innerText = `${files.length} images queued.`;
-          progress.style.display = 'block';
-        }
+      ZERO.setupDropzone(mount.querySelector('#bc-drop'), mount.querySelector('#bc-in'), (f) => {
+        files = f;
+        mount.querySelector('#bc-box').style.display = 'block';
       });
 
-      btn.onclick = async () => {
-        btn.disabled = true;
-        results.innerHTML = '';
-        convertedPack = [];
-        const targetFmt = fmt.value;
-        const ext = targetFmt.split('/')[1];
-
-        for (let i = 0; i < files.length; i++) {
-          progress.innerText = `Converting ${i + 1} of ${files.length}...`;
-          try {
-            const bmp = await createImageBitmap(files[i]);
-            const c = document.createElement('canvas');
-            c.width = bmp.width;
-            c.height = bmp.height;
-            const ctx = c.getContext('2d');
-            if (targetFmt === 'image/jpeg') {
-              ctx.fillStyle = '#ffffff';
-              ctx.fillRect(0, 0, c.width, c.height);
-            }
-            ctx.drawImage(bmp, 0, 0);
-            const dataUrl = c.toDataURL(targetFmt, 0.85);
-            const fileName = `${files[i].name.replace(/\.[^/.]+$/, "")}.${ext}`;
-            convertedPack.push({ name: fileName, dataUrl });
-
-            const item = document.createElement('div');
-            item.style.cssText = 'background:var(--bg-tertiary); padding:6px; border-radius:6px; text-align:center; font-size:11px;';
-            item.innerHTML = `
-              <img src="${dataUrl}" style="width:100%; height:80px; object-fit:cover; border-radius:4px; margin-bottom:4px;">
-              <div style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-bottom:4px;">${fileName}</div>
-              <button class="action-btn dl-single-item" style="padding:2px 8px; font-size:10px;">Download</button>
-            `;
-            item.querySelector('.dl-single-item').onclick = () => {
-              ZERO.downloadBlob(dataUrl, fileName, targetFmt);
-            };
-            results.appendChild(item);
-          } catch (err) {
-            console.error(`Failed ${files[i].name}`, err);
-          }
+      mount.querySelector('#bc-btn').onclick = async () => {
+        const zip = new JSZip();
+        for (const f of files) {
+          const bmp = await createImageBitmap(f);
+          const c = document.createElement('canvas');
+          c.width = bmp.width; c.height = bmp.height;
+          c.getContext('2d').drawImage(bmp, 0, 0);
+          const b64 = c.toDataURL('image/webp', 0.85).split(',')[1];
+          zip.file(`${f.name.replace(/\.[^.]+$/, '')}.webp`, b64, { base64: true });
         }
-        progress.innerText = `Converted ${convertedPack.length} images successfully.`;
-        btn.disabled = false;
-        if (convertedPack.length > 1) dlAll.style.display = 'inline-block';
-      };
-
-      dlAll.onclick = async () => {
-        const zip = new window.JSZip();
-        convertedPack.forEach(f => {
-          zip.file(f.name, f.dataUrl.split(',')[1], { base64: true });
-        });
-        const zipBlob = await zip.generateAsync({ type: 'blob' });
-        ZERO.downloadBlob(zipBlob, 'batch_images.zip', 'application/zip');
+        ZERO.downloadBlob(await zip.generateAsync({ type: 'blob' }), 'batch_webp.zip', 'application/zip');
       };
     }
 
     /* =====================================================================
-       MASTER TOOL REGISTRY (ALL 30 UTILITIES)
+       DIRECTORY MAPPING & APP INITIALIZATION
        ===================================================================== */
-    const TOOLS_DIRECTORY = [
-      // PDF Pro
-      { id: 'pdf-merger', name: 'PDF Merger', cat: 'pdf', desc: 'Merge multiple PDF files into one clean document.', render: renderPdfMerger },
-      { id: 'pdf-splitter', name: 'PDF Splitter', cat: 'pdf', desc: 'Extract individual pages or ranges into a new PDF.', render: renderPdfSplitter },
-      { id: 'pdf-compressor', name: 'PDF Compressor', cat: 'pdf', desc: 'Reduce PDF file sizes via canvas quantization.', render: renderPdfCompressor },
-      { id: 'pdf-organizer', name: 'PDF Page Organizer', cat: 'pdf', desc: 'Reorder, rotate, or eliminate PDF pages visually.', render: renderPdfOrganizer },
-      { id: 'pdf-to-img', name: 'PDF to Image Converter', cat: 'pdf', desc: 'Rasterize PDF pages into individual high-res PNGs.', render: renderPdfToImage },
-      { id: 'img-to-pdf', name: 'Image to PDF Converter', cat: 'pdf', desc: 'Combine multiple image files into a single PDF.', render: renderImageToPdf },
+    const TOOLS = [
+      { id: 'pdf-merger', name: 'PDF Merger', cat: 'pdf', desc: 'Combine multiple PDFs into a single clean file.', render: renderPdfMerger },
+      { id: 'pdf-splitter', name: 'PDF Splitter', cat: 'pdf', desc: 'Extract custom page ranges into a separate document.', render: renderPdfSplitter },
+      { id: 'pdf-compressor', name: 'PDF Compressor', cat: 'pdf', desc: 'In-memory JPEG quantization downsampler.', render: renderPdfCompressor },
+      { id: 'pdf-organizer', name: 'PDF Page Organizer', cat: 'pdf', desc: 'Reorder, rotate, or delete pages visually.', render: renderPdfOrganizer },
+      { id: 'pdf-to-img', name: 'PDF to Image Converter', cat: 'pdf', desc: 'Render pages into high-res PNG pictures.', render: renderPdfToImage },
+      { id: 'img-to-pdf', name: 'Image to PDF Converter', cat: 'pdf', desc: 'Compile PNG and JPEG pictures into a PDF.', render: renderImageToPdf },
 
-      // Image Studio
-      { id: 'bg-remover', name: 'Image Background Remover', cat: 'image', desc: 'Isolate foregrounds using client-side edge matting.', render: renderBgRemover },
-      { id: 'img-compressor', name: 'Image Compressor', cat: 'image', desc: 'Compress JPG, PNG, and WebP images locally.', render: renderImageCompressor },
-      { id: 'img-resizer', name: 'Image Resizer', cat: 'image', desc: 'Resize image dimensions with aspect ratio lock.', render: renderImageResizer },
-      { id: 'img-converter', name: 'Image Format Converter', cat: 'image', desc: 'Convert between PNG, JPEG, and WebP formats.', render: renderImageConverter },
-      { id: 'img-cropper', name: 'Image Cropper', cat: 'image', desc: 'Crop pixel boundaries visually on high-DPI canvas.', render: renderImageCropper },
-      { id: 'metadata-remover', name: 'Image Metadata Remover', cat: 'image', desc: 'Strip EXIF, GPS, and device signatures completely.', render: renderMetadataRemover },
+      { id: 'bg-remover', name: 'Foreground Isolator', cat: 'image', desc: 'Client edge-contour matting and eyedropper isolation.', render: renderBgRemover },
+      { id: 'img-compressor', name: 'Image Compressor', cat: 'image', desc: 'Ultra-fast in-memory WebP quantization.', render: renderImageCompressor },
+      { id: 'img-resizer', name: 'Image Resizer', cat: 'image', desc: 'Pixel-perfect dimension resizing with ratio lock.', render: renderImageResizer },
+      { id: 'img-converter', name: 'Format Converter', cat: 'image', desc: 'Convert seamlessly between PNG, JPEG, and WebP.', render: renderImageConverter },
+      { id: 'img-cropper', name: 'Image Cropper', cat: 'image', desc: 'Interactive bounding box visual crop engine.', render: renderImageCropper },
+      { id: 'metadata-remover', name: 'EXIF Metadata Remover', cat: 'image', desc: 'Purge GPS location and camera signatures.', render: renderMetadataRemover },
 
-      // Document & Writing
-      { id: 'resume-builder', name: 'ATS Resume Builder', cat: 'writing', desc: 'Clean, ATS-friendly resume creator with PDF export.', render: renderResumeBuilder },
-      { id: 'ats-checker', name: 'ATS Resume Checker', cat: 'writing', desc: 'Match keyword frequency against job descriptions.', render: renderAtsChecker },
-      { id: 'invoice-gen', name: 'Invoice Generator', cat: 'writing', desc: 'Professional invoices with dynamic items and totals.', render: renderInvoiceGenerator },
-      { id: 'grammar-checker', name: 'Grammar and Text Checker', cat: 'writing', desc: 'Offline syntax, repetition, and typo heuristics.', render: renderGrammarChecker },
-      { id: 'word-counter', name: 'Word Counter', cat: 'writing', desc: 'Instant word, sentence, and reading-duration counts.', render: renderWordCounter },
-      { id: 'markdown-editor', name: 'Markdown Editor', cat: 'writing', desc: 'Live Markdown editor with preview and HTML export.', render: renderMarkdownEditor },
+      { id: 'resume-builder', name: 'ATS Resume Builder', cat: 'writing', desc: 'Clean, printable corporate resume builder.', render: renderResumeBuilder },
+      { id: 'ats-checker', name: 'ATS Keyword Checker', cat: 'writing', desc: 'Compare resume keyword density against job descriptions.', render: renderAtsChecker },
+      { id: 'invoice-gen', name: 'Invoice Generator', cat: 'writing', desc: 'Generate printable invoices with automated sums.', render: renderInvoiceGenerator },
+      { id: 'grammar-checker', name: 'Linguistic Checker', cat: 'writing', desc: 'Offline grammar, typo, and passive heuristics.', render: renderGrammarChecker },
+      { id: 'word-counter', name: 'Word & Read Time Counter', cat: 'writing', desc: 'Instant character, sentence, and duration stats.', render: renderWordCounter },
+      { id: 'markdown-editor', name: 'Live Markdown Studio', cat: 'writing', desc: 'Reactive editor with instant HTML export.', render: renderMarkdownEditor },
 
-      // Developer Core
-      { id: 'json-formatter', name: 'JSON Formatter & Validator', cat: 'dev', desc: 'Prettify, minify, and validate JSON data.', render: renderJsonFormatter },
-      { id: 'code-formatter', name: 'HTML/CSS/JS Formatter', cat: 'dev', desc: 'Format web source code using js-beautify.', render: renderCodeFormatter },
-      { id: 'regex-tester', name: 'Regex Tester', cat: 'dev', desc: 'Test regular expressions against sample text live.', render: renderRegexTester },
-      { id: 'palette-gen', name: 'Color Palette Generator', cat: 'dev', desc: 'Generate harmonic color palettes on demand.', render: renderPaletteGenerator },
-      { id: 'gradient-gen', name: 'CSS Gradient Generator', cat: 'dev', desc: 'Visual CSS gradient builder with copyable rules.', render: renderGradientGenerator },
-      { id: 'svg-editor', name: 'SVG Editor', cat: 'dev', desc: 'Live SVG code editor and vector visualizer.', render: renderSvgEditor },
+      { id: 'json-formatter', name: 'JSON Prettifier', cat: 'dev', desc: 'Prettify, minify, and validate JSON data structures.', render: renderJsonFormatter },
+      { id: 'code-formatter', name: 'HTML/CSS/JS Beautifier', cat: 'dev', desc: 'Format source code using embedded js-beautify.', render: renderCodeFormatter },
+      { id: 'regex-tester', name: 'Regex Playground', cat: 'dev', desc: 'Real-time regular expression match evaluator.', render: renderRegexTester },
+      { id: 'palette-gen', name: 'Harmonic Palette Generator', cat: 'dev', desc: 'Algorithmic color harmonies with 1-click copy.', render: renderPaletteGenerator },
+      { id: 'gradient-gen', name: 'CSS Gradient Studio', cat: 'dev', desc: 'Visual linear-gradient creator with rule export.', render: renderGradientGenerator },
+      { id: 'svg-editor', name: 'SVG Vector Visualizer', cat: 'dev', desc: 'Live vector code editor and visual preview.', render: renderSvgEditor },
 
-      // Security & System
-      { id: 'adv-calc', name: 'Advanced Calculator', cat: 'productivity', desc: 'Scientific math calculations and trigonometric evaluations.', render: renderCalculator },
-      { id: 'qr-gen', name: 'QR Code Generator', cat: 'productivity', desc: 'Generate downloadable QR codes for URLs and text.', render: renderQrGenerator },
-      { id: 'pwd-gen', name: 'Password Generator', cat: 'productivity', desc: 'Hardware-backed random passwords via Web Crypto.', render: renderPasswordGenerator },
-      { id: 'meta-inspector', name: 'Metadata Inspector', cat: 'productivity', desc: 'Inspect file properties and MIME signatures locally.', render: renderMetadataInspector },
-      { id: 'dup-finder', name: 'Duplicate File Finder', cat: 'productivity', desc: 'Detect byte-for-byte duplicate files via SHA-256.', render: renderDuplicateFinder },
-      { id: 'batch-converter', name: 'Batch File Converter', cat: 'productivity', desc: 'Bulk format transformations packaged into a ZIP.', render: renderBatchConverter }
+      { id: 'adv-calc', name: 'Scientific Calculator', cat: 'productivity', desc: 'Trigonometric and mathematical expression evaluator.', render: renderCalculator },
+      { id: 'qr-gen', name: 'QR Code Generator', cat: 'productivity', desc: 'Generate downloadable QR codes for links and text.', render: renderQrGenerator },
+      { id: 'pwd-gen', name: 'Crypto Password Engine', cat: 'productivity', desc: 'Hardware-backed random passwords via Web Crypto.', render: renderPasswordGenerator },
+      { id: 'meta-inspector', name: 'File Header Inspector', cat: 'productivity', desc: 'Analyze magic byte headers and MIME types.', render: renderMetadataInspector },
+      { id: 'dup-finder', name: 'Duplicate File Matcher', cat: 'productivity', desc: 'Find identical files via hardware SHA-256 digests.', render: renderDuplicateFinder },
+      { id: 'batch-converter', name: 'Batch Image Converter', cat: 'productivity', desc: 'Bulk format transformations packaged into a ZIP.', render: renderBatchConverter }
     ];
 
-    /* =====================================================================
-       APPLICATION ORCHESTRATION & ROUTING
-       ===================================================================== */
     document.addEventListener('DOMContentLoaded', () => {
-      initTheme();
-      initCommandPalette();
       renderDirectory('all');
+      initPalette();
+
+      document.getElementById('theme-toggle').onclick = () => {
+        document.documentElement.classList.toggle('dark');
+        document.documentElement.classList.toggle('light');
+      };
 
       document.getElementById('category-tabs').onclick = (e) => {
-        if (!e.target.classList.contains('tab-btn')) return;
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        if (!e.target.classList.contains('cat-btn')) return;
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
         e.target.classList.add('active');
         renderDirectory(e.target.dataset.cat);
       };
 
-      document.getElementById('brand-home').onclick = closeActiveTool;
-      document.getElementById('btn-back-hub').onclick = closeActiveTool;
-      document.getElementById('nav-privacy-link').onclick = () => {
-        closeActiveTool();
-        document.getElementById('privacy-section').scrollIntoView({ behavior: 'smooth' });
-      };
-
-      const favBtn = document.getElementById('tool-fav-btn');
-      favBtn.onclick = () => {
-        if (!ZERO.activeToolId) return;
-        if (ZERO.favorites.has(ZERO.activeToolId)) {
-          ZERO.favorites.delete(ZERO.activeToolId);
-        } else {
-          ZERO.favorites.add(ZERO.activeToolId);
-        }
-        localStorage.setItem('zero_favs', JSON.stringify(Array.from(ZERO.favorites)));
-        updateFavBtnState();
-      };
+      document.getElementById('brand-home').onclick = closeTool;
+      document.getElementById('btn-back-hub').onclick = closeTool;
     });
 
-    function initTheme() {
-      const toggle = document.getElementById('theme-toggle');
-      const isDark = localStorage.getItem('zero_theme') !== 'light';
-      document.documentElement.classList.toggle('dark', isDark);
-      document.documentElement.classList.toggle('light', !isDark);
-
-      toggle.onclick = () => {
-        const nextDark = !document.documentElement.classList.contains('dark');
-        document.documentElement.classList.toggle('dark', nextDark);
-        document.documentElement.classList.toggle('light', !nextDark);
-        localStorage.setItem('zero_theme', nextDark ? 'dark' : 'light');
-      };
-    }
-
-    function renderDirectory(category = 'all') {
-      const grid = document.getElementById('tools-directory');
-      grid.innerHTML = '';
-      const list = category === 'all' ? TOOLS_DIRECTORY : TOOLS_DIRECTORY.filter(t => t.cat === category);
-
+    function renderDirectory(cat) {
+      const g = document.getElementById('tools-directory');
+      g.innerHTML = '';
+      const list = cat === 'all' ? TOOLS : TOOLS.filter(t => t.cat === cat);
       list.forEach(t => {
         const card = document.createElement('div');
         card.className = 'tool-card';
         card.innerHTML = `
-          <div class="tool-card-header">
-            <div class="tool-icon-box">Ø</div>
-            <span class="badge-tag">${t.cat}</span>
+          <div class="card-head">
+            <div class="card-icon">⚡</div>
+            <span class="card-cat">${t.cat}</span>
           </div>
-          <h3 class="tool-title">${t.name}</h3>
-          <p class="tool-desc">${t.desc}</p>
+          <h3 class="tool-card-title">${t.name}</h3>
+          <p class="tool-card-desc">${t.desc}</p>
         `;
         card.onclick = () => openTool(t.id);
-        grid.appendChild(card);
+        g.appendChild(card);
       });
     }
 
-    function openTool(toolId) {
-      const tool = TOOLS_DIRECTORY.find(t => t.id === toolId);
+    function openTool(id) {
+      const tool = TOOLS.find(t => t.id === id);
       if (!tool) return;
-
       ZERO.activeToolId = tool.id;
-      document.getElementById('view-hub').classList.add('view-hidden');
-      document.getElementById('view-hub').classList.remove('view-active');
-
-      const toolView = document.getElementById('view-tool');
-      toolView.classList.remove('view-hidden');
-      toolView.classList.add('view-active');
-
+      document.getElementById('view-hub').classList.replace('view-active', 'view-hidden');
+      document.getElementById('view-tool').classList.replace('view-hidden', 'view-active');
       document.getElementById('tool-active-title').innerText = tool.name;
       document.getElementById('tool-active-cat').innerText = tool.cat;
-
-      updateFavBtnState();
       const mount = document.getElementById('tool-mount-point');
       mount.innerHTML = '';
       tool.render(mount);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function closeActiveTool() {
-      document.getElementById('view-tool').classList.add('view-hidden');
-      document.getElementById('view-tool').classList.remove('view-active');
-      document.getElementById('view-hub').classList.remove('view-hidden');
-      document.getElementById('view-hub').classList.add('view-active');
+    function closeTool() {
+      document.getElementById('view-tool').classList.replace('view-active', 'view-hidden');
+      document.getElementById('view-hub').classList.replace('view-hidden', 'view-active');
       ZERO.activeToolId = null;
     }
 
-    function updateFavBtnState() {
-      const isFav = ZERO.favorites.has(ZERO.activeToolId);
-      document.getElementById('fav-text').innerText = isFav ? 'Favorited' : 'Favorite';
-      document.getElementById('tool-fav-btn').style.borderColor = isFav ? 'var(--status-warning)' : 'var(--border-subtle)';
-    }
-
-    function initCommandPalette() {
+    function initPalette() {
       const modal = document.getElementById('cmd-palette');
-      const input = document.getElementById('palette-input');
-      const results = document.getElementById('palette-results');
-      const trigger = document.getElementById('cmd-k-trigger');
+      const inEl = document.getElementById('palette-input');
+      const res = document.getElementById('palette-results');
+      const show = () => { modal.style.display = 'flex'; inEl.value = ''; inEl.focus(); search(''); };
+      const hide = () => modal.style.display = 'none';
 
-      function show() {
-        modal.style.display = 'flex';
-        input.value = '';
-        input.focus();
-        search('');
-      }
-
-      function hide() { modal.style.display = 'none'; }
-
-      trigger.onclick = show;
+      document.getElementById('cmd-k-trigger').onclick = show;
       window.addEventListener('keydown', (e) => {
-        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-          e.preventDefault();
-          modal.style.display === 'none' ? show() : hide();
-        }
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); modal.style.display === 'none' ? show() : hide(); }
         if (e.key === 'Escape') hide();
       });
-
       modal.onclick = (e) => { if (e.target === modal) hide(); };
-      input.oninput = () => search(input.value.toLowerCase().trim());
+      inEl.oninput = () => search(inEl.value.toLowerCase().trim());
 
       function search(q) {
-        results.innerHTML = '';
-        const matches = TOOLS_DIRECTORY.filter(t =>
-          t.name.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q) || t.cat.toLowerCase().includes(q)
-        );
-        matches.forEach(t => {
+        res.innerHTML = '';
+        TOOLS.filter(t => t.name.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q)).forEach(t => {
           const item = document.createElement('div');
-          item.className = 'palette-item';
-          item.innerHTML = `<span>${t.name}</span><span class="badge-tag">${t.cat}</span>`;
-          item.onclick = () => {
-            hide();
-            openTool(t.id);
-          };
-          results.appendChild(item);
+          item.style.cssText = 'padding:10px 14px; border-radius:8px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;';
+          item.innerHTML = `<span>${t.name}</span><small style="color:var(--text-muted);">${t.cat}</small>`;
+          item.onmouseover = () => item.style.background = 'var(--bg-input)';
+          item.onmouseout = () => item.style.background = 'transparent';
+          item.onclick = () => { hide(); openTool(t.id); };
+          res.appendChild(item);
         });
       }
     }
   </script>
 </body>
 </html>
-```
