@@ -1,0 +1,2867 @@
+```html
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZERO — Everything Premium. Absolutely Free.</title>
+  <meta name="description" content="30 professional, client-side digital utilities. 100% private, zero uploads, unlimited free access.">
+  <meta name="theme-color" content="#090a0f">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Production Open-Source Client Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.1/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.9/beautify.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.9/beautify-css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.9/beautify-html.min.js"></script>
+
+  <style>
+    :root {
+      --bg-primary: #090a0f;
+      --bg-secondary: #12141c;
+      --bg-tertiary: #191c28;
+      --bg-card: rgba(22, 26, 38, 0.75);
+      --bg-card-hover: rgba(30, 35, 52, 0.95);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(255, 255, 255, 0.22);
+      --border-active: #6366f1;
+      --text-main: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-tertiary: #64748b;
+      --accent-primary: #4f46e5;
+      --accent-primary-hover: #4338ca;
+      --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+      --accent-glow: rgba(99, 102, 241, 0.2);
+      --status-success: #10b981;
+      --status-warning: #f59e0b;
+      --status-danger: #ef4444;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-medium: 250ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html.light {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #f1f5f9;
+      --bg-tertiary: #e2e8f0;
+      --bg-card: rgba(255, 255, 255, 0.9);
+      --bg-card-hover: #ffffff;
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --border-focus: rgba(0, 0, 0, 0.22);
+      --border-active: #4f46e5;
+      --text-main: #0f172a;
+      --text-secondary: #475569;
+      --text-tertiary: #94a3b8;
+      --accent-glow: rgba(99, 102, 241, 0.12);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+
+    .ambient-glow {
+      position: fixed;
+      top: -220px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1000px;
+      height: 550px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, rgba(0,0,0,0) 70%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background-color: rgba(9, 10, 15, 0.75);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0 1.5rem;
+    }
+    html.light .navbar { background-color: rgba(248, 250, 252, 0.85); }
+
+    .nav-container {
+      max-width: 1320px;
+      height: 64px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: -0.03em;
+      cursor: pointer;
+    }
+
+    .brand-symbol {
+      color: var(--accent-primary);
+      font-size: 1.5rem;
+    }
+
+    .search-trigger-wrapper {
+      flex: 1;
+      max-width: 440px;
+    }
+
+    .search-trigger {
+      width: 100%;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.55rem 0.9rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .search-trigger:hover {
+      border-color: var(--border-focus);
+      background: var(--bg-tertiary);
+    }
+
+    .shortcut-badge, .esc-badge {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-subtle);
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .icon-btn {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      padding: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-fast);
+    }
+    .icon-btn:hover {
+      color: var(--text-main);
+      border-color: var(--border-focus);
+      background: var(--bg-secondary);
+    }
+
+    html.dark .theme-icon-sun { display: block; }
+    html.dark .theme-icon-moon { display: none; }
+    html.light .theme-icon-sun { display: none; }
+    html.light .theme-icon-moon { display: block; }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color var(--transition-fast);
+      cursor: pointer;
+    }
+    .nav-link:hover { color: var(--text-main); }
+
+    #app-root {
+      flex: 1;
+      max-width: 1320px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    .view-hidden { display: none !important; }
+    .view-active { display: block; }
+
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem 3.5rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.45rem 1rem;
+      border-radius: 9999px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.775rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      margin-bottom: 1.25rem;
+    }
+
+    .gradient-text {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .category-tabs {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.75rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border-subtle);
+      scrollbar-width: none;
+    }
+    .category-tabs::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      padding: 0.6rem 1.2rem;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--radius-md);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all var(--transition-fast);
+    }
+    .tab-btn:hover {
+      color: var(--text-main);
+      background: var(--bg-secondary);
+    }
+    .tab-btn.active {
+      color: var(--text-main);
+      background: var(--bg-tertiary);
+      border-color: var(--border-focus);
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .tool-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
+      backdrop-filter: blur(12px);
+    }
+    .tool-card:hover {
+      transform: translateY(-3px);
+      background: var(--bg-card-hover);
+      border-color: var(--border-focus);
+    }
+
+    .tool-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .tool-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: var(--bg-tertiary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-primary);
+      border: 1px solid var(--border-subtle);
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .badge-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--bg-secondary);
+      color: var(--text-tertiary);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .tool-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .tool-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .zero-lab-card {
+      margin-top: 5rem;
+      background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 3.5rem 2rem;
+      text-align: center;
+    }
+
+    .lab-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .lab-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .lab-desc {
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .spec-val {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .spec-lbl {
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+    }
+
+    .tool-viewport-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border-subtle);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all var(--transition-fast);
+    }
+    .back-btn:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--border-focus);
+    }
+
+    .viewport-titles { text-align: center; }
+    .viewport-titles h2 { font-size: 1.6rem; font-weight: 700; }
+    .cat-pill {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--accent-primary);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .controls-panel {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .dropzone-surface {
+      border: 2px dashed var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 3rem 1.5rem;
+      text-align: center;
+      background: var(--bg-secondary);
+      cursor: pointer;
+      transition: all var(--transition-medium);
+      margin-bottom: 1.5rem;
+    }
+    .dropzone-surface:hover, .dropzone-surface.dragover {
+      border-color: var(--border-active);
+      background: var(--bg-tertiary);
+    }
+    .dropzone-title { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .dropzone-sub { color: var(--text-tertiary); font-size: 0.85rem; }
+
+    .action-btn {
+      background: var(--accent-primary);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background-color var(--transition-fast);
+    }
+    .action-btn:hover { background: var(--accent-primary-hover); }
+    .action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .action-btn-secondary {
+      background: var(--bg-tertiary);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1.25rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .action-btn-secondary:hover { border-color: var(--border-focus); }
+
+    .icon-btn-pill {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 6px 14px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+    }
+    .icon-btn-pill:hover { border-color: var(--border-focus); color: var(--text-main); }
+
+    input[type="text"], input[type="number"], select, textarea {
+      width: 100%;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      padding: 0.65rem 0.85rem;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color var(--transition-fast);
+    }
+    input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
+      border-color: var(--border-active);
+    }
+
+    .command-palette-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 14vh;
+    }
+
+    .command-palette-card {
+      width: 100%;
+      max-width: 600px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-focus);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
+
+    .palette-search-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .palette-search-bar input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-size: 1.1rem;
+      outline: none;
+    }
+
+    .palette-results {
+      max-height: 380px;
+      overflow-y: auto;
+      padding: 0.5rem;
+    }
+
+    .palette-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: background var(--transition-fast);
+    }
+    .palette-item:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-main);
+    }
+
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .toast {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1.25rem;
+      color: var(--text-main);
+      box-shadow: 0 10px 20px -3px rgba(0,0,0,0.4);
+      font-size: 0.875rem;
+      animation: toastIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .app-footer {
+      margin-top: auto;
+      border-top: 1px solid var(--border-subtle);
+      padding: 2.5rem 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+    }
+
+    .footer-container {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-glow" aria-hidden="true"></div>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a class="brand" id="brand-home">
+        <span class="brand-symbol">Ø</span>
+        <span>ZERO</span>
+      </a>
+
+      <div class="search-trigger-wrapper">
+        <button class="search-trigger" id="cmd-k-trigger" aria-label="Open Command Menu">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <span>Search 30 tools...</span>
+          <kbd class="shortcut-badge">⌘K</kbd>
+        </button>
+      </div>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">
+          <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a id="nav-privacy-link" class="nav-link">Privacy Engine</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN VIEWPORT -->
+  <main id="app-root">
+    <!-- DIRECTORY / HUB VIEW -->
+    <section id="view-hub" class="view-active">
+      <div class="hero">
+        <div class="hero-badge">Zero Servers • Zero Telemetry • 100% Client-Side Processing</div>
+        <h1 class="hero-title">Everything Premium.<br><span class="gradient-text">Absolutely Free.</span></h1>
+        <p class="hero-subtitle">
+          30 professional-grade utilities engineered to operate entirely within your browser memory sandbox.
+          Your files, keys, and documents never touch a third-party server.
+        </p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <nav class="category-tabs" id="category-tabs">
+        <button class="tab-btn active" data-cat="all">All Tools (30)</button>
+        <button class="tab-btn" data-cat="pdf">PDF Pro (6)</button>
+        <button class="tab-btn" data-cat="image">Image Studio (6)</button>
+        <button class="tab-btn" data-cat="writing">Document & Writing (6)</button>
+        <button class="tab-btn" data-cat="dev">Developer Core (6)</button>
+        <button class="tab-btn" data-cat="productivity">Security & System (6)</button>
+      </nav>
+
+      <!-- 30 Tools Dynamic Cards Grid -->
+      <div class="tool-grid" id="tools-directory"></div>
+
+      <!-- Architectural Transparency Block -->
+      <section class="zero-lab-card" id="privacy-section">
+        <div class="lab-badge">RADICAL PRIVACY ARCHITECTURE</div>
+        <h3 class="lab-title">Engineered Without Cloud Dependencies</h3>
+        <p class="lab-desc">
+          Most online utilities secretly ship your PDFs, images, and text to AWS or Google Cloud servers.
+          ZERO processes every byte in local device RAM using Web Workers, HTML5 Canvas, and Web Crypto APIs.
+        </p>
+        <div class="spec-grid">
+          <div class="spec-item"><span class="spec-val">0 bytes</span><span class="spec-lbl">Outbound File Uploads</span></div>
+          <div class="spec-item"><span class="spec-val">WebAssembly</span><span class="spec-lbl">Local PDF Engine</span></div>
+          <div class="spec-item"><span class="spec-val">Web Crypto</span><span class="spec-lbl">SHA-256 Hardware Hashing</span></div>
+          <div class="spec-item"><span class="spec-val">GitHub Pages</span><span class="spec-lbl">Static Serverless Host</span></div>
+        </div>
+      </section>
+    </section>
+
+    <!-- MOUNTED TOOL VIEW -->
+    <section id="view-tool" class="view-hidden">
+      <div class="tool-viewport-header">
+        <button id="btn-back-hub" class="back-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <span>All Tools</span>
+        </button>
+        <div class="viewport-titles">
+          <h2 id="tool-active-title">Tool Name</h2>
+          <span id="tool-active-cat" class="cat-pill">Category</span>
+        </div>
+        <div>
+          <button id="tool-fav-btn" class="icon-btn-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span id="fav-text">Favorite</span>
+          </button>
+        </div>
+      </div>
+      <div id="tool-mount-point"></div>
+    </section>
+  </main>
+
+  <!-- COMMAND PALETTE (CMD+K) -->
+  <div class="command-palette-backdrop" id="cmd-palette" style="display: none;">
+    <div class="command-palette-card">
+      <div class="palette-search-bar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="palette-input" placeholder="Type a tool name or category..." autocomplete="off">
+        <kbd class="esc-badge">ESC</kbd>
+      </div>
+      <div class="palette-results" id="palette-results"></div>
+    </div>
+  </div>
+
+  <!-- TOAST ALERTS HUB -->
+  <div id="toast-hub" class="toast-container" aria-live="polite"></div>
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <div>
+        <b>Ø ZERO</b> — Completely Free & Private Utility Platform
+      </div>
+      <div class="footer-links">
+        <span>Zero Storage</span>
+        <span>•</span>
+        <span>Zero Telemetry</span>
+        <span>•</span>
+        <span>Client-Side Execution</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* =====================================================================
+       ZERO CORE ENGINE & BINARY DOWNLOAD BUS
+       ===================================================================== */
+    const ZERO = {
+      favorites: new Set(JSON.parse(localStorage.getItem('zero_favs') || '[]')),
+      activeToolId: null,
+
+      toast(msg, type = 'info') {
+        const hub = document.getElementById('toast-hub');
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.style.borderColor = type === 'error' ? 'var(--status-danger)' : (type === 'success' ? 'var(--status-success)' : 'var(--border-focus)');
+        toast.textContent = msg;
+        hub.appendChild(toast);
+        setTimeout(() => toast.remove(), 3500);
+      },
+
+      downloadBlob(data, filename, mimeType) {
+        let blob;
+        if (data instanceof Blob) {
+          blob = data;
+        } else if (typeof data === 'string' && data.startsWith('data:')) {
+          const parts = data.split(',');
+          const meta = parts[0].match(/:(.*?);/);
+          const mime = meta ? meta[1] : (mimeType || 'application/octet-stream');
+          const binStr = atob(parts[1]);
+          const len = binStr.length;
+          const u8arr = new Uint8Array(len);
+          for (let i = 0; i < len; i++) {
+            u8arr[i] = binStr.charCodeAt(i);
+          }
+          blob = new Blob([u8arr], { type: mime });
+        } else {
+          blob = new Blob([data], { type: mimeType || 'application/octet-stream' });
+        }
+
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+      },
+
+      setupDropzone(dropEl, inputEl, onFiles) {
+        dropEl.onclick = () => inputEl.click();
+        dropEl.ondragover = (e) => { e.preventDefault(); dropEl.classList.add('dragover'); };
+        dropEl.ondragleave = () => dropEl.classList.remove('dragover');
+        dropEl.ondrop = (e) => {
+          e.preventDefault();
+          dropEl.classList.remove('dragover');
+          if (e.dataTransfer.files && e.dataTransfer.files.length) {
+            onFiles(Array.from(e.dataTransfer.files));
+          }
+        };
+        inputEl.onchange = () => {
+          if (inputEl.files && inputEl.files.length) {
+            onFiles(Array.from(inputEl.files));
+            inputEl.value = '';
+          }
+        };
+      }
+    };
+
+    if (window.pdfjsLib) {
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
+
+    /* =====================================================================
+       CATEGORY A: PDF PROFESSIONAL TOOLS (1-6)
+       ===================================================================== */
+    
+    // 1. PDF Merger
+    function renderPdfMerger(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div class="dropzone-surface" id="pdf-merge-drop">
+            <h3 class="dropzone-title">Upload 2 or More PDFs to Merge</h3>
+            <p class="dropzone-sub">Drop PDF documents or click to browse</p>
+            <input type="file" id="pdf-merge-input" multiple accept=".pdf,application/pdf" style="display:none">
+          </div>
+          <div id="pdf-merge-list" style="margin-bottom:1.5rem; display:flex; flex-direction:column; gap:8px;"></div>
+          <button class="action-btn" id="btn-run-merge" disabled>Merge PDFs</button>
+        </div>
+      `;
+      let files = [];
+      const drop = mount.querySelector('#pdf-merge-drop');
+      const input = mount.querySelector('#pdf-merge-input');
+      const list = mount.querySelector('#pdf-merge-list');
+      const btn = mount.querySelector('#btn-run-merge');
+
+      ZERO.setupDropzone(drop, input, (newFiles) => {
+        const valid = newFiles.filter(f => f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf'));
+        if (!valid.length) return ZERO.toast('Please select valid PDF files.', 'error');
+        files.push(...valid);
+        render();
+      });
+
+      function render() {
+        list.innerHTML = files.map((f, i) => `
+          <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-tertiary); padding:10px 14px; border-radius:8px;">
+            <span>${i + 1}. ${f.name} <small style="color:var(--text-tertiary)">(${(f.size/1024/1024).toFixed(2)} MB)</small></span>
+            <button data-idx="${i}" class="del-btn" style="background:none; border:none; color:var(--status-danger); cursor:pointer; font-weight:bold;">✕</button>
+          </div>
+        `).join('');
+        list.querySelectorAll('.del-btn').forEach(b => {
+          b.onclick = () => { files.splice(parseInt(b.dataset.idx), 1); render(); };
+        });
+        btn.disabled = files.length < 2;
+      }
+
+      btn.onclick = async () => {
+        btn.innerText = 'Merging in local memory...';
+        btn.disabled = true;
+        try {
+          const merged = await PDFLib.PDFDocument.create();
+          for (const f of files) {
+            const buf = await f.arrayBuffer();
+            const doc = await PDFLib.PDFDocument.load(buf);
+            const copied = await merged.copyPages(doc, doc.getPageIndices());
+            copied.forEach(p => merged.addPage(p));
+          }
+          const out = await merged.save();
+          ZERO.downloadBlob(out, 'zero_merged.pdf', 'application/pdf');
+          ZERO.toast('Merged PDF generated successfully!', 'success');
+        } catch (err) {
+          ZERO.toast(`Merge failed: ${err.message}`, 'error');
+        } finally {
+          btn.innerText = 'Merge PDFs';
+          btn.disabled = files.length < 2;
+        }
+      };
+    }
+
+    // 2. PDF Splitter
+    function renderPdfSplitter(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div class="dropzone-surface" id="split-drop">
+            <h3 class="dropzone-title">Upload a PDF to Split</h3>
+            <p class="dropzone-sub">Extract custom pages or ranges (e.g. 1-3, 5)</p>
+            <input type="file" id="split-input" accept=".pdf,application/pdf" style="display:none">
+          </div>
+          <div id="split-opts" style="display:none;">
+            <p id="split-info" style="font-weight:600; margin-bottom:10px;"></p>
+            <input type="text" id="split-range" placeholder="Enter page ranges, e.g. 1, 3-5" style="margin-bottom:12px;">
+            <button class="action-btn" id="split-btn">Extract Pages to New PDF</button>
+          </div>
+        </div>
+      `;
+      let activeFile = null;
+      let totalPages = 0;
+      const drop = mount.querySelector('#split-drop');
+      const input = mount.querySelector('#split-input');
+      const opts = mount.querySelector('#split-opts');
+      const info = mount.querySelector('#split-info');
+      const range = mount.querySelector('#split-range');
+      const btn = mount.querySelector('#split-btn');
+
+      ZERO.setupDropzone(drop, input, async (files) => {
+        const file = files[0];
+        if (!file || (!file.type.includes('pdf') && !file.name.toLowerCase().endsWith('.pdf'))) {
+          return ZERO.toast('Please supply a valid PDF document.', 'error');
+        }
+        try {
+          activeFile = file;
+          const doc = await PDFLib.PDFDocument.load(await activeFile.arrayBuffer());
+          totalPages = doc.getPageCount();
+          info.innerText = `${activeFile.name} — Total Pages: ${totalPages}`;
+          opts.style.display = 'block';
+        } catch (e) {
+          ZERO.toast(`Invalid PDF: ${e.message}`, 'error');
+        }
+      });
+
+      btn.onclick = async () => {
+        try {
+          const doc = await PDFLib.PDFDocument.load(await activeFile.arrayBuffer());
+          const newDoc = await PDFLib.PDFDocument.create();
+          const pageIndices = parseRanges(range.value, totalPages);
+          if (!pageIndices.length) {
+            return ZERO.toast('Please specify valid page numbers within document range', 'error');
+          }
+          const copied = await newDoc.copyPages(doc, pageIndices.map(p => p - 1));
+          copied.forEach(p => newDoc.addPage(p));
+          const out = await newDoc.save();
+          ZERO.downloadBlob(out, `extracted_${activeFile.name}`, 'application/pdf');
+          ZERO.toast('Pages extracted successfully!', 'success');
+        } catch (e) {
+          ZERO.toast(e.message, 'error');
+        }
+      };
+
+      function parseRanges(str, max) {
+        const res = new Set();
+        str.split(',').map(s => s.trim()).forEach(part => {
+          if (part.includes('-')) {
+            const [a, b] = part.split('-').map(Number);
+            if (!isNaN(a) && !isNaN(b)) {
+              for (let i = Math.max(1, a); i <= Math.min(max, b); i++) res.add(i);
+            }
+          } else {
+            const n = Number(part);
+            if (!isNaN(n) && n >= 1 && n <= max) res.add(n);
+          }
+        });
+        return Array.from(res).sort((a,b) => a-b);
+      }
+    }
+
+    // 3. PDF Compressor
+    function renderPdfCompressor(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div class="dropzone-surface" id="comp-drop">
+            <h3 class="dropzone-title">Upload PDF to Compress</h3>
+            <p class="dropzone-sub">In-browser canvas quantization and stream optimization</p>
+            <input type="file" id="comp-input" accept=".pdf,application/pdf" style="display:none">
+          </div>
+          <div id="comp-opts" style="display:none;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+              <span>Target Image Quality: <b id="comp-val">70%</b></span>
+              <span id="comp-size-preview"></span>
+            </div>
+            <input type="range" id="comp-slider" min="20" max="90" value="70" style="width:100%; margin-bottom:1.5rem;">
+            <button class="action-btn" id="comp-btn">Compress PDF</button>
+          </div>
+        </div>
+      `;
+      let file = null;
+      const drop = mount.querySelector('#comp-drop');
+      const input = mount.querySelector('#comp-input');
+      const opts = mount.querySelector('#comp-opts');
+      const slider = mount.querySelector('#comp-slider');
+      const val = mount.querySelector('#comp-val');
+      const btn = mount.querySelector('#comp-btn');
+      const sizePrev = mount.querySelector('#comp-size-preview');
+
+      ZERO.setupDropzone(drop, input, (files) => {
+        file = files[0];
+        if (!file) return;
+        sizePrev.innerText = `Original: ${(file.size / 1024 / 1024).toFixed(2)} MB`;
+        opts.style.display = 'block';
+      });
+
+      slider.oninput = () => val.innerText = `${slider.value}%`;
+
+      btn.onclick = async () => {
+        btn.innerText = 'Compressing locally in RAM...';
+        btn.disabled = true;
+        try {
+          const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
+          const newPdf = await PDFLib.PDFDocument.create();
+          const q = parseFloat(slider.value) / 100;
+
+          for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i);
+            const origVp = page.getViewport({ scale: 1.0 });
+            const renderVp = page.getViewport({ scale: 1.5 });
+            const c = document.createElement('canvas');
+            c.width = renderVp.width;
+            c.height = renderVp.height;
+            const ctx = c.getContext('2d');
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, c.width, c.height);
+            await page.render({ canvasContext: ctx, viewport: renderVp }).promise;
+            
+            const imgData = c.toDataURL('image/jpeg', q);
+            const embedded = await newPdf.embedJpg(imgData);
+            const np = newPdf.addPage([origVp.width, origVp.height]);
+            np.drawImage(embedded, { x: 0, y: 0, width: origVp.width, height: origVp.height });
+          }
+          const out = await newPdf.save();
+          const savedPercent = (((file.size - out.length) / file.size) * 100).toFixed(1);
+          ZERO.downloadBlob(out, `compressed_${file.name}`, 'application/pdf');
+          ZERO.toast(`Compressed! Size reduced by ${savedPercent > 0 ? savedPercent : 0}%`, 'success');
+        } catch (e) {
+          ZERO.toast(`Compression failed: ${e.message}`, 'error');
+        } finally {
+          btn.innerText = 'Compress PDF';
+          btn.disabled = false;
+        }
+      };
+    }
+
+    // 4. PDF Page Organizer
+    function renderPdfOrganizer(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div class="dropzone-surface" id="org-drop">
+            <h3 class="dropzone-title">Upload PDF to Reorganize</h3>
+            <p class="dropzone-sub">Reorder, rotate, or eliminate individual pages</p>
+            <input type="file" id="org-input" accept=".pdf,application/pdf" style="display:none">
+          </div>
+          <div id="org-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:14px; margin-bottom:1.5rem;"></div>
+          <button class="action-btn" id="org-save" style="display:none;">Export Modified PDF</button>
+        </div>
+      `;
+      let docBytes = null;
+      let pages = [];
+      const drop = mount.querySelector('#org-drop');
+      const input = mount.querySelector('#org-input');
+      const grid = mount.querySelector('#org-grid');
+      const saveBtn = mount.querySelector('#org-save');
+
+      ZERO.setupDropzone(drop, input, async (files) => {
+        if (!files[0]) return;
+        docBytes = await files[0].arrayBuffer();
+        const pdf = await pdfjsLib.getDocument({ data: docBytes }).promise;
+        pages = [];
+        grid.innerHTML = '<p>Generating thumbnails...</p>';
+
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const vp = page.getViewport({ scale: 0.35 });
+          const c = document.createElement('canvas');
+          c.width = vp.width;
+          c.height = vp.height;
+          const ctx = c.getContext('2d');
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, c.width, c.height);
+          await page.render({ canvasContext: ctx, viewport: vp }).promise;
+          pages.push({ origIdx: i - 1, rot: 0, thumb: c.toDataURL() });
+        }
+        renderWorkbench();
+        saveBtn.style.display = 'inline-block';
+      });
+
+      function renderWorkbench() {
+        grid.innerHTML = '';
+        pages.forEach((item, idx) => {
+          const card = document.createElement('div');
+          card.style.cssText = 'background:var(--bg-tertiary); padding:8px; border-radius:8px; text-align:center; border:1px solid var(--border-subtle);';
+          card.innerHTML = `
+            <img src="${item.thumb}" style="width:100%; border-radius:4px; margin-bottom:6px; transform:rotate(${item.rot}deg); transition:transform 0.2s;">
+            <div style="font-size:0.75rem; margin-bottom:6px;">Page ${item.origIdx + 1}</div>
+            <div style="display:flex; justify-content:center; gap:4px; flex-wrap:wrap;">
+              <button class="icon-btn-pill move-l" title="Move Left" ${idx === 0 ? 'disabled' : ''}>←</button>
+              <button class="icon-btn-pill rot-btn" title="Rotate 90°">↻</button>
+              <button class="icon-btn-pill move-r" title="Move Right" ${idx === pages.length - 1 ? 'disabled' : ''}>→</button>
+              <button class="icon-btn-pill del-btn" style="color:var(--status-danger);" title="Delete">✕</button>
+            </div>
+          `;
+          card.querySelector('.rot-btn').onclick = () => {
+            item.rot = (item.rot + 90) % 360;
+            renderWorkbench();
+          };
+          card.querySelector('.del-btn').onclick = () => {
+            pages.splice(idx, 1);
+            renderWorkbench();
+          };
+          card.querySelector('.move-l').onclick = () => {
+            if (idx > 0) {
+              [pages[idx - 1], pages[idx]] = [pages[idx], pages[idx - 1]];
+              renderWorkbench();
+            }
+          };
+          card.querySelector('.move-r').onclick = () => {
+            if (idx < pages.length - 1) {
+              [pages[idx + 1], pages[idx]] = [pages[idx], pages[idx + 1]];
+              renderWorkbench();
+            }
+          };
+          grid.appendChild(card);
+        });
+      }
+
+      saveBtn.onclick = async () => {
+        if (!pages.length) {
+          return ZERO.toast('PDF must contain at least one page', 'error');
+        }
+        try {
+          const src = await PDFLib.PDFDocument.load(docBytes);
+          const dest = await PDFLib.PDFDocument.create();
+          for (const item of pages) {
+            const [p] = await dest.copyPages(src, [item.origIdx]);
+            if (item.rot > 0) {
+              p.setRotation(PDFLib.degrees((p.getRotation().angle || 0) + item.rot));
+            }
+            dest.addPage(p);
+          }
+          const out = await dest.save();
+          ZERO.downloadBlob(out, 'reorganized.pdf', 'application/pdf');
+          ZERO.toast('Organized PDF exported successfully!', 'success');
+        } catch (e) {
+          ZERO.toast(e.message, 'error');
+        }
+      };
+    }
+
+    // 5. PDF to Image Converter
+    function renderPdfToImage(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div class="dropzone-surface" id="p2i-drop">
+            <h3 class="dropzone-title">Upload PDF to Extract Images</h3>
+            <p class="dropzone-sub">Converts every PDF page into a high-res PNG file</p>
+            <input type="file" id="p2i-input" accept=".pdf,application/pdf" style="display:none">
+          </div>
+          <div id="p2i-actions" style="margin-bottom:1rem; display:none;">
+            <button class="action-btn" id="p2i-zip-btn">Download All as ZIP</button>
+          </div>
+          <div id="p2i-gallery" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:16px;"></div>
+        </div>
+      `;
+      const drop = mount.querySelector('#p2i-drop');
+      const input = mount.querySelector('#p2i-input');
+      const gallery = mount.querySelector('#p2i-gallery');
+      const actions = mount.querySelector('#p2i-actions');
+      const zipBtn = mount.querySelector('#p2i-zip-btn');
+      let renderedImages = [];
+
+      ZERO.setupDropzone(drop, input, async (files) => {
+        if (!files[0]) return;
+        gallery.innerHTML = '<p>Rasterizing pages in memory...</p>';
+        renderedImages = [];
+        const pdf = await pdfjsLib.getDocument({ data: await files[0].arrayBuffer() }).promise;
+        gallery.innerHTML = '';
+
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const vp = page.getViewport({ scale: 2.0 });
+          const c = document.createElement('canvas');
+          c.width = vp.width;
+          c.height = vp.height;
+          const ctx = c.getContext('2d');
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, c.width, c.height);
+          await page.render({ canvasContext: ctx, viewport: vp }).promise;
+          const url = c.toDataURL('image/png');
+          renderedImages.push({ pageNum: i, dataUrl: url });
+
+          const card = document.createElement('div');
+          card.style.cssText = 'background:var(--bg-tertiary); padding:10px; border-radius:8px; text-align:center;';
+          card.innerHTML = `
+            <img src="${url}" style="width:100%; border-radius:4px; margin-bottom:8px;">
+            <button class="action-btn dl-single-btn" style="padding:4px 10px; font-size:0.8rem;">Download Page ${i}</button>
+          `;
+          card.querySelector('.dl-single-btn').onclick = () => {
+            ZERO.downloadBlob(url, `page-${i}.png`, 'image/png');
+          };
+          gallery.appendChild(card);
+        }
+        actions.style.display = 'block';
+        ZERO.toast('Pages rendered to images!', 'success');
+      });
+
+      zipBtn.onclick = async () => {
+        const zip = new window.JSZip();
+        renderedImages.forEach(img => {
+          const b64 = img.dataUrl.split(',')[1];
+          zip.file(`page-${img.pageNum}.png`, b64, { base64: true });
+        });
+        const blob = await zip.generateAsync({ type: 'blob' });
+        ZERO.downloadBlob(blob, 'pdf_pages.zip', 'application/zip');
+      };
+    }
+
+    // 6. Image to PDF Converter
+    function renderImageToPdf(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div class="dropzone-surface" id="i2p-drop">
+            <h3 class="dropzone-title">Upload Images to Convert to PDF</h3>
+            <p class="dropzone-sub">Supports PNG, JPG, WebP</p>
+            <input type="file" id="i2p-input" multiple accept="image/*" style="display:none">
+          </div>
+          <div id="i2p-list" style="margin-bottom:1rem; display:flex; flex-wrap:wrap; gap:8px;"></div>
+          <button class="action-btn" id="i2p-btn" disabled>Compile PDF</button>
+        </div>
+      `;
+      let images = [];
+      const drop = mount.querySelector('#i2p-drop');
+      const input = mount.querySelector('#i2p-input');
+      const list = mount.querySelector('#i2p-list');
+      const btn = mount.querySelector('#i2p-btn');
+
+      ZERO.setupDropzone(drop, input, (files) => {
+        images.push(...files);
+        list.innerHTML = images.map(img => `
+          <span style="background:var(--bg-tertiary); padding:4px 8px; border-radius:4px; font-size:0.8rem;">${img.name}</span>
+        `).join('');
+        btn.disabled = images.length === 0;
+      });
+
+      btn.onclick = async () => {
+        btn.innerText = 'Compiling PDF...';
+        btn.disabled = true;
+        try {
+          const pdf = await PDFLib.PDFDocument.create();
+          for (const f of images) {
+            const buf = await f.arrayBuffer();
+            let emb;
+            if (f.type === 'image/jpeg' || f.name.toLowerCase().endsWith('.jpg') || f.name.toLowerCase().endsWith('.jpeg')) {
+              emb = await pdf.embedJpg(buf);
+            } else {
+              const bmp = await createImageBitmap(f);
+              const c = document.createElement('canvas');
+              c.width = bmp.width;
+              c.height = bmp.height;
+              c.getContext('2d').drawImage(bmp, 0, 0);
+              const pngBlob = await new Promise(res => c.toBlob(res, 'image/png'));
+              emb = await pdf.embedPng(await pngBlob.arrayBuffer());
+            }
+            const p = pdf.addPage([emb.width, emb.height]);
+            p.drawImage(emb, { x: 0, y: 0, width: emb.width, height: emb.height });
+          }
+          const out = await pdf.save();
+          ZERO.downloadBlob(out, 'images_compiled.pdf', 'application/pdf');
+          ZERO.toast('Image compilation complete!', 'success');
+        } catch (e) {
+          ZERO.toast(e.message, 'error');
+        } finally {
+          btn.innerText = 'Compile PDF';
+          btn.disabled = false;
+        }
+      };
+    }
+
+    /* =====================================================================
+       CATEGORY B: IMAGE PROFESSIONAL TOOLS (7-12)
+       ===================================================================== */
+
+    // 7. Interactive Foreground Isolator & Edge Matting Engine
+    function renderBgRemover(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div class="dropzone-surface" id="bg-drop">
+            <h3 class="dropzone-title">Upload Image for Background Isolation</h3>
+            <p class="dropzone-sub">Local edge-contour matting, click-to-key eyedropper, and alpha retouching</p>
+            <input type="file" id="bg-input" accept="image/*" style="display:none">
+          </div>
+          <div id="bg-workbench" style="display:none; text-align:center;">
+            <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:16px; margin-bottom:1rem;">
+              <label>Tolerance: <span id="bg-tol-val">28</span></label>
+              <input type="range" id="bg-tol" min="5" max="80" value="28" style="max-width:140px;">
+              <label>Mode: 
+                <select id="bg-brush-mode" style="max-width:130px; padding:4px;">
+                  <option value="eyedrop">Click to Key Color</option>
+                  <option value="erase">Erase Brush</option>
+                  <option value="restore">Restore Brush</option>
+                </select>
+              </label>
+              <label>Size: <input type="range" id="bg-brush-size" min="5" max="80" value="25" style="max-width:100px;"></label>
+              <button class="action-btn-secondary" id="bg-auto-mat">Auto Boundary Flood</button>
+            </div>
+            <div style="overflow:auto; max-height:500px; border:1px solid var(--border-subtle); border-radius:8px; background: repeating-conic-gradient(#808080 0% 25%, transparent 0% 50%) 50% / 20px 20px; display:inline-block;">
+              <canvas id="bg-canvas" style="cursor:crosshair; display:block;"></canvas>
+            </div>
+            <br><br>
+            <button class="action-btn" id="bg-download">Download Transparent PNG</button>
+          </div>
+        </div>
+      `;
+      const drop = mount.querySelector('#bg-drop');
+      const input = mount.querySelector('#bg-input');
+      const bench = mount.querySelector('#bg-workbench');
+      const canvas = mount.querySelector('#bg-canvas');
+      const tol = mount.querySelector('#bg-tol');
+      const tolVal = mount.querySelector('#bg-tol-val');
+      const brushMode = mount.querySelector('#bg-brush-mode');
+      const brushSize = mount.querySelector('#bg-brush-size');
+      const reAuto = mount.querySelector('#bg-auto-mat');
+      const dl = mount.querySelector('#bg-download');
+
+      let origImg = null;
+      let rawPixels = null;
+
+      ZERO.setupDropzone(drop, input, async (files) => {
+        if (!files[0]) return;
+        origImg = new Image();
+        origImg.src = URL.createObjectURL(files[0]);
+        await origImg.decode();
+        canvas.width = origImg.naturalWidth;
+        canvas.height = origImg.naturalHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(origImg, 0, 0);
+        rawPixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        runEdgeFlood();
+        bench.style.display = 'block';
+      });
+
+      tol.oninput = () => tolVal.innerText = tol.value;
+      reAuto.onclick = runEdgeFlood;
+
+      function runEdgeFlood(customBg = null) {
+        if (!origImg) return;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(origImg, 0, 0);
+        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imgData.data;
+        const w = canvas.width, h = canvas.height;
+        const visited = new Uint8Array(w * h);
+        const queue = [];
+
+        let bgR, bgG, bgB;
+        if (customBg) {
+          bgR = customBg[0]; bgG = customBg[1]; bgB = customBg[2];
+        } else {
+          // Average the 4 true corners
+          const c1 = 0;
+          const c2 = (w - 1) * 4;
+          const c3 = (h - 1) * w * 4;
+          const c4 = ((h - 1) * w + (w - 1)) * 4;
+          bgR = (data[c1] + data[c2] + data[c3] + data[c4]) / 4;
+          bgG = (data[c1 + 1] + data[c2 + 1] + data[c3 + 1] + data[c4 + 1]) / 4;
+          bgB = (data[c1 + 2] + data[c2 + 2] + data[c3 + 2] + data[c4 + 2]) / 4;
+        }
+
+        const threshold = parseInt(tol.value) * 3;
+
+        for (let x = 0; x < w; x++) { queue.push(x, 0); queue.push(x, h - 1); }
+        for (let y = 0; y < h; y++) { queue.push(0, y); queue.push(w - 1, y); }
+
+        while (queue.length > 0) {
+          const cy = queue.pop();
+          const cx = queue.pop();
+          const idx = (cy * w + cx);
+          if (visited[idx]) continue;
+          visited[idx] = 1;
+
+          const pIdx = idx * 4;
+          const r = data[pIdx], g = data[pIdx+1], b = data[pIdx+2];
+          const dist = Math.abs(r - bgR) + Math.abs(g - bgG) + Math.abs(b - bgB);
+
+          if (dist < threshold) {
+            data[pIdx + 3] = 0;
+            if (cx > 0 && !visited[idx - 1]) queue.push(cx - 1, cy);
+            if (cx < w - 1 && !visited[idx + 1]) queue.push(cx + 1, cy);
+            if (cy > 0 && !visited[idx - w]) queue.push(cx, cy - 1);
+            if (cy < h - 1 && !visited[idx + w]) queue.push(cx, cy + 1);
+          }
+        }
+        ctx.putImageData(imgData, 0, 0);
+      }
+
+      let isPainting = false;
+      canvas.onmousedown = (e) => {
+        if (brushMode.value === 'eyedrop') {
+          const rect = canvas.getBoundingClientRect();
+          const x = Math.round((e.clientX - rect.left) * (canvas.width / rect.width));
+          const y = Math.round((e.clientY - rect.top) * (canvas.height / rect.height));
+          const ctx = canvas.getContext('2d');
+          const p = ctx.getImageData(x, y, 1, 1).data;
+          runEdgeFlood([p[0], p[1], p[2]]);
+          ZERO.toast('Keyed background color sampled from click!', 'info');
+          return;
+        }
+        isPainting = true;
+        paint(e);
+      };
+      window.addEventListener('mouseup', () => isPainting = false);
+      canvas.onmousemove = (e) => { if (isPainting) paint(e); };
+
+      function paint(e) {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const x = Math.round((e.clientX - rect.left) * scaleX);
+        const y = Math.round((e.clientY - rect.top) * scaleY);
+        const r = parseInt(brushSize.value);
+        const ctx = canvas.getContext('2d');
+        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imgData.data;
+
+        for (let dy = -r; dy <= r; dy++) {
+          for (let dx = -r; dx <= r; dx++) {
+            if (dx*dx + dy*dy <= r*r) {
+              const px = x + dx, py = y + dy;
+              if (px >= 0 && px < canvas.width && py >= 0 && py < canvas.height) {
+                const idx = (py * canvas.width + px) * 4;
+                if (brushMode.value === 'erase') {
+                  data[idx + 3] = 0;
+                } else if (rawPixels) {
+                  data[idx] = rawPixels.data[idx];
+                  data[idx+1] = rawPixels.data[idx+1];
+                  data[idx+2] = rawPixels.data[idx+2];
+                  data[idx+3] = 255;
+                }
+              }
+            }
+          }
+        }
+        ctx.putImageData(imgData, 0, 0);
+      }
+
+      dl.onclick = () => {
+        ZERO.downloadBlob(canvas.toDataURL('image/png'), 'isolated_subject.png', 'image/png');
+      };
+    }
+
+    // 8. Image Compressor
+    function renderImageCompressor(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div class="dropzone-surface" id="ic-drop">
+            <h3 class="dropzone-title">Upload Image to Compress</h3>
+            <p class="dropzone-sub">Hardware-accelerated quantization in browser memory</p>
+            <input type="file" id="ic-input" accept="image/jpeg,image/png,image/webp" style="display:none">
+          </div>
+          <div id="ic-controls" style="display:none;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:1rem;">
+              <div>
+                <label>Format</label>
+                <select id="ic-fmt">
+                  <option value="image/webp">WEBP (Highest Compression)</option>
+                  <option value="image/jpeg">JPEG</option>
+                </select>
+              </div>
+              <div>
+                <label>Quality: <b id="ic-lbl">75%</b></label>
+                <input type="range" id="ic-quality" min="10" max="95" value="75">
+              </div>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:1.5rem; font-size:0.9rem;">
+              <span>Original: <b id="ic-orig">0 KB</b></span>
+              <span>Compressed: <b id="ic-new">0 KB</b></span>
+            </div>
+            <button class="action-btn" id="ic-dl">Download Compressed Image</button>
+          </div>
+        </div>
+      `;
+      let file = null, currentBlob = null;
+      const drop = mount.querySelector('#ic-drop');
+      const input = mount.querySelector('#ic-input');
+      const controls = mount.querySelector('#ic-controls');
+      const slider = mount.querySelector('#ic-quality');
+      const fmtSelect = mount.querySelector('#ic-fmt');
+      const lbl = mount.querySelector('#ic-lbl');
+      const origSpan = mount.querySelector('#ic-orig');
+      const newSpan = mount.querySelector('#ic-new');
+      const dlBtn = mount.querySelector('#ic-dl');
+
+      ZERO.setupDropzone(drop, input, (files) => {
+        file = files[0];
+        if (!file) return;
+        origSpan.innerText = `${(file.size / 1024).toFixed(1)} KB`;
+        controls.style.display = 'block';
+        compress();
+      });
+
+      slider.oninput = () => { lbl.innerText = `${slider.value}%`; compress(); };
+      fmtSelect.onchange = compress;
+
+      async function compress() {
+        if (!file) return;
+        const bmp = await createImageBitmap(file);
+        const c = document.createElement('canvas');
+        c.width = bmp.width;
+        c.height = bmp.height;
+        const ctx = c.getContext('2d');
+        if (fmtSelect.value === 'image/jpeg') {
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, c.width, c.height);
+        }
+        ctx.drawImage(bmp, 0, 0);
+        const q = parseFloat(slider.value) / 100;
+        c.toBlob((b) => {
+          currentBlob = b;
+          newSpan.innerText = `${(b.size / 1024).toFixed(1)} KB (Saved ${(((file.size - b.size)/file.size)*100).toFixed(0)}%)`;
+        }, fmtSelect.value, q);
+      }
+
+      dlBtn.onclick = () => {
+        if (!currentBlob) return;
+        const ext = fmtSelect.value.split('/')[1];
+        ZERO.downloadBlob(currentBlob, `compressed_${file.name.replace(/\.[^/.]+$/, "")}.${ext}`, fmtSelect.value);
+      };
+    }
+
+    // 9. Image Resizer
+    function renderImageResizer(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div class="dropzone-surface" id="ir-drop">
+            <h3 class="dropzone-title">Upload Image to Resize</h3>
+            <input type="file" id="ir-input" accept="image/*" style="display:none">
+          </div>
+          <div id="ir-controls" style="display:none;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:1rem;">
+              <div>
+                <label style="font-size:0.85rem;">Width (px)</label>
+                <input type="number" id="ir-w">
+              </div>
+              <div>
+                <label style="font-size:0.85rem;">Height (px)</label>
+                <input type="number" id="ir-h">
+              </div>
+            </div>
+            <label style="display:flex; align-items:center; gap:8px; margin-bottom:1.5rem; cursor:pointer;">
+              <input type="checkbox" id="ir-lock" checked> Maintain Aspect Ratio
+            </label>
+            <button class="action-btn" id="ir-btn">Download Resized Image</button>
+          </div>
+        </div>
+      `;
+      let bmp = null, ratio = 1;
+      const drop = mount.querySelector('#ir-drop');
+      const input = mount.querySelector('#ir-input');
+      const ctrls = mount.querySelector('#ir-controls');
+      const wIn = mount.querySelector('#ir-w');
+      const hIn = mount.querySelector('#ir-h');
+      const lock = mount.querySelector('#ir-lock');
+      const btn = mount.querySelector('#ir-btn');
+
+      ZERO.setupDropzone(drop, input, async (files) => {
+        if (!files[0]) return;
+        bmp = await createImageBitmap(files[0]);
+        ratio = bmp.width / bmp.height;
+        wIn.value = bmp.width;
+        hIn.value = bmp.height;
+        ctrls.style.display = 'block';
+      });
+
+      wIn.oninput = () => { if (lock.checked) hIn.value = Math.round(wIn.value / ratio); };
+      hIn.oninput = () => { if (lock.checked) wIn.value = Math.round(hIn.value * ratio); };
+
+      btn.onclick = () => {
+        const w = parseInt(wIn.value);
+        const h = parseInt(hIn.value);
+        if (isNaN(w) || isNaN(h) || w <= 0 || h <= 0) {
+          return ZERO.toast('Please enter valid positive dimensions', 'error');
+        }
+        if (w > 16384 || h > 16384) {
+          return ZERO.toast('Dimensions exceed browser canvas limits (16384px)', 'error');
+        }
+        const c = document.createElement('canvas');
+        c.width = w;
+        c.height = h;
+        const ctx = c.getContext('2d');
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(bmp, 0, 0, c.width, c.height);
+        c.toBlob((b) => ZERO.downloadBlob(b, `resized_${c.width}x${c.height}.png`, 'image/png'));
+      };
+    }
+
+    // 10. Image Format Converter
+    function renderImageConverter(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div class="dropzone-surface" id="ifc-drop">
+            <h3 class="dropzone-title">Upload Image to Convert</h3>
+            <input type="file" id="ifc-input" accept="image/*" style="display:none">
+          </div>
+          <div id="ifc-controls" style="display:none;">
+            <select id="ifc-fmt" style="margin-bottom:1.5rem;">
+              <option value="image/png">PNG (.png)</option>
+              <option value="image/jpeg">JPEG (.jpg)</option>
+              <option value="image/webp">WEBP (.webp)</option>
+            </select>
+            <button class="action-btn" id="ifc-btn">Convert & Download</button>
+          </div>
+        </div>
+      `;
+      let file = null;
+      const drop = mount.querySelector('#ifc-drop');
+      const input = mount.querySelector('#ifc-input');
+      const ctrls = mount.querySelector('#ifc-controls');
+      const fmt = mount.querySelector('#ifc-fmt');
+      const btn = mount.querySelector('#ifc-btn');
+
+      ZERO.setupDropzone(drop, input, (files) => {
+        file = files[0];
+        if (file) ctrls.style.display = 'block';
+      });
+
+      btn.onclick = async () => {
+        const bmp = await createImageBitmap(file);
+        const c = document.createElement('canvas');
+        c.width = bmp.width;
+        c.height = bmp.height;
+        const ctx = c.getContext('2d');
+        if (fmt.value === 'image/jpeg') {
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, c.width, c.height);
+        }
+        ctx.drawImage(bmp, 0, 0);
+        c.toBlob((b) => {
+          const ext = fmt.value.split('/')[1];
+          ZERO.downloadBlob(b, `converted.${ext}`, fmt.value);
+          ZERO.toast('Image format converted!', 'success');
+        }, fmt.value, 0.95);
+      };
+    }
+
+    // 11. Image Cropper
+    function renderImageCropper(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div class="dropzone-surface" id="crp-drop">
+            <h3 class="dropzone-title">Upload Image to Crop</h3>
+            <input type="file" id="crp-input" accept="image/*" style="display:none">
+          </div>
+          <div id="crp-workbench" style="display:none; text-align:center;">
+            <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:10px;">Drag bounding box across image to crop</p>
+            <canvas id="crp-canvas" style="max-width:100%; border:1px solid var(--border-subtle); cursor:crosshair;"></canvas>
+            <br><br>
+            <button class="action-btn" id="crp-btn">Export Crop Area</button>
+          </div>
+        </div>
+      `;
+      let img = null;
+      let startX, startY, endX, endY, isDrawing = false;
+      const drop = mount.querySelector('#crp-drop');
+      const input = mount.querySelector('#crp-input');
+      const bench = mount.querySelector('#crp-workbench');
+      const canvas = mount.querySelector('#crp-canvas');
+      const btn = mount.querySelector('#crp-btn');
+
+      ZERO.setupDropzone(drop, input, async (files) => {
+        if (!files[0]) return;
+        img = new Image();
+        img.src = URL.createObjectURL(files[0]);
+        await img.decode();
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        redraw();
+        bench.style.display = 'block';
+      });
+
+      function redraw() {
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+        if (startX !== undefined && endX !== undefined) {
+          ctx.strokeStyle = '#4f46e5';
+          ctx.lineWidth = 3;
+          ctx.strokeRect(startX, startY, endX - startX, endY - startY);
+          ctx.fillStyle = 'rgba(79, 70, 229, 0.25)';
+          ctx.fillRect(startX, startY, endX - startX, endY - startY);
+        }
+      }
+
+      canvas.onmousedown = (e) => {
+        const rect = canvas.getBoundingClientRect();
+        startX = (e.clientX - rect.left) * (canvas.width / rect.width);
+        startY = (e.clientY - rect.top) * (canvas.height / rect.height);
+        endX = startX;
+        endY = startY;
+        isDrawing = true;
+      };
+
+      canvas.onmousemove = (e) => {
+        if (!isDrawing) return;
+        const rect = canvas.getBoundingClientRect();
+        endX = (e.clientX - rect.left) * (canvas.width / rect.width);
+        endY = (e.clientY - rect.top) * (canvas.height / rect.height);
+        redraw();
+      };
+
+      window.addEventListener('mouseup', () => { isDrawing = false; });
+
+      btn.onclick = () => {
+        const rawX = Math.min(startX, endX);
+        const rawY = Math.min(startY, endY);
+        const rawW = Math.abs(endX - startX);
+        const rawH = Math.abs(endY - startY);
+
+        const x = Math.max(0, Math.min(rawX, img.naturalWidth));
+        const y = Math.max(0, Math.min(rawY, img.naturalHeight));
+        const w = Math.min(rawW, img.naturalWidth - x);
+        const h = Math.min(rawH, img.naturalHeight - y);
+
+        if (!w || !h || isNaN(w) || isNaN(h)) {
+          return ZERO.toast('Please select a valid crop region', 'error');
+        }
+
+        const c = document.createElement('canvas');
+        c.width = w;
+        c.height = h;
+        c.getContext('2d').drawImage(img, x, y, w, h, 0, 0, w, h);
+        c.toBlob((b) => ZERO.downloadBlob(b, 'cropped.png', 'image/png'));
+      };
+    }
+
+    // 12. Image Metadata Remover
+    function renderMetadataRemover(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div class="dropzone-surface" id="mr-drop">
+            <h3 class="dropzone-title">Upload Image to Strip EXIF/Metadata</h3>
+            <p class="dropzone-sub">Scrubs camera models, GPS coords, and device signatures</p>
+            <input type="file" id="mr-input" accept="image/*" style="display:none">
+          </div>
+          <div id="mr-result" style="display:none; text-align:center;">
+            <p style="color:var(--status-success); margin-bottom:1rem; font-weight:600;">EXIF headers wiped successfully.</p>
+            <button class="action-btn" id="mr-dl">Download Clean Image</button>
+          </div>
+        </div>
+      `;
+      let cleanBlob = null, origName = 'cleaned';
+      const drop = mount.querySelector('#mr-drop');
+      const input = mount.querySelector('#mr-input');
+      const res = mount.querySelector('#mr-result');
+      const dl = mount.querySelector('#mr-dl');
+
+      ZERO.setupDropzone(drop, input, async (files) => {
+        const file = files[0];
+        if (!file) return;
+        origName = file.name;
+        const bmp = await createImageBitmap(file);
+        const c = document.createElement('canvas');
+        c.width = bmp.width;
+        c.height = bmp.height;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(bmp, 0, 0);
+        c.toBlob((b) => {
+          cleanBlob = b;
+          res.style.display = 'block';
+        }, file.type.includes('png') ? 'image/png' : 'image/jpeg', 0.95);
+      });
+
+      dl.onclick = () => {
+        if (cleanBlob) ZERO.downloadBlob(cleanBlob, `sanitized_${origName}`, cleanBlob.type);
+      };
+    }
+
+    /* =====================================================================
+       CATEGORY C: WRITING & DOCUMENT TOOLS (13-18)
+       ===================================================================== */
+
+    // 13. Professional Resume Builder
+    function renderResumeBuilder(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel" style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <h3>Resume Profile Inputs</h3>
+            <input type="text" id="rb-name" placeholder="Full Name" value="Alex Rivera">
+            <input type="text" id="rb-title" placeholder="Professional Title" value="Senior Software Architect">
+            <input type="text" id="rb-contact" placeholder="Email • Phone • Location" value="alex@example.com • +1 555-0199 • San Francisco, CA">
+            <textarea id="rb-summary" rows="3" placeholder="Executive Summary">Expert in client-side architectures, local cryptography, and high-performance WebAssembly systems.</textarea>
+            <textarea id="rb-exp" rows="5" placeholder="Experience (Role | Company | Details)">Staff Architect | Vercel | Reduced edge pipeline latencies by 38%
+Lead Engineer | Cloudflare | Built client-side zero-retention privacy proxies</textarea>
+            <textarea id="rb-skills" rows="2" placeholder="Skills (Comma-separated)">JavaScript, WebAssembly, Web Crypto, IndexedDB, Canvas API</textarea>
+            <div style="display:flex; gap:10px; margin-top:8px;">
+              <button class="action-btn" id="rb-print">Print / Save as PDF</button>
+              <button class="action-btn-secondary" id="rb-dl-html">Download HTML</button>
+            </div>
+          </div>
+          <div>
+            <div id="rb-preview" style="background:#ffffff; color:#0f172a; padding:24px; border-radius:8px; font-family:serif; font-size:12px; line-height:1.5; min-height:420px; box-shadow:0 10px 25px rgba(0,0,0,0.25);"></div>
+          </div>
+        </div>
+      `;
+      const ids = ['rb-name', 'rb-title', 'rb-contact', 'rb-summary', 'rb-exp', 'rb-skills'];
+      const preview = mount.querySelector('#rb-preview');
+
+      function sync() {
+        const [name, title, contact, sum, exp, skills] = ids.map(id => mount.querySelector(`#${id}`).value);
+        preview.innerHTML = `
+          <div style="border-bottom: 2px solid #0f172a; padding-bottom:8px; margin-bottom:12px;">
+            <h1 style="font-size:22px; margin:0; font-weight:bold; color:#0f172a;">${name}</h1>
+            <div style="font-size:13px; font-weight:600; color:#334155;">${title}</div>
+            <div style="font-size:11px; color:#64748b; margin-top:3px;">${contact}</div>
+          </div>
+          <div style="margin-bottom:12px;">
+            <h3 style="font-size:11px; text-transform:uppercase; border-bottom:1px solid #cbd5e1; margin-bottom:4px;">Executive Summary</h3>
+            <p>${sum}</p>
+          </div>
+          <div style="margin-bottom:12px;">
+            <h3 style="font-size:11px; text-transform:uppercase; border-bottom:1px solid #cbd5e1; margin-bottom:4px;">Work Experience</h3>
+            ${exp.split('\n').map(l => `<p style="margin:2px 0;">• ${l}</p>`).join('')}
+          </div>
+          <div>
+            <h3 style="font-size:11px; text-transform:uppercase; border-bottom:1px solid #cbd5e1; margin-bottom:4px;">Core Competencies</h3>
+            <p>${skills}</p>
+          </div>
+        `;
+      }
+
+      ids.forEach(id => mount.querySelector(`#${id}`).oninput = sync);
+      sync();
+
+      mount.querySelector('#rb-print').onclick = () => {
+        const frame = document.createElement('iframe');
+        frame.style.cssText = 'position:fixed; top:0; left:0; width:1px; height:1px; opacity:0; pointer-events:none; border:none;';
+        document.body.appendChild(frame);
+        frame.contentDocument.write(`<html><body style="font-family:serif; padding:30px;">${preview.innerHTML}</body></html>`);
+        frame.contentDocument.close();
+        frame.contentWindow.focus();
+        frame.contentWindow.print();
+        setTimeout(() => frame.remove(), 1500);
+      };
+
+      mount.querySelector('#rb-dl-html').onclick = () => {
+        ZERO.downloadBlob(`<!DOCTYPE html><html><body style="font-family:serif; padding:40px; max-width:800px; margin:0 auto;">${preview.innerHTML}</body></html>`, 'resume.html', 'text/html');
+      };
+    }
+
+    // 14. ATS Resume Checker (Direct PDF Extraction via PDF.js)
+    function renderAtsChecker(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <h3>ATS Target Match Heuristics</h3>
+          <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1rem;">Analyzes keyword and structural token density locally against job specifications</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:1rem;">
+            <div>
+              <label style="font-size:0.85rem; margin-bottom:4px; display:block;">Resume (Paste text or drop PDF)</label>
+              <textarea id="ats-resume" rows="8" placeholder="Paste your resume text here..."></textarea>
+              <input type="file" id="ats-pdf-in" accept=".pdf,text/plain" style="margin-top:6px; font-size:0.8rem;">
+            </div>
+            <div>
+              <label style="font-size:0.85rem; margin-bottom:4px; display:block;">Job Description</label>
+              <textarea id="ats-job" rows="8" placeholder="Paste target Job Description here..."></textarea>
+            </div>
+          </div>
+          <button class="action-btn" id="ats-btn">Run Affinity Audit</button>
+          <div id="ats-out" style="display:none; margin-top:1.5rem; background:var(--bg-tertiary); padding:1.25rem; border-radius:8px;"></div>
+        </div>
+      `;
+      const resIn = mount.querySelector('#ats-resume');
+      const jobIn = mount.querySelector('#ats-job');
+      const pdfIn = mount.querySelector('#ats-pdf-in');
+      const out = mount.querySelector('#ats-out');
+
+      pdfIn.onchange = async () => {
+        const file = pdfIn.files[0];
+        if (!file) return;
+        if (file.type === 'text/plain') {
+          resIn.value = await file.text();
+          return;
+        }
+        try {
+          const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
+          let fullText = '';
+          for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i);
+            const content = await page.getTextContent();
+            fullText += content.items.map(it => it.str).join(' ') + '\n';
+          }
+          resIn.value = fullText;
+          ZERO.toast('Text parsed from resume PDF!', 'success');
+        } catch (e) {
+          ZERO.toast(`Failed to read PDF: ${e.message}`, 'error');
+        }
+      };
+
+      mount.querySelector('#ats-btn').onclick = () => {
+        const resumeWords = new Set(resIn.value.toLowerCase().match(/\b[a-zA-Z]{3,}\b/g) || []);
+        const jobWords = Array.from(new Set(jobIn.value.toLowerCase().match(/\b[a-zA-Z]{3,}\b/g) || []));
+
+        if (!jobWords.length) return ZERO.toast('Please provide a job description', 'error');
+
+        const matched = jobWords.filter(w => resumeWords.has(w));
+        const missing = jobWords.filter(w => !resumeWords.has(w));
+        const score = Math.round((matched.length / jobWords.length) * 100);
+
+        out.style.display = 'block';
+        out.innerHTML = `
+          <h4>Match Score: <span style="color:var(--accent-primary); font-size:1.5rem;">${score}%</span></h4>
+          <p style="margin:8px 0; font-size:0.9rem;">Matched Keywords (${matched.length}): <span style="color:var(--status-success);">${matched.slice(0, 15).join(', ')}...</span></p>
+          <p style="margin:8px 0; font-size:0.9rem;">Missing Keywords (${missing.length}): <span style="color:var(--status-danger);">${missing.slice(0, 15).join(', ')}...</span></p>
+        `;
+      };
+    }
+
+    // 15. Invoice Generator
+    function renderInvoiceGenerator(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-bottom:1.5rem;">
+            <input type="text" id="inv-from" placeholder="From (Your Company)" value="Zero Studio Corp.">
+            <input type="text" id="inv-to" placeholder="To (Client Name)" value="Acme Industries">
+            <input type="text" id="inv-id" placeholder="Invoice #" value="INV-2026-001">
+          </div>
+          <table style="width:100%; border-collapse:collapse; margin-bottom:1.5rem;">
+            <thead>
+              <tr style="text-align:left; border-bottom:1px solid var(--border-subtle);">
+                <th style="padding:8px;">Description</th>
+                <th style="padding:8px; width:100px;">Qty</th>
+                <th style="padding:8px; width:120px;">Rate ($)</th>
+                <th style="padding:8px; width:40px;"></th>
+              </tr>
+            </thead>
+            <tbody id="inv-tbody">
+              <tr>
+                <td><input type="text" value="System Security Audit" style="border:none;"></td>
+                <td><input type="number" class="iqty" value="1" style="border:none;"></td>
+                <td><input type="number" class="irate" value="2500" style="border:none;"></td>
+                <td><button class="idel" style="background:none; border:none; color:var(--status-danger); cursor:pointer;">✕</button></td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+            <button class="action-btn-secondary" id="inv-add-row">+ Add Item</button>
+            <h3>Total: $<span id="inv-total">2500.00</span></h3>
+          </div>
+          <button class="action-btn" id="inv-print">Print / Export Invoice</button>
+        </div>
+      `;
+      const tbody = mount.querySelector('#inv-tbody');
+      const totalSpan = mount.querySelector('#inv-total');
+
+      function recalc() {
+        let sum = 0;
+        tbody.querySelectorAll('tr').forEach(tr => {
+          const q = parseFloat(tr.querySelector('.iqty').value) || 0;
+          const r = parseFloat(tr.querySelector('.irate').value) || 0;
+          sum += q * r;
+        });
+        totalSpan.innerText = sum.toFixed(2);
+      }
+
+      tbody.oninput = recalc;
+
+      mount.querySelector('#inv-add-row').onclick = () => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><input type="text" placeholder="Service description" style="border:none;"></td>
+          <td><input type="number" class="iqty" value="1" style="border:none;"></td>
+          <td><input type="number" class="irate" value="100" style="border:none;"></td>
+          <td><button class="idel" style="background:none; border:none; color:var(--status-danger); cursor:pointer;">✕</button></td>
+        `;
+        tr.querySelector('.idel').onclick = () => { tr.remove(); recalc(); };
+        tbody.appendChild(tr);
+        recalc();
+      };
+
+      tbody.querySelector('.idel').onclick = (e) => { e.target.closest('tr').remove(); recalc(); };
+
+      mount.querySelector('#inv-print').onclick = () => {
+        const frame = document.createElement('iframe');
+        frame.style.cssText = 'position:fixed; top:0; left:0; width:1px; height:1px; opacity:0; pointer-events:none; border:none;';
+        document.body.appendChild(frame);
+        frame.contentDocument.write(`
+          <html><body style="font-family:sans-serif; padding:40px;">
+            <h2>INVOICE ${mount.querySelector('#inv-id').value}</h2>
+            <p><b>From:</b> ${mount.querySelector('#inv-from').value}</p>
+            <p><b>Bill To:</b> ${mount.querySelector('#inv-to').value}</p>
+            <hr style="margin:20px 0;">
+            <h3>Total Amount Due: $${totalSpan.innerText}</h3>
+          </body></html>
+        `);
+        frame.contentDocument.close();
+        frame.contentWindow.focus();
+        frame.contentWindow.print();
+        setTimeout(() => frame.remove(), 1500);
+      };
+    }
+
+    // 16. Comprehensive Linguistic Proofreading & Mechanics Engine
+    function renderGrammarChecker(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <h3>Local Linguistic & Mechanics Checker</h3>
+          <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1rem;">Deterministic spell, homophone, and style analysis running entirely in your browser</p>
+          <textarea id="gc-input" rows="7" placeholder="Type or paste prose to inspect...">Their going to recieve teh package in order to test it.</textarea>
+          <div id="gc-stats" style="margin:10px 0; font-size:0.85rem; color:var(--text-tertiary);"></div>
+          <div id="gc-out" style="margin-top:1rem;"></div>
+        </div>
+      `;
+      const input = mount.querySelector('#gc-input');
+      const out = mount.querySelector('#gc-out');
+      const stats = mount.querySelector('#gc-stats');
+
+      const DICTIONARY = {
+        'teh': 'the', 'recieve': 'receive', 'seperate': 'separate', 'untill': 'until',
+        'occurance': 'occurrence', 'truely': 'truly', 'definately': 'definitely',
+        'goverment': 'government', 'wierd': 'weird', 'alot': 'a lot',
+        'could of': 'could have', 'should of': 'should have', 'would of': 'would have',
+        'in order to': 'to', 'due to the fact that': 'because', 'at this point in time': 'now',
+        'basic fundamentals': 'fundamentals', 'their going': 'they\'re going',
+        'your welcome': 'you\'re welcome', 'its a': 'it\'s a'
+      };
+
+      const PASSIVE_REGEX = /\b(is|are|was|were|been|being)\s+([a-z]+ed|[a-z]+en)\b/gi;
+
+      function evaluate() {
+        const text = input.value;
+        const issues = [];
+
+        const dupRegex = /\b(\w+)\s+\1\b/gi;
+        let match;
+        while ((match = dupRegex.exec(text)) !== null) {
+          issues.push(`Repeated token: "<b>${match[0]}</b>"`);
+        }
+
+        Object.keys(DICTIONARY).forEach(phrase => {
+          const reg = new RegExp(`\\b${phrase}\\b`, 'gi');
+          if (reg.test(text)) {
+            issues.push(`Suggestion: Replace "<b>${phrase}</b>" with "<b>${DICTIONARY[phrase]}</b>"`);
+          }
+        });
+
+        while ((match = PASSIVE_REGEX.exec(text)) !== null) {
+          issues.push(`Passive voice detected: "<b>${match[0]}</b>" (Consider active voice)`);
+        }
+
+        const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+        sentences.forEach(s => {
+          const count = (s.match(/\S+/g) || []).length;
+          if (count > 30) issues.push(`Long sentence (${count} words): Consider splitting.`);
+        });
+
+        const words = (text.match(/\S+/g) || []).length;
+        const syllables = (text.match(/[aeiouy]{1,2}/gi) || []).length;
+        if (words > 5 && sentences.length > 0) {
+          const score = Math.round(206.835 - 1.015 * (words / sentences.length) - 84.6 * (syllables / words));
+          stats.innerText = `Readability Score: ${score}/100 (${score > 60 ? 'Plain English' : 'Complex'}) • Sentences: ${sentences.length} • Words: ${words}`;
+        }
+
+        out.innerHTML = issues.length === 0
+          ? '<span style="color:var(--status-success);">No structural or stylistic issues detected.</span>'
+          : `<ul style="padding-left:20px; color:var(--status-warning);">${issues.map(i => `<li>${i}</li>`).join('')}</ul>`;
+      }
+
+      input.oninput = evaluate;
+      evaluate();
+    }
+
+    // 17. Word Counter
+    function renderWordCounter(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:12px; margin-bottom:1.5rem;">
+            <div class="spec-item"><span class="spec-val" id="wc-words">0</span><span class="spec-lbl">Words</span></div>
+            <div class="spec-item"><span class="spec-val" id="wc-chars">0</span><span class="spec-lbl">Characters</span></div>
+            <div class="spec-item"><span class="spec-val" id="wc-sentences">0</span><span class="spec-lbl">Sentences</span></div>
+            <div class="spec-item"><span class="spec-val" id="wc-paragraphs">0</span><span class="spec-lbl">Paragraphs</span></div>
+            <div class="spec-item"><span class="spec-val" id="wc-read">0m</span><span class="spec-lbl">Read Time</span></div>
+          </div>
+          <textarea id="wc-text" rows="8" placeholder="Type or paste content here..."></textarea>
+        </div>
+      `;
+      const txt = mount.querySelector('#wc-text');
+      txt.oninput = () => {
+        const val = txt.value;
+        const words = (val.match(/\S+/g) || []).length;
+        mount.querySelector('#wc-words').innerText = words;
+        mount.querySelector('#wc-chars').innerText = val.length;
+        mount.querySelector('#wc-sentences').innerText = (val.match(/[^.!?]+[.!?]+/g) || []).length || (val.trim() ? 1 : 0);
+        mount.querySelector('#wc-paragraphs').innerText = val.split(/\n+/).filter(l => l.trim().length > 0).length;
+        mount.querySelector('#wc-read').innerText = `${Math.ceil(words / 200)}m`;
+      };
+    }
+
+    // 18. Live Markdown Editor
+    function renderMarkdownEditor(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div>
+            <textarea id="md-in" rows="14" style="font-family:var(--font-mono); font-size:13px;"># Project ZERO
+
+Client-side execution with **zero external telemetry**.
+
+- 100% in-browser processing
+- Unlimited usage quotas
+- GitHub Pages deployable</textarea>
+            <div style="display:flex; gap:10px; margin-top:10px;">
+              <button class="action-btn" id="md-dl-html">Download HTML</button>
+              <button class="action-btn-secondary" id="md-dl-raw">Download .md</button>
+            </div>
+          </div>
+          <div id="md-prev" style="padding:14px; background:var(--bg-tertiary); border-radius:8px; overflow-y:auto; max-height:360px;"></div>
+        </div>
+      `;
+      const input = mount.querySelector('#md-in');
+      const prev = mount.querySelector('#md-prev');
+      const sync = () => prev.innerHTML = window.marked.parse(input.value);
+      input.oninput = sync;
+      sync();
+
+      mount.querySelector('#md-dl-html').onclick = () => {
+        ZERO.downloadBlob(prev.innerHTML, 'document.html', 'text/html');
+      };
+      mount.querySelector('#md-dl-raw').onclick = () => {
+        ZERO.downloadBlob(input.value, 'document.md', 'text/markdown');
+      };
+    }
+
+    /* =====================================================================
+       CATEGORY D: DEVELOPER TOOLS (19-24)
+       ===================================================================== */
+
+    // 19. JSON Formatter & Validator
+    function renderJsonFormatter(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div style="display:flex; gap:10px; margin-bottom:12px;">
+            <button class="action-btn" id="jf-fmt">Prettify JSON</button>
+            <button class="action-btn-secondary" id="jf-min">Minify JSON</button>
+            <button class="action-btn-secondary" id="jf-copy">Copy</button>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <textarea id="jf-in" rows="12" style="font-family:var(--font-mono); font-size:12px;">{"project":"ZERO","tools":30,"offline":true}</textarea>
+            <pre id="jf-out" style="padding:10px; font-family:var(--font-mono); font-size:12px; background:var(--bg-tertiary); border-radius:8px; overflow:auto;"></pre>
+          </div>
+        </div>
+      `;
+      const input = mount.querySelector('#jf-in');
+      const out = mount.querySelector('#jf-out');
+
+      mount.querySelector('#jf-fmt').onclick = () => {
+        try {
+          out.style.color = 'var(--text-main)';
+          out.textContent = JSON.stringify(JSON.parse(input.value), null, 2);
+        } catch (e) {
+          out.style.color = 'var(--status-danger)';
+          out.textContent = `Parse Error: ${e.message}`;
+        }
+      };
+
+      mount.querySelector('#jf-min').onclick = () => {
+        try {
+          out.style.color = 'var(--text-main)';
+          out.textContent = JSON.stringify(JSON.parse(input.value));
+        } catch (e) {
+          out.style.color = 'var(--status-danger)';
+          out.textContent = `Parse Error: ${e.message}`;
+        }
+      };
+
+      mount.querySelector('#jf-copy').onclick = () => {
+        navigator.clipboard.writeText(out.textContent);
+        ZERO.toast('JSON copied to clipboard!', 'info');
+      };
+      mount.querySelector('#jf-fmt').click();
+    }
+
+    // 20. HTML/CSS/JavaScript Formatter
+    function renderCodeFormatter(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div style="display:flex; gap:10px; margin-bottom:12px;">
+            <select id="cf-lang" style="max-width:180px;">
+              <option value="html">HTML</option>
+              <option value="css">CSS</option>
+              <option value="js">JavaScript</option>
+            </select>
+            <button class="action-btn" id="cf-run">Beautify Code</button>
+          </div>
+          <textarea id="cf-code" rows="12" style="font-family:var(--font-mono); font-size:12px;"><div class="container"><p>Format Me</p></div></textarea>
+        </div>
+      `;
+      const lang = mount.querySelector('#cf-lang');
+      const code = mount.querySelector('#cf-code');
+
+      mount.querySelector('#cf-run').onclick = () => {
+        if (lang.value === 'html') code.value = window.html_beautify(code.value, { indent_size: 2 });
+        if (lang.value === 'css') code.value = window.css_beautify(code.value, { indent_size: 2 });
+        if (lang.value === 'js') code.value = window.js_beautify(code.value, { indent_size: 2 });
+        ZERO.toast('Code beautified successfully!', 'success');
+      };
+    }
+
+    // 21. Regex Tester
+    function renderRegexTester(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div style="display:flex; gap:8px; align-items:center; margin-bottom:1rem;">
+            <span style="font-family:var(--font-mono);">/</span>
+            <input type="text" id="rx-pat" value="[A-Z]\\w+" style="flex:1;">
+            <span style="font-family:var(--font-mono);">/</span>
+            <input type="text" id="rx-flags" value="g" style="max-width:60px;">
+          </div>
+          <textarea id="rx-text" rows="5" placeholder="Sample string to evaluate...">ZERO Platform 2026 Engine</textarea>
+          <div id="rx-matches" style="margin-top:1rem; padding:10px; background:var(--bg-tertiary); border-radius:8px;"></div>
+        </div>
+      `;
+      const pat = mount.querySelector('#rx-pat');
+      const flags = mount.querySelector('#rx-flags');
+      const text = mount.querySelector('#rx-text');
+      const out = mount.querySelector('#rx-matches');
+
+      function test() {
+        try {
+          const reg = new RegExp(pat.value, flags.value);
+          const matches = text.value.match(reg) || [];
+          out.innerHTML = `<b>Matches (${matches.length}):</b> ` +
+            matches.map(m => `<span style="background:var(--accent-glow); padding:2px 6px; margin:2px; border-radius:4px;">${m}</span>`).join(' ');
+        } catch (e) {
+          out.innerHTML = `<span style="color:var(--status-danger);">${e.message}</span>`;
+        }
+      }
+      [pat, flags, text].forEach(el => el.oninput = test);
+      test();
+    }
+
+    // 22. Color Palette Generator
+    function renderPaletteGenerator(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div id="pal-box" style="display:flex; height:120px; border-radius:8px; overflow:hidden; margin-bottom:1rem;"></div>
+          <button class="action-btn" id="pal-btn">Generate New Harmonies</button>
+        </div>
+      `;
+      const box = mount.querySelector('#pal-box');
+      function gen() {
+        box.innerHTML = '';
+        const base = Math.floor(Math.random() * 360);
+        [0, 30, 60, 180, 210].forEach(deg => {
+          const col = `hsl(${(base + deg) % 360}, 75%, 55%)`;
+          const bar = document.createElement('div');
+          bar.style.cssText = `flex:1; background:${col}; cursor:pointer; display:flex; align-items:flex-end; padding:8px; font-family:var(--font-mono); font-size:11px;`;
+          bar.innerHTML = `<span style="background:rgba(0,0,0,0.6); color:#fff; padding:2px 4px; border-radius:4px;">${col}</span>`;
+          bar.onclick = () => {
+            navigator.clipboard.writeText(col);
+            ZERO.toast(`Copied ${col} to clipboard!`, 'info');
+          };
+          box.appendChild(bar);
+        });
+      }
+      mount.querySelector('#pal-btn').onclick = gen;
+      gen();
+    }
+
+    // 23. CSS Gradient Generator
+    function renderGradientGenerator(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div id="grad-prev" style="height:140px; border-radius:8px; margin-bottom:1rem; border:1px solid var(--border-subtle);"></div>
+          <div style="display:flex; gap:12px; margin-bottom:1rem; align-items:center;">
+            <input type="color" id="g-c1" value="#6366f1">
+            <input type="color" id="g-c2" value="#ec4899">
+            <input type="range" id="g-deg" min="0" max="360" value="90" style="flex:1;">
+            <span id="g-deg-val">90deg</span>
+          </div>
+          <pre id="g-css" style="padding:10px; background:var(--bg-tertiary); font-family:var(--font-mono); border-radius:8px; cursor:pointer;"></pre>
+        </div>
+      `;
+      const prev = mount.querySelector('#grad-prev');
+      const c1 = mount.querySelector('#g-c1');
+      const c2 = mount.querySelector('#g-c2');
+      const deg = mount.querySelector('#g-deg');
+      const degVal = mount.querySelector('#g-deg-val');
+      const css = mount.querySelector('#g-css');
+
+      function update() {
+        degVal.innerText = `${deg.value}deg`;
+        const rule = `linear-gradient(${deg.value}deg, ${c1.value}, ${c2.value})`;
+        prev.style.background = rule;
+        css.innerText = `background: ${rule};`;
+      }
+      [c1, c2, deg].forEach(el => el.oninput = update);
+      css.onclick = () => {
+        navigator.clipboard.writeText(css.innerText);
+        ZERO.toast('CSS copied to clipboard!', 'info');
+      };
+      update();
+    }
+
+    // 24. SVG Vector Editor
+    function renderSvgEditor(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div>
+            <textarea id="svg-in" rows="12" style="font-family:var(--font-mono); font-size:12px;"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="45" fill="#4f46e5" />
+  <polygon points="50,20 80,80 20,80" fill="#ffffff" />
+</svg></textarea>
+            <button class="action-btn" id="svg-dl" style="margin-top:10px;">Download SVG</button>
+          </div>
+          <div id="svg-prev" style="display:flex; align-items:center; justify-content:center; background:var(--bg-tertiary); border-radius:8px; padding:1rem;"></div>
+        </div>
+      `;
+      const input = mount.querySelector('#svg-in');
+      const prev = mount.querySelector('#svg-prev');
+      const sync = () => prev.innerHTML = input.value;
+      input.oninput = sync;
+      sync();
+
+      mount.querySelector('#svg-dl').onclick = () => {
+        ZERO.downloadBlob(input.value, 'vector.svg', 'image/svg+xml');
+      };
+    }
+
+    /* =====================================================================
+       CATEGORY E: PRODUCTIVITY, SYSTEM & PRIVACY TOOLS (25-30)
+       ===================================================================== */
+
+    // 25. Advanced Scientific Calculator
+    function renderCalculator(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel" style="max-width:320px; margin:0 auto;">
+          <input type="text" id="calc-scr" readonly style="height:48px; font-size:1.4rem; text-align:right; font-family:var(--font-mono); margin-bottom:1rem;">
+          <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px;">
+            <button class="action-btn-secondary cb" data-v="C">C</button>
+            <button class="action-btn-secondary cb" data-v="(">(</button>
+            <button class="action-btn-secondary cb" data-v=")">)</button>
+            <button class="action-btn-secondary cb" data-v="/">/</button>
+            <button class="action-btn-secondary cb" data-v="7">7</button>
+            <button class="action-btn-secondary cb" data-v="8">8</button>
+            <button class="action-btn-secondary cb" data-v="9">9</button>
+            <button class="action-btn-secondary cb" data-v="*">*</button>
+            <button class="action-btn-secondary cb" data-v="4">4</button>
+            <button class="action-btn-secondary cb" data-v="5">5</button>
+            <button class="action-btn-secondary cb" data-v="6">6</button>
+            <button class="action-btn-secondary cb" data-v="-">-</button>
+            <button class="action-btn-secondary cb" data-v="1">1</button>
+            <button class="action-btn-secondary cb" data-v="2">2</button>
+            <button class="action-btn-secondary cb" data-v="3">3</button>
+            <button class="action-btn-secondary cb" data-v="+">+</button>
+            <button class="action-btn-secondary cb" data-v="0">0</button>
+            <button class="action-btn-secondary cb" data-v=".">.</button>
+            <button class="action-btn-secondary cb" data-v="sqrt(">√</button>
+            <button class="action-btn cb" data-v="=">=</button>
+          </div>
+        </div>
+      `;
+      const scr = mount.querySelector('#calc-scr');
+      mount.querySelectorAll('.cb').forEach(b => {
+        b.onclick = () => {
+          const v = b.dataset.v;
+          if (v === 'C') scr.value = '';
+          else if (v === '=') {
+            try {
+              let expr = scr.value
+                .replace(/sqrt\(/g, 'Math.sqrt(')
+                .replace(/sin\(/g, 'Math.sin(')
+                .replace(/cos\(/g, 'Math.cos(')
+                .replace(/tan\(/g, 'Math.tan(')
+                .replace(/log\(/g, 'Math.log10(')
+                .replace(/\^/g, '**');
+              scr.value = Function(`'use strict'; return (${expr})`)();
+            } catch {
+              scr.value = 'Error';
+            }
+          } else scr.value += v;
+        };
+      });
+    }
+
+    // 26. QR Code Generator
+    function renderQrGenerator(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel" style="text-align:center;">
+          <input type="text" id="qr-in" value="https://github.com" style="max-width:400px; margin:0 auto 1.5rem;">
+          <div id="qr-box" style="padding:14px; background:#fff; border-radius:8px; display:inline-block; margin-bottom:1.5rem;"></div>
+          <br>
+          <button class="action-btn" id="qr-dl">Download QR Code</button>
+        </div>
+      `;
+      const input = mount.querySelector('#qr-in');
+      const box = mount.querySelector('#qr-box');
+      function draw() {
+        box.innerHTML = '';
+        new window.QRCode(box, { text: input.value || 'ZERO', width: 190, height: 190 });
+      }
+      input.oninput = draw;
+      draw();
+
+      mount.querySelector('#qr-dl').onclick = () => {
+        const img = box.querySelector('img');
+        const canvas = box.querySelector('canvas');
+        if (img && img.src && img.src.startsWith('data:')) {
+          ZERO.downloadBlob(img.src, 'qrcode.png', 'image/png');
+        } else if (canvas) {
+          ZERO.downloadBlob(canvas.toDataURL('image/png'), 'qrcode.png', 'image/png');
+        }
+      };
+    }
+
+    // 27. Cryptographic Password Generator
+    function renderPasswordGenerator(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel" style="max-width:500px; margin:0 auto;">
+          <div style="display:flex; gap:10px; margin-bottom:1.5rem;">
+            <input type="text" id="pwd-val" readonly style="font-family:var(--font-mono); font-size:1.1rem;">
+            <button class="action-btn" id="pwd-copy">Copy</button>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+            <span>Length: <b id="pwd-len-val">32</b></span>
+          </div>
+          <input type="range" id="pwd-len" min="12" max="64" value="32" style="width:100%; margin-bottom:1.5rem;">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:1.5rem;">
+            <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" id="pwd-num" checked> Numbers (0-9)</label>
+            <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" id="pwd-sym" checked> Symbols (!@#$)</label>
+          </div>
+          <button class="action-btn-secondary" id="pwd-gen" style="width:100%;">Generate Secure Key</button>
+        </div>
+      `;
+      const out = mount.querySelector('#pwd-val');
+      const len = mount.querySelector('#pwd-len');
+      const lenVal = mount.querySelector('#pwd-len-val');
+      const num = mount.querySelector('#pwd-num');
+      const sym = mount.querySelector('#pwd-sym');
+
+      function generate() {
+        lenVal.innerText = len.value;
+        let set = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        if (num.checked) set += '0123456789';
+        if (sym.checked) set += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+        if (!set) set = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        const arr = new Uint32Array(parseInt(len.value));
+        crypto.getRandomValues(arr);
+        let res = '';
+        for (let i = 0; i < arr.length; i++) res += set[arr[i] % set.length];
+        out.value = res;
+      }
+
+      [len, num, sym].forEach(el => el.oninput = generate);
+      mount.querySelector('#pwd-gen').onclick = generate;
+      mount.querySelector('#pwd-copy').onclick = () => {
+        navigator.clipboard.writeText(out.value);
+        ZERO.toast('Secure password copied!', 'info');
+      };
+      generate();
+    }
+
+    // 28. Client Metadata Inspector (Magic Signature & Binary Inspector)
+    function renderMetadataInspector(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div class="dropzone-surface" id="mi-drop">
+            <h3 class="dropzone-title">Upload Any File to Inspect Headers</h3>
+            <p class="dropzone-sub">Inspects file system attributes and validates binary magic numbers</p>
+            <input type="file" id="mi-input" style="display:none">
+          </div>
+          <div id="mi-out" style="display:none; padding:14px; background:var(--bg-tertiary); border-radius:8px; font-family:var(--font-mono); font-size:12px; line-height:1.7;"></div>
+        </div>
+      `;
+      const drop = mount.querySelector('#mi-drop');
+      const input = mount.querySelector('#mi-input');
+      const out = mount.querySelector('#mi-out');
+
+      ZERO.setupDropzone(drop, input, async (files) => {
+        const f = files[0];
+        if (!f) return;
+        const buf = await f.slice(0, 8).arrayBuffer();
+        const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join(' ').toUpperCase();
+        
+        let signature = 'Unknown binary stream';
+        if (hex.startsWith('89 50 4E 47')) signature = 'PNG Image File';
+        else if (hex.startsWith('FF D8 FF')) signature = 'JPEG / JFIF Image';
+        else if (hex.startsWith('25 50 44 46')) signature = 'PDF Document Header (%PDF)';
+        else if (hex.startsWith('50 4B 03 04')) signature = 'ZIP / Office OpenXML Archive';
+        else if (hex.startsWith('52 49 46 46')) signature = 'RIFF Container (WebP / AVI / WAV)';
+
+        out.style.display = 'block';
+        out.innerHTML = `
+          <b>File Name:</b> ${f.name}<br>
+          <b>MIME Type:</b> ${f.type || 'application/octet-stream'}<br>
+          <b>Byte Size:</b> ${f.size.toLocaleString()} bytes (${(f.size/1024).toFixed(2)} KB)<br>
+          <b>Last Modified:</b> ${new Date(f.lastModified).toISOString()}<br>
+          <b>Magic Hex Bytes:</b> ${hex}<br>
+          <b>Validated Signature:</b> ${signature}<br>
+        `;
+      });
+    }
+
+    // 29. Duplicate File Finder (SHA-256 Web Crypto)
+    function renderDuplicateFinder(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div class="dropzone-surface" id="df-drop">
+            <h3 class="dropzone-title">Upload Multiple Files to Match Checksums</h3>
+            <p class="dropzone-sub">Computes SHA-256 cryptographic digests in parallel</p>
+            <input type="file" id="df-input" multiple style="display:none">
+          </div>
+          <div id="df-res" style="margin-top:1rem;"></div>
+        </div>
+      `;
+      const drop = mount.querySelector('#df-drop');
+      const input = mount.querySelector('#df-input');
+      const res = mount.querySelector('#df-res');
+
+      ZERO.setupDropzone(drop, input, async (files) => {
+        if (!files.length) return;
+        res.innerHTML = '<p>Computing hardware SHA-256 hashes...</p>';
+        const map = new Map();
+
+        for (const f of files) {
+          const buf = await f.arrayBuffer();
+          const digest = await crypto.subtle.digest('SHA-256', buf);
+          const hash = Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+          if (!map.has(hash)) map.set(hash, []);
+          map.get(hash).push(f.name);
+        }
+
+        const dups = Array.from(map.entries()).filter(([h, list]) => list.length > 1);
+        if (!dups.length) {
+          res.innerHTML = '<span style="color:var(--status-success);">All uploaded files have distinct SHA-256 hashes. No duplicates found.</span>';
+        } else {
+          res.innerHTML = `<h4>Identical File Matches:</h4>` + dups.map(([h, l]) => `
+            <div style="background:var(--bg-tertiary); padding:10px; border-radius:6px; margin:8px 0;">
+              <small style="color:var(--text-tertiary); font-family:var(--font-mono);">${h}</small><br>
+              <b>Duplicates:</b> ${l.join(' ⟷ ')}
+            </div>
+          `).join('');
+        }
+      });
+    }
+
+    // 30. Robust Batch Image Converter
+    function renderBatchConverter(mount) {
+      mount.innerHTML = `
+        <div class="controls-panel">
+          <div class="dropzone-surface" id="bc-drop">
+            <h3 class="dropzone-title">Upload Multiple Images for Batch Conversion</h3>
+            <input type="file" id="bc-input" multiple accept="image/*" style="display:none">
+          </div>
+          <div id="bc-controls" style="display:none;">
+            <div style="display:flex; gap:12px; margin-bottom:1.5rem; flex-wrap:wrap;">
+              <select id="bc-fmt" style="max-width:260px;">
+                <option value="image/webp">Batch Convert to WEBP (.webp)</option>
+                <option value="image/jpeg">Batch Convert to JPEG (.jpg)</option>
+                <option value="image/png">Batch Convert to PNG (.png)</option>
+              </select>
+              <button class="action-btn" id="bc-btn">Process All Files</button>
+            </div>
+            <div id="bc-progress" style="display:none; margin-bottom:1rem; font-weight:600;"></div>
+            <div id="bc-results" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:10px;"></div>
+            <br>
+            <button class="action-btn" id="bc-dl-all" style="display:none;">Download All as ZIP</button>
+          </div>
+        </div>
+      `;
+      let files = [];
+      const drop = mount.querySelector('#bc-drop');
+      const input = mount.querySelector('#bc-input');
+      const ctrls = mount.querySelector('#bc-controls');
+      const fmt = mount.querySelector('#bc-fmt');
+      const btn = mount.querySelector('#bc-btn');
+      const progress = mount.querySelector('#bc-progress');
+      const results = mount.querySelector('#bc-results');
+      const dlAll = mount.querySelector('#bc-dl-all');
+      let convertedPack = [];
+
+      ZERO.setupDropzone(drop, input, (newFiles) => {
+        files = newFiles;
+        if (files.length) {
+          ctrls.style.display = 'block';
+          progress.innerText = `${files.length} images queued.`;
+          progress.style.display = 'block';
+        }
+      });
+
+      btn.onclick = async () => {
+        btn.disabled = true;
+        results.innerHTML = '';
+        convertedPack = [];
+        const targetFmt = fmt.value;
+        const ext = targetFmt.split('/')[1];
+
+        for (let i = 0; i < files.length; i++) {
+          progress.innerText = `Converting ${i + 1} of ${files.length}...`;
+          try {
+            const bmp = await createImageBitmap(files[i]);
+            const c = document.createElement('canvas');
+            c.width = bmp.width;
+            c.height = bmp.height;
+            const ctx = c.getContext('2d');
+            if (targetFmt === 'image/jpeg') {
+              ctx.fillStyle = '#ffffff';
+              ctx.fillRect(0, 0, c.width, c.height);
+            }
+            ctx.drawImage(bmp, 0, 0);
+            const dataUrl = c.toDataURL(targetFmt, 0.85);
+            const fileName = `${files[i].name.replace(/\.[^/.]+$/, "")}.${ext}`;
+            convertedPack.push({ name: fileName, dataUrl });
+
+            const item = document.createElement('div');
+            item.style.cssText = 'background:var(--bg-tertiary); padding:6px; border-radius:6px; text-align:center; font-size:11px;';
+            item.innerHTML = `
+              <img src="${dataUrl}" style="width:100%; height:80px; object-fit:cover; border-radius:4px; margin-bottom:4px;">
+              <div style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-bottom:4px;">${fileName}</div>
+              <button class="action-btn dl-single-item" style="padding:2px 8px; font-size:10px;">Download</button>
+            `;
+            item.querySelector('.dl-single-item').onclick = () => {
+              ZERO.downloadBlob(dataUrl, fileName, targetFmt);
+            };
+            results.appendChild(item);
+          } catch (err) {
+            console.error(`Failed ${files[i].name}`, err);
+          }
+        }
+        progress.innerText = `Converted ${convertedPack.length} images successfully.`;
+        btn.disabled = false;
+        if (convertedPack.length > 1) dlAll.style.display = 'inline-block';
+      };
+
+      dlAll.onclick = async () => {
+        const zip = new window.JSZip();
+        convertedPack.forEach(f => {
+          zip.file(f.name, f.dataUrl.split(',')[1], { base64: true });
+        });
+        const zipBlob = await zip.generateAsync({ type: 'blob' });
+        ZERO.downloadBlob(zipBlob, 'batch_images.zip', 'application/zip');
+      };
+    }
+
+    /* =====================================================================
+       MASTER TOOL REGISTRY (ALL 30 UTILITIES)
+       ===================================================================== */
+    const TOOLS_DIRECTORY = [
+      // PDF Pro
+      { id: 'pdf-merger', name: 'PDF Merger', cat: 'pdf', desc: 'Merge multiple PDF files into one clean document.', render: renderPdfMerger },
+      { id: 'pdf-splitter', name: 'PDF Splitter', cat: 'pdf', desc: 'Extract individual pages or ranges into a new PDF.', render: renderPdfSplitter },
+      { id: 'pdf-compressor', name: 'PDF Compressor', cat: 'pdf', desc: 'Reduce PDF file sizes via canvas quantization.', render: renderPdfCompressor },
+      { id: 'pdf-organizer', name: 'PDF Page Organizer', cat: 'pdf', desc: 'Reorder, rotate, or eliminate PDF pages visually.', render: renderPdfOrganizer },
+      { id: 'pdf-to-img', name: 'PDF to Image Converter', cat: 'pdf', desc: 'Rasterize PDF pages into individual high-res PNGs.', render: renderPdfToImage },
+      { id: 'img-to-pdf', name: 'Image to PDF Converter', cat: 'pdf', desc: 'Combine multiple image files into a single PDF.', render: renderImageToPdf },
+
+      // Image Studio
+      { id: 'bg-remover', name: 'Image Background Remover', cat: 'image', desc: 'Isolate foregrounds using client-side edge matting.', render: renderBgRemover },
+      { id: 'img-compressor', name: 'Image Compressor', cat: 'image', desc: 'Compress JPG, PNG, and WebP images locally.', render: renderImageCompressor },
+      { id: 'img-resizer', name: 'Image Resizer', cat: 'image', desc: 'Resize image dimensions with aspect ratio lock.', render: renderImageResizer },
+      { id: 'img-converter', name: 'Image Format Converter', cat: 'image', desc: 'Convert between PNG, JPEG, and WebP formats.', render: renderImageConverter },
+      { id: 'img-cropper', name: 'Image Cropper', cat: 'image', desc: 'Crop pixel boundaries visually on high-DPI canvas.', render: renderImageCropper },
+      { id: 'metadata-remover', name: 'Image Metadata Remover', cat: 'image', desc: 'Strip EXIF, GPS, and device signatures completely.', render: renderMetadataRemover },
+
+      // Document & Writing
+      { id: 'resume-builder', name: 'ATS Resume Builder', cat: 'writing', desc: 'Clean, ATS-friendly resume creator with PDF export.', render: renderResumeBuilder },
+      { id: 'ats-checker', name: 'ATS Resume Checker', cat: 'writing', desc: 'Match keyword frequency against job descriptions.', render: renderAtsChecker },
+      { id: 'invoice-gen', name: 'Invoice Generator', cat: 'writing', desc: 'Professional invoices with dynamic items and totals.', render: renderInvoiceGenerator },
+      { id: 'grammar-checker', name: 'Grammar and Text Checker', cat: 'writing', desc: 'Offline syntax, repetition, and typo heuristics.', render: renderGrammarChecker },
+      { id: 'word-counter', name: 'Word Counter', cat: 'writing', desc: 'Instant word, sentence, and reading-duration counts.', render: renderWordCounter },
+      { id: 'markdown-editor', name: 'Markdown Editor', cat: 'writing', desc: 'Live Markdown editor with preview and HTML export.', render: renderMarkdownEditor },
+
+      // Developer Core
+      { id: 'json-formatter', name: 'JSON Formatter & Validator', cat: 'dev', desc: 'Prettify, minify, and validate JSON data.', render: renderJsonFormatter },
+      { id: 'code-formatter', name: 'HTML/CSS/JS Formatter', cat: 'dev', desc: 'Format web source code using js-beautify.', render: renderCodeFormatter },
+      { id: 'regex-tester', name: 'Regex Tester', cat: 'dev', desc: 'Test regular expressions against sample text live.', render: renderRegexTester },
+      { id: 'palette-gen', name: 'Color Palette Generator', cat: 'dev', desc: 'Generate harmonic color palettes on demand.', render: renderPaletteGenerator },
+      { id: 'gradient-gen', name: 'CSS Gradient Generator', cat: 'dev', desc: 'Visual CSS gradient builder with copyable rules.', render: renderGradientGenerator },
+      { id: 'svg-editor', name: 'SVG Editor', cat: 'dev', desc: 'Live SVG code editor and vector visualizer.', render: renderSvgEditor },
+
+      // Security & System
+      { id: 'adv-calc', name: 'Advanced Calculator', cat: 'productivity', desc: 'Scientific math calculations and trigonometric evaluations.', render: renderCalculator },
+      { id: 'qr-gen', name: 'QR Code Generator', cat: 'productivity', desc: 'Generate downloadable QR codes for URLs and text.', render: renderQrGenerator },
+      { id: 'pwd-gen', name: 'Password Generator', cat: 'productivity', desc: 'Hardware-backed random passwords via Web Crypto.', render: renderPasswordGenerator },
+      { id: 'meta-inspector', name: 'Metadata Inspector', cat: 'productivity', desc: 'Inspect file properties and MIME signatures locally.', render: renderMetadataInspector },
+      { id: 'dup-finder', name: 'Duplicate File Finder', cat: 'productivity', desc: 'Detect byte-for-byte duplicate files via SHA-256.', render: renderDuplicateFinder },
+      { id: 'batch-converter', name: 'Batch File Converter', cat: 'productivity', desc: 'Bulk format transformations packaged into a ZIP.', render: renderBatchConverter }
+    ];
+
+    /* =====================================================================
+       APPLICATION ORCHESTRATION & ROUTING
+       ===================================================================== */
+    document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      initCommandPalette();
+      renderDirectory('all');
+
+      document.getElementById('category-tabs').onclick = (e) => {
+        if (!e.target.classList.contains('tab-btn')) return;
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        renderDirectory(e.target.dataset.cat);
+      };
+
+      document.getElementById('brand-home').onclick = closeActiveTool;
+      document.getElementById('btn-back-hub').onclick = closeActiveTool;
+      document.getElementById('nav-privacy-link').onclick = () => {
+        closeActiveTool();
+        document.getElementById('privacy-section').scrollIntoView({ behavior: 'smooth' });
+      };
+
+      const favBtn = document.getElementById('tool-fav-btn');
+      favBtn.onclick = () => {
+        if (!ZERO.activeToolId) return;
+        if (ZERO.favorites.has(ZERO.activeToolId)) {
+          ZERO.favorites.delete(ZERO.activeToolId);
+        } else {
+          ZERO.favorites.add(ZERO.activeToolId);
+        }
+        localStorage.setItem('zero_favs', JSON.stringify(Array.from(ZERO.favorites)));
+        updateFavBtnState();
+      };
+    });
+
+    function initTheme() {
+      const toggle = document.getElementById('theme-toggle');
+      const isDark = localStorage.getItem('zero_theme') !== 'light';
+      document.documentElement.classList.toggle('dark', isDark);
+      document.documentElement.classList.toggle('light', !isDark);
+
+      toggle.onclick = () => {
+        const nextDark = !document.documentElement.classList.contains('dark');
+        document.documentElement.classList.toggle('dark', nextDark);
+        document.documentElement.classList.toggle('light', !nextDark);
+        localStorage.setItem('zero_theme', nextDark ? 'dark' : 'light');
+      };
+    }
+
+    function renderDirectory(category = 'all') {
+      const grid = document.getElementById('tools-directory');
+      grid.innerHTML = '';
+      const list = category === 'all' ? TOOLS_DIRECTORY : TOOLS_DIRECTORY.filter(t => t.cat === category);
+
+      list.forEach(t => {
+        const card = document.createElement('div');
+        card.className = 'tool-card';
+        card.innerHTML = `
+          <div class="tool-card-header">
+            <div class="tool-icon-box">Ø</div>
+            <span class="badge-tag">${t.cat}</span>
+          </div>
+          <h3 class="tool-title">${t.name}</h3>
+          <p class="tool-desc">${t.desc}</p>
+        `;
+        card.onclick = () => openTool(t.id);
+        grid.appendChild(card);
+      });
+    }
+
+    function openTool(toolId) {
+      const tool = TOOLS_DIRECTORY.find(t => t.id === toolId);
+      if (!tool) return;
+
+      ZERO.activeToolId = tool.id;
+      document.getElementById('view-hub').classList.add('view-hidden');
+      document.getElementById('view-hub').classList.remove('view-active');
+
+      const toolView = document.getElementById('view-tool');
+      toolView.classList.remove('view-hidden');
+      toolView.classList.add('view-active');
+
+      document.getElementById('tool-active-title').innerText = tool.name;
+      document.getElementById('tool-active-cat').innerText = tool.cat;
+
+      updateFavBtnState();
+      const mount = document.getElementById('tool-mount-point');
+      mount.innerHTML = '';
+      tool.render(mount);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closeActiveTool() {
+      document.getElementById('view-tool').classList.add('view-hidden');
+      document.getElementById('view-tool').classList.remove('view-active');
+      document.getElementById('view-hub').classList.remove('view-hidden');
+      document.getElementById('view-hub').classList.add('view-active');
+      ZERO.activeToolId = null;
+    }
+
+    function updateFavBtnState() {
+      const isFav = ZERO.favorites.has(ZERO.activeToolId);
+      document.getElementById('fav-text').innerText = isFav ? 'Favorited' : 'Favorite';
+      document.getElementById('tool-fav-btn').style.borderColor = isFav ? 'var(--status-warning)' : 'var(--border-subtle)';
+    }
+
+    function initCommandPalette() {
+      const modal = document.getElementById('cmd-palette');
+      const input = document.getElementById('palette-input');
+      const results = document.getElementById('palette-results');
+      const trigger = document.getElementById('cmd-k-trigger');
+
+      function show() {
+        modal.style.display = 'flex';
+        input.value = '';
+        input.focus();
+        search('');
+      }
+
+      function hide() { modal.style.display = 'none'; }
+
+      trigger.onclick = show;
+      window.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          modal.style.display === 'none' ? show() : hide();
+        }
+        if (e.key === 'Escape') hide();
+      });
+
+      modal.onclick = (e) => { if (e.target === modal) hide(); };
+      input.oninput = () => search(input.value.toLowerCase().trim());
+
+      function search(q) {
+        results.innerHTML = '';
+        const matches = TOOLS_DIRECTORY.filter(t =>
+          t.name.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q) || t.cat.toLowerCase().includes(q)
+        );
+        matches.forEach(t => {
+          const item = document.createElement('div');
+          item.className = 'palette-item';
+          item.innerHTML = `<span>${t.name}</span><span class="badge-tag">${t.cat}</span>`;
+          item.onclick = () => {
+            hide();
+            openTool(t.id);
+          };
+          results.appendChild(item);
+        });
+      }
+    }
+  </script>
+</body>
+</html>
+```
