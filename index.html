@@ -7,6 +7,105 @@
   <meta name="description" content="30 Ultra-modern client-side tools shielded by dynamic interactive animations. 100% in-memory sandbox.">
   <meta name="theme-color" content="#030509">
 
+  <!-- ==================== HARDCORE ANTI-INSPECT SHIELD ==================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // 1. Context Menu (Right Click) Disable
+      document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+        return false;
+      }, { capture: true });
+
+      // 2. Block Critical Inspection Shortcuts
+      window.addEventListener('keydown', function (e) {
+        const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+        const ctrlKey = isMac ? e.metaKey : e.ctrlKey;
+
+        // F12
+        if (e.keyCode === 123) {
+          killEvent(e);
+        }
+        // Ctrl+Shift+I (Inspect), Ctrl+Shift+J (Console), Ctrl+Shift+C (Element picker)
+        if (ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+          killEvent(e);
+        }
+        // Ctrl+U (View Source)
+        if (ctrlKey && (e.keyCode === 85 || e.key === 'u' || e.key === 'U')) {
+          killEvent(e);
+        }
+        // Ctrl+S (Save Page)
+        if (ctrlKey && (e.keyCode === 83 || e.key === 's' || e.key === 'S')) {
+          killEvent(e);
+        }
+      }, { capture: true });
+
+      function killEvent(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        return false;
+      }
+
+      // 3. Infinite Debugger Loop (DevTools Freeze Trap)
+      setInterval(function () {
+        (function antiDebug(i) {
+          try {
+            if (('' + i / i).length !== 1 || i === 0) {
+              (function () {}.constructor('debugger')());
+            } else {
+              (function () {}.constructor('debugger')());
+            }
+          } catch (err) {}
+          antiDebug(++i);
+        })(0);
+      }, 50);
+
+      // 4. DevTools Active Detection via Viewport & Console Timing
+      let devtoolsOpen = false;
+      const threshold = 160;
+
+      function checkDevTools() {
+        const widthDiff = window.outerWidth - window.innerWidth > threshold;
+        const heightDiff = window.outerHeight - window.innerHeight > threshold;
+
+        if (widthDiff || heightDiff) {
+          if (!devtoolsOpen) {
+            devtoolsOpen = true;
+            triggerDefense();
+          }
+        }
+      }
+
+      // Detection via Object toString trigger
+      const element = new Image();
+      Object.defineProperty(element, 'id', {
+        get: function () {
+          devtoolsOpen = true;
+          triggerDefense();
+        }
+      });
+
+      function triggerDefense() {
+        document.body.innerHTML = `
+          <div style="background:#030509; color:#ef4444; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; font-family:sans-serif; text-align:center; padding:20px;">
+            <h1 style="font-size:2rem; margin-bottom:10px;">INSPECTION DETECTED</h1>
+            <p style="color:#94a3b8;">Security sandbox locked. Please close Developer Tools and refresh.</p>
+          </div>
+        `;
+      }
+
+      setInterval(() => {
+        checkDevTools();
+        console.log('%c', element);
+        console.clear();
+      }, 500);
+
+    })();
+  </script>
+  <!-- ==================== END ANTI-INSPECT SHIELD ==================== -->
+
   <!-- ==================== PWA META & MANIFEST ==================== -->
   <link rel="manifest" href="manifest.json">
   <meta name="mobile-web-app-capable" content="yes">
@@ -75,9 +174,10 @@
       overflow-x: hidden;
       letter-spacing: -0.015em;
       user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
     }
 
-    /* TOP SIGNATURE BAR */
     .top-sujata-bar {
       width: 100%;
       text-align: center;
@@ -94,7 +194,6 @@
       text-shadow: 0 0 15px rgba(99, 102, 241, 0.6);
     }
 
-    /* Hardware Animated Background Canvas */
     #live-canvas {
       position: fixed;
       inset: 0;
@@ -125,7 +224,6 @@
       100% { transform: translateY(50px) scale(1.08); }
     }
 
-    /* Glass Header */
     .navbar {
       position: sticky;
       top: 0;
@@ -205,7 +303,6 @@
       font-size: 0.75rem;
     }
 
-    /* PWA Install Button */
     .pwa-install-btn {
       display: none;
       align-items: center;
@@ -228,7 +325,6 @@
       box-shadow: 0 4px 20px var(--glow-accent);
     }
 
-    /* Main Container */
     #app-root {
       flex: 1;
       max-width: 1320px;
@@ -249,7 +345,6 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* Hero */
     .hero {
       text-align: center;
       padding: 2.5rem 1rem 3rem;
@@ -301,7 +396,6 @@
       line-height: 1.65;
     }
 
-    /* Category Nav */
     .category-nav {
       display: flex;
       justify-content: center;
@@ -331,7 +425,6 @@
       box-shadow: 0 4px 20px var(--glow-accent);
     }
 
-    /* 30 TOOL GRID WITH HIDDEN REVEAL ANIMATIONS */
     .tool-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
@@ -359,7 +452,6 @@
       box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.7), 0 0 30px rgba(99, 102, 241, 0.25);
     }
 
-    /* THE HIDDEN VEIL / SHROUD ANIMATION */
     .card-veil {
       position: absolute;
       inset: 0;
@@ -427,7 +519,6 @@
       50% { opacity: 1; }
     }
 
-    /* ON HOVER: UNVEIL ANIMATION REVEALS THE TOOL */
     .tool-card:hover .card-veil {
       transform: translateY(-105%) scale(0.95);
       opacity: 0;
@@ -493,7 +584,6 @@
       color: var(--accent);
     }
 
-    /* Tool Viewport Layout */
     .viewport-header {
       display: flex;
       align-items: center;
@@ -534,7 +624,6 @@
       position: relative;
     }
 
-    /* Dropzone */
     .dropzone-laser {
       position: relative;
       border: 2px dashed rgba(255, 255, 255, 0.14);
@@ -554,7 +643,6 @@
       box-shadow: 0 0 30px rgba(99, 102, 241, 0.15);
     }
 
-    /* Action Buttons */
     .action-btn {
       background: var(--accent-gradient);
       color: #ffffff;
@@ -616,7 +704,6 @@
       box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
     }
 
-    /* Modal / Command Palette */
     .cmd-backdrop {
       position: fixed;
       inset: 0;
@@ -648,7 +735,6 @@
       outline: none;
     }
 
-    /* Toast */
     .toast-tray {
       position: fixed;
       bottom: 2rem;
@@ -671,15 +757,12 @@
   </style>
 </head>
 <body>
-  <!-- TOP SIGNATURE -->
   <div class="top-sujata-bar">from SUJATA</div>
 
-  <!-- Hardware Canvas Particles -->
   <canvas id="live-canvas"></canvas>
   <div class="aurora-orb orb-1"></div>
   <div class="aurora-orb orb-2"></div>
 
-  <!-- NAVBAR -->
   <header class="navbar">
     <div class="nav-inner">
       <div class="brand-wrap" id="brand-home">
@@ -694,7 +777,6 @@
       </button>
 
       <div style="display:flex; align-items:center; gap:12px;">
-        <!-- PWA INSTALL PROMPT BUTTON -->
         <button id="pwa-install-btn" class="pwa-install-btn">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span>Install App</span>
@@ -708,9 +790,7 @@
     </div>
   </header>
 
-  <!-- APP VIEWPORT -->
   <main id="app-root">
-    <!-- HUB VIEW -->
     <section id="view-hub" class="view-active">
       <div class="hero">
         <div class="live-badge">
@@ -723,7 +803,6 @@
         </p>
       </div>
 
-      <!-- Category Filter Tabs -->
       <nav class="category-nav" id="category-tabs">
         <button class="cat-btn active" data-cat="all">All Tools (30)</button>
         <button class="cat-btn" data-cat="pdf">PDF Engine (6)</button>
@@ -733,11 +812,9 @@
         <button class="cat-btn" data-cat="productivity">Security & OS (6)</button>
       </nav>
 
-      <!-- 30 Tools Dynamic Cards Grid -->
       <div class="tool-grid" id="tools-directory"></div>
     </section>
 
-    <!-- MOUNTED TOOL VIEW -->
     <section id="view-tool" class="view-hidden">
       <div class="viewport-header">
         <button id="btn-back-hub" class="back-btn">
@@ -754,7 +831,6 @@
     </section>
   </main>
 
-  <!-- COMMAND PALETTE (CMD+K) -->
   <div class="cmd-backdrop" id="cmd-palette" style="display:none;">
     <div class="cmd-card">
       <input type="text" class="cmd-search-input" id="palette-input" placeholder="Type a tool name to quick launch..." autocomplete="off">
@@ -765,9 +841,6 @@
   <div id="toast-tray" class="toast-tray"></div>
 
   <script>
-    /* =====================================================================
-       PWA REGISTRATION & OFFLINE ENGINE
-       ===================================================================== */
     let deferredPrompt = null;
     const installBtn = document.getElementById('pwa-install-btn');
 
@@ -793,7 +866,6 @@
       ZERO.toast('ZERO PRO successfully installed on your device!', 'success');
     });
 
-    // Network Status Tracking
     window.addEventListener('online', () => {
       document.getElementById('network-pulse').style.background = '#10b981';
       document.getElementById('network-status').innerText = 'ONLINE / CACHED';
@@ -805,7 +877,6 @@
       ZERO.toast('Operating in offline memory sandbox', 'warning');
     });
 
-    // Register Service Worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js').then((reg) => {
@@ -816,9 +887,6 @@
       });
     }
 
-    /* =====================================================================
-       ZERO PRO RUNTIME KERNEL & BACKGROUND CANVAS
-       ===================================================================== */
     const ZERO = {
       activeToolId: null,
 
@@ -866,7 +934,6 @@
       window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
     }
 
-    // Dynamic Live Canvas
     (function initBackgroundCanvas() {
       const canvas = document.getElementById('live-canvas');
       const ctx = canvas.getContext('2d');
@@ -919,10 +986,6 @@
       }
       loop();
     })();
-
-    /* =====================================================================
-       ALL 30 UTILITIES (FULL ENGINE RESTORED)
-       ===================================================================== */
 
     // 1. PDF Merger
     function renderPdfMerger(mount) {
@@ -2042,11 +2105,7 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
       };
     }
 
-    /* =====================================================================
-       ALL 30 UTILITIES DIRECTORY REGISTRY
-       ===================================================================== */
     const TOOLS = [
-      // PDF Engine
       { id: 'pdf-merger', name: 'PDF Merger', cat: 'pdf', desc: 'Combine multiple PDFs into a single clean file.', render: renderPdfMerger, icon: '◫' },
       { id: 'pdf-splitter', name: 'PDF Splitter', cat: 'pdf', desc: 'Extract custom page ranges into a separate document.', render: renderPdfSplitter, icon: '✂' },
       { id: 'pdf-compressor', name: 'PDF Compressor', cat: 'pdf', desc: 'In-memory JPEG quantization downsampler.', render: renderPdfCompressor, icon: '⚡' },
@@ -2054,7 +2113,6 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
       { id: 'pdf-to-img', name: 'PDF to Image', cat: 'pdf', desc: 'Render pages into high-res PNG pictures.', render: renderPdfToImage, icon: '🖼' },
       { id: 'img-to-pdf', name: 'Image to PDF', cat: 'pdf', desc: 'Compile PNG and JPEG pictures into a master PDF.', render: renderImageToPdf, icon: '🗎' },
 
-      // Image Studio
       { id: 'bg-remover', name: 'Background Isolator', cat: 'image', desc: 'Client edge-contour matting and eyedropper isolation.', render: renderBgRemover, icon: '✦' },
       { id: 'img-compressor', name: 'Image Compressor', cat: 'image', desc: 'Ultra-fast in-memory WebP quantization.', render: renderImageCompressor, icon: '🗜' },
       { id: 'img-resizer', name: 'Image Resizer', cat: 'image', desc: 'Pixel-perfect dimension resizing with ratio lock.', render: renderImageResizer, icon: '⤢' },
@@ -2062,7 +2120,6 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
       { id: 'img-cropper', name: 'Image Cropper', cat: 'image', desc: 'Interactive bounding box visual crop engine.', render: renderImageCropper, icon: '⧉' },
       { id: 'metadata-remover', name: 'EXIF Metadata Remover', cat: 'image', desc: 'Purge GPS location and camera signatures.', render: renderMetadataRemover, icon: '◌' },
 
-      // Document Suite
       { id: 'resume-builder', name: 'ATS Resume Builder', cat: 'writing', desc: 'Clean, printable corporate resume builder.', render: renderResumeBuilder, icon: '☰' },
       { id: 'ats-checker', name: 'ATS Keyword Checker', cat: 'writing', desc: 'Compare resume keyword density against job descriptions.', render: renderAtsChecker, icon: '🎯' },
       { id: 'invoice-gen', name: 'Invoice Generator', cat: 'writing', desc: 'Generate printable invoices with automated sums.', render: renderInvoiceGenerator, icon: '🧾' },
@@ -2070,7 +2127,6 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
       { id: 'word-counter', name: 'Word & Read Time Counter', cat: 'writing', desc: 'Instant character, sentence, and duration stats.', render: renderWordCounter, icon: '🔢' },
       { id: 'markdown-editor', name: 'Live Markdown Studio', cat: 'writing', desc: 'Reactive editor with instant HTML export.', render: renderMarkdownEditor, icon: 'M↓' },
 
-      // Dev Core
       { id: 'json-formatter', name: 'JSON Prettifier', cat: 'dev', desc: 'Prettify, minify, and validate JSON data structures.', render: renderJsonFormatter, icon: '{ }' },
       { id: 'code-formatter', name: 'HTML/CSS/JS Beautifier', cat: 'dev', desc: 'Format source code using embedded js-beautify.', render: renderCodeFormatter, icon: '</>' },
       { id: 'regex-tester', name: 'Regex Playground', cat: 'dev', desc: 'Real-time regular expression match evaluator.', render: renderRegexTester, icon: '.*' },
@@ -2078,7 +2134,6 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
       { id: 'gradient-gen', name: 'CSS Gradient Studio', cat: 'dev', desc: 'Visual linear-gradient creator with rule export.', render: renderGradientGenerator, icon: '🌈' },
       { id: 'svg-editor', name: 'SVG Vector Visualizer', cat: 'dev', desc: 'Live vector code editor and visual preview.', render: renderSvgEditor, icon: '📐' },
 
-      // Security & System
       { id: 'adv-calc', name: 'Scientific Calculator', cat: 'productivity', desc: 'Trigonometric and mathematical expression evaluator.', render: renderCalculator, icon: '🖩' },
       { id: 'qr-gen', name: 'Vector QR Studio', cat: 'productivity', desc: 'Generate downloadable QR codes for links and text.', render: renderQrGenerator, icon: '▣' },
       { id: 'pwd-gen', name: 'Crypto Password Engine', cat: 'productivity', desc: 'Hardware-backed random passwords via Web Crypto.', render: renderPasswordGenerator, icon: '🔑' },
@@ -2110,14 +2165,12 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
         const card = document.createElement('div');
         card.className = 'tool-card';
         card.innerHTML = `
-          <!-- HIDDEN VEIL OVERLAY WITH SCANNING BEAM -->
           <div class="card-veil">
             <span class="veil-badge">✦ VEILED MODULE</span>
             <div class="veil-title">${t.name}</div>
             <span class="veil-hint">[ HOVER TO UNVEIL ]</span>
           </div>
 
-          <!-- UNDERLYING REVEALED CONTENT -->
           <div class="card-top">
             <div class="card-icon-box">${t.icon}</div>
             <span class="card-tag">${t.cat}</span>
