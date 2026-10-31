@@ -1,44 +1,29 @@
+```html
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>ZERO PRO — Autonomous Digital Suite</title>
-  <meta name="description" content="30 Ultra-modern client-side tools shielded by dynamic interactive animations. 100% in-memory sandbox.">
+  <title>ZERO PRO 2.0 — Everything You Need. Nothing You Pay.</title>
+  <meta name="description" content="Professional, privacy-first, offline client-side digital workstation. 30 power tools, batch execution, visual tool chaining, and zero server storage.">
   <meta name="theme-color" content="#030509">
 
   <!-- ==================== HARDCORE ANTI-INSPECT SHIELD ==================== -->
   <script>
     (function () {
       'use strict';
-
-      // 1. Context Menu (Right Click) Disable
       document.addEventListener('contextmenu', function (e) {
         e.preventDefault();
         return false;
       }, { capture: true });
 
-      // 2. Block Critical Inspection Shortcuts
       window.addEventListener('keydown', function (e) {
         const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
         const ctrlKey = isMac ? e.metaKey : e.ctrlKey;
-
-        // F12
-        if (e.keyCode === 123) {
-          killEvent(e);
-        }
-        // Ctrl+Shift+I (Inspect), Ctrl+Shift+J (Console), Ctrl+Shift+C (Element picker)
-        if (ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
-          killEvent(e);
-        }
-        // Ctrl+U (View Source)
-        if (ctrlKey && (e.keyCode === 85 || e.key === 'u' || e.key === 'U')) {
-          killEvent(e);
-        }
-        // Ctrl+S (Save Page)
-        if (ctrlKey && (e.keyCode === 83 || e.key === 's' || e.key === 'S')) {
-          killEvent(e);
-        }
+        if (e.keyCode === 123) killEvent(e);
+        if (ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) killEvent(e);
+        if (ctrlKey && (e.keyCode === 85 || e.key === 'u' || e.key === 'U')) killEvent(e);
+        if (ctrlKey && (e.keyCode === 83 || e.key === 's' || e.key === 'S')) killEvent(e);
       }, { capture: true });
 
       function killEvent(e) {
@@ -48,7 +33,6 @@
         return false;
       }
 
-      // 3. Infinite Debugger Loop (DevTools Freeze Trap)
       setInterval(function () {
         (function antiDebug(i) {
           try {
@@ -62,14 +46,11 @@
         })(0);
       }, 50);
 
-      // 4. DevTools Active Detection via Viewport & Console Timing
       let devtoolsOpen = false;
       const threshold = 160;
-
       function checkDevTools() {
         const widthDiff = window.outerWidth - window.innerWidth > threshold;
         const heightDiff = window.outerHeight - window.innerHeight > threshold;
-
         if (widthDiff || heightDiff) {
           if (!devtoolsOpen) {
             devtoolsOpen = true;
@@ -78,7 +59,6 @@
         }
       }
 
-      // Detection via Object toString trigger
       const element = new Image();
       Object.defineProperty(element, 'id', {
         get: function () {
@@ -101,7 +81,6 @@
         console.log('%c', element);
         console.clear();
       }, 500);
-
     })();
   </script>
   <!-- ==================== END ANTI-INSPECT SHIELD ==================== -->
@@ -111,7 +90,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="ZERO PRO">
+  <meta name="apple-mobile-web-app-title" content="ZERO PRO 2.0">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236366f1'/><text x='50%' y='68%' font-size='60' font-weight='800' fill='white' text-anchor='middle'>Ø</text></svg>">
   <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236366f1'/><text x='50%' y='68%' font-size='60' font-weight='800' fill='white' text-anchor='middle'>Ø</text></svg>">
 
@@ -133,16 +112,16 @@
   <style>
     :root {
       --bg-base: #030509;
-      --bg-surface: rgba(11, 15, 26, 0.75);
-      --bg-card: rgba(15, 21, 37, 0.6);
-      --bg-input: rgba(7, 10, 19, 0.85);
+      --bg-surface: rgba(11, 15, 26, 0.78);
+      --bg-card: rgba(15, 21, 37, 0.65);
+      --bg-input: rgba(7, 10, 19, 0.9);
       --border-subtle: rgba(255, 255, 255, 0.08);
       --border-highlight: rgba(99, 102, 241, 0.5);
       --accent: #6366f1;
       --accent-cyan: #06b6d4;
       --accent-pink: #ec4899;
       --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #06b6d4 100%);
-      --glow-accent: rgba(99, 102, 241, 0.25);
+      --glow-accent: rgba(99, 102, 241, 0.28);
       --text-main: #f8fafc;
       --text-secondary: #94a3b8;
       --text-muted: #64748b;
@@ -153,7 +132,7 @@
       --radius-md: 14px;
       --radius-lg: 22px;
       --radius-full: 9999px;
-      --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
       --spring: cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -187,7 +166,7 @@
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: #a5b4fc;
-      background: linear-gradient(90deg, transparent 0%, rgba(99, 102, 241, 0.15) 50%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(99, 102, 241, 0.18) 50%, transparent 100%);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       position: relative;
       z-index: 60;
@@ -230,18 +209,18 @@
       z-index: 50;
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      background: rgba(3, 5, 9, 0.75);
+      background: rgba(3, 5, 9, 0.82);
       border-bottom: 1px solid var(--border-subtle);
     }
     .nav-inner {
-      max-width: 1320px;
-      height: 70px;
+      max-width: 1400px;
+      height: 72px;
       margin: 0 auto;
       padding: 0 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1.5rem;
+      gap: 1.25rem;
     }
 
     .brand-wrap {
@@ -255,8 +234,8 @@
       cursor: pointer;
     }
     .brand-symbol {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       border-radius: var(--radius-sm);
       background: var(--accent-gradient);
       display: flex;
@@ -271,9 +250,41 @@
       transform: rotate(180deg) scale(1.08);
     }
 
+    .nav-tabs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.03);
+      padding: 4px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-subtle);
+    }
+    .nav-tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 0.825rem;
+      font-weight: 600;
+      padding: 0.45rem 1rem;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.25s var(--spring);
+    }
+    .nav-tab-btn.active, .nav-tab-btn:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+    }
+    .nav-tab-btn.active {
+      background: var(--accent);
+      box-shadow: 0 0 16px var(--glow-accent);
+    }
+
     .search-trigger {
       flex: 1;
-      max-width: 420px;
+      max-width: 360px;
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-full);
@@ -282,7 +293,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 0.875rem;
+      font-size: 0.85rem;
       cursor: pointer;
       backdrop-filter: blur(12px);
       transition: all 0.3s var(--spring);
@@ -327,10 +338,10 @@
 
     #app-root {
       flex: 1;
-      max-width: 1320px;
+      max-width: 1400px;
       width: 100%;
       margin: 0 auto;
-      padding: 2.5rem 1.5rem 5rem;
+      padding: 2rem 1.5rem 5rem;
       position: relative;
       z-index: 1;
     }
@@ -338,17 +349,17 @@
     .view-hidden { display: none !important; }
     .view-active {
       display: block;
-      animation: viewSlideIn 0.4s var(--spring);
+      animation: viewSlideIn 0.35s var(--spring);
     }
     @keyframes viewSlideIn {
-      from { opacity: 0; transform: translateY(16px) scale(0.99); }
+      from { opacity: 0; transform: translateY(14px) scale(0.99); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .hero {
       text-align: center;
-      padding: 2.5rem 1rem 3rem;
-      max-width: 860px;
+      padding: 2rem 1rem 2.5rem;
+      max-width: 900px;
       margin: 0 auto;
     }
     .live-badge {
@@ -362,7 +373,7 @@
       font-size: 0.8rem;
       font-weight: 600;
       color: #c7d2fe;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
       box-shadow: 0 0 25px rgba(99, 102, 241, 0.2);
     }
     .live-pulse {
@@ -378,11 +389,11 @@
       50% { opacity: 0.4; transform: scale(1.3); }
     }
     .hero-title {
-      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
       font-weight: 800;
       line-height: 1.12;
       letter-spacing: -0.04em;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1rem;
     }
     .gradient-text {
       background: var(--accent-gradient);
@@ -391,9 +402,9 @@
       text-shadow: 0 0 40px rgba(99, 102, 241, 0.35);
     }
     .hero-subtitle {
-      font-size: 1.15rem;
+      font-size: 1.12rem;
       color: var(--text-secondary);
-      line-height: 1.65;
+      line-height: 1.6;
     }
 
     .category-nav {
@@ -401,10 +412,10 @@
       justify-content: center;
       gap: 0.5rem;
       flex-wrap: wrap;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2.25rem;
     }
     .cat-btn {
-      padding: 0.65rem 1.25rem;
+      padding: 0.6rem 1.2rem;
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-full);
@@ -445,11 +456,33 @@
       -webkit-backdrop-filter: blur(20px);
       transition: transform 0.4s var(--spring), border-color 0.4s var(--spring), box-shadow 0.4s var(--spring);
     }
-
     .tool-card:hover {
       transform: translateY(-6px) scale(1.02);
       border-color: var(--border-highlight);
       box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.7), 0 0 30px rgba(99, 102, 241, 0.25);
+    }
+
+    .card-fav-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 10;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .card-fav-btn.favorited {
+      color: #f59e0b;
+      border-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.15);
     }
 
     .card-veil {
@@ -468,7 +501,6 @@
       transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.4s ease;
       overflow: hidden;
     }
-    
     .card-veil::before {
       content: '';
       position: absolute;
@@ -484,7 +516,6 @@
       0% { transform: translateY(-70%) rotate(45deg); }
       100% { transform: translateY(70%) rotate(45deg); }
     }
-
     .veil-badge {
       display: inline-flex;
       align-items: center;
@@ -500,25 +531,17 @@
       text-transform: uppercase;
       box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
     }
-
     .veil-title {
       font-size: 1.15rem;
       font-weight: 700;
       color: var(--text-main);
       text-align: center;
     }
-
     .veil-hint {
       font-size: 0.75rem;
       color: var(--accent-cyan);
       font-family: var(--font-mono);
-      animation: hintPulse 2s infinite ease-in-out;
     }
-    @keyframes hintPulse {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
-    }
-
     .tool-card:hover .card-veil {
       transform: translateY(-105%) scale(0.95);
       opacity: 0;
@@ -528,7 +551,7 @@
     .card-top {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 12px;
       margin-bottom: 1.25rem;
     }
     .card-icon-box {
@@ -628,7 +651,7 @@
       position: relative;
       border: 2px dashed rgba(255, 255, 255, 0.14);
       border-radius: var(--radius-md);
-      padding: 3.5rem 2rem;
+      padding: 3rem 2rem;
       text-align: center;
       background: rgba(10, 14, 25, 0.5);
       cursor: pointer;
@@ -636,7 +659,7 @@
       transition: all 0.3s var(--spring);
       margin-bottom: 1.5rem;
     }
-    .dropzone-laser:hover {
+    .dropzone-laser:hover, .dropzone-laser.dragover {
       border-color: var(--accent);
       background: rgba(99, 102, 241, 0.08);
       transform: scale(0.995);
@@ -648,8 +671,8 @@
       color: #ffffff;
       border: none;
       border-radius: var(--radius-full);
-      padding: 0.85rem 1.85rem;
-      font-size: 0.95rem;
+      padding: 0.8rem 1.75rem;
+      font-size: 0.925rem;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
@@ -675,8 +698,8 @@
       color: var(--text-main);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-full);
-      padding: 0.85rem 1.5rem;
-      font-size: 0.95rem;
+      padding: 0.8rem 1.4rem;
+      font-size: 0.925rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.25s var(--spring);
@@ -702,6 +725,76 @@
     input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+    }
+
+    /* Queue & Batch Management Cards */
+    .batch-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-input);
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 8px;
+    }
+    .batch-status-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+    }
+    .status-queued { background: rgba(148, 163, 184, 0.15); color: #94a3b8; }
+    .status-processing { background: rgba(99, 102, 241, 0.2); color: #818cf8; }
+    .status-done { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .status-error { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+
+    /* Workflow Visual Builder */
+    .flow-chain-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 2rem;
+    }
+    .flow-node {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+    .flow-node::after {
+      content: '↓';
+      position: absolute;
+      bottom: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.2rem;
+      color: var(--accent);
+      font-weight: 900;
+    }
+    .flow-node:last-child::after {
+      content: '';
+    }
+
+    /* Preset Management Drawer */
+    .preset-chip {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border-subtle);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .preset-chip:hover {
+      border-color: var(--accent);
+      background: rgba(99, 102, 241, 0.15);
     }
 
     .cmd-backdrop {
@@ -767,8 +860,16 @@
     <div class="nav-inner">
       <div class="brand-wrap" id="brand-home">
         <div class="brand-symbol">Ø</div>
-        <span>ZERO PRO</span>
+        <span>ZERO PRO <small style="font-size:0.65rem; color:var(--accent-cyan); font-weight:800; vertical-align:super;">2.0</small></span>
       </div>
+
+      <nav class="nav-tabs">
+        <button class="nav-tab-btn active" id="tab-btn-hub">Tools Directory</button>
+        <button class="nav-tab-btn" id="tab-btn-workspace">Smart Workspace</button>
+        <button class="nav-tab-btn" id="tab-btn-flow">Chaining Studio</button>
+        <button class="nav-tab-btn" id="tab-btn-history">Processing History</button>
+        <button class="nav-tab-btn" id="tab-btn-privacy">Privacy Audit</button>
+      </nav>
 
       <button class="search-trigger" id="cmd-k-trigger">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -779,10 +880,10 @@
       <div style="display:flex; align-items:center; gap:12px;">
         <button id="pwa-install-btn" class="pwa-install-btn">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Install App</span>
+          <span>Install PWA</span>
         </button>
 
-        <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
+        <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
           <span class="live-pulse" id="network-pulse"></span>
           <span id="network-status">OFFLINE READY</span>
         </div>
@@ -791,15 +892,16 @@
   </header>
 
   <main id="app-root">
+    <!-- VIEW 1: Directory Hub -->
     <section id="view-hub" class="view-active">
       <div class="hero">
         <div class="live-badge">
           <span class="live-pulse"></span>
-          <span>PWA Standalone App • Zero Uploads • 30 Power Modules</span>
+          <span>Zero Server • 100% In-Memory Sandbox • Batch & Chaining Ready</span>
         </div>
-        <h1 class="hero-title">Ultra-Fast Digital Tools.<br><span class="gradient-text">Radical 10X Architecture.</span></h1>
+        <h1 class="hero-title">Everything You Need.<br><span class="gradient-text">Nothing You Pay.</span></h1>
         <p class="hero-subtitle">
-          Hover over any veiled module to trigger the holographic reveal animation.
+          Hover over any veiled module to trigger the holographic reveal animation. All file transformations execute strictly on device hardware.
         </p>
       </div>
 
@@ -815,22 +917,171 @@
       <div class="tool-grid" id="tools-directory"></div>
     </section>
 
+    <!-- VIEW 2: Active Tool Viewport -->
     <section id="view-tool" class="view-hidden">
       <div class="viewport-header">
         <button id="btn-back-hub" class="back-btn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-          <span>All 30 Tools</span>
+          <span>Return to Workspace</span>
         </button>
         <div style="text-align:center;">
           <h2 id="tool-active-title" style="font-size:1.6rem; font-weight:800;">Tool Name</h2>
           <span id="tool-active-cat" style="font-size:0.75rem; color:var(--accent); text-transform:uppercase; font-weight:700; letter-spacing:0.05em;">Curated Suite</span>
         </div>
-        <div style="width:120px;"></div>
+        <div id="tool-preset-container" style="display:flex; align-items:center; gap:8px;"></div>
       </div>
       <div id="tool-mount-point"></div>
     </section>
+
+    <!-- VIEW 3: Smart Workspace Dashboard -->
+    <section id="view-workspace" class="view-hidden">
+      <div class="tool-panel">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <h2 style="font-size:1.8rem; font-weight:800;">Personal Workspace Dashboard</h2>
+            <p style="color:var(--text-secondary); font-size:0.9rem;">Custom pinned utilities, frequency analysis, and quick access widgets.</p>
+          </div>
+          <button class="action-btn-secondary" id="btn-reset-workspace">Reset Widgets</button>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.5rem;" id="workspace-widgets-grid">
+          <!-- Widget: Favorite Tools -->
+          <div class="tool-panel" style="background:var(--bg-input);">
+            <h3 style="font-size:1.15rem; font-weight:700; margin-bottom:1rem; display:flex; align-items:center; gap:8px;">
+              <span style="color:#f59e0b;">★</span> Favorited Modules
+            </h3>
+            <div id="ws-favorites-list" style="display:flex; flex-direction:column; gap:8px;"></div>
+          </div>
+
+          <!-- Widget: Recently Executed -->
+          <div class="tool-panel" style="background:var(--bg-input);">
+            <h3 style="font-size:1.15rem; font-weight:700; margin-bottom:1rem; display:flex; align-items:center; gap:8px;">
+              <span style="color:var(--accent-cyan);">◷</span> Recently Used Tools
+            </h3>
+            <div id="ws-recent-list" style="display:flex; flex-direction:column; gap:8px;"></div>
+          </div>
+
+          <!-- Widget: Hardware & Sandbox Telemetry -->
+          <div class="tool-panel" style="background:var(--bg-input);">
+            <h3 style="font-size:1.15rem; font-weight:700; margin-bottom:1rem; display:flex; align-items:center; gap:8px;">
+              <span style="color:var(--status-success);">⚡</span> Performance Telemetry
+            </h3>
+            <div style="font-family:var(--font-mono); font-size:0.85rem; line-height:2; color:var(--text-secondary);">
+              <div>Concurrency Cores: <b id="stat-cores" style="color:var(--text-main);">0</b></div>
+              <div>Estimated Heap: <b id="stat-heap" style="color:var(--text-main);">In-Memory RAM</b></div>
+              <div>Network Sandboxing: <b style="color:var(--status-success);">Isolated Client Sandbox</b></div>
+              <div>Persistent DB: <b style="color:var(--accent-cyan);">IndexedDB 2.0</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 4: Visual Tool Chaining Studio -->
+    <section id="view-flow" class="view-hidden">
+      <div class="tool-panel">
+        <div style="margin-bottom:2rem;">
+          <h2 style="font-size:1.8rem; font-weight:800;">Visual Chaining Studio</h2>
+          <p style="color:var(--text-secondary); font-size:0.9rem;">Sequence multiple tools together into an autonomous pipeline. Outputs pipe into subsequent steps automatically.</p>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-bottom:1.5rem; flex-wrap:wrap;">
+          <select id="flow-select-tool" style="max-width:280px;">
+            <option value="img-resizer">Image Resizer</option>
+            <option value="img-compressor">Image Compressor</option>
+            <option value="img-converter">Format Converter (WebP)</option>
+          </select>
+          <button class="action-btn-secondary" id="btn-flow-add-step">+ Add Step to Chain</button>
+          <button class="action-btn" id="btn-flow-execute">Execute Complete Workflow</button>
+        </div>
+
+        <div class="dropzone-laser" id="flow-drop">
+          <h3 style="font-size:1.2rem; font-weight:800; margin-bottom:6px;">Drop Root Files for Workflow Chain</h3>
+          <p style="color:var(--text-muted); font-size:0.85rem;">Input file will feed Step 1, flow through each transformer, and produce a ZIP</p>
+          <input type="file" id="flow-file-input" multiple accept="image/*" style="display:none">
+        </div>
+
+        <div id="flow-chain-nodes" class="flow-chain-container"></div>
+        <div id="flow-execution-log" style="display:none; background:var(--bg-input); padding:1.25rem; border-radius:var(--radius-sm); font-family:var(--font-mono); font-size:0.85rem; margin-top:1.5rem;"></div>
+      </div>
+    </section>
+
+    <!-- VIEW 5: Processing History & Analytics -->
+    <section id="view-history" class="view-hidden">
+      <div class="tool-panel">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <h2 style="font-size:1.8rem; font-weight:800;">Local Processing History</h2>
+            <p style="color:var(--text-secondary); font-size:0.9rem;">Client-side audit ledger of completed file transformations. Never sent to any server.</p>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="action-btn-secondary" id="btn-export-history">Export CSV</button>
+            <button class="action-btn-secondary" id="btn-clear-history" style="color:var(--status-danger);">Wipe History</button>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:12px; margin-bottom:1rem;">
+          <input type="text" id="history-filter" placeholder="Filter operations by tool or file name..." style="max-width:340px;">
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+            <thead>
+              <tr style="border-bottom:1px solid var(--border-subtle); text-align:left; color:var(--text-muted);">
+                <th style="padding:10px;">Timestamp</th>
+                <th style="padding:10px;">Tool</th>
+                <th style="padding:10px;">Files Processed</th>
+                <th style="padding:10px;">Status</th>
+                <th style="padding:10px;">Payload Size</th>
+              </tr>
+            </thead>
+            <tbody id="history-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 6: Privacy Audit & Data Management -->
+    <section id="view-privacy" class="view-hidden">
+      <div class="tool-panel">
+        <div style="margin-bottom:2rem;">
+          <h2 style="font-size:1.8rem; font-weight:800;">Privacy & Memory Isolation Sandbox</h2>
+          <p style="color:var(--text-secondary); font-size:0.9rem;">ZERO PRO 2.0 maintains 0 telemetry, 0 tracking cookies, and 0 external storage endpoints.</p>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.5rem; margin-bottom:2rem;">
+          <div style="background:var(--bg-input); padding:1.5rem; border-radius:var(--radius-md); border:1px solid var(--border-subtle);">
+            <h4 style="font-size:1rem; margin-bottom:8px; color:var(--accent-cyan);">Zero Server Processing</h4>
+            <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.6;">
+              Every PDF compile, image isolation, code format, and cryptographic digest executes inside the browser process on your physical machine.
+            </p>
+          </div>
+          <div style="background:var(--bg-input); padding:1.5rem; border-radius:var(--radius-md); border:1px solid var(--border-subtle);">
+            <h4 style="font-size:1rem; margin-bottom:8px; color:var(--status-success);">Automatic Resource Revocation</h4>
+            <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.6;">
+              Generated memory Blobs and Canvas objects are garbage-collected via automatic URL revocation cycles to prevent RAM exhaustion.
+            </p>
+          </div>
+          <div style="background:var(--bg-input); padding:1.5rem; border-radius:var(--radius-md); border:1px solid var(--border-subtle);">
+            <h4 style="font-size:1rem; margin-bottom:8px; color:var(--accent);">Hardware Cryptography</h4>
+            <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.6;">
+              Cryptographic keys and SHA-256 checks utilize the browser's hardware-backed <code style="font-family:var(--font-mono);">window.crypto.subtle</code> standard.
+            </p>
+          </div>
+        </div>
+
+        <div style="background:rgba(239, 68, 68, 0.05); border:1px solid rgba(239, 68, 68, 0.25); border-radius:var(--radius-md); padding:1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <h4 style="color:var(--status-danger); font-size:1rem; margin-bottom:4px;">Factory Wipe Workspace Storage</h4>
+            <p style="color:var(--text-secondary); font-size:0.85rem;">Clear all custom presets, processing history records, and workspace configurations.</p>
+          </div>
+          <button class="action-btn" id="btn-purge-storage" style="background:var(--status-danger);">Purge Sandbox Database</button>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <!-- Global Command Palette -->
   <div class="cmd-backdrop" id="cmd-palette" style="display:none;">
     <div class="cmd-card">
       <input type="text" class="cmd-search-input" id="palette-input" placeholder="Type a tool name to quick launch..." autocomplete="off">
@@ -841,54 +1092,120 @@
   <div id="toast-tray" class="toast-tray"></div>
 
   <script>
-    let deferredPrompt = null;
-    const installBtn = document.getElementById('pwa-install-btn');
+    /* ==========================================================================
+       ZERO PRO 2.0 — ARCHITECTURAL STORAGE & EVENT BUS ENGINE
+       ========================================================================== */
 
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      installBtn.style.display = 'inline-flex';
-    });
-
-    installBtn.addEventListener('click', async () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') {
-          installBtn.style.display = 'none';
-        }
-        deferredPrompt = null;
+    // 1. IndexedDB Persistent Layer
+    class ZeroDatabase {
+      constructor() {
+        this.dbName = 'ZeroPro2DB';
+        this.dbVersion = 1;
+        this.db = null;
       }
-    });
 
-    window.addEventListener('appinstalled', () => {
-      installBtn.style.display = 'none';
-      ZERO.toast('ZERO PRO successfully installed on your device!', 'success');
-    });
-
-    window.addEventListener('online', () => {
-      document.getElementById('network-pulse').style.background = '#10b981';
-      document.getElementById('network-status').innerText = 'ONLINE / CACHED';
-      ZERO.toast('Connected to network', 'info');
-    });
-    window.addEventListener('offline', () => {
-      document.getElementById('network-pulse').style.background = '#f59e0b';
-      document.getElementById('network-status').innerText = '100% OFFLINE ACTIVE';
-      ZERO.toast('Operating in offline memory sandbox', 'warning');
-    });
-
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').then((reg) => {
-          console.log('ZERO PWA Service Worker Registered:', reg.scope);
-        }).catch((err) => {
-          console.log('SW registration fallback active:', err);
+      async init() {
+        return new Promise((resolve, reject) => {
+          const req = indexedDB.open(this.dbName, this.dbVersion);
+          req.onupgradeneeded = (e) => {
+            const db = e.target.result;
+            if (!db.objectStoreNames.contains('history')) {
+              db.createObjectStore('history', { keyPath: 'id', autoIncrement: true });
+            }
+            if (!db.objectStoreNames.contains('presets')) {
+              db.createObjectStore('presets', { keyPath: 'id' });
+            }
+            if (!db.objectStoreNames.contains('workspace')) {
+              db.createObjectStore('workspace', { keyPath: 'key' });
+            }
+          };
+          req.onsuccess = (e) => {
+            this.db = e.target.result;
+            resolve(this.db);
+          };
+          req.onerror = (e) => reject(e);
         });
-      });
+      }
+
+      async addHistory(entry) {
+        if (!this.db) await this.init();
+        return new Promise((resolve) => {
+          const tx = this.db.transaction('history', 'readwrite');
+          const store = tx.objectStore('history');
+          entry.timestamp = new Date().toISOString();
+          store.add(entry);
+          tx.oncomplete = () => resolve(true);
+        });
+      }
+
+      async getHistory() {
+        if (!this.db) await this.init();
+        return new Promise((resolve) => {
+          const tx = this.db.transaction('history', 'readonly');
+          const store = tx.objectStore('history');
+          const req = store.getAll();
+          req.onsuccess = () => resolve(req.result.reverse());
+        });
+      }
+
+      async clearHistory() {
+        if (!this.db) await this.init();
+        return new Promise((resolve) => {
+          const tx = this.db.transaction('history', 'readwrite');
+          tx.objectStore('history').clear();
+          tx.oncomplete = () => resolve(true);
+        });
+      }
+
+      async savePreset(toolId, name, config) {
+        if (!this.db) await this.init();
+        return new Promise((resolve) => {
+          const tx = this.db.transaction('presets', 'readwrite');
+          tx.objectStore('presets').put({ id: `${toolId}__${name}`, toolId, name, config });
+          tx.oncomplete = () => resolve(true);
+        });
+      }
+
+      async getPresets(toolId) {
+        if (!this.db) await this.init();
+        return new Promise((resolve) => {
+          const tx = this.db.transaction('presets', 'readonly');
+          const store = tx.objectStore('presets');
+          const req = store.getAll();
+          req.onsuccess = () => resolve(req.result.filter(p => p.toolId === toolId));
+        });
+      }
+
+      async deletePreset(presetId) {
+        if (!this.db) await this.init();
+        return new Promise((resolve) => {
+          const tx = this.db.transaction('presets', 'readwrite');
+          tx.objectStore('presets').delete(presetId);
+          tx.oncomplete = () => resolve(true);
+        });
+      }
+
+      async purgeAll() {
+        if (!this.db) await this.init();
+        return new Promise((resolve) => {
+          const tx = this.db.transaction(['history', 'presets', 'workspace'], 'readwrite');
+          tx.objectStore('history').clear();
+          tx.objectStore('presets').clear();
+          tx.objectStore('workspace').clear();
+          tx.oncomplete = () => resolve(true);
+        });
+      }
     }
 
+    const DB = new ZeroDatabase();
+    DB.init();
+
+    // 2. Global Core Runtime
     const ZERO = {
       activeToolId: null,
+      favorites: JSON.parse(localStorage.getItem('zero_favs') || '[]'),
+      recentTools: JSON.parse(localStorage.getItem('zero_recent') || '[]'),
+      toolUsage: JSON.parse(localStorage.getItem('zero_usage') || '{}'),
 
       toast(msg, type = 'info') {
         const tray = document.getElementById('toast-tray');
@@ -912,6 +1229,17 @@
         setTimeout(() => URL.revokeObjectURL(url), 2500);
       },
 
+      async downloadZip(fileList, zipName = 'zero_archive.zip', onProgress = null) {
+        const zip = new JSZip();
+        fileList.forEach(item => {
+          zip.file(item.name, item.blob);
+        });
+        const content = await zip.generateAsync({ type: 'blob' }, (metadata) => {
+          if (onProgress) onProgress(metadata.percent);
+        });
+        ZERO.downloadBlob(content, zipName, 'application/zip');
+      },
+
       setupDropzone(dropEl, inputEl, onFiles) {
         dropEl.onclick = () => inputEl.click();
         dropEl.ondragover = (e) => { e.preventDefault(); dropEl.classList.add('dragover'); };
@@ -927,6 +1255,28 @@
             inputEl.value = '';
           }
         };
+      },
+
+      toggleFavorite(id, e) {
+        if (e) e.stopPropagation();
+        const idx = this.favorites.indexOf(id);
+        if (idx >= 0) {
+          this.favorites.splice(idx, 1);
+          ZERO.toast('Removed from favorites', 'info');
+        } else {
+          this.favorites.push(id);
+          ZERO.toast('Added to favorites!', 'success');
+        }
+        localStorage.setItem('zero_favs', JSON.stringify(this.favorites));
+        renderDirectory();
+        renderWorkspaceWidgets();
+      },
+
+      recordToolLaunch(id) {
+        this.recentTools = [id, ...this.recentTools.filter(x => x !== id)].slice(0, 8);
+        this.toolUsage[id] = (this.toolUsage[id] || 0) + 1;
+        localStorage.setItem('zero_recent', JSON.stringify(this.recentTools));
+        localStorage.setItem('zero_usage', JSON.stringify(this.toolUsage));
       }
     };
 
@@ -934,6 +1284,7 @@
       window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
     }
 
+    // Canvas Background Particles
     (function initBackgroundCanvas() {
       const canvas = document.getElementById('live-canvas');
       const ctx = canvas.getContext('2d');
@@ -987,6 +1338,10 @@
       loop();
     })();
 
+    /* ==========================================================================
+       ALL 30 WORKING PRODUCTION TOOLS (UPGRADED WITH BATCH PROCESSING & PRESETS)
+       ========================================================================== */
+
     // 1. PDF Merger
     function renderPdfMerger(mount) {
       mount.innerHTML = `
@@ -1011,7 +1366,7 @@
 
       function render() {
         list.innerHTML = files.map((f, i) => `
-          <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-input); padding:12px 18px; border-radius:var(--radius-sm); border:1px solid var(--border-subtle);">
+          <div class="batch-item">
             <span><b>#${i+1}</b> ${f.name} <small style="color:var(--text-muted)">(${(f.size/1024/1024).toFixed(2)} MB)</small></span>
             <button data-idx="${i}" class="del-btn" style="background:none; border:none; color:var(--status-danger); cursor:pointer; font-weight:bold;">✕ Remove</button>
           </div>
@@ -1032,8 +1387,10 @@
             const pages = await merged.copyPages(doc, doc.getPageIndices());
             pages.forEach(p => merged.addPage(p));
           }
-          ZERO.downloadBlob(await merged.save(), 'zero_merged.pdf', 'application/pdf');
+          const out = await merged.save();
+          ZERO.downloadBlob(out, 'zero_merged.pdf', 'application/pdf');
           ZERO.toast('PDFs merged successfully!', 'success');
+          DB.addHistory({ tool: 'PDF Merger', files: `${files.length} PDFs combined`, status: 'Success', size: `${(out.byteLength/1024).toFixed(1)} KB` });
         } catch (e) {
           ZERO.toast(`Merge error: ${e.message}`, 'error');
         } finally {
@@ -1088,19 +1445,21 @@
         const newDoc = await PDFLib.PDFDocument.create();
         const copied = await newDoc.copyPages(activeDoc, Array.from(pages).sort((a,b)=>a-b).map(i => i - 1));
         copied.forEach(p => newDoc.addPage(p));
-        ZERO.downloadBlob(await newDoc.save(), `split_${file.name}`, 'application/pdf');
+        const out = await newDoc.save();
+        ZERO.downloadBlob(out, `split_${file.name}`, 'application/pdf');
         ZERO.toast('Pages extracted successfully!', 'success');
+        DB.addHistory({ tool: 'PDF Splitter', files: file.name, status: 'Success', size: `${(out.byteLength/1024).toFixed(1)} KB` });
       };
     }
 
-    // 3. PDF Compressor
+    // 3. PDF Compressor (Advanced Batch Ready)
     function renderPdfCompressor(mount) {
       mount.innerHTML = `
         <div class="tool-panel">
           <div class="dropzone-laser" id="comp-drop">
-            <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:6px;">Upload PDF to Compress</h3>
-            <p style="color:var(--text-muted); font-size:0.9rem;">Canvas stream downsampling directly in RAM</p>
-            <input type="file" id="comp-input" accept=".pdf,application/pdf" style="display:none">
+            <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:6px;">Upload PDF(s) to Compress</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Multi-file canvas downsampling directly in RAM</p>
+            <input type="file" id="comp-input" multiple accept=".pdf,application/pdf" style="display:none">
           </div>
           <div id="comp-opts" style="display:none;">
             <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
@@ -1108,53 +1467,75 @@
               <span id="comp-orig" style="color:var(--accent-cyan); font-weight:700;"></span>
             </div>
             <input type="range" id="comp-slider" min="20" max="90" value="65" style="width:100%; margin-bottom:1.5rem;">
-            <button class="action-btn" id="comp-btn">Compress Document</button>
+            <div id="comp-batch-queue" style="margin-bottom:1.5rem;"></div>
+            <button class="action-btn" id="comp-btn">Execute Compression</button>
           </div>
         </div>
       `;
-      let file = null;
+      let queue = [];
       const drop = mount.querySelector('#comp-drop'), input = mount.querySelector('#comp-input');
       const opts = mount.querySelector('#comp-opts'), slider = mount.querySelector('#comp-slider');
       const val = mount.querySelector('#comp-val'), btn = mount.querySelector('#comp-btn');
+      const qList = mount.querySelector('#comp-batch-queue');
 
-      ZERO.setupDropzone(drop, input, (f) => {
-        file = f[0];
-        mount.querySelector('#comp-orig').innerText = `Original: ${(file.size/1024/1024).toFixed(2)} MB`;
+      ZERO.setupDropzone(drop, input, (files) => {
+        queue = files.map(f => ({ file: f, status: 'queued' }));
         opts.style.display = 'block';
+        renderQueue();
       });
+
+      function renderQueue() {
+        qList.innerHTML = queue.map((item, idx) => `
+          <div class="batch-item">
+            <span>${item.file.name} <small style="color:var(--text-muted)">(${(item.file.size/1024/1024).toFixed(2)} MB)</small></span>
+            <span class="batch-status-badge status-${item.status}">${item.status.toUpperCase()}</span>
+          </div>
+        `).join('');
+      }
 
       slider.oninput = () => val.innerText = `${slider.value}%`;
 
       btn.onclick = async () => {
-        btn.innerText = 'Optimizing streams...';
         btn.disabled = true;
-        try {
-          const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
-          const outPdf = await PDFLib.PDFDocument.create();
-          const q = slider.value / 100;
+        const q = slider.value / 100;
+        const processedBlobs = [];
 
-          for (let i = 1; i <= pdf.numPages; i++) {
-            const page = await pdf.getPage(i);
-            const vp = page.getViewport({ scale: 1.5 });
-            const c = document.createElement('canvas');
-            c.width = vp.width; c.height = vp.height;
-            const ctx = c.getContext('2d');
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, c.width, c.height);
-            await page.render({ canvasContext: ctx, viewport: vp }).promise;
-            const img = await outPdf.embedJpg(c.toDataURL('image/jpeg', q));
-            const p = outPdf.addPage([vp.width / 1.5, vp.height / 1.5]);
-            p.drawImage(img, { x: 0, y: 0, width: p.getWidth(), height: p.getHeight() });
+        for (let i = 0; i < queue.length; i++) {
+          queue[i].status = 'processing';
+          renderQueue();
+          try {
+            const pdf = await pdfjsLib.getDocument({ data: await queue[i].file.arrayBuffer() }).promise;
+            const outPdf = await PDFLib.PDFDocument.create();
+            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+              const page = await pdf.getPage(pageNum);
+              const vp = page.getViewport({ scale: 1.5 });
+              const c = document.createElement('canvas');
+              c.width = vp.width; c.height = vp.height;
+              const ctx = c.getContext('2d');
+              ctx.fillStyle = '#ffffff';
+              ctx.fillRect(0, 0, c.width, c.height);
+              await page.render({ canvasContext: ctx, viewport: vp }).promise;
+              const img = await outPdf.embedJpg(c.toDataURL('image/jpeg', q));
+              const p = outPdf.addPage([vp.width / 1.5, vp.height / 1.5]);
+              p.drawImage(img, { x: 0, y: 0, width: p.getWidth(), height: p.getHeight() });
+            }
+            const outBytes = await outPdf.save();
+            const b = new Blob([outBytes], { type: 'application/pdf' });
+            processedBlobs.push({ name: `compressed_${queue[i].file.name}`, blob: b });
+            queue[i].status = 'done';
+          } catch (e) {
+            queue[i].status = 'error';
           }
-          const out = await outPdf.save();
-          ZERO.downloadBlob(out, `compressed_${file.name}`, 'application/pdf');
-          ZERO.toast('PDF compressed successfully!', 'success');
-        } catch (e) {
-          ZERO.toast(`Compression failed: ${e.message}`, 'error');
-        } finally {
-          btn.innerText = 'Compress Document';
-          btn.disabled = false;
+          renderQueue();
         }
+
+        if (processedBlobs.length === 1) {
+          ZERO.downloadBlob(processedBlobs[0].blob, processedBlobs[0].name, 'application/pdf');
+        } else if (processedBlobs.length > 1) {
+          await ZERO.downloadZip(processedBlobs, 'compressed_pdfs.zip');
+        }
+        DB.addHistory({ tool: 'PDF Compressor', files: `${processedBlobs.length} files`, status: 'Completed', size: 'Batch Archive' });
+        btn.disabled = false;
       };
     }
 
@@ -1220,8 +1601,10 @@
           if (item.rot) p.setRotation(PDFLib.degrees((p.getRotation().angle || 0) + item.rot));
           dest.addPage(p);
         }
-        ZERO.downloadBlob(await dest.save(), 'reordered.pdf', 'application/pdf');
+        const out = await dest.save();
+        ZERO.downloadBlob(out, 'reordered.pdf', 'application/pdf');
         ZERO.toast('Organized PDF exported successfully!', 'success');
+        DB.addHistory({ tool: 'PDF Organizer', files: `${pages.length} pages deck`, status: 'Saved', size: `${(out.byteLength/1024).toFixed(1)} KB` });
       };
     }
 
@@ -1231,7 +1614,7 @@
         <div class="tool-panel">
           <div class="dropzone-laser" id="p2i-drop">
             <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:6px;">Extract Pages as High-Res Images</h3>
-            <p style="color:var(--text-muted); font-size:0.9rem;">Renders pages into crisp 300 DPI PNG raster frames</p>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Renders pages into crisp PNG raster frames</p>
             <input type="file" id="p2i-input" accept=".pdf,application/pdf" style="display:none">
           </div>
           <button class="action-btn" id="p2i-zip" style="display:none; margin-bottom:1.5rem;">Download All as ZIP</button>
@@ -1254,25 +1637,25 @@
           const c = document.createElement('canvas');
           c.width = vp.width; c.height = vp.height;
           await page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise;
-          const url = c.toDataURL('image/png');
-          pageBlobs.push({ name: `page-${i}.png`, url });
+          c.toBlob((b) => {
+            pageBlobs.push({ name: `page-${i}.png`, blob: b });
+          }, 'image/png');
 
           const card = document.createElement('div');
           card.style.cssText = 'background:var(--bg-input); border:1px solid var(--border-subtle); padding:10px; border-radius:var(--radius-sm); text-align:center;';
           card.innerHTML = `
-            <img src="${url}" style="width:100%; border-radius:4px; margin-bottom:8px;">
+            <img src="${c.toDataURL()}" style="width:100%; border-radius:4px; margin-bottom:8px;">
             <button class="action-btn-secondary" style="padding:4px 10px; font-size:0.8rem; width:100%;">Save PNG</button>
           `;
-          card.querySelector('button').onclick = () => ZERO.downloadBlob(url, `page-${i}.png`, 'image/png');
+          card.querySelector('button').onclick = () => ZERO.downloadBlob(c.toDataURL('image/png'), `page-${i}.png`, 'image/png');
           grid.appendChild(card);
         }
         zipBtn.style.display = 'inline-flex';
       });
 
       zipBtn.onclick = async () => {
-        const zip = new JSZip();
-        pageBlobs.forEach(b => zip.file(b.name, b.url.split(',')[1], { base64: true }));
-        ZERO.downloadBlob(await zip.generateAsync({ type: 'blob' }), 'pages.zip', 'application/zip');
+        await ZERO.downloadZip(pageBlobs, 'pdf_pages.zip');
+        DB.addHistory({ tool: 'PDF to Image', files: `${pageBlobs.length} images`, status: 'ZIP Exported', size: 'Collection' });
       };
     }
 
@@ -1320,8 +1703,10 @@
             const p = doc.addPage([emb.width, emb.height]);
             p.drawImage(emb, { x: 0, y: 0, width: emb.width, height: emb.height });
           }
-          ZERO.downloadBlob(await doc.save(), 'compiled_document.pdf', 'application/pdf');
+          const out = await doc.save();
+          ZERO.downloadBlob(out, 'compiled_document.pdf', 'application/pdf');
           ZERO.toast('Image compilation complete!', 'success');
+          DB.addHistory({ tool: 'Image to PDF', files: `${imgs.length} pictures`, status: 'Compiled', size: `${(out.byteLength/1024).toFixed(1)} KB` });
         } finally {
           btn.innerText = 'Compile into PDF';
           btn.disabled = false;
@@ -1353,11 +1738,12 @@
       `;
       const drop = mount.querySelector('#bg-drop'), input = mount.querySelector('#bg-input');
       const canvas = mount.querySelector('#bg-canvas'), sens = mount.querySelector('#bg-sens');
-      let orig = null;
+      let orig = null, rawFile = null;
 
       ZERO.setupDropzone(drop, input, async (f) => {
+        rawFile = f[0];
         orig = new Image();
-        orig.src = URL.createObjectURL(f[0]);
+        orig.src = URL.createObjectURL(rawFile);
         await orig.decode();
         canvas.width = orig.naturalWidth;
         canvas.height = orig.naturalHeight;
@@ -1398,17 +1784,18 @@
 
       mount.querySelector('#bg-dl').onclick = () => {
         ZERO.downloadBlob(canvas.toDataURL('image/png'), 'isolated_subject.png', 'image/png');
+        DB.addHistory({ tool: 'Background Isolator', files: rawFile.name, status: 'Extracted', size: 'PNG' });
       };
     }
 
-    // 8. Image Compressor
+    // 8. Image Compressor (Batch Capable)
     function renderImageCompressor(mount) {
       mount.innerHTML = `
         <div class="tool-panel">
           <div class="dropzone-laser" id="ic-drop">
-            <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:6px;">Upload Image to Compress</h3>
+            <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:6px;">Upload Image(s) to Compress</h3>
             <p style="color:var(--text-muted); font-size:0.9rem;">Instant in-memory hardware canvas quantization</p>
-            <input type="file" id="ic-input" accept="image/*" style="display:none">
+            <input type="file" id="ic-input" multiple accept="image/*" style="display:none">
           </div>
           <div id="ic-box" style="display:none;">
             <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
@@ -1416,75 +1803,90 @@
               <span id="ic-stats" style="color:var(--accent-cyan); font-weight:700;"></span>
             </div>
             <input type="range" id="ic-q" min="10" max="95" value="75" style="width:100%; margin-bottom:1.5rem;">
-            <button class="action-btn" id="ic-dl">Download Optimized Image</button>
+            <div id="ic-batch-list" style="margin-bottom:1.5rem;"></div>
+            <button class="action-btn" id="ic-dl">Process & Download Results</button>
           </div>
         </div>
       `;
-      let file = null, currentBlob = null;
+      let fileList = [];
       const drop = mount.querySelector('#ic-drop'), input = mount.querySelector('#ic-input');
       const box = mount.querySelector('#ic-box'), q = mount.querySelector('#ic-q');
-      const qVal = mount.querySelector('#ic-q-val'), stats = mount.querySelector('#ic-stats');
+      const qVal = mount.querySelector('#ic-q-val'), bList = mount.querySelector('#ic-batch-list');
 
-      ZERO.setupDropzone(drop, input, (f) => {
-        file = f[0];
+      ZERO.setupDropzone(drop, input, (files) => {
+        fileList = files;
         box.style.display = 'block';
-        exec();
+        bList.innerHTML = fileList.map(f => `<div class="batch-item"><span>${f.name}</span><small>${(f.size/1024).toFixed(1)} KB</small></div>`).join('');
       });
 
-      q.oninput = () => { qVal.innerText = `${q.value}%`; exec(); };
+      q.oninput = () => qVal.innerText = `${q.value}%`;
 
-      async function exec() {
-        const bmp = await createImageBitmap(file);
-        const c = document.createElement('canvas');
-        c.width = bmp.width; c.height = bmp.height;
-        c.getContext('2d').drawImage(bmp, 0, 0);
-        c.toBlob((b) => {
-          currentBlob = b;
-          stats.innerText = `Original: ${(file.size/1024).toFixed(1)} KB → Result: ${(b.size/1024).toFixed(1)} KB`;
-        }, 'image/webp', q.value / 100);
-      }
-
-      mount.querySelector('#ic-dl').onclick = () => {
-        ZERO.downloadBlob(currentBlob, `optimized_${file.name.replace(/\.[^.]+$/, '')}.webp`, 'image/webp');
+      mount.querySelector('#ic-dl').onclick = async () => {
+        const outItems = [];
+        for (const file of fileList) {
+          const bmp = await createImageBitmap(file);
+          const c = document.createElement('canvas');
+          c.width = bmp.width; c.height = bmp.height;
+          c.getContext('2d').drawImage(bmp, 0, 0);
+          const b = await new Promise(res => c.toBlob(res, 'image/webp', q.value / 100));
+          outItems.push({ name: `opt_${file.name.replace(/\.[^.]+$/, '')}.webp`, blob: b });
+        }
+        if (outItems.length === 1) {
+          ZERO.downloadBlob(outItems[0].blob, outItems[0].name, 'image/webp');
+        } else {
+          await ZERO.downloadZip(outItems, 'compressed_images.zip');
+        }
+        DB.addHistory({ tool: 'Image Compressor', files: `${outItems.length} files`, status: 'Compressed', size: 'Batch Output' });
       };
     }
 
-    // 9. Image Resizer
+    // 9. Image Resizer (Batch Capable)
     function renderImageResizer(mount) {
       mount.innerHTML = `
         <div class="tool-panel">
           <div class="dropzone-laser" id="ir-drop">
-            <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:6px;">Upload Image to Resize</h3>
-            <input type="file" id="ir-input" accept="image/*" style="display:none">
+            <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:6px;">Upload Image(s) to Resize</h3>
+            <input type="file" id="ir-input" multiple accept="image/*" style="display:none">
           </div>
           <div id="ir-box" style="display:none;">
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:1.5rem;">
-              <div><label>Width (px)</label><input type="number" id="ir-w"></div>
-              <div><label>Height (px)</label><input type="number" id="ir-h"></div>
+              <div><label>Target Width (px)</label><input type="number" id="ir-w" value="1920"></div>
+              <div><label>Target Height (px)</label><input type="number" id="ir-h" value="1080"></div>
             </div>
-            <button class="action-btn" id="ir-dl">Download Resized Image</button>
+            <div id="ir-queue" style="margin-bottom:1.5rem;"></div>
+            <button class="action-btn" id="ir-dl">Execute Resize & Save</button>
           </div>
         </div>
       `;
-      let bmp = null, ratio = 1;
+      let files = [];
       const drop = mount.querySelector('#ir-drop'), input = mount.querySelector('#ir-input');
-      const wIn = mount.querySelector('#ir-w'), hIn = mount.querySelector('#ir-h');
+      const wIn = mount.querySelector('#ir-w'), hIn = mount.querySelector('#ir-h'), qEl = mount.querySelector('#ir-queue');
 
       ZERO.setupDropzone(drop, input, async (f) => {
-        bmp = await createImageBitmap(f[0]);
-        ratio = bmp.width / bmp.height;
-        wIn.value = bmp.width; hIn.value = bmp.height;
+        files = f;
         mount.querySelector('#ir-box').style.display = 'block';
+        qEl.innerHTML = files.map(x => `<div class="batch-item"><span>${x.name}</span><span>Ready</span></div>`).join('');
       });
 
-      wIn.oninput = () => hIn.value = Math.round(wIn.value / ratio);
-      hIn.oninput = () => wIn.value = Math.round(hIn.value * ratio);
+      mount.querySelector('#ir-dl').onclick = async () => {
+        const out = [];
+        const tw = parseInt(wIn.value) || 1200;
+        const th = parseInt(hIn.value) || 800;
 
-      mount.querySelector('#ir-dl').onclick = () => {
-        const c = document.createElement('canvas');
-        c.width = parseInt(wIn.value); c.height = parseInt(hIn.value);
-        c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
-        c.toBlob((b) => ZERO.downloadBlob(b, 'resized.png', 'image/png'));
+        for (const file of files) {
+          const bmp = await createImageBitmap(file);
+          const c = document.createElement('canvas');
+          c.width = tw; c.height = th;
+          c.getContext('2d').drawImage(bmp, 0, 0, tw, th);
+          const b = await new Promise(r => c.toBlob(r, 'image/png'));
+          out.push({ name: `resized_${file.name.replace(/\.[^.]+$/, '')}.png`, blob: b });
+        }
+        if (out.length === 1) {
+          ZERO.downloadBlob(out[0].blob, out[0].name, 'image/png');
+        } else {
+          await ZERO.downloadZip(out, 'resized_collection.zip');
+        }
+        DB.addHistory({ tool: 'Image Resizer', files: `${out.length} items`, status: 'Resized', size: `${tw}x${th}` });
       };
     }
 
@@ -1493,8 +1895,8 @@
       mount.innerHTML = `
         <div class="tool-panel">
           <div class="dropzone-laser" id="ifc-drop">
-            <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:6px;">Upload Image for Format Conversion</h3>
-            <input type="file" id="ifc-input" accept="image/*" style="display:none">
+            <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:6px;">Upload Images for Format Conversion</h3>
+            <input type="file" id="ifc-input" multiple accept="image/*" style="display:none">
           </div>
           <div id="ifc-box" style="display:none;">
             <select id="ifc-sel" style="margin-bottom:1.5rem;">
@@ -1506,22 +1908,34 @@
           </div>
         </div>
       `;
-      let bmp = null;
+      let files = [];
       const drop = mount.querySelector('#ifc-drop'), input = mount.querySelector('#ifc-input');
       const sel = mount.querySelector('#ifc-sel');
 
-      ZERO.setupDropzone(drop, input, async (f) => {
-        bmp = await createImageBitmap(f[0]);
+      ZERO.setupDropzone(drop, input, (f) => {
+        files = f;
         mount.querySelector('#ifc-box').style.display = 'block';
       });
 
-      mount.querySelector('#ifc-dl').onclick = () => {
-        const c = document.createElement('canvas');
-        c.width = bmp.width; c.height = bmp.height;
-        const ctx = c.getContext('2d');
-        if (sel.value === 'image/jpeg') { ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, c.width, c.height); }
-        ctx.drawImage(bmp, 0, 0);
-        c.toBlob((b) => ZERO.downloadBlob(b, `converted.${sel.value.split('/')[1]}`, sel.value));
+      mount.querySelector('#ifc-dl').onclick = async () => {
+        const out = [];
+        const ext = sel.value.split('/')[1];
+        for (const file of files) {
+          const bmp = await createImageBitmap(file);
+          const c = document.createElement('canvas');
+          c.width = bmp.width; c.height = bmp.height;
+          const ctx = c.getContext('2d');
+          if (sel.value === 'image/jpeg') { ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, c.width, c.height); }
+          ctx.drawImage(bmp, 0, 0);
+          const b = await new Promise(r => c.toBlob(r, sel.value));
+          out.push({ name: `${file.name.replace(/\.[^.]+$/, '')}.${ext}`, blob: b });
+        }
+        if (out.length === 1) {
+          ZERO.downloadBlob(out[0].blob, out[0].name, sel.value);
+        } else {
+          await ZERO.downloadZip(out, 'converted_images.zip');
+        }
+        DB.addHistory({ tool: 'Format Converter', files: `${out.length} items`, status: 'Converted', size: ext.toUpperCase() });
       };
     }
 
@@ -1586,7 +2000,10 @@
         const c = document.createElement('canvas');
         c.width = w; c.height = h;
         c.getContext('2d').drawImage(img, x, y, w, h, 0, 0, w, h);
-        c.toBlob((b) => ZERO.downloadBlob(b, 'cropped.png', 'image/png'));
+        c.toBlob((b) => {
+          ZERO.downloadBlob(b, 'cropped.png', 'image/png');
+          DB.addHistory({ tool: 'Image Cropper', files: 'Cropped selection', status: 'Exported', size: `${Math.round(w)}x${Math.round(h)}` });
+        });
       };
     }
 
@@ -1595,30 +2012,37 @@
       mount.innerHTML = `
         <div class="tool-panel">
           <div class="dropzone-laser" id="exif-drop">
-            <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:6px;">Upload Image to Wipe EXIF</h3>
+            <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:6px;">Upload Image(s) to Wipe EXIF</h3>
             <p style="color:var(--text-muted); font-size:0.9rem;">Purges GPS coordinates, camera models, and timestamps</p>
-            <input type="file" id="exif-input" accept="image/*" style="display:none">
+            <input type="file" id="exif-input" multiple accept="image/*" style="display:none">
           </div>
           <div id="exif-box" style="display:none; text-align:center;">
             <p style="color:var(--status-success); font-weight:700; margin-bottom:1.5rem;">Binary sanitized. Zero header metadata remaining.</p>
-            <button class="action-btn" id="exif-dl">Download Clean Image</button>
+            <button class="action-btn" id="exif-dl">Download Clean Image(s)</button>
           </div>
         </div>
       `;
-      let cleanBlob = null;
-      ZERO.setupDropzone(mount.querySelector('#exif-drop'), mount.querySelector('#exif-input'), async (f) => {
-        const bmp = await createImageBitmap(f[0]);
-        const c = document.createElement('canvas');
-        c.width = bmp.width; c.height = bmp.height;
-        c.getContext('2d').drawImage(bmp, 0, 0);
-        c.toBlob((b) => {
-          cleanBlob = b;
-          mount.querySelector('#exif-box').style.display = 'block';
-        }, 'image/png');
+      let cleanList = [];
+      ZERO.setupDropzone(mount.querySelector('#exif-drop'), mount.querySelector('#exif-input'), async (files) => {
+        cleanList = [];
+        for (const f of files) {
+          const bmp = await createImageBitmap(f);
+          const c = document.createElement('canvas');
+          c.width = bmp.width; c.height = bmp.height;
+          c.getContext('2d').drawImage(bmp, 0, 0);
+          const b = await new Promise(r => c.toBlob(r, 'image/png'));
+          cleanList.push({ name: `sanitized_${f.name.replace(/\.[^.]+$/, '')}.png`, blob: b });
+        }
+        mount.querySelector('#exif-box').style.display = 'block';
       });
 
-      mount.querySelector('#exif-dl').onclick = () => {
-        ZERO.downloadBlob(cleanBlob, 'sanitized_photo.png', 'image/png');
+      mount.querySelector('#exif-dl').onclick = async () => {
+        if (cleanList.length === 1) {
+          ZERO.downloadBlob(cleanList[0].blob, cleanList[0].name, 'image/png');
+        } else {
+          await ZERO.downloadZip(cleanList, 'sanitized_images.zip');
+        }
+        DB.addHistory({ tool: 'EXIF Metadata Remover', files: `${cleanList.length} files`, status: 'Sanitized', size: 'Clean' });
       };
     }
 
@@ -1632,8 +2056,8 @@
             <input type="text" id="rb-role" placeholder="Target Role" value="Senior Systems Engineer">
             <input type="text" id="rb-contact" placeholder="Contact | Email | Location" value="alex@example.com • +1 555-0199 • San Francisco, CA">
             <textarea id="rb-summary" rows="3" placeholder="Executive Summary">Architecting high-concurrency client-side systems and zero-retention cryptography pipelines.</textarea>
-            <textarea id="rb-exp" rows="5" placeholder="Experience">Staff Engineer | Vercel | Scaled global edge nodes
-Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textarea>
+            <textarea id="rb-exp" rows="5" placeholder="Experience">Staff Engineer | Global Edge Systems | Scaled nodes
+Lead Architect | Cloudflare Ecosystem | Reduced handshake overhead by 40%</textarea>
             <button class="action-btn" id="rb-print">Print / Save as PDF</button>
           </div>
           <div>
@@ -1662,6 +2086,7 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
         win.document.write(`<html><body style="font-family:serif; padding:40px;">${prev.innerHTML}</body></html>`);
         win.document.close();
         win.print();
+        DB.addHistory({ tool: 'ATS Resume Builder', files: mount.querySelector('#rb-name').value, status: 'Generated', size: 'PDF/Print' });
       };
     }
 
@@ -1697,6 +2122,7 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
           <p style="color:var(--status-success); margin-bottom:6px;">Matched Tokens (${hit.length}): ${hit.slice(0, 12).join(', ')}</p>
           <p style="color:var(--status-danger);">Missing Tokens: ${jWords.filter(w => !rWords.has(w)).slice(0, 12).join(', ')}</p>
         `;
+        DB.addHistory({ tool: 'ATS Keyword Checker', files: 'Match Analysis', status: `${score}% Score`, size: 'Text Audit' });
       };
     }
 
@@ -1746,6 +2172,7 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
         </body></html>`);
         win.document.close();
         win.print();
+        DB.addHistory({ tool: 'Invoice Generator', files: mount.querySelector('#inv-id').value, status: 'Printed', size: `$${mount.querySelector('#inv-tot').innerText}` });
       };
     }
 
@@ -1804,7 +2231,7 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
       mount.innerHTML = `
         <div class="tool-panel" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
           <div>
-            <textarea id="md-in" rows="12" style="font-family:var(--font-mono); font-size:13px;"># ZERO Ultra Pro
+            <textarea id="md-in" rows="12" style="font-family:var(--font-mono); font-size:13px;"># ZERO Ultra Pro 2.0
 
 - 100% In-memory processing
 - Zero Server latency
@@ -1818,7 +2245,10 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
       const sync = () => out.innerHTML = marked.parse(input.value);
       input.oninput = sync;
       sync();
-      mount.querySelector('#md-dl').onclick = () => ZERO.downloadBlob(out.innerHTML, 'article.html', 'text/html');
+      mount.querySelector('#md-dl').onclick = () => {
+        ZERO.downloadBlob(out.innerHTML, 'article.html', 'text/html');
+        DB.addHistory({ tool: 'Live Markdown Studio', files: 'article.html', status: 'Rendered', size: `${out.innerHTML.length} chars` });
+      };
     }
 
     // 19. JSON Formatter & Validator
@@ -1834,10 +2264,10 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
       `;
       const txt = mount.querySelector('#jf-in');
       mount.querySelector('#jf-run').onclick = () => {
-        try { txt.value = JSON.stringify(JSON.parse(txt.value), null, 2); } catch (e) { ZERO.toast(e.message, 'error'); }
+        try { txt.value = JSON.stringify(JSON.parse(txt.value), null, 2); ZERO.toast('JSON Formatted', 'success'); } catch (e) { ZERO.toast(e.message, 'error'); }
       };
       mount.querySelector('#jf-min').onclick = () => {
-        try { txt.value = JSON.stringify(JSON.parse(txt.value)); } catch (e) { ZERO.toast(e.message, 'error'); }
+        try { txt.value = JSON.stringify(JSON.parse(txt.value)); ZERO.toast('JSON Minified', 'success'); } catch (e) { ZERO.toast(e.message, 'error'); }
       };
     }
 
@@ -1994,7 +2424,10 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
       draw();
       mount.querySelector('#qr-dl').onclick = () => {
         const img = c.querySelector('img');
-        if (img?.src) ZERO.downloadBlob(img.src, 'qrcode.png', 'image/png');
+        if (img?.src) {
+          ZERO.downloadBlob(img.src, 'qrcode.png', 'image/png');
+          DB.addHistory({ tool: 'Vector QR Studio', files: inEl.value, status: 'Generated', size: 'PNG' });
+        }
       };
     }
 
@@ -2041,6 +2474,7 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
           Type: ${file.type || 'application/octet-stream'}<br>
           Magic Header: ${hex}
         `;
+        DB.addHistory({ tool: 'File Header Inspector', files: file.name, status: 'Inspected', size: `${file.size} B` });
       });
     }
 
@@ -2069,6 +2503,7 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
         res.innerHTML = dups.length
           ? dups.map(([h, l]) => `<div style="background:var(--bg-input); padding:8px; border-radius:6px; margin:4px 0;">Duplicate matches: ${l.join(' ⟷ ')}</div>`).join('')
           : '<span style="color:var(--status-success);">All files are completely unique.</span>';
+        DB.addHistory({ tool: 'Duplicate File Matcher', files: `${files.length} files scanned`, status: 'Verified', size: 'SHA-256' });
       });
     }
 
@@ -2092,19 +2527,23 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
       });
 
       mount.querySelector('#bc-btn').onclick = async () => {
-        const zip = new JSZip();
+        const outList = [];
         for (const f of files) {
           const bmp = await createImageBitmap(f);
           const c = document.createElement('canvas');
           c.width = bmp.width; c.height = bmp.height;
           c.getContext('2d').drawImage(bmp, 0, 0);
-          const b64 = c.toDataURL('image/webp', 0.85).split(',')[1];
-          zip.file(`${f.name.replace(/\.[^.]+$/, '')}.webp`, b64, { base64: true });
+          const b = await new Promise(r => c.toBlob(r, 'image/webp', 0.85));
+          outList.push({ name: `${f.name.replace(/\.[^.]+$/, '')}.webp`, blob: b });
         }
-        ZERO.downloadBlob(await zip.generateAsync({ type: 'blob' }), 'batch_webp.zip', 'application/zip');
+        await ZERO.downloadZip(outList, 'batch_webp.zip');
+        DB.addHistory({ tool: 'Batch Image Converter', files: `${files.length} items`, status: 'WebP Packaged', size: 'ZIP' });
       };
     }
 
+    /* ==========================================================================
+       DIRECTORY & SYSTEM DATA DEFINITIONS
+       ========================================================================== */
     const TOOLS = [
       { id: 'pdf-merger', name: 'PDF Merger', cat: 'pdf', desc: 'Combine multiple PDFs into a single clean file.', render: renderPdfMerger, icon: '◫' },
       { id: 'pdf-splitter', name: 'PDF Splitter', cat: 'pdf', desc: 'Extract custom page ranges into a separate document.', render: renderPdfSplitter, icon: '✂' },
@@ -2142,29 +2581,51 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
       { id: 'batch-converter', name: 'Batch Image Converter', cat: 'productivity', desc: 'Bulk format transformations packaged into a ZIP.', render: renderBatchConverter, icon: '📦' }
     ];
 
-    document.addEventListener('DOMContentLoaded', () => {
-      renderDirectory('all');
-      initPalette();
+    /* ==========================================================================
+       VIEW ROUTING & CONTROLLERS
+       ========================================================================== */
+    function switchView(viewId) {
+      document.querySelectorAll('#app-root > section').forEach(s => {
+        s.classList.remove('view-active');
+        s.classList.add('view-hidden');
+      });
+      const target = document.getElementById(viewId);
+      if (target) {
+        target.classList.remove('view-hidden');
+        target.classList.add('view-active');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-      document.getElementById('brand-home').onclick = closeTool;
-      document.getElementById('btn-back-hub').onclick = closeTool;
-
-      document.getElementById('category-tabs').onclick = (e) => {
-        if (!e.target.classList.contains('cat-btn')) return;
-        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-        renderDirectory(e.target.dataset.cat);
+    document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('.nav-tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        if (btn.id === 'tab-btn-hub') switchView('view-hub');
+        if (btn.id === 'tab-btn-workspace') { renderWorkspaceWidgets(); switchView('view-workspace'); }
+        if (btn.id === 'tab-btn-flow') { renderFlowChain(); switchView('view-flow'); }
+        if (btn.id === 'tab-btn-history') { renderHistoryTable(); switchView('view-history'); }
+        if (btn.id === 'tab-btn-privacy') switchView('view-privacy');
       };
     });
+
+    document.getElementById('brand-home').onclick = () => {
+      document.getElementById('tab-btn-hub').click();
+    };
+    document.getElementById('btn-back-hub').onclick = () => {
+      document.getElementById('tab-btn-hub').click();
+    };
 
     function renderDirectory(cat = 'all') {
       const g = document.getElementById('tools-directory');
       g.innerHTML = '';
       const list = cat === 'all' ? TOOLS : TOOLS.filter(t => t.cat === cat);
       list.forEach(t => {
+        const isFav = ZERO.favorites.includes(t.id);
         const card = document.createElement('div');
         card.className = 'tool-card';
         card.innerHTML = `
+          <button class="card-fav-btn ${isFav ? 'favorited' : ''}" title="Toggle Favorite">★</button>
           <div class="card-veil">
             <span class="veil-badge">✦ VEILED MODULE</span>
             <div class="veil-title">${t.name}</div>
@@ -2182,31 +2643,213 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </div>
         `;
+        card.querySelector('.card-fav-btn').onclick = (e) => ZERO.toggleFavorite(t.id, e);
         card.onclick = () => openTool(t.id);
         g.appendChild(card);
       });
     }
 
-    function openTool(id) {
+    async function openTool(id) {
       const tool = TOOLS.find(t => t.id === id);
       if (!tool) return;
       ZERO.activeToolId = tool.id;
-      document.getElementById('view-hub').classList.replace('view-active', 'view-hidden');
-      document.getElementById('view-tool').classList.replace('view-hidden', 'view-active');
+      ZERO.recordToolLaunch(tool.id);
+
+      switchView('view-tool');
       document.getElementById('tool-active-title').innerText = tool.name;
       document.getElementById('tool-active-cat').innerText = tool.cat;
+
+      // Render Presets
+      const presetWrap = document.getElementById('tool-preset-container');
+      presetWrap.innerHTML = '';
+      const presets = await DB.getPresets(tool.id);
+      presets.forEach(p => {
+        const chip = document.createElement('span');
+        chip.className = 'preset-chip';
+        chip.innerHTML = `⚙ ${p.name} <span class="del-preset">✕</span>`;
+        chip.onclick = () => ZERO.toast(`Preset '${p.name}' applied!`, 'info');
+        chip.querySelector('.del-preset').onclick = async (e) => {
+          e.stopPropagation();
+          await DB.deletePreset(p.id);
+          openTool(id);
+        };
+        presetWrap.appendChild(chip);
+      });
+
       const mount = document.getElementById('tool-mount-point');
       mount.innerHTML = '';
       tool.render(mount);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function closeTool() {
-      document.getElementById('view-tool').classList.replace('view-active', 'view-hidden');
-      document.getElementById('view-hub').classList.replace('view-hidden', 'view-active');
-      ZERO.activeToolId = null;
+    /* ==========================================================================
+       SMART WORKSPACE CONTROLLER
+       ========================================================================== */
+    function renderWorkspaceWidgets() {
+      // Cores & Hardware
+      document.getElementById('stat-cores').innerText = `${navigator.hardwareConcurrency || 4} Hardware Threads`;
+
+      // Favorites
+      const favList = document.getElementById('ws-favorites-list');
+      favList.innerHTML = ZERO.favorites.length
+        ? ZERO.favorites.map(id => {
+            const t = TOOLS.find(x => x.id === id);
+            return t ? `<div class="batch-item" onclick="openTool('${t.id}')" style="cursor:pointer;"><span>${t.icon} <b>${t.name}</b></span><span>Launch →</span></div>` : '';
+          }).join('')
+        : '<p style="color:var(--text-muted); font-size:0.85rem;">No favorite tools marked yet. Click the ★ on any module.</p>';
+
+      // Recent
+      const recList = document.getElementById('ws-recent-list');
+      recList.innerHTML = ZERO.recentTools.length
+        ? ZERO.recentTools.map(id => {
+            const t = TOOLS.find(x => x.id === id);
+            return t ? `<div class="batch-item" onclick="openTool('${t.id}')" style="cursor:pointer;"><span>${t.icon} ${t.name}</span><small style="color:var(--text-muted);">${ZERO.toolUsage[t.id] || 1} runs</small></div>` : '';
+          }).join('')
+        : '<p style="color:var(--text-muted); font-size:0.85rem;">No recently executed tools recorded.</p>';
     }
 
+    document.getElementById('btn-reset-workspace').onclick = () => {
+      ZERO.favorites = [];
+      ZERO.recentTools = [];
+      ZERO.toolUsage = {};
+      localStorage.removeItem('zero_favs');
+      localStorage.removeItem('zero_recent');
+      localStorage.removeItem('zero_usage');
+      renderWorkspaceWidgets();
+      renderDirectory();
+      ZERO.toast('Workspace layout reset!', 'info');
+    };
+
+    /* ==========================================================================
+       VISUAL CHAINING PIPELINE STUDIO
+       ========================================================================== */
+    let flowNodes = [
+      { id: 'img-resizer', label: 'Image Resizer (Downsample to 1920px)' },
+      { id: 'img-compressor', label: 'Image Compressor (WebP Quantization 75%)' }
+    ];
+    let flowFiles = [];
+
+    function renderFlowChain() {
+      const container = document.getElementById('flow-chain-nodes');
+      container.innerHTML = flowNodes.map((node, i) => `
+        <div class="flow-node">
+          <div>
+            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent);">STEP 0${i+1}</span>
+            <h4 style="font-size:1.05rem; margin-top:2px;">${node.label}</h4>
+          </div>
+          <button onclick="removeFlowNode(${i})" class="action-btn-secondary" style="padding:4px 10px; font-size:0.8rem; color:var(--status-danger);">Remove</button>
+        </div>
+      `).join('');
+    }
+
+    window.removeFlowNode = (i) => {
+      flowNodes.splice(i, 1);
+      renderFlowChain();
+    };
+
+    document.getElementById('btn-flow-add-step').onclick = () => {
+      const sel = document.getElementById('flow-select-tool');
+      const val = sel.value;
+      const label = sel.options[sel.selectedIndex].text;
+      flowNodes.push({ id: val, label });
+      renderFlowChain();
+      ZERO.toast('Step appended to pipeline', 'info');
+    };
+
+    ZERO.setupDropzone(document.getElementById('flow-drop'), document.getElementById('flow-file-input'), (f) => {
+      flowFiles = f;
+      ZERO.toast(`${f.length} file(s) loaded into pipeline queue`, 'success');
+    });
+
+    document.getElementById('btn-flow-execute').onclick = async () => {
+      if (!flowFiles.length) return ZERO.toast('Please drop input files into the dropzone first!', 'error');
+      if (!flowNodes.length) return ZERO.toast('Configure at least 1 pipeline step', 'error');
+
+      const log = document.getElementById('flow-execution-log');
+      log.style.display = 'block';
+      log.innerHTML = '<div>[SYSTEM] Pipeline execution triggered...</div>';
+
+      const results = [];
+      for (const file of flowFiles) {
+        log.innerHTML += `<div>[FLOW] Processing Root: ${file.name}</div>`;
+        let bmp = await createImageBitmap(file);
+
+        for (let i = 0; i < flowNodes.length; i++) {
+          const step = flowNodes[i];
+          log.innerHTML += `<div>↳ Executing Step 0${i+1} [${step.id}]...</div>`;
+          const c = document.createElement('canvas');
+
+          if (step.id === 'img-resizer') {
+            c.width = 1920; c.height = 1080;
+            c.getContext('2d').drawImage(bmp, 0, 0, 1920, 1080);
+          } else {
+            c.width = bmp.width; c.height = bmp.height;
+            c.getContext('2d').drawImage(bmp, 0, 0);
+          }
+          const blob = await new Promise(r => c.toBlob(r, 'image/webp', 0.75));
+          bmp = await createImageBitmap(blob);
+          if (i === flowNodes.length - 1) {
+            results.push({ name: `pipeline_${file.name.replace(/\.[^.]+$/, '')}.webp`, blob });
+          }
+        }
+      }
+
+      log.innerHTML += '<div style="color:var(--status-success);">[SUCCESS] Workflow completed. Assembling ZIP package...</div>';
+      await ZERO.downloadZip(results, 'workflow_output.zip');
+      DB.addHistory({ tool: 'Visual Pipeline Chaining', files: `${results.length} outputs`, status: 'Pipelined', size: 'ZIP' });
+    };
+
+    /* ==========================================================================
+       HISTORY AUDIT TABLE & EXPORT
+       ========================================================================== */
+    async function renderHistoryTable() {
+      const records = await DB.getHistory();
+      const tbody = document.getElementById('history-tbody');
+      const filter = document.getElementById('history-filter').value.toLowerCase();
+      const filtered = records.filter(r => r.tool.toLowerCase().includes(filter) || r.files.toLowerCase().includes(filter));
+
+      tbody.innerHTML = filtered.length
+        ? filtered.map(r => `
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+              <td style="padding:10px; font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">${new Date(r.timestamp).toLocaleTimeString()}</td>
+              <td style="padding:10px; font-weight:700;">${r.tool}</td>
+              <td style="padding:10px; color:var(--text-secondary);">${r.files}</td>
+              <td style="padding:10px;"><span class="batch-status-badge status-done">${r.status}</span></td>
+              <td style="padding:10px; font-family:var(--font-mono); font-size:0.8rem;">${r.size}</td>
+            </tr>
+          `).join('')
+        : `<tr><td colspan="5" style="padding:2rem; text-align:center; color:var(--text-muted);">No recorded operations in this ledger.</td></tr>`;
+    }
+
+    document.getElementById('history-filter').oninput = renderHistoryTable;
+
+    document.getElementById('btn-clear-history').onclick = async () => {
+      await DB.clearHistory();
+      renderHistoryTable();
+      ZERO.toast('Processing history ledger wiped', 'info');
+    };
+
+    document.getElementById('btn-export-history').onclick = async () => {
+      const records = await DB.getHistory();
+      let csv = 'Timestamp,Tool,Files,Status,Size\n';
+      records.forEach(r => {
+        csv += `"${r.timestamp}","${r.tool}","${r.files}","${r.status}","${r.size}"\n`;
+      });
+      ZERO.downloadBlob(csv, 'zero_processing_history.csv', 'text/csv');
+      ZERO.toast('History ledger exported to CSV', 'success');
+    };
+
+    document.getElementById('btn-purge-storage').onclick = async () => {
+      if (confirm('Permanently wipe all offline cache, presets, and history records?')) {
+        await DB.purgeAll();
+        localStorage.clear();
+        ZERO.toast('Full database purge complete. Refreshing workspace...', 'warning');
+        setTimeout(() => window.location.reload(), 1000);
+      }
+    };
+
+    /* ==========================================================================
+       COMMAND PALETTE & GLOBAL SEARCH
+       ========================================================================== */
     function initPalette() {
       const modal = document.getElementById('cmd-palette');
       const inEl = document.getElementById('palette-input');
@@ -2224,10 +2867,10 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
 
       function search(q) {
         res.innerHTML = '';
-        TOOLS.filter(t => t.name.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q)).forEach(t => {
+        TOOLS.filter(t => t.name.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q) || t.cat.toLowerCase().includes(q)).forEach(t => {
           const item = document.createElement('div');
           item.style.cssText = 'padding:12px 16px; border-radius:8px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition:background 0.2s;';
-          item.innerHTML = `<span>${t.name}</span><small style="color:var(--text-muted);">${t.cat}</small>`;
+          item.innerHTML = `<span><b>${t.name}</b> <small style="color:var(--text-muted); margin-left:6px;">${t.desc}</small></span><span class="card-tag">${t.cat}</span>`;
           item.onmouseover = () => item.style.background = 'var(--bg-input)';
           item.onmouseout = () => item.style.background = 'transparent';
           item.onclick = () => { hide(); openTool(t.id); };
@@ -2235,6 +2878,64 @@ Lead Architect | Cloudflare | Reduced network handshake overhead by 40%</textare
         });
       }
     }
+
+    /* ==========================================================================
+       PWA SERVICE WORKER REGISTRATION & NETWORK MONITOR
+       ========================================================================== */
+    let deferredPrompt = null;
+    const installBtn = document.getElementById('pwa-install-btn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'inline-flex';
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') installBtn.style.display = 'none';
+        deferredPrompt = null;
+      }
+    });
+
+    window.addEventListener('online', () => {
+      document.getElementById('network-pulse').style.background = '#10b981';
+      document.getElementById('network-status').innerText = 'ONLINE / CACHED';
+      ZERO.toast('Network connection detected', 'info');
+    });
+    window.addEventListener('offline', () => {
+      document.getElementById('network-pulse').style.background = '#f59e0b';
+      document.getElementById('network-status').innerText = '100% OFFLINE ACTIVE';
+      ZERO.toast('Operating in physical offline sandbox', 'warning');
+    });
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').then((reg) => {
+          console.log('ZERO PWA Service Worker Registered:', reg.scope);
+        }).catch((err) => {
+          console.log('Service Worker fallback active:', err);
+        });
+      });
+    }
+
+    /* ==========================================================================
+       INITIALIZATION
+       ========================================================================== */
+    document.addEventListener('DOMContentLoaded', () => {
+      renderDirectory('all');
+      initPalette();
+
+      document.getElementById('category-tabs').onclick = (e) => {
+        if (!e.target.classList.contains('cat-btn')) return;
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        renderDirectory(e.target.dataset.cat);
+      };
+    });
   </script>
 </body>
 </html>
+```
