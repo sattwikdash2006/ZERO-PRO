@@ -312,15 +312,9 @@
       user-select: text;
     }
 
-    .batch-item {
-      display: flex; align-items: center; justify-content: space-between;
-      background: var(--bg-input); padding: 10px 16px; border-radius: var(--radius-sm); margin-bottom: 8px;
-    }
-
     .toast-tray { position: fixed; bottom: 2rem; right: 2rem; z-index: 200; display: flex; flex-direction: column; gap: 0.75rem; }
     .toast-card { background: rgba(11, 15, 26, 0.95); border: 1px solid var(--border-highlight); border-radius: var(--radius-md); padding: 0.9rem 1.5rem; }
 
-    /* AI Chip Accent */
     .ai-badge {
       background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(6, 182, 212, 0.3));
       border: 1px solid rgba(139, 92, 246, 0.6);
@@ -358,7 +352,7 @@
       <div class="hero">
         <h1 class="hero-title">Everything You Need.<br><span class="gradient-text">Local Web AI Powered.</span></h1>
         <p style="color:var(--text-secondary); margin-bottom:1rem;">
-          35 প্রফেশনাল টুলস — যার মধ্যে রয়েছে ৫টি পাওয়ারফুল Web AI ফিচার। সবকিছু প্রসেস হয় সরাসরি আপনার ব্রাউজারের ভেতর (WASM/Local Model)। কোনো ডাটা সার্ভারে যায় না।
+          35 professional utilities powered by local, client-side Web AI. All workloads run directly in memory on device hardware (WASM/Local Models). Zero server retention.
         </p>
       </div>
 
@@ -402,7 +396,7 @@
       <div class="tool-panel">
         <h2 style="font-size:1.8rem; font-weight:800; margin-bottom:1rem;">100% Client-Side Web AI Privacy Audit</h2>
         <p style="color:var(--text-secondary); line-height:1.7;">
-          ঐতিহ্যগত AI টুলস আপনার ফাইল ও প্রম্পট রিমোট সার্ভারে পাঠায়। কিন্তু <b>ZERO PRO 2.0 Web AI</b> সম্পূর্ণ আলাদা—এটি ওপেন সোর্স মডেল, Tesseract WASM ও ব্রাউজার মেশিন লার্নিং ফ্রেমওয়ার্ক ব্যবহার করে ইন-মেমোরি এক্সিকিউট করে। আপনার ক্যামেরা, ভয়েস বা ডকুমেন্টের কোনো বাইট কখনোই ক্লাউডে আপলোড হয় না।
+          Traditional AI suites transmit your files, prompts, and audio to third-party cloud datacenters. ZERO PRO 2.0 operates strictly on local WebAssembly, Web Workers, and browser neural runtimes. Zero tracking, zero telemetry, and zero data leakage.
         </p>
       </div>
     </section>
@@ -458,7 +452,7 @@
         <div class="tool-panel">
           <div class="dropzone-laser" id="ocr-drop">
             <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:6px;">Upload Scanned Document / Receipt</h3>
-            <p style="color:var(--text-muted); font-size:0.9rem;">Client-side Tesseract WASM neural engine parses text with 0 network calls</p>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Client-side Tesseract WASM neural engine parses text with zero network calls</p>
             <input type="file" id="ocr-input" accept="image/*" style="display:none">
           </div>
           <div id="ocr-status" style="display:none; margin-bottom:1rem; font-family:var(--font-mono); color:var(--accent-cyan);"></div>
@@ -477,12 +471,12 @@
       ZERO.setupDropzone(drop, input, async (files) => {
         const file = files[0];
         stat.style.display = 'block';
-        stat.innerText = '⚡ Initializing WebAssembly Neural Worker...';
+        stat.innerText = 'Initializing WebAssembly Neural Worker...';
         box.style.display = 'none';
 
         try {
           const worker = await Tesseract.createWorker('eng');
-          stat.innerText = '🔍 Scanning pixel matrices locally on device...';
+          stat.innerText = 'Scanning pixel matrices locally on device...';
           const ret = await worker.recognize(file);
           await worker.terminate();
 
@@ -548,7 +542,6 @@
         const d = imgData.data, w = canvas.width, h = canvas.height;
         const cornerSens = parseInt(thresh.value);
 
-        // Sample 4 perimeter boundaries to build dynamic environmental background palette
         const bgSamples = [
           [d[0], d[1], d[2]],
           [d[(w-1)*4], d[(w-1)*4+1], d[(w-1)*4+2]],
@@ -566,7 +559,7 @@
               break;
             }
           }
-          if (isBackdrop) d[i+3] = 0; // Alpha Zero
+          if (isBackdrop) d[i+3] = 0;
         }
         ctx.putImageData(imgData, 0, 0);
       }
@@ -611,7 +604,6 @@
         const text = input.value.trim();
         if (!text) return ZERO.toast('Please paste text first!', 'error');
 
-        // Client-side NLP Extractive Summarization Algorithm
         const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
         if (sentences.length <= 3) {
           bullets.innerHTML = `<p>${text}</p>`;
@@ -757,7 +749,6 @@
         const txt = inEl.value.trim();
         if (!txt) return;
 
-        // Sentiment audit
         const posWords = ['good','great','excellent','ready','fast','thanks','helpful','happy'];
         const negWords = ['annoyed','bad','bug','slow','late','fail','terrible','problem'];
         let score = 0;
@@ -768,7 +759,6 @@
         const sentimentStr = score > 0 ? 'Positive / Constructive' : (score < 0 ? 'Urgent / Negative' : 'Neutral');
         stat.innerHTML = `Local NLP Polarity: <b style="color:${score < 0 ? '#f87171' : '#34d399'}">${sentimentStr}</b> (${score})`;
 
-        // Tone Heuristic Templates
         const mode = sel.value;
         if (mode === 'corporate') {
           outEl.value = `I hope this note finds you well. Could we please ensure the finalized documentation is circulated by tomorrow? Addressing these items promptly will maintain client alignment and confidence. Thank you for your continued dedication.`;
@@ -863,14 +853,14 @@
        TOOL REGISTRY (35 TOTAL WITH 5 LOCAL WEB AI MODULES)
        ========================================================================== */
     const TOOLS = [
-      // 5 New Web AI Tools
+      // 5 Local Web AI Tools
       { id: 'ai-ocr', name: 'AI OCR Vision Scanner', cat: 'ai', desc: 'Scan images, contracts, and receipts into plain text via local WASM.', render: renderAiOcrScanner, icon: '👁️' },
       { id: 'ai-bg-remover', name: 'AI Neural Matting', cat: 'ai', desc: 'Saliency background cutout engine running completely inside memory.', render: renderAiNeuralMatting, icon: '🧠' },
       { id: 'ai-summarizer', name: 'AI Document Summarizer', cat: 'ai', desc: 'Instant key takeaway extractor using local client-side NLP vectors.', render: renderAiSummarizer, icon: '⚡' },
       { id: 'ai-transcriber', name: 'AI Voice Transcriber', cat: 'ai', desc: 'Dictate or transcribe speech into text via local Web Audio pipeline.', render: renderAiTranscriber, icon: '🎙️' },
       { id: 'ai-tone', name: 'AI Sentiment & Tone Rewriter', cat: 'ai', desc: 'Analyze emotional polarity and rephrase text into executive tones.', render: renderAiToneRewriter, icon: '✨' },
 
-      // Standard Tools
+      // Standard PDF Suite
       { id: 'pdf-merger', name: 'PDF Merger', cat: 'pdf', desc: 'Combine multiple PDFs into a single clean file.', render: renderPdfMerger, icon: '◫' },
       { id: 'pdf-compressor', name: 'PDF Compressor', cat: 'pdf', desc: 'In-memory JPEG quantization downsampler.', render: (m) => renderGenericTool(m, 'PDF Compressor', 'Quantize embedded page streams to reduce document size.'), icon: '⚡' },
       { id: 'pdf-splitter', name: 'PDF Splitter', cat: 'pdf', desc: 'Extract custom page ranges into a separate document.', render: (m) => renderGenericTool(m, 'PDF Splitter', 'Extract custom intervals directly in memory.'), icon: '✂' },
@@ -878,6 +868,7 @@
       { id: 'pdf-to-img', name: 'PDF to Image', cat: 'pdf', desc: 'Render pages into high-res PNG pictures.', render: (m) => renderGenericTool(m, 'PDF to Image', 'Rasterize PDF pages into PNGs.'), icon: '🖼' },
       { id: 'img-to-pdf', name: 'Image to PDF', cat: 'pdf', desc: 'Compile PNG and JPEG pictures into a master PDF.', render: (m) => renderGenericTool(m, 'Image to PDF', 'Combine images into a master PDF.'), icon: '🗎' },
 
+      // Image Suite
       { id: 'img-compressor', name: 'Image Compressor', cat: 'image', desc: 'Ultra-fast in-memory WebP quantization.', render: renderImageCompressor, icon: '🗜' },
       { id: 'img-resizer', name: 'Image Resizer', cat: 'image', desc: 'Pixel-perfect dimension resizing with ratio lock.', render: (m) => renderGenericTool(m, 'Image Resizer', 'Scale dimensions with bicubic canvas smoothing.'), icon: '⤢' },
       { id: 'img-converter', name: 'Format Converter', cat: 'image', desc: 'Convert seamlessly between PNG, JPEG, and WebP.', render: (m) => renderGenericTool(m, 'Format Converter', 'Instant raster conversions.'), icon: '⇆' },
@@ -885,6 +876,7 @@
       { id: 'metadata-remover', name: 'EXIF Metadata Remover', cat: 'image', desc: 'Purge GPS location and camera signatures.', render: (m) => renderGenericTool(m, 'EXIF Remover', 'Strip EXIF/GPS tags from photos.'), icon: '◌' },
       { id: 'bg-remover-manual', name: 'Chroma Key Isolator', cat: 'image', desc: 'Sample-based eyedropper color matting.', render: (m) => renderGenericTool(m, 'Chroma Key Isolator', 'Color-key based backdrop eraser.'), icon: '✦' },
 
+      // Writing & Office Suite
       { id: 'resume-builder', name: 'ATS Resume Builder', cat: 'writing', desc: 'Clean, printable corporate resume builder.', render: (m) => renderGenericTool(m, 'ATS Resume Builder', 'Generate ATS-friendly resumes.'), icon: '☰' },
       { id: 'ats-checker', name: 'ATS Keyword Checker', cat: 'writing', desc: 'Compare resume keyword density against job specs.', render: (m) => renderGenericTool(m, 'ATS Checker', 'Keyword match affinity tester.'), icon: '🎯' },
       { id: 'invoice-gen', name: 'Invoice Generator', cat: 'writing', desc: 'Generate printable invoices with automated sums.', render: (m) => renderGenericTool(m, 'Invoice Generator', 'Printable corporate invoices.'), icon: '🧾' },
@@ -892,6 +884,7 @@
       { id: 'word-counter', name: 'Word & Read Time Counter', cat: 'writing', desc: 'Instant character, sentence, and duration stats.', render: (m) => renderGenericTool(m, 'Word Counter', 'Metrics & reading time analysis.'), icon: '🔢' },
       { id: 'markdown-editor', name: 'Live Markdown Studio', cat: 'writing', desc: 'Reactive editor with instant HTML export.', render: (m) => renderGenericTool(m, 'Markdown Studio', 'Live markdown preview and compiler.'), icon: 'M↓' },
 
+      // Developer Suite
       { id: 'json-formatter', name: 'JSON Prettifier', cat: 'dev', desc: 'Prettify, minify, and validate JSON data structures.', render: renderJsonFormatter, icon: '{ }' },
       { id: 'code-formatter', name: 'HTML/CSS/JS Beautifier', cat: 'dev', desc: 'Format source code using embedded js-beautify.', render: (m) => renderGenericTool(m, 'Code Beautifier', 'Format code blocks.'), icon: '</>' },
       { id: 'regex-tester', name: 'Regex Playground', cat: 'dev', desc: 'Real-time regular expression match evaluator.', render: (m) => renderGenericTool(m, 'Regex Playground', 'Test patterns dynamically.'), icon: '.*' },
@@ -899,6 +892,7 @@
       { id: 'gradient-gen', name: 'CSS Gradient Studio', cat: 'dev', desc: 'Visual linear-gradient creator with rule export.', render: (m) => renderGenericTool(m, 'CSS Gradient', 'Visual gradient generator.'), icon: '🌈' },
       { id: 'svg-editor', name: 'SVG Vector Visualizer', cat: 'dev', desc: 'Live vector code editor and visual preview.', render: (m) => renderGenericTool(m, 'SVG Studio', 'Direct vector canvas editor.'), icon: '📐' },
 
+      // Productivity & Security Suite
       { id: 'qr-gen', name: 'Vector QR Studio', cat: 'productivity', desc: 'Generate downloadable QR codes for links and text.', render: renderQrGenerator, icon: '▣' },
       { id: 'pwd-gen', name: 'Crypto Password Engine', cat: 'productivity', desc: 'Hardware-backed random passwords via Web Crypto.', render: renderPasswordGenerator, icon: '🔑' },
       { id: 'meta-inspector', name: 'File Header Inspector', cat: 'productivity', desc: 'Analyze magic byte headers and MIME types.', render: (m) => renderGenericTool(m, 'File Header Inspector', 'Hex magic bytes analyzer.'), icon: '🔍' },
