@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>ZERO PRO 2.0 — Everything You Need. Nothing You Pay.</title>
-  <meta name="description" content="Professional, privacy-first, offline client-side digital workstation with live camera capture, 35 power tools, and local in-browser Web AI.">
+  <title>SHARLINE — Universal Client-Side Workstation</title>
+  <meta name="description" content="SHARLINE: Professional, privacy-first, offline client-side digital workstation with live camera capture, 35 power tools, and local Web AI.">
   <meta name="theme-color" content="#030509">
 
   <!-- ==================== HARDCORE ANTI-INSPECT SHIELD ==================== -->
@@ -39,14 +39,14 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="ZERO PRO 2.0">
+  <meta name="apple-mobile-web-app-title" content="SHARLINE">
 
   <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Processing Engines -->
+  <!-- Client-Side Processing Engines -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.1/marked.min.js"></script>
@@ -220,6 +220,11 @@
     .cat-btn.active { color: #fff; background: var(--accent); border-color: var(--accent); }
     .cat-btn[data-cat="ai"] { border-color: rgba(139, 92, 246, 0.4); }
 
+    .search-filter-box {
+      max-width: 480px;
+      margin: 0 auto 2rem;
+    }
+
     .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 1.5rem; }
     .tool-card {
       position: relative;
@@ -348,7 +353,7 @@
       color: #c4b5fd;
     }
 
-    /* Universal Live Camera Modal */
+    /* Universal Live Camera Viewfinder Modal */
     .cam-modal-backdrop {
       position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(16px); z-index: 300; display: flex;
@@ -378,8 +383,8 @@
   <header class="navbar">
     <div class="nav-inner">
       <div class="brand-wrap" id="brand-home">
-        <div class="brand-symbol">Ø</div>
-        <span>ZERO PRO <small style="font-size:0.65rem; color:var(--accent-cyan); font-weight:800;">2.0 PRO</small></span>
+        <div class="brand-symbol">S</div>
+        <span>SHARLINE <small style="font-size:0.65rem; color:var(--accent-cyan); font-weight:800;">PRO</small></span>
       </div>
 
       <nav class="nav-tabs">
@@ -390,7 +395,7 @@
 
       <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--status-success); display:flex; align-items:center; gap:6px;">
         <span>●</span>
-        <span>ALL 35 ACTIVE MODULES READY</span>
+        <span>SHARLINE ENGINE ONLINE</span>
       </div>
     </div>
   </header>
@@ -399,10 +404,14 @@
     <!-- VIEW 1: Hub -->
     <section id="view-hub" class="view-active">
       <div class="hero">
-        <h1 class="hero-title">Everything You Need.<br><span class="gradient-text">100% Fully Functional.</span></h1>
-        <p style="color:var(--text-secondary); margin-bottom:1rem;">
-          All 35 tools execute authentic, offline client-side transformations with zero server calls. Live camera capture and local file loading enabled across all visual engines.
+        <h1 class="hero-title">SHARLINE<br><span class="gradient-text">Complete Client Workstation.</span></h1>
+        <p style="color:var(--text-secondary); margin-bottom:1.5rem;">
+          35 professional privacy-first utilities. Everything executes entirely inside your browser on device hardware with zero server storage.
         </p>
+
+        <div class="search-filter-box">
+          <input type="text" id="tool-search-input" placeholder="Search any tool or category (e.g. OCR, PDF, Crop)...">
+        </div>
       </div>
 
       <nav class="category-nav" id="category-tabs">
@@ -434,8 +443,10 @@
     <!-- VIEW 3: Workspace -->
     <section id="view-workspace" class="view-hidden">
       <div class="tool-panel">
-        <h2 style="font-size:1.8rem; font-weight:800; margin-bottom:1rem;">Smart Workstation Summary</h2>
+        <h2 style="font-size:1.8rem; font-weight:800; margin-bottom:1rem;">SHARLINE Hardware Telemetry</h2>
         <p style="color:var(--text-secondary); margin-bottom:1.5rem;">Browser AI Sandboxing Active: WASM, Web Workers & WebGPU Acceleration.</p>
+        <div id="ws-telemetry-box" style="margin-bottom:1.5rem; background:var(--bg-input); padding:1rem; border-radius:12px; font-family:var(--font-mono); font-size:0.85rem; line-height:2;"></div>
+        <h3 style="font-size:1.2rem; margin-bottom:10px;">Quick Launch Catalog</h3>
         <div id="ws-favorites-list"></div>
       </div>
     </section>
@@ -445,7 +456,7 @@
       <div class="tool-panel">
         <h2 style="font-size:1.8rem; font-weight:800; margin-bottom:1rem;">Zero Telemetry Sandbox</h2>
         <p style="color:var(--text-secondary); line-height:1.7;">
-          Every file transformation executes strictly on physical device hardware. No remote server communication, zero data collection.
+          Every file transformation in SHARLINE executes strictly on physical device hardware. No remote server communication, zero data collection.
         </p>
       </div>
     </section>
@@ -470,14 +481,14 @@
 
   <script>
     /* ==========================================================================
-       ★ CORE PLATFORM RUNTIME & UNIVERSAL BINARY EXPORT ENGINE ★
+       ★ SHARLINE PLATFORM RUNTIME & UNIVERSAL BINARY EXPORT ENGINE ★
        ========================================================================== */
     if (window.pdfjsLib) {
       window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
     }
 
-    const ZERO = {
-      favorites: JSON.parse(localStorage.getItem('zero_favs') || '[]'),
+    const SHARLINE = {
+      favorites: JSON.parse(localStorage.getItem('sharline_favs') || '[]'),
       activeCamStream: null,
       currentFacingMode: 'environment',
 
@@ -519,11 +530,11 @@
         setTimeout(() => URL.revokeObjectURL(url), 20000);
       },
 
-      async downloadZip(fileList, zipName = 'archive.zip') {
+      async downloadZip(fileList, zipName = 'sharline_archive.zip') {
         const zip = new JSZip();
         fileList.forEach(item => zip.file(item.name, item.blob));
         const content = await zip.generateAsync({ type: 'blob' });
-        await ZERO.downloadBlob(content, zipName, 'application/zip');
+        await SHARLINE.downloadBlob(content, zipName, 'application/zip');
       },
 
       setupDropzone(dropEl, inputEl, camBtnEl, onFiles) {
@@ -545,7 +556,7 @@
         if (camBtnEl) {
           camBtnEl.onclick = (e) => {
             e.stopPropagation();
-            ZERO.launchCameraModal((capturedFile) => onFiles([capturedFile]));
+            SHARLINE.launchCameraModal((capturedFile) => onFiles([capturedFile]));
           };
         }
       },
@@ -561,9 +572,9 @@
         modal.style.display = 'flex';
 
         const stopTracks = () => {
-          if (ZERO.activeCamStream) {
-            ZERO.activeCamStream.getTracks().forEach(t => t.stop());
-            ZERO.activeCamStream = null;
+          if (SHARLINE.activeCamStream) {
+            SHARLINE.activeCamStream.getTracks().forEach(t => t.stop());
+            SHARLINE.activeCamStream = null;
           }
         };
 
@@ -571,13 +582,14 @@
           stopTracks();
           try {
             const stream = await navigator.mediaDevices.getUserMedia({
-              video: { facingMode: { ideal: ZERO.currentFacingMode }, width: { ideal: 1920 }, height: { ideal: 1080 } },
+              video: { facingMode: { ideal: SHARLINE.currentFacingMode }, width: { ideal: 1920 }, height: { ideal: 1080 } },
               audio: false
             });
-            ZERO.activeCamStream = stream;
+            SHARLINE.activeCamStream = stream;
             video.srcObject = stream;
+            video.style.transform = SHARLINE.currentFacingMode === 'user' ? 'scaleX(-1)' : 'scaleX(1)';
           } catch (err) {
-            ZERO.toast(`Camera hardware access denied: ${err.message}`, 'error');
+            SHARLINE.toast(`Camera access denied: ${err.message}`, 'error');
             modal.style.display = 'none';
           }
         };
@@ -585,7 +597,7 @@
         startStream();
 
         flip.onclick = () => {
-          ZERO.currentFacingMode = ZERO.currentFacingMode === 'environment' ? 'user' : 'environment';
+          SHARLINE.currentFacingMode = SHARLINE.currentFacingMode === 'environment' ? 'user' : 'environment';
           startStream();
         };
 
@@ -607,17 +619,17 @@
           ctx.drawImage(video, 0, 0);
 
           canvas.toBlob((blob) => {
-            const capturedFile = new File([blob], `photo_${Date.now()}.jpg`, { type: 'image/jpeg' });
+            const capturedFile = new File([blob], `sharline_${Date.now()}.jpg`, { type: 'image/jpeg' });
             shutDownModal();
             onCapture(capturedFile);
-            ZERO.toast('Photo captured successfully!', 'success');
+            SHARLINE.toast('Photo captured successfully!', 'success');
           }, 'image/jpeg', 0.95);
         };
       }
     };
 
     /* ==========================================================================
-       ★ ALL 35 FULLY IMPLEMENTED PRODUCTION MODULES (AUTHENTIC CLIENT LOGIC) ★
+       ★ ALL 35 PRODUCTION MODULES ★
        ========================================================================== */
 
     // 1. AI OCR Scanner
@@ -648,24 +660,21 @@
       const stat = mount.querySelector('#ocr-status'), box = mount.querySelector('#ocr-res-box'), out = mount.querySelector('#ocr-output');
       fileBtn.onclick = (e) => { e.stopPropagation(); input.click(); };
 
-      ZERO.setupDropzone(drop, input, camBtn, async (files) => {
+      SHARLINE.setupDropzone(drop, input, camBtn, async (files) => {
         stat.style.display = 'block';
         stat.innerText = 'Initializing WebAssembly Neural Worker...';
         box.style.display = 'none';
         try {
-          const worker = await Tesseract.createWorker('eng');
-          stat.innerText = 'Scanning pixels locally...';
-          const ret = await worker.recognize(files[0]);
-          await worker.terminate();
+          const ret = await Tesseract.recognize(files[0], 'eng');
           stat.style.display = 'none';
           box.style.display = 'block';
           out.value = ret.data.text.trim() || 'No legible text detected.';
-          ZERO.toast('OCR complete!', 'success');
+          SHARLINE.toast('OCR complete!', 'success');
         } catch (err) {
           stat.innerText = `Worker error: ${err.message}`;
         }
       });
-      mount.querySelector('#ocr-copy').onclick = () => { navigator.clipboard.writeText(out.value); ZERO.toast('Copied!', 'success'); };
+      mount.querySelector('#ocr-copy').onclick = () => { navigator.clipboard.writeText(out.value); SHARLINE.toast('Copied!', 'success'); };
     }
 
     // 2. AI Background Remover
@@ -694,7 +703,7 @@
       let orig = null;
       fileBtn.onclick = (e) => { e.stopPropagation(); input.click(); };
 
-      ZERO.setupDropzone(drop, input, camBtn, async (files) => {
+      SHARLINE.setupDropzone(drop, input, camBtn, async (files) => {
         orig = new Image();
         orig.src = URL.createObjectURL(files[0]);
         await orig.decode();
@@ -720,7 +729,7 @@
       }
       sens.oninput = filter;
       mount.querySelector('#mat-dl').onclick = () => {
-        canvas.toBlob((b) => ZERO.downloadBlob(b, 'cutout.png', 'image/png'), 'image/png');
+        canvas.toBlob((b) => SHARLINE.downloadBlob(b, 'sharline_cutout.png', 'image/png'), 'image/png');
       };
     }
 
@@ -738,7 +747,7 @@
         const sentences = txt.value.match(/[^.!?]+[.!?]+/g) || [txt.value];
         res.innerHTML = sentences.slice(0, 3).map(s => `<p style="margin-bottom:6px;">• ${s.trim()}</p>`).join('');
         res.style.display = 'block';
-        ZERO.toast('Summary generated!', 'success');
+        SHARLINE.toast('Summary generated!', 'success');
       };
     }
 
@@ -746,8 +755,11 @@
     function renderAiTranscriber(mount) {
       mount.innerHTML = `
         <div class="tool-panel" style="text-align:center;">
-          <button class="action-btn" id="rec-btn">Start Voice Dictation</button>
-          <textarea id="rec-out" rows="8" style="margin-top:1.5rem;" placeholder="Speech text will render here..."></textarea>
+          <div style="display:flex; justify-content:center; gap:10px; margin-bottom:1rem;">
+            <button class="action-btn" id="rec-btn">Start Voice Dictation</button>
+            <button class="action-btn-secondary" id="rec-dl">Export Transcript</button>
+          </div>
+          <textarea id="rec-out" rows="8" placeholder="Speech text will render here..."></textarea>
         </div>
       `;
       const btn = mount.querySelector('#rec-btn'), out = mount.querySelector('#rec-out');
@@ -762,6 +774,9 @@
       btn.onclick = () => {
         if (!active) { rec.start(); btn.innerText = 'Stop Dictation'; active = true; }
         else { rec.stop(); btn.innerText = 'Start Voice Dictation'; active = false; }
+      };
+      mount.querySelector('#rec-dl').onclick = () => {
+        if (out.value) SHARLINE.downloadBlob(out.value, 'sharline_transcript.txt', 'text/plain');
       };
     }
 
@@ -786,7 +801,7 @@
         if (sel.value === 'corp') outEl.value = 'Could we please ensure the documentation is finalized and circulated promptly to preserve client satisfaction?';
         else if (sel.value === 'pers') outEl.value = 'Finalizing this report now gives us a tremendous opportunity to exceed client expectations!';
         else outEl.value = 'Action Item: Deliver final report immediately. Priority: Urgent.';
-        ZERO.toast('Tone transformed!', 'success');
+        SHARLINE.toast('Tone transformed!', 'success');
       };
     }
 
@@ -805,7 +820,7 @@
       let files = [];
       const d = mount.querySelector('#pm-d'), i = mount.querySelector('#pm-i'), b = mount.querySelector('#pm-b'), l = mount.querySelector('#pm-list');
       d.onclick = () => i.click();
-      ZERO.setupDropzone(d, i, null, (f) => {
+      SHARLINE.setupDropzone(d, i, null, (f) => {
         files.push(...f);
         l.innerHTML = files.map(x => `<div class="batch-item">${x.name}</div>`).join('');
         b.disabled = files.length < 2;
@@ -817,7 +832,7 @@
           const p = await doc.copyPages(sub, sub.getPageIndices());
           p.forEach(page => doc.addPage(page));
         }
-        ZERO.downloadBlob(await doc.save(), 'merged.pdf', 'application/pdf');
+        SHARLINE.downloadBlob(await doc.save(), 'sharline_merged.pdf', 'application/pdf');
       };
     }
 
@@ -827,24 +842,42 @@
         <div class="tool-panel">
           <div class="dropzone-laser" id="ps-d"><h3>Upload PDF to Extract Pages</h3><input type="file" id="ps-i" accept=".pdf" style="display:none"></div>
           <div id="ps-opts" style="display:none;">
+            <p id="ps-count" style="margin-bottom:8px; font-weight:bold;"></p>
             <input type="text" id="ps-r" placeholder="Page range (e.g. 1-2, 4)" style="margin-bottom:1rem;">
             <button class="action-btn" id="ps-btn">Extract Pages</button>
           </div>
         </div>
       `;
       let doc = null, file = null;
-      const d = mount.querySelector('#ps-d'), i = mount.querySelector('#ps-i'), opts = mount.querySelector('#ps-opts');
+      const d = mount.querySelector('#ps-d'), i = mount.querySelector('#ps-i'), opts = mount.querySelector('#ps-opts'), cnt = mount.querySelector('#ps-count');
       d.onclick = () => i.click();
-      ZERO.setupDropzone(d, i, null, async (f) => {
+      SHARLINE.setupDropzone(d, i, null, async (f) => {
         file = f[0];
         doc = await PDFLib.PDFDocument.load(await file.arrayBuffer());
+        cnt.innerText = `Total Pages in Document: ${doc.getPageCount()}`;
         opts.style.display = 'block';
       });
       mount.querySelector('#ps-btn').onclick = async () => {
+        const rangeStr = mount.querySelector('#ps-r').value.trim() || '1';
+        const maxPages = doc.getPageCount();
+        const pageIndices = [];
+        rangeStr.split(',').forEach(part => {
+          if (part.includes('-')) {
+            const [start, end] = part.split('-').map(n => parseInt(n.trim()));
+            if (start && end) {
+              for (let p = Math.max(1, start); p <= Math.min(maxPages, end); p++) pageIndices.push(p - 1);
+            }
+          } else {
+            const p = parseInt(part.trim());
+            if (p >= 1 && p <= maxPages) pageIndices.push(p - 1);
+          }
+        });
+        const uniqueIndices = Array.from(new Set(pageIndices)).sort((a,b)=>a-b);
         const out = await PDFLib.PDFDocument.create();
-        const p = await out.copyPages(doc, [0]);
+        const p = await out.copyPages(doc, uniqueIndices.length ? uniqueIndices : [0]);
         p.forEach(page => out.addPage(page));
-        ZERO.downloadBlob(await out.save(), 'split_document.pdf', 'application/pdf');
+        SHARLINE.downloadBlob(await out.save(), 'sharline_split.pdf', 'application/pdf');
+        SHARLINE.toast('Pages extracted successfully!', 'success');
       };
     }
 
@@ -859,21 +892,28 @@
       let file = null;
       const d = mount.querySelector('#pc-d'), i = mount.querySelector('#pc-i'), btn = mount.querySelector('#pc-btn');
       d.onclick = () => i.click();
-      ZERO.setupDropzone(d, i, null, (f) => { file = f[0]; btn.style.display = 'inline-flex'; });
+      SHARLINE.setupDropzone(d, i, null, (f) => { file = f[0]; btn.style.display = 'inline-flex'; });
       btn.onclick = async () => {
-        const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
-        const out = await PDFLib.PDFDocument.create();
-        for (let pNum = 1; pNum <= pdf.numPages; pNum++) {
-          const page = await pdf.getPage(pNum);
-          const vp = page.getViewport({ scale: 1.0 });
-          const c = document.createElement('canvas');
-          c.width = vp.width; c.height = vp.height;
-          await page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise;
-          const img = await out.embedJpg(c.toDataURL('image/jpeg', 0.6));
-          const p = out.addPage([vp.width, vp.height]);
-          p.drawImage(img, { x: 0, y: 0, width: vp.width, height: vp.height });
+        btn.innerText = 'Compressing...';
+        btn.disabled = true;
+        try {
+          const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
+          const out = await PDFLib.PDFDocument.create();
+          for (let pNum = 1; pNum <= pdf.numPages; pNum++) {
+            const page = await pdf.getPage(pNum);
+            const vp = page.getViewport({ scale: 1.0 });
+            const c = document.createElement('canvas');
+            c.width = vp.width; c.height = vp.height;
+            await page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise;
+            const img = await out.embedJpg(c.toDataURL('image/jpeg', 0.6));
+            const p = out.addPage([vp.width, vp.height]);
+            p.drawImage(img, { x: 0, y: 0, width: vp.width, height: vp.height });
+          }
+          SHARLINE.downloadBlob(await out.save(), 'sharline_compressed.pdf', 'application/pdf');
+        } finally {
+          btn.innerText = 'Compress PDF';
+          btn.disabled = false;
         }
-        ZERO.downloadBlob(await out.save(), 'compressed.pdf', 'application/pdf');
       };
     }
 
@@ -881,7 +921,7 @@
     function renderPdfOrganizer(mount) {
       mount.innerHTML = `
         <div class="tool-panel">
-          <div class="dropzone-laser" id="po-d"><h3>Upload PDF to Rotate / Delete Pages</h3><input type="file" id="po-i" accept=".pdf" style="display:none"></div>
+          <div class="dropzone-laser" id="po-d"><h3>Upload PDF to Reorganize Pages</h3><input type="file" id="po-i" accept=".pdf" style="display:none"></div>
           <div id="po-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:12px; margin-bottom:1.5rem;"></div>
           <button class="action-btn" id="po-btn" style="display:none;">Save Reordered PDF</button>
         </div>
@@ -889,11 +929,11 @@
       let raw = null, pages = [];
       const d = mount.querySelector('#po-d'), i = mount.querySelector('#po-i'), grid = mount.querySelector('#po-grid'), btn = mount.querySelector('#po-btn');
       d.onclick = () => i.click();
-      ZERO.setupDropzone(d, i, null, async (f) => {
+      SHARLINE.setupDropzone(d, i, null, async (f) => {
         raw = await f[0].arrayBuffer();
         const pdf = await pdfjsLib.getDocument({ data: raw }).promise;
         pages = [];
-        grid.innerHTML = '';
+        grid.innerHTML = '<p>Generating thumbnails...</p>';
         for (let idx = 1; idx <= pdf.numPages; idx++) {
           const page = await pdf.getPage(idx);
           const vp = page.getViewport({ scale: 0.3 });
@@ -907,12 +947,22 @@
       });
 
       function renderDeck() {
-        grid.innerHTML = pages.map((p, idx) => `
-          <div style="background:var(--bg-input); padding:8px; border-radius:6px; text-align:center;">
-            <img src="${p.thumb}" style="width:100%; transform:rotate(${p.rot}deg);">
-            <div style="margin-top:6px; font-size:12px;">Page ${idx+1}</div>
-          </div>
-        `).join('');
+        grid.innerHTML = '';
+        pages.forEach((p, idx) => {
+          const el = document.createElement('div');
+          el.style.cssText = 'background:var(--bg-input); padding:8px; border-radius:6px; text-align:center;';
+          el.innerHTML = `
+            <img src="${p.thumb}" style="width:100%; border-radius:4px; transform:rotate(${p.rot}deg); transition:transform 0.2s;">
+            <div style="margin:6px 0; font-size:12px;">Page ${p.idx + 1}</div>
+            <div style="display:flex; justify-content:center; gap:6px;">
+              <button class="rot-btn action-btn-secondary" style="padding:2px 8px; font-size:11px;">↻</button>
+              <button class="del-btn action-btn-secondary" style="padding:2px 8px; font-size:11px; color:var(--status-danger);">✕</button>
+            </div>
+          `;
+          el.querySelector('.rot-btn').onclick = () => { p.rot = (p.rot + 90) % 360; renderDeck(); };
+          el.querySelector('.del-btn').onclick = () => { pages.splice(idx, 1); renderDeck(); };
+          grid.appendChild(el);
+        });
       }
 
       btn.onclick = async () => {
@@ -920,9 +970,11 @@
         const dest = await PDFLib.PDFDocument.create();
         for (const item of pages) {
           const [p] = await dest.copyPages(src, [item.idx]);
+          if (item.rot) p.setRotation(PDFLib.degrees((p.getRotation().angle || 0) + item.rot));
           dest.addPage(p);
         }
-        ZERO.downloadBlob(await dest.save(), 'organized.pdf', 'application/pdf');
+        SHARLINE.downloadBlob(await dest.save(), 'sharline_organized.pdf', 'application/pdf');
+        SHARLINE.toast('Organized PDF exported!', 'success');
       };
     }
 
@@ -936,7 +988,7 @@
       `;
       const d = mount.querySelector('#p2i-d'), i = mount.querySelector('#p2i-i'), out = mount.querySelector('#p2i-out');
       d.onclick = () => i.click();
-      ZERO.setupDropzone(d, i, null, async (f) => {
+      SHARLINE.setupDropzone(d, i, null, async (f) => {
         out.innerHTML = '<p>Rasterizing...</p>';
         const pdf = await pdfjsLib.getDocument({ data: await f[0].arrayBuffer() }).promise;
         out.innerHTML = '';
@@ -949,7 +1001,7 @@
           const card = document.createElement('div');
           card.style.cssText = 'background:var(--bg-input); padding:8px; border-radius:6px; text-align:center;';
           card.innerHTML = `<img src="${c.toDataURL()}" style="width:100%; border-radius:4px;"><br><button class="action-btn-secondary" style="margin-top:6px; font-size:12px;">Save PNG</button>`;
-          card.querySelector('button').onclick = () => c.toBlob(b => ZERO.downloadBlob(b, `page_${idx}.png`, 'image/png'), 'image/png');
+          card.querySelector('button').onclick = () => c.toBlob(b => SHARLINE.downloadBlob(b, `page_${idx}.png`, 'image/png'), 'image/png');
           out.appendChild(card);
         }
       });
@@ -974,7 +1026,7 @@
       let imgs = [];
       const d = mount.querySelector('#i2p-d'), i = mount.querySelector('#i2p-i'), btn = mount.querySelector('#i2p-btn'), list = mount.querySelector('#i2p-list');
       mount.querySelector('#i2p-file-btn').onclick = (e) => { e.stopPropagation(); i.click(); };
-      ZERO.setupDropzone(d, i, mount.querySelector('#i2p-cam-btn'), (f) => {
+      SHARLINE.setupDropzone(d, i, mount.querySelector('#i2p-cam-btn'), (f) => {
         imgs.push(...f);
         list.innerHTML = imgs.map((x, idx) => `<div class="batch-item">Page ${idx+1}: ${x.name}</div>`).join('');
         btn.disabled = !imgs.length;
@@ -986,11 +1038,13 @@
           const c = document.createElement('canvas');
           c.width = bmp.width; c.height = bmp.height;
           c.getContext('2d').drawImage(bmp, 0, 0);
-          const png = await doc.embedPng(await (await fetch(c.toDataURL('image/png'))).arrayBuffer());
+          const blob = await new Promise(res => c.toBlob(res, 'image/png'));
+          const pngBytes = await blob.arrayBuffer();
+          const png = await doc.embedPng(pngBytes);
           const p = doc.addPage([png.width, png.height]);
           p.drawImage(png, { x: 0, y: 0, width: png.width, height: png.height });
         }
-        ZERO.downloadBlob(await doc.save(), 'compiled.pdf', 'application/pdf');
+        SHARLINE.downloadBlob(await doc.save(), 'sharline_compiled.pdf', 'application/pdf');
       };
     }
 
@@ -1006,20 +1060,25 @@
             </div>
             <input type="file" id="ic-i" multiple accept="image/*" style="display:none">
           </div>
-          <button class="action-btn" id="ic-b" disabled>Compress & Download Images</button>
+          <div style="display:flex; justify-content:center; gap:16px; margin-bottom:1.5rem; align-items:center;">
+            <label>Quality: <input type="range" id="ic-q" min="20" max="95" value="80"></label>
+          </div>
+          <button class="action-btn" id="ic-b" disabled>Compress & Download</button>
         </div>
       `;
       let files = [];
       const d = mount.querySelector('#ic-d'), i = mount.querySelector('#ic-i'), b = mount.querySelector('#ic-b');
+      const q = mount.querySelector('#ic-q');
       mount.querySelector('#ic-file-btn').onclick = (e) => { e.stopPropagation(); i.click(); };
-      ZERO.setupDropzone(d, i, mount.querySelector('#ic-cam-btn'), (f) => { files.push(...f); b.disabled = !files.length; });
+      SHARLINE.setupDropzone(d, i, mount.querySelector('#ic-cam-btn'), (f) => { files.push(...f); b.disabled = !files.length; });
       b.onclick = async () => {
+        const quality = parseInt(q.value) / 100;
         for (const f of files) {
           const bmp = await createImageBitmap(f);
           const c = document.createElement('canvas');
           c.width = bmp.width; c.height = bmp.height;
           c.getContext('2d').drawImage(bmp, 0, 0);
-          c.toBlob(blob => ZERO.downloadBlob(blob, `compressed_${f.name.replace(/\.[^.]+$/, '')}.jpg`, 'image/jpeg'), 'image/jpeg', 0.8);
+          c.toBlob(blob => SHARLINE.downloadBlob(blob, `compressed_${f.name.replace(/\.[^.]+$/, '')}.jpg`, 'image/jpeg'), 'image/jpeg', quality);
         }
       };
     }
@@ -1046,14 +1105,14 @@
       let raw = null;
       const d = mount.querySelector('#ir-d'), i = mount.querySelector('#ir-i'), opts = mount.querySelector('#ir-opts');
       mount.querySelector('#ir-file-btn').onclick = (e) => { e.stopPropagation(); i.click(); };
-      ZERO.setupDropzone(d, i, mount.querySelector('#ir-cam-btn'), (f) => { raw = f[0]; opts.style.display = 'block'; });
+      SHARLINE.setupDropzone(d, i, mount.querySelector('#ir-cam-btn'), (f) => { raw = f[0]; opts.style.display = 'block'; });
       mount.querySelector('#ir-btn').onclick = async () => {
         const bmp = await createImageBitmap(raw);
         const c = document.createElement('canvas');
         c.width = parseInt(mount.querySelector('#ir-w').value) || 1280;
         c.height = parseInt(mount.querySelector('#ir-h').value) || 720;
         c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
-        c.toBlob(b => ZERO.downloadBlob(b, 'resized.png', 'image/png'), 'image/png');
+        c.toBlob(b => SHARLINE.downloadBlob(b, 'sharline_resized.png', 'image/png'), 'image/png');
       };
     }
 
@@ -1078,7 +1137,7 @@
       let file = null;
       const d = mount.querySelector('#ifc-d'), i = mount.querySelector('#ifc-i'), b = mount.querySelector('#ifc-b');
       mount.querySelector('#ifc-file-btn').onclick = (e) => { e.stopPropagation(); i.click(); };
-      ZERO.setupDropzone(d, i, mount.querySelector('#ifc-cam-btn'), (f) => { file = f[0]; b.disabled = false; });
+      SHARLINE.setupDropzone(d, i, mount.querySelector('#ifc-cam-btn'), (f) => { file = f[0]; b.disabled = false; });
       b.onclick = async () => {
         const bmp = await createImageBitmap(file);
         const c = document.createElement('canvas');
@@ -1087,7 +1146,7 @@
         const fmt = mount.querySelector('#ifc-fmt').value;
         if (fmt === 'image/jpeg') { ctx.fillStyle = '#fff'; ctx.fillRect(0,0,c.width,c.height); }
         ctx.drawImage(bmp, 0, 0);
-        c.toBlob(blob => ZERO.downloadBlob(blob, `converted.${fmt.split('/')[1]}`, fmt), fmt);
+        c.toBlob(blob => SHARLINE.downloadBlob(blob, `sharline_converted.${fmt.split('/')[1]}`, fmt), fmt);
       };
     }
 
@@ -1097,6 +1156,7 @@
         <div class="tool-panel">
           <div class="dropzone-laser" id="crp-d">
             <h3>Crop Image Boundaries</h3>
+            <p style="color:var(--text-muted); font-size:0.85rem;">Drag a rectangular area on the image to crop</p>
             <div class="dropzone-actions-bar">
               <button class="action-btn-secondary" id="crp-file-btn">📁 Select File</button>
               <button class="action-btn" id="crp-cam-btn">📷 Snap Photo</button>
@@ -1104,27 +1164,58 @@
             <input type="file" id="crp-i" accept="image/*" style="display:none">
           </div>
           <div id="crp-box" style="display:none; text-align:center;">
-            <canvas id="crp-c" style="max-width:100%; border:1px solid var(--border-subtle);"></canvas><br><br>
-            <button class="action-btn" id="crp-b">Download Crop</button>
+            <canvas id="crp-c" style="max-width:100%; border:1px solid var(--border-subtle); cursor:crosshair;"></canvas><br><br>
+            <button class="action-btn" id="crp-b">Download Selection Crop</button>
           </div>
         </div>
       `;
-      let img = null;
+      let img = null, sx = 0, sy = 0, ex = 0, ey = 0, isDown = false;
       const canvas = mount.querySelector('#crp-c');
       mount.querySelector('#crp-file-btn').onclick = (e) => { e.stopPropagation(); mount.querySelector('#crp-i').click(); };
-      ZERO.setupDropzone(mount.querySelector('#crp-d'), mount.querySelector('#crp-i'), mount.querySelector('#crp-cam-btn'), async (f) => {
+
+      SHARLINE.setupDropzone(mount.querySelector('#crp-d'), mount.querySelector('#crp-i'), mount.querySelector('#crp-cam-btn'), async (f) => {
         img = new Image();
         img.src = URL.createObjectURL(f[0]);
         await img.decode();
         canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
-        canvas.getContext('2d').drawImage(img, 0, 0);
+        draw();
         mount.querySelector('#crp-box').style.display = 'block';
       });
+
+      function draw() {
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+        if (isDown || (ex !== sx)) {
+          ctx.strokeStyle = '#6366f1'; ctx.lineWidth = 3;
+          ctx.strokeRect(sx, sy, ex - sx, ey - sy);
+          ctx.fillStyle = 'rgba(99, 102, 241, 0.25)';
+          ctx.fillRect(sx, sy, ex - sx, ey - sy);
+        }
+      }
+
+      canvas.onmousedown = (e) => {
+        const r = canvas.getBoundingClientRect();
+        sx = (e.clientX - r.left) * (canvas.width / r.width);
+        sy = (e.clientY - r.top) * (canvas.height / r.height);
+        ex = sx; ey = sy; isDown = true;
+      };
+      canvas.onmousemove = (e) => {
+        if (!isDown) return;
+        const r = canvas.getBoundingClientRect();
+        ex = (e.clientX - r.left) * (canvas.width / r.width);
+        ey = (e.clientY - r.top) * (canvas.height / r.height);
+        draw();
+      };
+      window.addEventListener('mouseup', () => isDown = false);
+
       mount.querySelector('#crp-b').onclick = () => {
+        const x = Math.min(sx, ex), y = Math.min(sy, ey), w = Math.abs(ex - sx), h = Math.abs(ey - sy);
+        if (w < 5 || h < 5) return SHARLINE.toast('Please drag a valid crop box first', 'error');
         const c = document.createElement('canvas');
-        c.width = canvas.width / 2; c.height = canvas.height / 2;
-        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height, 0, 0, c.width, c.height);
-        c.toBlob(b => ZERO.downloadBlob(b, 'cropped.png', 'image/png'), 'image/png');
+        c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, x, y, w, h, 0, 0, w, h);
+        c.toBlob(b => SHARLINE.downloadBlob(b, 'sharline_cropped.png', 'image/png'), 'image/png');
       };
     }
 
@@ -1145,7 +1236,7 @@
       `;
       let file = null;
       mount.querySelector('#ex-file-btn').onclick = (e) => { e.stopPropagation(); mount.querySelector('#ex-i').click(); };
-      ZERO.setupDropzone(mount.querySelector('#ex-d'), mount.querySelector('#ex-i'), mount.querySelector('#ex-cam-btn'), (f) => {
+      SHARLINE.setupDropzone(mount.querySelector('#ex-d'), mount.querySelector('#ex-i'), mount.querySelector('#ex-cam-btn'), (f) => {
         file = f[0]; mount.querySelector('#ex-b').disabled = false;
       });
       mount.querySelector('#ex-b').onclick = async () => {
@@ -1153,7 +1244,7 @@
         const c = document.createElement('canvas');
         c.width = bmp.width; c.height = bmp.height;
         c.getContext('2d').drawImage(bmp, 0, 0);
-        c.toBlob(b => ZERO.downloadBlob(b, 'sanitized.png', 'image/png'), 'image/png');
+        c.toBlob(b => SHARLINE.downloadBlob(b, 'sharline_sanitized.png', 'image/png'), 'image/png');
       };
     }
 
@@ -1163,34 +1254,49 @@
         <div class="tool-panel">
           <div class="dropzone-laser" id="ck-d">
             <h3>Color Key Background Remover</h3>
+            <p style="color:var(--text-muted); font-size:0.85rem;">Click anywhere on the image below to key out that color</p>
             <div class="dropzone-actions-bar">
               <button class="action-btn-secondary" id="ck-file-btn">📁 Select File</button>
               <button class="action-btn" id="ck-cam-btn">📷 Snap Photo</button>
             </div>
             <input type="file" id="ck-i" accept="image/*" style="display:none">
           </div>
-          <canvas id="ck-c" style="max-width:100%; display:none; margin-bottom:1rem;"></canvas><br>
+          <canvas id="ck-c" style="max-width:100%; display:none; margin-bottom:1rem; cursor:crosshair;"></canvas><br>
           <button class="action-btn" id="ck-b" style="display:none;">Download Mask</button>
         </div>
       `;
       const canvas = mount.querySelector('#ck-c'), btn = mount.querySelector('#ck-b');
+      let img = null;
       mount.querySelector('#ck-file-btn').onclick = (e) => { e.stopPropagation(); mount.querySelector('#ck-i').click(); };
-      ZERO.setupDropzone(mount.querySelector('#ck-d'), mount.querySelector('#ck-i'), mount.querySelector('#ck-cam-btn'), async (f) => {
-        const img = new Image();
+
+      SHARLINE.setupDropzone(mount.querySelector('#ck-d'), mount.querySelector('#ck-i'), mount.querySelector('#ck-cam-btn'), async (f) => {
+        img = new Image();
         img.src = URL.createObjectURL(f[0]);
         await img.decode();
         canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
         const ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0);
-        const d = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        for (let j = 0; j < d.data.length; j += 4) {
-          if (d.data[j] > 200 && d.data[j+1] > 200 && d.data[j+2] > 200) d.data[j+3] = 0;
-        }
-        ctx.putImageData(d, 0, 0);
         canvas.style.display = 'block';
         btn.style.display = 'inline-flex';
+        SHARLINE.toast('Click on the background color to remove it!', 'info');
       });
-      btn.onclick = () => canvas.toBlob(b => ZERO.downloadBlob(b, 'chroma_key.png', 'image/png'), 'image/png');
+
+      canvas.onclick = (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = Math.round((e.clientX - rect.left) * (canvas.width / rect.width));
+        const y = Math.round((e.clientY - rect.top) * (canvas.height / rect.height));
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        const p = ctx.getImageData(x, y, 1, 1).data;
+        const d = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        for (let j = 0; j < d.data.length; j += 4) {
+          if (Math.hypot(d.data[j]-p[0], d.data[j+1]-p[1], d.data[j+2]-p[2]) < 45) d.data[j+3] = 0;
+        }
+        ctx.putImageData(d, 0, 0);
+        SHARLINE.toast('Keyed out color!', 'success');
+      };
+
+      btn.onclick = () => canvas.toBlob(b => SHARLINE.downloadBlob(b, 'sharline_chroma.png', 'image/png'), 'image/png');
     }
 
     // 18. ATS Resume Builder
@@ -1203,15 +1309,18 @@
             <textarea id="rb-e" rows="8">Designed zero-telemetry in-browser encryption workstations.</textarea>
             <button class="action-btn" id="rb-p" style="margin-top:12px;">Print to PDF</button>
           </div>
-          <div id="rb-pv" style="background:#fff; color:#000; padding:16px; border-radius:8px; font-family:serif;"></div>
+          <div id="rb-pv" style="background:#fff; color:#000; padding:24px; border-radius:8px; font-family:serif;"></div>
         </div>
       `;
       const n = mount.querySelector('#rb-n'), r = mount.querySelector('#rb-r'), e = mount.querySelector('#rb-e'), pv = mount.querySelector('#rb-pv');
-      const sync = () => pv.innerHTML = `<h1>${n.value}</h1><h3>${r.value}</h3><hr><p>${e.value}</p>`;
+      const sync = () => pv.innerHTML = `<h1 style="margin:0 0 4px 0;">${n.value}</h1><h3 style="margin:0 0 12px 0; color:#475569;">${r.value}</h3><hr style="border:none; border-top:1px solid #cbd5e1; margin-bottom:12px;"><p style="white-space:pre-wrap; line-height:1.6;">${e.value}</p>`;
       [n, r, e].forEach(x => x.oninput = sync);
       sync();
       mount.querySelector('#rb-p').onclick = () => {
-        const w = window.open(); w.document.write(pv.innerHTML); w.print(); w.close();
+        const w = window.open('', '_blank');
+        w.document.write(`<!DOCTYPE html><html><head><title>Resume</title><style>body{font-family:serif; padding:40px; color:#000;}</style></head><body>${pv.innerHTML}</body></html>`);
+        w.document.close();
+        w.print();
       };
     }
 
@@ -1243,9 +1352,12 @@
         </div>
       `;
       mount.querySelector('#inv-p').onclick = () => {
-        const w = window.open();
-        w.document.write(`<h1>INVOICE</h1><p>Client: ${mount.querySelector('#inv-c').value}</p><p>Total Due: $${mount.querySelector('#inv-a').value}</p>`);
-        w.print(); w.close();
+        const client = mount.querySelector('#inv-c').value;
+        const amount = mount.querySelector('#inv-a').value;
+        const w = window.open('', '_blank');
+        w.document.write(`<!DOCTYPE html><html><head><title>Invoice</title><style>body{font-family:sans-serif; padding:40px;} hr{border:none; border-top:1px solid #ccc;}</style></head><body><h1>SHARLINE INVOICE</h1><p>Client: ${client}</p><hr><p>Total Due: $${amount}</p></body></html>`);
+        w.document.close();
+        w.print();
       };
     }
 
@@ -1286,13 +1398,19 @@
     function renderMarkdownEditor(mount) {
       mount.innerHTML = `
         <div class="tool-panel" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-          <textarea id="md-i" rows="12"># Zero Workstation&#10;&#10;Pure **client-side** processing.</textarea>
-          <div id="md-o" style="background:var(--bg-input); padding:1rem; border-radius:8px;"></div>
+          <div>
+            <textarea id="md-i" rows="12"># Sharline Workstation&#10;&#10;Pure **client-side** processing.</textarea>
+            <button class="action-btn" id="md-dl" style="margin-top:10px;">Download HTML</button>
+          </div>
+          <div id="md-o" style="background:var(--bg-input); padding:1rem; border-radius:8px; overflow:auto; max-height:360px;"></div>
         </div>
       `;
       const i = mount.querySelector('#md-i'), o = mount.querySelector('#md-o');
       const sync = () => o.innerHTML = marked.parse(i.value);
       i.oninput = sync; sync();
+      mount.querySelector('#md-dl').onclick = () => {
+        SHARLINE.downloadBlob(o.innerHTML, 'sharline_document.html', 'text/html');
+      };
     }
 
     // 24. JSON Prettifier
@@ -1300,12 +1418,12 @@
       mount.innerHTML = `
         <div class="tool-panel">
           <button class="action-btn" id="jf-b" style="margin-bottom:1rem;">Prettify JSON</button>
-          <textarea id="jf-t" rows="10">{"zero":"pro","active":true,"cores":8}</textarea>
+          <textarea id="jf-t" rows="10">{"sharline":"pro","active":true,"cores":8}</textarea>
         </div>
       `;
       const t = mount.querySelector('#jf-t');
       mount.querySelector('#jf-b').onclick = () => {
-        try { t.value = JSON.stringify(JSON.parse(t.value), null, 2); ZERO.toast('Formatted!', 'success'); } catch(e){ ZERO.toast(e.message, 'error'); }
+        try { t.value = JSON.stringify(JSON.parse(t.value), null, 2); SHARLINE.toast('Formatted!', 'success'); } catch(e){ SHARLINE.toast(e.message, 'error'); }
       };
     }
 
@@ -1313,13 +1431,23 @@
     function renderCodeFormatter(mount) {
       mount.innerHTML = `
         <div class="tool-panel">
-          <button class="action-btn" id="cf-b" style="margin-bottom:1rem;">Beautify JavaScript</button>
+          <div style="display:flex; gap:10px; margin-bottom:1rem;">
+            <select id="cf-sel" style="max-width:160px;">
+              <option value="js">JavaScript</option>
+              <option value="html">HTML</option>
+              <option value="css">CSS</option>
+            </select>
+            <button class="action-btn" id="cf-b">Beautify Code</button>
+          </div>
           <textarea id="cf-t" rows="10">function test(){let x=10;return x*2;}</textarea>
         </div>
       `;
-      const t = mount.querySelector('#cf-t');
+      const t = mount.querySelector('#cf-t'), sel = mount.querySelector('#cf-sel');
       mount.querySelector('#cf-b').onclick = () => {
-        t.value = js_beautify(t.value); ZERO.toast('Code formatted!', 'success');
+        if (sel.value === 'js') t.value = js_beautify(t.value);
+        else if (sel.value === 'html') t.value = html_beautify(t.value);
+        else if (sel.value === 'css') t.value = css_beautify(t.value);
+        SHARLINE.toast('Code beautified!', 'success');
       };
     }
 
@@ -1328,7 +1456,7 @@
       mount.innerHTML = `
         <div class="tool-panel">
           <input type="text" id="rx-p" value="\\b[A-Z]\\w+" placeholder="Pattern" style="margin-bottom:8px;">
-          <textarea id="rx-t" rows="4">Zero Pro Workstation Architecture 2026</textarea>
+          <textarea id="rx-t" rows="4">Sharline Pro Workstation Architecture 2026</textarea>
           <div id="rx-o" style="margin-top:10px;"></div>
         </div>
       `;
@@ -1358,7 +1486,7 @@
           const col = `hsl(${(base + deg) % 360}, 70%, 50%)`;
           const d = document.createElement('div');
           d.style.cssText = `flex:1; background:${col}; cursor:pointer;`;
-          d.onclick = () => { navigator.clipboard.writeText(col); ZERO.toast(`Copied ${col}!`, 'info'); };
+          d.onclick = () => { navigator.clipboard.writeText(col); SHARLINE.toast(`Copied ${col}!`, 'info'); };
           c.appendChild(d);
         });
       };
@@ -1398,17 +1526,21 @@
     function renderQrGenerator(mount) {
       mount.innerHTML = `
         <div class="tool-panel" style="text-align:center;">
-          <input type="text" id="qr-v" value="https://zero.pro" style="max-width:320px; margin:0 auto 1rem;">
+          <input type="text" id="qr-v" value="https://sharline.pro" style="max-width:320px; margin:0 auto 1rem;">
           <div id="qr-b" style="background:#fff; padding:16px; border-radius:8px; display:inline-block; margin-bottom:1rem;"></div><br>
           <button class="action-btn" id="qr-dl">Save Universal QR PNG</button>
         </div>
       `;
       const v = mount.querySelector('#qr-v'), b = mount.querySelector('#qr-b');
-      const draw = () => { b.innerHTML = ''; new QRCode(b, { text: v.value || 'ZERO', width: 180, height: 180 }); };
+      const draw = () => { b.innerHTML = ''; new QRCode(b, { text: v.value || 'SHARLINE', width: 180, height: 180 }); };
       v.oninput = draw; draw();
       mount.querySelector('#qr-dl').onclick = () => {
         const c = b.querySelector('canvas');
-        if (c) c.toBlob(blob => ZERO.downloadBlob(blob, 'qrcode.png', 'image/png'), 'image/png');
+        if (c) c.toBlob(blob => SHARLINE.downloadBlob(blob, 'sharline_qr.png', 'image/png'), 'image/png');
+        else {
+          const img = b.querySelector('img');
+          if (img?.src) SHARLINE.downloadBlob(img.src, 'sharline_qr.png', 'image/png');
+        }
       };
     }
 
@@ -1438,7 +1570,7 @@
       `;
       const d = mount.querySelector('#mi-d'), i = mount.querySelector('#mi-i'), o = mount.querySelector('#mi-o');
       d.onclick = () => i.click();
-      ZERO.setupDropzone(d, i, null, async (f) => {
+      SHARLINE.setupDropzone(d, i, null, async (f) => {
         const b = new Uint8Array(await f[0].slice(0, 8).arrayBuffer());
         o.innerText = `File: ${f[0].name}\nSize: ${f[0].size} bytes\nMagic Header: ${Array.from(b).map(x => x.toString(16).padStart(2,'0')).join(' ').toUpperCase()}`;
         o.style.display = 'block';
@@ -1455,7 +1587,7 @@
       `;
       const d = mount.querySelector('#df-d'), i = mount.querySelector('#df-i'), o = mount.querySelector('#df-o');
       d.onclick = () => i.click();
-      ZERO.setupDropzone(d, i, null, async (files) => {
+      SHARLINE.setupDropzone(d, i, null, async (files) => {
         o.innerHTML = '<p>Computing hashes...</p>';
         const map = {};
         for (const f of files) {
@@ -1472,17 +1604,20 @@
         <div class="tool-panel" style="max-width:320px; margin:0 auto;">
           <input type="text" id="calc-s" readonly style="font-family:var(--font-mono); font-size:1.5rem; text-align:right; margin-bottom:1rem;">
           <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px;">
-            ${['C','(',')','/','7','8','9','*','4','5','6','-','1','2','3','+','0','.','√','='].map(k => `<button class="action-btn-secondary" onclick="calcInput('${k}')">${k}</button>`).join('')}
+            ${['C','(',')','/','7','8','9','*','4','5','6','-','1','2','3','+','0','.','√','='].map(k => `<button class="action-btn-secondary cbtn" data-key="${k}">${k}</button>`).join('')}
           </div>
         </div>
       `;
-      window.calcInput = (k) => {
-        const s = document.getElementById('calc-s');
-        if (k === 'C') s.value = '';
-        else if (k === '=') {
-          try { s.value = Function(`'use strict'; return (${s.value.replace(/√/g, 'Math.sqrt')})`)(); } catch { s.value = 'Error'; }
-        } else s.value += k;
-      };
+      const s = mount.querySelector('#calc-s');
+      mount.querySelectorAll('.cbtn').forEach(btn => {
+        btn.onclick = () => {
+          const k = btn.dataset.key;
+          if (k === 'C') s.value = '';
+          else if (k === '=') {
+            try { s.value = Function(`'use strict'; return (${s.value.replace(/√/g, 'Math.sqrt')})`)(); } catch { s.value = 'Error'; }
+          } else s.value += k;
+        };
+      });
     }
 
     // 35. Batch Image Converter
@@ -1503,7 +1638,7 @@
       let files = [];
       const d = mount.querySelector('#bc-d'), i = mount.querySelector('#bc-i'), b = mount.querySelector('#bc-b');
       mount.querySelector('#bc-file-btn').onclick = (e) => { e.stopPropagation(); i.click(); };
-      ZERO.setupDropzone(d, i, mount.querySelector('#bc-cam-btn'), (f) => { files.push(...f); b.disabled = !files.length; });
+      SHARLINE.setupDropzone(d, i, mount.querySelector('#bc-cam-btn'), (f) => { files.push(...f); b.disabled = !files.length; });
       b.onclick = async () => {
         const out = [];
         for (const f of files) {
@@ -1516,12 +1651,12 @@
           const blob = await new Promise(res => c.toBlob(res, 'image/jpeg', 0.85));
           out.push({ name: `${f.name.replace(/\.[^.]+$/, '')}.jpg`, blob });
         }
-        await ZERO.downloadZip(out, 'batch_images.zip');
+        await SHARLINE.downloadZip(out, 'sharline_batch.zip');
       };
     }
 
     /* ==========================================================================
-       TOOL REGISTRY (EXACTLY 35 UNIQUE MODULES CONNECTED TO REAL CODE)
+       TOOL REGISTRY (EXACTLY 35 MODULES)
        ========================================================================== */
     const TOOLS = [
       { id: 'ai-ocr', name: 'AI OCR Vision Scanner', cat: 'ai', desc: 'Scan document photos or upload images to extract text locally.', render: renderAiOcrScanner, icon: '👁️' },
@@ -1578,12 +1713,29 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    function renderWorkspaceTelemetry() {
+      const box = document.getElementById('ws-telemetry-box');
+      box.innerHTML = `
+        <div>Concurrency Threads: <b>${navigator.hardwareConcurrency || 4} Hardware Cores</b></div>
+        <div>Memory Heap: <b>Client Isolated Sandboxing</b></div>
+        <div>Web AI Acceleration: <b>WebAssembly / Web Workers Enabled</b></div>
+        <div>Camera Subsystem: <b>WebRTC MediaStream Active</b></div>
+      `;
+      const list = document.getElementById('ws-favorites-list');
+      list.innerHTML = TOOLS.slice(0, 8).map(t => `
+        <div class="batch-item" onclick="openTool('${t.id}')" style="cursor:pointer;">
+          <span>${t.icon} <b>${t.name}</b></span>
+          <span>Launch Module →</span>
+        </div>
+      `).join('');
+    }
+
     document.querySelectorAll('.nav-tab-btn').forEach(btn => {
       btn.onclick = () => {
         document.querySelectorAll('.nav-tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         if (btn.id === 'tab-btn-hub') switchView('view-hub');
-        if (btn.id === 'tab-btn-workspace') switchView('view-workspace');
+        if (btn.id === 'tab-btn-workspace') { renderWorkspaceTelemetry(); switchView('view-workspace'); }
         if (btn.id === 'tab-btn-privacy') switchView('view-privacy');
       };
     });
@@ -1591,10 +1743,14 @@
     document.getElementById('brand-home').onclick = () => document.getElementById('tab-btn-hub').click();
     document.getElementById('btn-back-hub').onclick = () => document.getElementById('tab-btn-hub').click();
 
-    function renderDirectory(cat = 'all') {
+    function renderDirectory(cat = 'all', searchQuery = '') {
       const g = document.getElementById('tools-directory');
       g.innerHTML = '';
-      const list = cat === 'all' ? TOOLS : TOOLS.filter(t => t.cat === cat);
+      let list = cat === 'all' ? TOOLS : TOOLS.filter(t => t.cat === cat);
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase().trim();
+        list = list.filter(t => t.name.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q) || t.cat.toLowerCase().includes(q));
+      }
 
       list.forEach(t => {
         const card = document.createElement('div');
@@ -1632,7 +1788,12 @@
       if (!e.target.classList.contains('cat-btn')) return;
       document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
       e.target.classList.add('active');
-      renderDirectory(e.target.dataset.cat);
+      renderDirectory(e.target.dataset.cat, document.getElementById('tool-search-input').value);
+    };
+
+    document.getElementById('tool-search-input').oninput = (e) => {
+      const activeCat = document.querySelector('.cat-btn.active')?.dataset.cat || 'all';
+      renderDirectory(activeCat, e.target.value);
     };
 
     // Ambient particle background
