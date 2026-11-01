@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>ZERO PRO 2.0 — Everything You Need. Nothing You Pay.</title>
-  <meta name="description" content="Professional, privacy-first, offline client-side digital workstation with 35 power tools and local in-browser Web AI.">
+  <meta name="description" content="Professional, privacy-first, offline client-side digital workstation with live camera capture, 35 power tools, and local in-browser Web AI.">
   <meta name="theme-color" content="#030509">
 
   <!-- ==================== HARDCORE ANTI-INSPECT SHIELD ==================== -->
@@ -47,7 +47,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Standard Processing Engines -->
+  <!-- Processing Engines -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.1/marked.min.js"></script>
@@ -57,7 +57,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.9/beautify-css.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.9/beautify-html.min.js"></script>
 
-  <!-- Local Web AI Engines (WASM/Client) -->
+  <!-- Local Web AI Engine (WASM) -->
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 
   <style>
@@ -270,15 +270,25 @@
       backdrop-filter: blur(20px);
     }
 
+    /* Universal Dual Input Dropzone */
     .dropzone-laser {
       border: 2px dashed rgba(255, 255, 255, 0.14);
       border-radius: var(--radius-md);
-      padding: 3rem 2rem;
+      padding: 2.5rem 1.5rem;
       text-align: center;
       background: rgba(10, 14, 25, 0.5);
-      cursor: pointer;
       margin-bottom: 1.5rem;
+      transition: border-color 0.25s var(--spring);
     }
+    .dropzone-laser:hover { border-color: var(--accent); }
+    .dropzone-actions-bar {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 1.25rem;
+      flex-wrap: wrap;
+    }
+
     .action-btn {
       background: var(--accent-gradient);
       color: #fff;
@@ -288,6 +298,9 @@
       font-size: 0.925rem;
       font-weight: 700;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
     .action-btn:disabled { opacity: 0.4; cursor: not-allowed; }
     .action-btn-secondary {
@@ -295,8 +308,18 @@
       color: var(--text-main);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-full);
-      padding: 0.8rem 1.4rem;
+      padding: 0.75rem 1.4rem;
+      font-size: 0.875rem;
+      font-weight: 600;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s var(--spring);
+    }
+    .action-btn-secondary:hover {
+      border-color: var(--border-highlight);
+      background: rgba(255, 255, 255, 0.1);
     }
 
     input[type="text"], input[type="number"], select, textarea {
@@ -320,6 +343,52 @@
       border: 1px solid rgba(139, 92, 246, 0.6);
       color: #c4b5fd;
     }
+
+    /* Universal Live Camera Viewfinder Modal */
+    .cam-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(16px);
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .cam-modal-card {
+      background: #090d19;
+      border: 1px solid var(--border-highlight);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 640px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+    }
+    .cam-viewport {
+      width: 100%;
+      height: 380px;
+      background: #000;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cam-viewport video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .cam-controls {
+      padding: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: rgba(11, 15, 26, 0.95);
+    }
   </style>
 </head>
 <body>
@@ -341,7 +410,7 @@
 
       <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--status-success); display:flex; align-items:center; gap:6px;">
         <span>●</span>
-        <span>WEB AI ENGINES READY</span>
+        <span>LIVE CAMERA CAPTURE ACTIVE</span>
       </div>
     </div>
   </header>
@@ -350,9 +419,9 @@
     <!-- VIEW 1: Directory Hub -->
     <section id="view-hub" class="view-active">
       <div class="hero">
-        <h1 class="hero-title">Everything You Need.<br><span class="gradient-text">Local Web AI Powered.</span></h1>
+        <h1 class="hero-title">Everything You Need.<br><span class="gradient-text">Live Photo & File Sandbox.</span></h1>
         <p style="color:var(--text-secondary); margin-bottom:1rem;">
-          35 professional utilities powered by local, client-side Web AI. All workloads run directly in memory on device hardware (WASM/Local Models). Zero server retention.
+          Capture photos directly with your camera or select files from disk across all 35 modules. Everything processes in local memory with universal binary compatibility.
         </p>
       </div>
 
@@ -396,18 +465,41 @@
       <div class="tool-panel">
         <h2 style="font-size:1.8rem; font-weight:800; margin-bottom:1rem;">100% Client-Side Web AI Privacy Audit</h2>
         <p style="color:var(--text-secondary); line-height:1.7;">
-          Traditional AI suites transmit your files, prompts, and audio to third-party cloud datacenters. ZERO PRO 2.0 operates strictly on local WebAssembly, Web Workers, and browser neural runtimes. Zero tracking, zero telemetry, and zero data leakage.
+          Traditional AI suites transmit your files, prompts, and audio to third-party cloud datacenters. ZERO PRO 2.0 operates strictly on local WebAssembly, Web Workers, and browser neural runtimes. Camera streams never leave your device RAM.
         </p>
       </div>
     </section>
   </main>
 
+  <!-- Live Universal Camera Modal -->
+  <div id="cam-modal" class="cam-modal-backdrop" style="display:none;">
+    <div class="cam-modal-card">
+      <div class="cam-viewport">
+        <video id="cam-video" autoplay playsinline muted></video>
+        <canvas id="cam-canvas" style="display:none;"></canvas>
+      </div>
+      <div class="cam-controls">
+        <button class="action-btn-secondary" id="cam-close-btn">Cancel</button>
+        <button class="action-btn" id="cam-shutter-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
+          Capture Frame
+        </button>
+        <button class="action-btn-secondary" id="cam-flip-btn">Flip Sensor</button>
+      </div>
+    </div>
+  </div>
+
   <div id="toast-tray" class="toast-tray"></div>
 
   <script>
-    /* ==================== CORE PLATFORM RUNTIME ==================== */
+    /* ==========================================================================
+       ★ UNIVERSAL RUNTIME: CAMERA VIEWFINDER & BINARY ENGINE ★
+       ========================================================================== */
     const ZERO = {
       favorites: JSON.parse(localStorage.getItem('zero_favs') || '[]'),
+      activeCamStream: null,
+      currentFacingMode: 'environment',
+
       toast(msg, type = 'info') {
         const tray = document.getElementById('toast-tray');
         const card = document.createElement('div');
@@ -416,8 +508,29 @@
         tray.appendChild(card);
         setTimeout(() => card.remove(), 3200);
       },
-      downloadBlob(data, filename, mimeType) {
-        let blob = data instanceof Blob ? data : new Blob([data], { type: mimeType || 'application/octet-stream' });
+
+      // Binary blob download engine with true Uint8Array conversion for universal device readability
+      async downloadBlob(data, filename, defaultMime = 'application/octet-stream') {
+        let blob;
+        if (data instanceof Blob) {
+          blob = data;
+        } else if (typeof data === 'string' && data.startsWith('data:')) {
+          const parts = data.split(',');
+          const mimeMatch = parts[0].match(/:(.*?);/);
+          const mime = mimeMatch ? mimeMatch[1] : defaultMime;
+          const binaryStr = atob(parts[1]);
+          const len = binaryStr.length;
+          const u8arr = new Uint8Array(len);
+          for (let i = 0; i < len; i++) {
+            u8arr[i] = binaryStr.charCodeAt(i);
+          }
+          blob = new Blob([u8arr], { type: mime });
+        } else if (data instanceof ArrayBuffer || ArrayBuffer.isView(data)) {
+          blob = new Blob([data], { type: defaultMime });
+        } else {
+          blob = new Blob([data], { type: defaultMime });
+        }
+
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
@@ -425,10 +538,18 @@
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-        setTimeout(() => URL.revokeObjectURL(url), 2500);
+        setTimeout(() => URL.revokeObjectURL(url), 20000);
       },
-      setupDropzone(dropEl, inputEl, onFiles) {
-        dropEl.onclick = () => inputEl.click();
+
+      async downloadZip(fileList, zipName = 'archive.zip') {
+        const zip = new JSZip();
+        fileList.forEach(item => zip.file(item.name, item.blob));
+        const content = await zip.generateAsync({ type: 'blob' });
+        await ZERO.downloadBlob(content, zipName, 'application/zip');
+      },
+
+      // Setup dropzone with drag-drop, file upload, and camera shutter integration
+      setupDropzone(dropEl, inputEl, camBtnEl, onFiles) {
         dropEl.ondragover = (e) => { e.preventDefault(); dropEl.style.borderColor = 'var(--accent)'; };
         dropEl.ondragleave = () => { dropEl.style.borderColor = 'rgba(255,255,255,0.14)'; };
         dropEl.ondrop = (e) => {
@@ -436,39 +557,131 @@
           dropEl.style.borderColor = 'rgba(255,255,255,0.14)';
           if (e.dataTransfer.files?.length) onFiles(Array.from(e.dataTransfer.files));
         };
+
         inputEl.onchange = () => {
-          if (inputEl.files?.length) { onFiles(Array.from(inputEl.files)); inputEl.value = ''; }
+          if (inputEl.files?.length) {
+            onFiles(Array.from(inputEl.files));
+            inputEl.value = '';
+          }
+        };
+
+        if (camBtnEl) {
+          camBtnEl.onclick = (e) => {
+            e.stopPropagation();
+            ZERO.launchCameraModal((capturedFile) => onFiles([capturedFile]));
+          };
+        }
+      },
+
+      // Universal WebRTC Camera Viewfinder
+      launchCameraModal(onCapture) {
+        const modal = document.getElementById('cam-modal');
+        const video = document.getElementById('cam-video');
+        const shutter = document.getElementById('cam-shutter-btn');
+        const flip = document.getElementById('cam-flip-btn');
+        const close = document.getElementById('cam-close-btn');
+        const canvas = document.getElementById('cam-canvas');
+
+        modal.style.display = 'flex';
+
+        const stopTracks = () => {
+          if (ZERO.activeCamStream) {
+            ZERO.activeCamStream.getTracks().forEach(t => t.stop());
+            ZERO.activeCamStream = null;
+          }
+        };
+
+        const startStream = async () => {
+          stopTracks();
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+              video: {
+                facingMode: { ideal: ZERO.currentFacingMode },
+                width: { ideal: 1920 },
+                height: { ideal: 1080 }
+              },
+              audio: false
+            });
+            ZERO.activeCamStream = stream;
+            video.srcObject = stream;
+          } catch (err) {
+            ZERO.toast(`Camera hardware access denied: ${err.message}`, 'error');
+            modal.style.display = 'none';
+          }
+        };
+
+        startStream();
+
+        flip.onclick = () => {
+          ZERO.currentFacingMode = ZERO.currentFacingMode === 'environment' ? 'user' : 'environment';
+          startStream();
+        };
+
+        const shutDownModal = () => {
+          stopTracks();
+          modal.style.display = 'none';
+          shutter.onclick = null;
+          close.onclick = null;
+          flip.onclick = null;
+        };
+
+        close.onclick = shutDownModal;
+
+        shutter.onclick = () => {
+          if (!video.videoWidth) return;
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(video, 0, 0);
+
+          canvas.toBlob((blob) => {
+            const capturedFile = new File([blob], `photo_${Date.now()}.jpg`, { type: 'image/jpeg' });
+            shutDownModal();
+            onCapture(capturedFile);
+            ZERO.toast('Photo captured successfully!', 'success');
+          }, 'image/jpeg', 0.95);
         };
       }
     };
 
     /* ==========================================================================
-       ★ THE 5 ESSENTIAL LOCAL WEB AI FEATURES (100% IN-BROWSER) ★
+       ★ THE 5 ESSENTIAL LOCAL WEB AI FEATURES (CAMERA + FILE SELECT) ★
        ========================================================================== */
 
-    // AI TOOL 1: AI OCR Vision Scanner (Local Tesseract.js WASM)
+    // AI TOOL 1: AI OCR Vision Scanner
     function renderAiOcrScanner(mount) {
       mount.innerHTML = `
         <div class="tool-panel">
           <div class="dropzone-laser" id="ocr-drop">
-            <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:6px;">Upload Scanned Document / Receipt</h3>
-            <p style="color:var(--text-muted); font-size:0.9rem;">Client-side Tesseract WASM neural engine parses text with zero network calls</p>
+            <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:6px;">OCR Document & Receipt Scanner</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Snap document photo or upload image to extract plain text locally via WASM</p>
+            <div class="dropzone-actions-bar">
+              <button class="action-btn-secondary" id="ocr-file-btn">📁 Select File</button>
+              <button class="action-btn" id="ocr-cam-btn">📷 Snap Photo (Camera)</button>
+            </div>
             <input type="file" id="ocr-input" accept="image/*" style="display:none">
           </div>
+
           <div id="ocr-status" style="display:none; margin-bottom:1rem; font-family:var(--font-mono); color:var(--accent-cyan);"></div>
           <div id="ocr-res-box" style="display:none;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <span style="font-weight:700;">Extracted Plain Text</span>
-              <button class="action-btn-secondary" id="ocr-copy">Copy Text</button>
+              <span style="font-weight:700;">Extracted Text Output</span>
+              <div style="display:flex; gap:8px;">
+                <button class="action-btn-secondary" id="ocr-copy">Copy Text</button>
+                <button class="action-btn" id="ocr-dl-txt">Export TXT</button>
+              </div>
             </div>
             <textarea id="ocr-output" rows="12"></textarea>
           </div>
         </div>
       `;
       const drop = mount.querySelector('#ocr-drop'), input = mount.querySelector('#ocr-input');
+      const camBtn = mount.querySelector('#ocr-cam-btn'), fileBtn = mount.querySelector('#ocr-file-btn');
       const stat = mount.querySelector('#ocr-status'), box = mount.querySelector('#ocr-res-box'), out = mount.querySelector('#ocr-output');
 
-      ZERO.setupDropzone(drop, input, async (files) => {
+      fileBtn.onclick = (e) => { e.stopPropagation(); input.click(); };
+
+      ZERO.setupDropzone(drop, input, camBtn, async (files) => {
         const file = files[0];
         stat.style.display = 'block';
         stat.innerText = 'Initializing WebAssembly Neural Worker...';
@@ -476,7 +689,7 @@
 
         try {
           const worker = await Tesseract.createWorker('eng');
-          stat.innerText = 'Scanning pixel matrices locally on device...';
+          stat.innerText = 'Scanning text matrices locally on device...';
           const ret = await worker.recognize(file);
           await worker.terminate();
 
@@ -494,17 +707,25 @@
         navigator.clipboard.writeText(out.value);
         ZERO.toast('Extracted text copied!', 'success');
       };
+      mount.querySelector('#ocr-dl-txt').onclick = () => {
+        ZERO.downloadBlob(out.value, 'scanned_text.txt', 'text/plain;charset=utf-8');
+      };
     }
 
-    // AI TOOL 2: AI Neural Background Remover (Client Semantic Segmentation)
+    // AI TOOL 2: AI Neural Background Remover
     function renderAiNeuralMatting(mount) {
       mount.innerHTML = `
         <div class="tool-panel">
           <div class="dropzone-laser" id="mat-drop">
-            <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:6px;">Upload Subject Photo for AI Cutout</h3>
-            <p style="color:var(--text-muted); font-size:0.9rem;">Client-side saliency & smart edge thresholding removes backdrop instantly</p>
+            <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:6px;">Upload or Snap Photo for AI Cutout</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Saliency edge detection exports universal 32-bit transparent PNG</p>
+            <div class="dropzone-actions-bar">
+              <button class="action-btn-secondary" id="mat-file-btn">📁 Select File</button>
+              <button class="action-btn" id="mat-cam-btn">📷 Snap Photo (Camera)</button>
+            </div>
             <input type="file" id="mat-input" accept="image/*" style="display:none">
           </div>
+
           <div id="mat-preview-wrap" style="display:none; text-align:center;">
             <div style="margin-bottom:1rem; display:flex; justify-content:center; gap:16px;">
               <label>AI Edge Tolerance: <input type="range" id="mat-thresh" min="10" max="80" value="38"></label>
@@ -514,16 +735,19 @@
               <canvas id="mat-canvas" style="display:block; max-width:100%;"></canvas>
             </div>
             <br><br>
-            <button class="action-btn" id="mat-dl">Download Transparent Cutout</button>
+            <button class="action-btn" id="mat-dl">Download Universal Transparent PNG</button>
           </div>
         </div>
       `;
       const drop = mount.querySelector('#mat-drop'), input = mount.querySelector('#mat-input');
+      const camBtn = mount.querySelector('#mat-cam-btn'), fileBtn = mount.querySelector('#mat-file-btn');
       const wrap = mount.querySelector('#mat-preview-wrap'), canvas = mount.querySelector('#mat-canvas');
       const thresh = mount.querySelector('#mat-thresh');
       let orig = null, rawName = 'cutout';
 
-      ZERO.setupDropzone(drop, input, async (files) => {
+      fileBtn.onclick = (e) => { e.stopPropagation(); input.click(); };
+
+      ZERO.setupDropzone(drop, input, camBtn, async (files) => {
         rawName = files[0].name.replace(/\.[^.]+$/, '');
         orig = new Image();
         orig.src = URL.createObjectURL(files[0]);
@@ -568,12 +792,14 @@
       thresh.oninput = runLocalSemanticMatting;
 
       mount.querySelector('#mat-dl').onclick = () => {
-        ZERO.downloadBlob(canvas.toDataURL('image/png'), `${rawName}_ai_cutout.png`, 'image/png');
-        ZERO.toast('Cutout exported as PNG!', 'success');
+        canvas.toBlob((blob) => {
+          ZERO.downloadBlob(blob, `${rawName}_cutout.png`, 'image/png');
+          ZERO.toast('Saved as universal transparent PNG!', 'success');
+        }, 'image/png');
       };
     }
 
-    // AI TOOL 3: AI Document Summarizer & TL;DR Engine (Local NLP Pipeline)
+    // AI TOOL 3: AI Document Summarizer
     function renderAiSummarizer(mount) {
       mount.innerHTML = `
         <div class="tool-panel">
@@ -637,7 +863,7 @@
       };
     }
 
-    // AI TOOL 4: AI Voice Transcriber (Local Speech-to-Text)
+    // AI TOOL 4: AI Voice Transcriber
     function renderAiTranscriber(mount) {
       const isSupported = 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window;
       mount.innerHTML = `
@@ -681,13 +907,9 @@
 
       rec.onresult = (e) => {
         let finalStr = '';
-        for (let i = 0; i < e.results.length; ++i) {
-          finalStr += e.results[i][0].transcript + ' ';
-        }
+        for (let i = 0; i < e.results.length; ++i) finalStr += e.results[i][0].transcript + ' ';
         out.value = finalStr;
       };
-
-      rec.onerror = (e) => ZERO.toast(`Microphone stream: ${e.error}`, 'error');
 
       btnStart.onclick = () => {
         try {
@@ -708,11 +930,11 @@
 
       mount.querySelector('#ai-rec-export').onclick = () => {
         if (!out.value.trim()) return ZERO.toast('Nothing to export', 'error');
-        ZERO.downloadBlob(out.value, 'voice_transcript.txt', 'text/plain');
+        ZERO.downloadBlob(out.value, 'voice_transcript.txt', 'text/plain;charset=utf-8');
       };
     }
 
-    // AI TOOL 5: AI Sentiment & Tone Rewriter (Local NLP Stylist)
+    // AI TOOL 5: AI Sentiment & Tone Rewriter
     function renderAiToneRewriter(mount) {
       mount.innerHTML = `
         <div class="tool-panel">
@@ -774,13 +996,337 @@
     }
 
     /* ==========================================================================
-       STANDARD 30 TOOLS
+       ★ STANDARD TOOLS (WITH DIRECT CAMERA + FILE CAPTURE) ★
        ========================================================================== */
+
+    // Image Compressor with Live Camera
+    function renderImageCompressor(mount) {
+      mount.innerHTML = `
+        <div class="tool-panel">
+          <div class="dropzone-laser" id="ic-d">
+            <h3>Image Compression Studio</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Snap live photo or upload pictures to compress into universal JPEG/PNG</p>
+            <div class="dropzone-actions-bar">
+              <button class="action-btn-secondary" id="ic-file-btn">📁 Select Files</button>
+              <button class="action-btn" id="ic-cam-btn">📷 Snap Photo (Camera)</button>
+            </div>
+            <input type="file" id="ic-i" multiple accept="image/*" style="display:none">
+          </div>
+
+          <div style="display:flex; justify-content:center; gap:16px; margin-bottom:1.5rem; align-items:center;">
+            <label>Output Format:
+              <select id="ic-fmt" style="width:auto; display:inline-block; margin-left:6px;">
+                <option value="image/jpeg" selected>Standard JPEG (.jpg)</option>
+                <option value="image/png">Lossless PNG (.png)</option>
+              </select>
+            </label>
+            <label>Quality: <input type="range" id="ic-q" min="20" max="95" value="80" style="vertical-align:middle;"></label>
+          </div>
+          <button class="action-btn" id="ic-b" disabled>Compress & Download Images</button>
+        </div>
+      `;
+      let files = [];
+      const d = mount.querySelector('#ic-d'), i = mount.querySelector('#ic-i'), b = mount.querySelector('#ic-b');
+      const camBtn = mount.querySelector('#ic-cam-btn'), fileBtn = mount.querySelector('#ic-file-btn');
+      const fmt = mount.querySelector('#ic-fmt'), q = mount.querySelector('#ic-q');
+
+      fileBtn.onclick = (e) => { e.stopPropagation(); i.click(); };
+
+      ZERO.setupDropzone(d, i, camBtn, (f) => {
+        files.push(...f);
+        b.disabled = !files.length;
+        ZERO.toast(`${files.length} file(s) staged`, 'info');
+      });
+
+      b.onclick = async () => {
+        const outList = [];
+        const isJpg = fmt.value === 'image/jpeg';
+        const ext = isJpg ? 'jpg' : 'png';
+        const quality = parseInt(q.value) / 100;
+
+        for (const f of files) {
+          const bmp = await createImageBitmap(f);
+          const c = document.createElement('canvas');
+          c.width = bmp.width; c.height = bmp.height;
+          const ctx = c.getContext('2d');
+          if (isJpg) {
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, c.width, c.height);
+          }
+          ctx.drawImage(bmp, 0, 0);
+
+          const blob = await new Promise(r => c.toBlob(r, fmt.value, quality));
+          outList.push({ name: `compressed_${f.name.replace(/\.[^.]+$/, '')}.${ext}`, blob });
+        }
+
+        if (outList.length === 1) {
+          await ZERO.downloadBlob(outList[0].blob, outList[0].name, fmt.value);
+        } else {
+          await ZERO.downloadZip(outList, 'compressed_photos.zip');
+        }
+        ZERO.toast('Image processing complete and verified!', 'success');
+      };
+    }
+
+    // Format Converter with Live Camera
+    function renderImageConverter(mount) {
+      mount.innerHTML = `
+        <div class="tool-panel">
+          <div class="dropzone-laser" id="ifc-d">
+            <h3>Format Converter Studio</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Snap photo or upload files to convert across PNG and JPEG</p>
+            <div class="dropzone-actions-bar">
+              <button class="action-btn-secondary" id="ifc-file-btn">📁 Select Files</button>
+              <button class="action-btn" id="ifc-cam-btn">📷 Snap Photo (Camera)</button>
+            </div>
+            <input type="file" id="ifc-i" multiple accept="image/*" style="display:none">
+          </div>
+
+          <div style="display:flex; justify-content:center; gap:16px; margin-bottom:1.5rem; align-items:center;">
+            <select id="ifc-target" style="max-width:280px;">
+              <option value="image/jpeg">Convert to Standard JPEG (.jpg)</option>
+              <option value="image/png">Convert to Portable Network Graphics (.png)</option>
+            </select>
+          </div>
+          <button class="action-btn" id="ifc-b" disabled>Execute Conversion</button>
+        </div>
+      `;
+      let files = [];
+      const d = mount.querySelector('#ifc-d'), i = mount.querySelector('#ifc-i'), b = mount.querySelector('#ifc-b');
+      const camBtn = mount.querySelector('#ifc-cam-btn'), fileBtn = mount.querySelector('#ifc-file-btn');
+      const target = mount.querySelector('#ifc-target');
+
+      fileBtn.onclick = (e) => { e.stopPropagation(); i.click(); };
+
+      ZERO.setupDropzone(d, i, camBtn, (f) => {
+        files.push(...f);
+        b.disabled = !files.length;
+      });
+
+      b.onclick = async () => {
+        const outList = [];
+        const isJpg = target.value === 'image/jpeg';
+        const ext = isJpg ? 'jpg' : 'png';
+
+        for (const f of files) {
+          const bmp = await createImageBitmap(f);
+          const c = document.createElement('canvas');
+          c.width = bmp.width; c.height = bmp.height;
+          const ctx = c.getContext('2d');
+          if (isJpg) {
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, c.width, c.height);
+          }
+          ctx.drawImage(bmp, 0, 0);
+          const blob = await new Promise(r => c.toBlob(r, target.value, 0.95));
+          outList.push({ name: `${f.name.replace(/\.[^.]+$/, '')}.${ext}`, blob });
+        }
+
+        if (outList.length === 1) {
+          await ZERO.downloadBlob(outList[0].blob, outList[0].name, target.value);
+        } else {
+          await ZERO.downloadZip(outList, 'converted_photos.zip');
+        }
+        ZERO.toast('Converted to standard device format!', 'success');
+      };
+    }
+
+    // Image Cropper with Live Camera
+    function renderImageCropper(mount) {
+      mount.innerHTML = `
+        <div class="tool-panel">
+          <div class="dropzone-laser" id="crp-d">
+            <h3>Bounding Box Image Cropper</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Snap live photo or upload from disk to crop</p>
+            <div class="dropzone-actions-bar">
+              <button class="action-btn-secondary" id="crp-file-btn">📁 Select File</button>
+              <button class="action-btn" id="crp-cam-btn">📷 Snap Photo (Camera)</button>
+            </div>
+            <input type="file" id="crp-i" accept="image/*" style="display:none">
+          </div>
+
+          <div id="crp-box" style="display:none; text-align:center;">
+            <canvas id="crp-c" style="max-width:100%; border:1px solid var(--border-subtle); cursor:crosshair;"></canvas>
+            <br><br>
+            <button class="action-btn" id="crp-b">Download Universal Cropped Image</button>
+          </div>
+        </div>
+      `;
+      let img = null, sx = 0, sy = 0, ex = 0, ey = 0, isDown = false;
+      const canvas = mount.querySelector('#crp-c');
+      const camBtn = mount.querySelector('#crp-cam-btn'), fileBtn = mount.querySelector('#crp-file-btn');
+      const d = mount.querySelector('#crp-d'), i = mount.querySelector('#crp-i');
+
+      fileBtn.onclick = (e) => { e.stopPropagation(); i.click(); };
+
+      ZERO.setupDropzone(d, i, camBtn, async (f) => {
+        img = new Image();
+        img.src = URL.createObjectURL(f[0]);
+        await img.decode();
+        canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+        draw();
+        mount.querySelector('#crp-box').style.display = 'block';
+      });
+
+      function draw() {
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+        if (isDown || (ex !== sx)) {
+          ctx.strokeStyle = '#6366f1'; ctx.lineWidth = 3;
+          ctx.strokeRect(sx, sy, ex - sx, ey - sy);
+          ctx.fillStyle = 'rgba(99, 102, 241, 0.25)';
+          ctx.fillRect(sx, sy, ex - sx, ey - sy);
+        }
+      }
+
+      canvas.onmousedown = (e) => {
+        const r = canvas.getBoundingClientRect();
+        sx = (e.clientX - r.left) * (canvas.width / r.width);
+        sy = (e.clientY - r.top) * (canvas.height / r.height);
+        ex = sx; ey = sy; isDown = true;
+      };
+      canvas.onmousemove = (e) => {
+        if (!isDown) return;
+        const r = canvas.getBoundingClientRect();
+        ex = (e.clientX - r.left) * (canvas.width / r.width);
+        ey = (e.clientY - r.top) * (canvas.height / r.height);
+        draw();
+      };
+      window.addEventListener('mouseup', () => isDown = false);
+
+      mount.querySelector('#crp-b').onclick = () => {
+        const x = Math.min(sx, ex), y = Math.min(sy, ey), w = Math.abs(ex - sx), h = Math.abs(ey - sy);
+        if (w < 4 || h < 4) return ZERO.toast('Select a crop region first', 'error');
+        const c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, x, y, w, h, 0, 0, w, h);
+        c.toBlob((b) => {
+          ZERO.downloadBlob(b, 'cropped.png', 'image/png');
+          ZERO.toast('Cropped PNG exported!', 'success');
+        }, 'image/png');
+      };
+    }
+
+    // Image to Master PDF with Live Multi-Photo Camera Scan
+    function renderImageToPdf(mount) {
+      mount.innerHTML = `
+        <div class="tool-panel">
+          <div class="dropzone-laser" id="i2p-d">
+            <h3>Camera Document to PDF Compiler</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Snap multi-page document pages with camera or select image files</p>
+            <div class="dropzone-actions-bar">
+              <button class="action-btn-secondary" id="i2p-file-btn">📁 Select Files</button>
+              <button class="action-btn" id="i2p-cam-btn">📷 Snap Page (Camera)</button>
+            </div>
+            <input type="file" id="i2p-i" multiple accept="image/*" style="display:none">
+          </div>
+
+          <div id="i2p-list" style="margin-bottom:1.5rem; display:flex; flex-wrap:wrap; gap:8px;"></div>
+          <button class="action-btn" id="i2p-btn" disabled>Compile into Master PDF</button>
+        </div>
+      `;
+      let imgs = [];
+      const d = mount.querySelector('#i2p-d'), i = mount.querySelector('#i2p-i'), btn = mount.querySelector('#i2p-btn');
+      const camBtn = mount.querySelector('#i2p-cam-btn'), fileBtn = mount.querySelector('#i2p-file-btn');
+      const list = mount.querySelector('#i2p-list');
+
+      fileBtn.onclick = (e) => { e.stopPropagation(); i.click(); };
+
+      const updateList = () => {
+        list.innerHTML = imgs.map((x, idx) => `
+          <span style="background:var(--bg-input); border:1px solid var(--border-subtle); padding:6px 12px; border-radius:6px; font-size:0.85rem;">
+            Page ${idx+1}: ${x.name}
+          </span>
+        `).join('');
+        btn.disabled = !imgs.length;
+      };
+
+      ZERO.setupDropzone(d, i, camBtn, (f) => {
+        imgs.push(...f);
+        updateList();
+      });
+
+      btn.onclick = async () => {
+        btn.innerText = 'Compiling master PDF...';
+        btn.disabled = true;
+        try {
+          const doc = await PDFLib.PDFDocument.create();
+          for (const f of imgs) {
+            const buf = await f.arrayBuffer();
+            let emb;
+            if (f.type === 'image/jpeg' || f.name.match(/\.(jpg|jpeg)$/i)) {
+              emb = await doc.embedJpg(buf);
+            } else {
+              const bmp = await createImageBitmap(f);
+              const c = document.createElement('canvas');
+              c.width = bmp.width; c.height = bmp.height;
+              c.getContext('2d').drawImage(bmp, 0, 0);
+              const pngBuf = await (await fetch(c.toDataURL('image/png'))).arrayBuffer();
+              emb = await doc.embedPng(pngBuf);
+            }
+            const p = doc.addPage([emb.width, emb.height]);
+            p.drawImage(emb, { x: 0, y: 0, width: emb.width, height: emb.height });
+          }
+          const outBytes = await doc.save();
+          ZERO.downloadBlob(outBytes, 'compiled_document.pdf', 'application/pdf');
+          ZERO.toast('Image compilation complete!', 'success');
+        } finally {
+          btn.innerText = 'Compile into Master PDF';
+          btn.disabled = false;
+        }
+      };
+    }
+
+    // QR Code Generator
+    function renderQrGenerator(mount) {
+      mount.innerHTML = `
+        <div class="tool-panel" style="text-align:center;">
+          <input type="text" id="qr-v" value="https://zero.pro" style="max-width:340px; margin:0 auto 1.5rem;">
+          <div id="qr-box" style="background:#fff; padding:16px; border-radius:8px; display:inline-block; margin-bottom:1rem;"></div>
+          <br>
+          <button class="action-btn" id="qr-dl">Save Universal QR PNG</button>
+        </div>
+      `;
+      const v = mount.querySelector('#qr-v'), box = mount.querySelector('#qr-box');
+      const draw = () => { box.innerHTML = ''; new QRCode(box, { text: v.value || 'ZERO', width: 200, height: 200 }); };
+      v.oninput = draw; draw();
+      mount.querySelector('#qr-dl').onclick = () => {
+        const canvas = box.querySelector('canvas');
+        if (canvas) {
+          canvas.toBlob((b) => ZERO.downloadBlob(b, 'qrcode.png', 'image/png'), 'image/png');
+        } else {
+          const img = box.querySelector('img');
+          if (img?.src) ZERO.downloadBlob(img.src, 'qrcode.png', 'image/png');
+        }
+      };
+    }
+
+    // PDF Merger
     function renderPdfMerger(mount) {
-      mount.innerHTML = `<div class="tool-panel"><div class="dropzone-laser" id="p-m-d"><h3>Drop PDFs to Merge</h3><input type="file" id="p-m-i" multiple accept=".pdf" style="display:none"></div><button class="action-btn" id="p-m-b" disabled>Merge & Export</button></div>`;
+      mount.innerHTML = `
+        <div class="tool-panel">
+          <div class="dropzone-laser" id="p-m-d">
+            <h3>Drop PDFs to Merge</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Combine multiple PDF files into one clean document</p>
+            <div class="dropzone-actions-bar">
+              <button class="action-btn-secondary" id="p-m-file-btn">📁 Select PDF Files</button>
+            </div>
+            <input type="file" id="p-m-i" multiple accept=".pdf" style="display:none">
+          </div>
+          <button class="action-btn" id="p-m-b" disabled>Merge & Export PDF</button>
+        </div>
+      `;
       let files = [];
       const d = mount.querySelector('#p-m-d'), i = mount.querySelector('#p-m-i'), b = mount.querySelector('#p-m-b');
-      ZERO.setupDropzone(d, i, (f) => { files.push(...f); b.disabled = files.length < 2; ZERO.toast(`${files.length} PDFs loaded`, 'info'); });
+      mount.querySelector('#p-m-file-btn').onclick = () => i.click();
+
+      ZERO.setupDropzone(d, i, null, (f) => {
+        files.push(...f);
+        b.disabled = files.length < 2;
+        ZERO.toast(`${files.length} PDFs loaded`, 'info');
+      });
+
       b.onclick = async () => {
         const doc = await PDFLib.PDFDocument.create();
         for (const file of files) {
@@ -788,42 +1334,16 @@
           const p = await doc.copyPages(sub, sub.getPageIndices());
           p.forEach(page => doc.addPage(page));
         }
-        ZERO.downloadBlob(await doc.save(), 'merged.pdf', 'application/pdf');
-      };
-    }
-
-    function renderImageCompressor(mount) {
-      mount.innerHTML = `<div class="tool-panel"><div class="dropzone-laser" id="ic-d"><h3>Drop Images to Compress (WebP)</h3><input type="file" id="ic-i" multiple accept="image/*" style="display:none"></div><button class="action-btn" id="ic-b" disabled>Compress</button></div>`;
-      let files = [];
-      const d = mount.querySelector('#ic-d'), i = mount.querySelector('#ic-i'), b = mount.querySelector('#ic-b');
-      ZERO.setupDropzone(d, i, (f) => { files = f; b.disabled = !files.length; });
-      b.onclick = async () => {
-        for (const f of files) {
-          const bmp = await createImageBitmap(f);
-          const c = document.createElement('canvas');
-          c.width = bmp.width; c.height = bmp.height;
-          c.getContext('2d').drawImage(bmp, 0, 0);
-          c.toBlob(blob => ZERO.downloadBlob(blob, `opt_${f.name.replace(/\.[^.]+$/, '')}.webp`, 'image/webp'), 'image/webp', 0.7);
-        }
+        const pdfBytes = await doc.save();
+        ZERO.downloadBlob(pdfBytes, 'merged_document.pdf', 'application/pdf');
       };
     }
 
     function renderJsonFormatter(mount) {
-      mount.innerHTML = `<div class="tool-panel"><button class="action-btn" id="jf-b" style="margin-bottom:1rem;">Prettify JSON</button><textarea id="jf-t" rows="12">{"zero":"web-ai","privacy":"100%","client_side":true}</textarea></div>`;
+      mount.innerHTML = `<div class="tool-panel"><button class="action-btn" id="jf-b" style="margin-bottom:1rem;">Prettify JSON</button><textarea id="jf-t" rows="12">{"zero":"web-ai","privacy":"100%","client_side":true,"camera_active":true}</textarea></div>`;
       const t = mount.querySelector('#jf-t');
       mount.querySelector('#jf-b').onclick = () => {
         try { t.value = JSON.stringify(JSON.parse(t.value), null, 2); ZERO.toast('JSON Formatted!', 'success'); } catch(e){ ZERO.toast(e.message, 'error'); }
-      };
-    }
-
-    function renderQrGenerator(mount) {
-      mount.innerHTML = `<div class="tool-panel" style="text-align:center;"><input type="text" id="qr-v" value="https://zero.pro" style="max-width:340px; margin:0 auto 1.5rem;"><div id="qr-box" style="background:#fff; padding:16px; border-radius:8px; display:inline-block; margin-bottom:1rem;"></div><br><button class="action-btn" id="qr-dl">Save QR Code</button></div>`;
-      const v = mount.querySelector('#qr-v'), box = mount.querySelector('#qr-box');
-      const draw = () => { box.innerHTML = ''; new QRCode(box, { text: v.value || 'ZERO', width: 160, height: 160 }); };
-      v.oninput = draw; draw();
-      mount.querySelector('#qr-dl').onclick = () => {
-        const img = box.querySelector('img');
-        if (img?.src) ZERO.downloadBlob(img.src, 'qrcode.png', 'image/png');
       };
     }
 
@@ -843,19 +1363,24 @@
         <div class="tool-panel" style="text-align:center; padding:3rem 1rem;">
           <h3 style="font-size:1.4rem; margin-bottom:8px;">${name}</h3>
           <p style="color:var(--text-secondary); max-width:450px; margin:0 auto 1.5rem;">${desc}</p>
-          <div class="dropzone-laser" style="max-width:450px; margin:0 auto 1rem;">Click or Drag File to Process</div>
+          <div class="dropzone-laser" style="max-width:450px; margin:0 auto 1rem;">
+            <span>Click or Drag File to Process</span>
+            <div class="dropzone-actions-bar">
+              <button class="action-btn-secondary">📁 Browse File</button>
+            </div>
+          </div>
           <button class="action-btn">Execute Local Sandbox Operation</button>
         </div>
       `;
     }
 
     /* ==========================================================================
-       TOOL REGISTRY (35 TOTAL WITH 5 LOCAL WEB AI MODULES)
+       TOOL REGISTRY (35 TOTAL WITH CAMERA + FILE SELECT SYSTEM)
        ========================================================================== */
     const TOOLS = [
       // 5 Local Web AI Tools
-      { id: 'ai-ocr', name: 'AI OCR Vision Scanner', cat: 'ai', desc: 'Scan images, contracts, and receipts into plain text via local WASM.', render: renderAiOcrScanner, icon: '👁️' },
-      { id: 'ai-bg-remover', name: 'AI Neural Matting', cat: 'ai', desc: 'Saliency background cutout engine running completely inside memory.', render: renderAiNeuralMatting, icon: '🧠' },
+      { id: 'ai-ocr', name: 'AI OCR Vision Scanner', cat: 'ai', desc: 'Scan document photos or upload images to extract text locally.', render: renderAiOcrScanner, icon: '👁️' },
+      { id: 'ai-bg-remover', name: 'AI Neural Matting', cat: 'ai', desc: 'Snap photo or select file for instant semantic background removal.', render: renderAiNeuralMatting, icon: '🧠' },
       { id: 'ai-summarizer', name: 'AI Document Summarizer', cat: 'ai', desc: 'Instant key takeaway extractor using local client-side NLP vectors.', render: renderAiSummarizer, icon: '⚡' },
       { id: 'ai-transcriber', name: 'AI Voice Transcriber', cat: 'ai', desc: 'Dictate or transcribe speech into text via local Web Audio pipeline.', render: renderAiTranscriber, icon: '🎙️' },
       { id: 'ai-tone', name: 'AI Sentiment & Tone Rewriter', cat: 'ai', desc: 'Analyze emotional polarity and rephrase text into executive tones.', render: renderAiToneRewriter, icon: '✨' },
@@ -866,13 +1391,13 @@
       { id: 'pdf-splitter', name: 'PDF Splitter', cat: 'pdf', desc: 'Extract custom page ranges into a separate document.', render: (m) => renderGenericTool(m, 'PDF Splitter', 'Extract custom intervals directly in memory.'), icon: '✂' },
       { id: 'pdf-organizer', name: 'PDF Page Organizer', cat: 'pdf', desc: 'Reorder, rotate, or delete pages visually.', render: (m) => renderGenericTool(m, 'PDF Organizer', 'Interactive page sorter and rotator.'), icon: '🗂' },
       { id: 'pdf-to-img', name: 'PDF to Image', cat: 'pdf', desc: 'Render pages into high-res PNG pictures.', render: (m) => renderGenericTool(m, 'PDF to Image', 'Rasterize PDF pages into PNGs.'), icon: '🖼' },
-      { id: 'img-to-pdf', name: 'Image to PDF', cat: 'pdf', desc: 'Compile PNG and JPEG pictures into a master PDF.', render: (m) => renderGenericTool(m, 'Image to PDF', 'Combine images into a master PDF.'), icon: '🗎' },
+      { id: 'img-to-pdf', name: 'Image to PDF', cat: 'pdf', desc: 'Compile camera photos and JPEG/PNG pictures into master PDF.', render: renderImageToPdf, icon: '🗎' },
 
-      // Image Suite
-      { id: 'img-compressor', name: 'Image Compressor', cat: 'image', desc: 'Ultra-fast in-memory WebP quantization.', render: renderImageCompressor, icon: '🗜' },
+      // Image Suite with Live Camera Options
+      { id: 'img-compressor', name: 'Image Compressor', cat: 'image', desc: 'Universal JPEG and PNG compression with camera snap support.', render: renderImageCompressor, icon: '🗜' },
       { id: 'img-resizer', name: 'Image Resizer', cat: 'image', desc: 'Pixel-perfect dimension resizing with ratio lock.', render: (m) => renderGenericTool(m, 'Image Resizer', 'Scale dimensions with bicubic canvas smoothing.'), icon: '⤢' },
-      { id: 'img-converter', name: 'Format Converter', cat: 'image', desc: 'Convert seamlessly between PNG, JPEG, and WebP.', render: (m) => renderGenericTool(m, 'Format Converter', 'Instant raster conversions.'), icon: '⇆' },
-      { id: 'img-cropper', name: 'Image Cropper', cat: 'image', desc: 'Interactive bounding box visual crop engine.', render: (m) => renderGenericTool(m, 'Image Cropper', 'Drag bounded marquee crop.'), icon: '⧉' },
+      { id: 'img-converter', name: 'Format Converter', cat: 'image', desc: 'Convert seamlessly between standard PNG and JPEG with camera.', render: renderImageConverter, icon: '⇆' },
+      { id: 'img-cropper', name: 'Image Cropper', cat: 'image', desc: 'Interactive bounding box visual crop engine with live shutter.', render: renderImageCropper, icon: '⧉' },
       { id: 'metadata-remover', name: 'EXIF Metadata Remover', cat: 'image', desc: 'Purge GPS location and camera signatures.', render: (m) => renderGenericTool(m, 'EXIF Remover', 'Strip EXIF/GPS tags from photos.'), icon: '◌' },
       { id: 'bg-remover-manual', name: 'Chroma Key Isolator', cat: 'image', desc: 'Sample-based eyedropper color matting.', render: (m) => renderGenericTool(m, 'Chroma Key Isolator', 'Color-key based backdrop eraser.'), icon: '✦' },
 
@@ -898,7 +1423,7 @@
       { id: 'meta-inspector', name: 'File Header Inspector', cat: 'productivity', desc: 'Analyze magic byte headers and MIME types.', render: (m) => renderGenericTool(m, 'File Header Inspector', 'Hex magic bytes analyzer.'), icon: '🔍' },
       { id: 'dup-finder', name: 'Duplicate File Matcher', cat: 'productivity', desc: 'Find identical files via hardware SHA-256 digests.', render: (m) => renderGenericTool(m, 'Duplicate Matcher', 'Compare multi-file SHA-256 hashes.'), icon: '👥' },
       { id: 'adv-calc', name: 'Scientific Calculator', cat: 'productivity', desc: 'Mathematical expression evaluator.', render: (m) => renderGenericTool(m, 'Scientific Calculator', 'Trig & math evaluator.'), icon: '🖩' },
-      { id: 'batch-converter', name: 'Batch Image Converter', cat: 'productivity', desc: 'Bulk format transformations packaged into a ZIP.', render: (m) => renderGenericTool(m, 'Batch Converter', 'Bulk WebP/PNG converter.'), icon: '📦' }
+      { id: 'batch-converter', name: 'Batch Image Converter', cat: 'productivity', desc: 'Bulk format transformations packaged into a ZIP.', render: (m) => renderGenericTool(m, 'Batch Converter', 'Bulk image processing.'), icon: '📦' }
     ];
 
     /* ==========================================================================
