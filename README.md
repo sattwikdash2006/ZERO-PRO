@@ -1,8 +1,8 @@
-# 🛡️ ZERO — Ultimate Privacy-First Utility Platform
+# 🛡️ SHARLINE — Ultimate Privacy-First Utility Platform
 
 > **Everything Premium. Absolutely Free. 100% Client-Side.**
 
-**ZERO** is a collection of professional-grade web utilities engineered to run entirely within your browser memory sandbox. No clouds, no servers, no data tracking—your files never leave your device.
+**SHARLINE** is a collection of professional-grade web utilities engineered to run entirely within your browser memory sandbox. No clouds, no servers, no data tracking—your files never leave your device.
 
 ---
 
@@ -26,7 +26,7 @@
 
 ## 🚀 Live Demo
 
-Check out the live platform here: [ZERO Platform Live](https://sattwikdash2006.github.io/ZERO/)
+Check out the live platform here: [SHARLINE Platform Live](https://sattwikdash2006.github.io/ZERO/)
 
 ---
 
