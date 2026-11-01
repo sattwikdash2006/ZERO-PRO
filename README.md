@@ -26,7 +26,7 @@
 
 ## 🚀 Live Demo
 
-Check out the live platform here: [SHARLINE Platform Live](https://sattwikdash2006.github.io/ZERO/)
+Check out the live platform here: [SHARLINE Platform Live](https://sattwikdash2006.github.io/SHARLINE/)
 
 ---
 
